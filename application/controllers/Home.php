@@ -11,12 +11,25 @@ class Home extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Wezenberg | startpagina';
-            
-            $partials = array('hoofding' => 'main_header', 
-                'inhoud' => 'startpagina', 
+
+            $partials = array('hoofding' => 'main_header',
+                'inhoud' => 'startpagina',
                 'voetnoot' => 'main_footer');
-            
+
             $this->template->load('main_master', $partials, $data);
     }
+
+    public function meldAan()
+{
+    $data['titel'] = 'Aanmelden';
+    $data['gebruiker']  = $this->authex->getGebruikerInfo();
+
+    $partials = array('hoofding' => 'main_header',
+        'menu' => 'main_menu',
+        'inhoud' => 'startpagina',
+        'voetnoot' => 'main_footer');
+
+    $this->template->load('main_master', $partials, $data);
+}
 
 }
