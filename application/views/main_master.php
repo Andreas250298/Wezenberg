@@ -13,8 +13,11 @@
         <title><?php echo $titel; ?></title>
 
         <!-- Custom CSS -->
-        <?php echo pasStylesheetAan("stijl.css"); ?>
-
+        <?php echo pasStylesheetAan("stijl.css"); 
+        //echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://localhost/wezenberg/application/assets/css/stijl.css\" />";
+        ?>
+        
+        
         <script type="text/javascript">
             var site_url = '<?php echo site_url(); ?>';
             var base_url = '<?php echo base_url(); ?>';
