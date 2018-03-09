@@ -63,7 +63,6 @@ class Authex {
         if ($gebruiker == null) {
             return false;
         } else {
-            $CI->gebruiker_model->updateLaatstAangemeld($gebruiker->id);
             $CI->session->set_userdata('gebruiker_id', $gebruiker->id);
             return true;
         }
@@ -86,7 +85,7 @@ class Authex {
         } else {
             return 0;
         }
-    } 
-    
+    }
+
 
 }

@@ -36,11 +36,33 @@
                     <a class="nav-link" href="#">Over ons</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="E-mail" aria-label="E-mail">
-                <input class="form-control mr-sm-2" type="password" placeholder="Wachtwoord" aria-label="Wachtwoord">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Inloggen</button>
-            </form>
+            <?php
+                // Indien niet ingelogd, toont loginformulier
+                if (!$this->session->has_userdata('gebruiker_id'))
+                {
+                    $dataInputEmail = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'email', 'id' => 'email', 'placeholder' => 'E-mail', 'aria-label' => 'E-mail');
+                    $dataInputWachtwoord = array('class' => 'form-control mr-sm-2', 'type' => 'password', 'name' => 'wachtwoord', 'id' => 'wachtwoord', 'placeholder' => 'Wachtwoord', 'aria-label' => 'Wachtwoord');
+                    $dataSubmit = array('class' => 'btn btn-outline-success my-2 my-sm0', 'value' => 'Inloggen');
+
+                    echo form_open('home/controleerAanmelden', 'class="form-inline my2 my-lg0"');
+                    echo form_input($dataInputEmail);
+                    echo form_input($dataInputWachtwoord);
+                    echo form_submit($dataSubmit);
+                    echo form_close();
+                }
+                //
+
+                // Indien ingelogd, toont welkom bericht
+                else
+                {
+                    if ($gebruiker != null)
+                    {
+                        echo "<p>Welkom " . $gebruiker->naam . "</p>";
+                        echo "<p>" . anchor('home/meldAf', 'Afmelden') . "</p>";
+                    }
+                }
+
+                ; ?>
         </div>
     </div>
 </nav>
