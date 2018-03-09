@@ -27,5 +27,5 @@ class Gebruiker extends CI_Controller {
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-
+    
 }

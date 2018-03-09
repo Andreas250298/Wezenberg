@@ -31,7 +31,6 @@ $link = array('class' => 'nav-link');
                 </li>
                 <li class="nav-item">
                     <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link);?>
-                    <a class="nav-link" href="home/zwemmers">Zwemmers</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="home/wedstrijden">Wedstrijden</a>
