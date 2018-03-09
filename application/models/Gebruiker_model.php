@@ -10,18 +10,18 @@ class Gebruiker_model extends CI_Model
     public function get($id)
     {
         $this->db->where('id', $id);
-        $query = $this->db->get('Gebruiker');
+        $query = $this->db->get('gebruiker');
+		return $query->row();
     }
 
     public function getGebruiker($email, $wachtwoord)
     {
         $this->db->where('email', $email);
-        $this->db->where('wachtwoord', $wachtwoord);
-        $query = $this->db->get('Gebruiker');
+        $query = $this->db->get('gebruiker');
 
         if ($query->num_rows() == 1) {
             $gebruiker = $query->row();
-            if (password_verify($wachtwoord, $gebruiker->wachtwoord)) {
+            if ($wachtwoord == $gebruiker->wachtwoord) {
                 return $gebruiker;
             } else {
                 return null;
@@ -31,7 +31,7 @@ class Gebruiker_model extends CI_Model
         }
     }
 
-    public function voegToe($naam, $address, $woonplaats, $soort)
+    public function voegToe($email, $wachtwoord, $naam, $address, $woonplaats, $soort)
     {
         $gebruiker = new stdClass();
         $gebruiker->naam = $naam;
