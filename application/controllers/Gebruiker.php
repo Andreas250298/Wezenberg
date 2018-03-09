@@ -13,6 +13,19 @@ class Gebruiker extends CI_Controller {
       $gebruikerEmail = $this->input->get('email');
       $gebruikerWachtwoord = $this->input->get('wachtwoord');
     }
-
+    
+    public function toonZwemmers() {
+        $data['titel'] = 'Zwemmers';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        /**
+         * gebruiker_model inladen
+         */
+        $this->load->model('gebruiker_model');
+        $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'zwemmers',
+            'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
 
 }

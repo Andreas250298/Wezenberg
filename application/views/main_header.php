@@ -1,3 +1,6 @@
+<?php
+$link = array('class' => 'nav-link');
+?>
 <!--Banner-->
 <nav class="navbar navbar-light">
     <div class="container">   
@@ -27,7 +30,7 @@
                     <a class="nav-link" href="#">Startpagina <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Zwemmers</a>
+                    <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link);?>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Wedstrijden</a>

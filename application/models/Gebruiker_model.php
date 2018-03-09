@@ -43,4 +43,10 @@ class Gebruiker_model extends CI_Model
         $this->db->insert('Gebruiker', $gebruiker);
         return $this->db->insert_id();
     }
+    
+    public function toonZwemmers() {
+        $this->db->where('soort', 'zwemmer');
+        $query = $this->db->get('gebruiker');
+        return $query->result();
+    }
 }
