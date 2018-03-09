@@ -57,32 +57,41 @@
                         //echo "<p>Welkom zwemmer" . $gebruiker->naam . "</p>";
                         //echo divAnchor('product/bestel', 'Producten bestellen');
                         ?>
-            
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="home/index">Supplementen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="home/zwemmers">Mijn Agenda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="home/wedstrijden">Inschrijvingen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="home/overons">Account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="home/meldAf">Uitloggen</a>
-                </li>
-            </ul>
-                        
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="home/supplementen">Supplementen</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="home/mijnagenda">Mijn Agenda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="home/inschrijvingen">Inschrijvingen</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="home/account">Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="home/meldAf">Uitloggen</a>
+                            </li>
+                        </ul>
+
                         <?php
                         break;
                     case 'trainer': // trainer
-                        echo "<p>Welkom trainer" . $gebruiker->naam . "</p>";
-                        echo divAnchor('product/beheer', 'Producten beheren');
-                        echo divAnchor('admin/beheer', 'Gebruikers beheren');
-                        echo divAnchor('admin/configureer', 'Configureren');
+                        
+                        ?>
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="home/account">Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="home/meldAf">Uitloggen</a>
+                            </li>
+                        </ul>
+
+                        <?php
                         break;
                 }
             }
