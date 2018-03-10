@@ -1,5 +1,13 @@
 <?php
 /**
+ * @mainpage Wezenberg Documentatie
+ * 
+ * Groep 12
+ * 
+ * Hier is alle documentatie van het project APP/BIT terug te vinden.
+ * 
+ */
+/**
  * CodeIgniter
  *
  * An open source application development framework for PHP
