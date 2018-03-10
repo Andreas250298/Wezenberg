@@ -52,26 +52,29 @@ class Gebruiker extends CI_Controller {
     }
     
     public function wijzig($id) {
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('gebruiker_model');
-        $data['brouwerij'] = $this->gebruiker_model->get($id);
+        $data['zwemmer'] = $this->gebruiker_model->get($id);
         $data['titel'] = 'Zwemmer wijzigen';
 
         $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'zwemmer_wijzig');
+            'inhoud' => 'zwemmers_form',
+            'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
-    public function schrap($id) {
-        $this->load->model('gebruiker_model');
-        $data['zwemmer'] = $this->gebruiker_model->delete($id);
-
-        redirect('/gebruiker/toonZwemmers');
-    }
-    
+  
     public function maakInactief($id) {
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
-        $huidigeZwemmer->status=0;
+        $huidigeZwemmer->status = 0;
+        $this->gebruiker_model->update($huidigeZwemmer);
+        redirect('gebruiker/toonZwemmers');
+    }
+    
+    public function maakActief($id) {
+        $this->load->model('gebruiker_model');
+        $huidigeZwemmer = $this->gebruiker_model->get($id);
+        $huidigeZwemmer->status = 1;
         $this->gebruiker_model->update($huidigeZwemmer);
         redirect('gebruiker/toonZwemmers');
     }
@@ -84,7 +87,7 @@ class Gebruiker extends CI_Controller {
         $this->load->model('gebruiker_model');
         $data['zwemmers'] = $this->gebruiker_model->toonInactieveZwemmers();
         $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'zwemmers',
+            'inhoud' => 'inactieveZwemmers',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
