@@ -73,11 +73,8 @@ class Gebruiker extends CI_Controller {
     public function maakActief($id) {
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
-<<<<<<< HEAD
-        $huidigeZwemmer->status = 0;
-=======
+
         $huidigeZwemmer->status = 1;
->>>>>>> e491181e5672b98c0902e55267e92554e4c4f24b
         $this->gebruiker_model->update($huidigeZwemmer);
         redirect('gebruiker/toonZwemmers');
     }
