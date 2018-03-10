@@ -27,7 +27,8 @@ $link = array('class' => 'nav-link');
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="home/index">Startpagina <span class="sr-only">(current)</span></a>
+                    <!--<a class="nav-link" href="home/index">Startpagina <span class="sr-only">(current)</span></a>-->
+                    <?php echo anchor('gebruiker/index', 'Startpagina', $link);?>
                     
                 </li>
                 <li class="nav-item">

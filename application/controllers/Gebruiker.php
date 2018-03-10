@@ -8,6 +8,19 @@ class Gebruiker extends CI_Controller {
         parent::__construct();
         $this->load->helper('form');
     }
+    
+    public function index() {
+        $data['titel'] = 'Startpagina';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+
+        $this->load->model('gebruiker_model');
+
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'startpagina',
+                'voetnoot' => 'main_footer');
+
+        $this->template->load('main_master', $partials, $data);
+    }
 
     public function getGebruiker(){
       $gebruikerEmail = $this->input->get('email');
@@ -53,6 +66,27 @@ class Gebruiker extends CI_Controller {
         $data['zwemmer'] = $this->gebruiker_model->delete($id);
 
         redirect('/gebruiker/toonZwemmers');
+    }
+    
+    public function maakInactief($id) {
+        $this->load->model('gebruiker_model');
+        $huidigeZwemmer = $this->gebruiker_model->get($id);
+        $huidigeZwemmer->status=0;
+        $this->gebruiker_model->update($huidigeZwemmer);
+        redirect('gebruiker/toonZwemmers');
+    }
+    
+    public function toonInactieveZwemmers() {
+        $data['titel'] = 'Zwemmers';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        
+        //gebruiker_model inladen
+        $this->load->model('gebruiker_model');
+        $data['zwemmers'] = $this->gebruiker_model->toonInactieveZwemmers();
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'zwemmers',
+            'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
     }
     
 }

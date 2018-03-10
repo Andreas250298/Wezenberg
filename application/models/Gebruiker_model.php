@@ -69,4 +69,16 @@ class Gebruiker_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->delete('gebruiker');
     }
+    
+    public function toonInactieveZwemmers() {
+        $this->db->where('soort', 'zwemmer');
+        $this->db->where('status', '0');
+        $query = $this->db->get('gebruiker');
+        return $query->result();
+    }
+    
+    function update($gebruiker) {
+        $this->db->where('id', $gebruiker->id);
+        $this->db->update('gebruiker', $gebruiker);
+    }
 }

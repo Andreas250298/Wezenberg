@@ -1,13 +1,16 @@
+<?php
+$link = array('class' => 'nav-link');
+?>
 <!--Navigatiebalk-->
 <nav class="navbar navbar-expand-lg navbar-light fixed-bottom">
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Startpagina <span class="sr-only">(current)</span></a>
+                    <?php echo anchor('gebruiker/index', 'Startpagina', $link);?>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Zwemmers</a>
+                    <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link);?>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Wedstrijden</a>
