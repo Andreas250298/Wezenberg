@@ -28,6 +28,7 @@ $link = array('class' => 'nav-link');
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="home/index">Startpagina <span class="sr-only">(current)</span></a>
+                    
                 </li>
                 <li class="nav-item">
                     <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link);?>

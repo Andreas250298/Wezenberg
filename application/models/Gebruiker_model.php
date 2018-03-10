@@ -47,10 +47,11 @@ class Gebruiker_model extends CI_Model
     {
         $gebruiker = new stdClass();
         $gebruiker->naam = $naam;
-        $gebruiker->address = $address;
+        $gebruiker->adres = $address;
         $gebruiker->woonplaats = $woonplaats;
         $gebruiker->soort = $soort;
         $gebruiker->email = $email;
+        $gebruiker->status = 1;
         $gebruiker->wachtwoord = password_hash($wachtwoord, PASSWORD_DEFAULT);
         $this->db->insert('gebruiker', $gebruiker);
         return $this->db->insert_id();
@@ -58,6 +59,7 @@ class Gebruiker_model extends CI_Model
     
     public function toonZwemmers() {
         $this->db->where('soort', 'zwemmer');
+        $this->db->where('status', '1');
         $query = $this->db->get('gebruiker');
         return $query->result();
     }
