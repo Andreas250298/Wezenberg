@@ -45,7 +45,6 @@ class Gebruiker extends CI_Controller {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         
         $partials = array('hoofding' => 'main_header',
-            'menu' => 'main_header',
             'inhoud' => 'zwemmer_registreer',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
@@ -71,7 +70,7 @@ class Gebruiker extends CI_Controller {
     public function maakInactief($id) {
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
-        $huidigeZwemmer->status=0;
+        $huidigeZwemmer->status = 0;
         $this->gebruiker_model->update($huidigeZwemmer);
         redirect('gebruiker/toonZwemmers');
     }
