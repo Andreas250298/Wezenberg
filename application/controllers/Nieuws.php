@@ -27,6 +27,9 @@ class Nieuws extends CI_Controller {
         $data['titel'] = 'Nieuwsartikel aanmaken';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
+        $data['nieuwsArtikel'] = null;
+        
+        
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'Nieuws/form',
             'voetnoot' => 'main_footer');
