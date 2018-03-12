@@ -77,7 +77,7 @@ $link = array('class' => 'nav-link');
                                 <a class="nav-link" href="home/account">Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="home/meldAf">Uitloggen</a>
+                                <?php echo anchor('Home/meldAf', 'Uitloggen', 'class="nav-item"') ?>
                             </li>
                         </ul>
 
@@ -89,10 +89,13 @@ $link = array('class' => 'nav-link');
 
                         <ul class="navbar-nav">
                             <li class="nav-item">
+                                <?php echo anchor('Nieuws/index', 'Nieuws beheren', 'class="nav-link"') ?>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="home/account">Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="home/meldAf">Uitloggen</a>
+                                <?php echo anchor('Home/meldAf', 'Uitloggen', 'class="nav-item"') ?>
                             </li>
                         </ul>
 
