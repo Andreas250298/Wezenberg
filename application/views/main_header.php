@@ -77,11 +77,8 @@ $link = array('class' => 'nav-link');
                                 <a class="nav-link" href="home/account">Account</a>
                             </li>
                             <li class="nav-item">
-<<<<<<< HEAD
-                                <?php echo anchor('Home/meldAf', 'Uitloggen', 'class="nav-item"') ?>
-=======
+
                                 <?php echo anchor('home/meldAf', 'Uitloggen', $link);?>
->>>>>>> 57b8180b0448d71ca2e4fa5fdcc06637d7c2da23
                             </li>
                         </ul>
 
