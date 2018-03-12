@@ -18,4 +18,9 @@ class Nieuws_model extends CI_Model
         $query = $this->db->get('nieuwsArtikel');
         return $query->result();
     }
+    
+    public function insert($nieuwsArtikel){
+        $this->db->insert('nieuwsArtikel', $nieuwsArtikel);
+        return $this->db->insert_id();
+    }
 }

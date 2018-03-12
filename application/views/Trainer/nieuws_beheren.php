@@ -5,11 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+echo "<p>" . anchor('Nieuws/maakNieuwsArtikel', "nieuw artikel") . "</p>";
+
 if(!empty($nieuwsArtikels)) {
 foreach ($nieuwsArtikels as $nieuwsArtikel) {
-    echo "<div><p>" . $nieuwsArtikel->titel . "<p>" .
-            "<p>" . $nieuwsArtikel->datumAangemaakt . "<p>" .
-            "<p>" . $nieuwsArtikel->beschrijving . "<p></div>";
+    echo "<div><p>" . $nieuwsArtikel->titel . "</p>" .
+            "<p>" . $nieuwsArtikel->datumAangemaakt . "</p>" .
+            "<p>" . $nieuwsArtikel->beschrijving . "</p></div>";
 } 
 }else {
     echo "niets";
