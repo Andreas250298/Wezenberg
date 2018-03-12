@@ -11,6 +11,7 @@ class Nieuws_model extends CI_Model
     {
         $this->db->where('id', $id);
         $query = $this->db->get('nieuwsArtikel');
+        return $query->row();
     }
     
     public function getAllNieuwsArtikels(){
@@ -22,5 +23,10 @@ class Nieuws_model extends CI_Model
     public function insert($nieuwsArtikel){
         $this->db->insert('nieuwsArtikel', $nieuwsArtikel);
         return $this->db->insert_id();
+    }
+    
+    public function update($nieuwsArtikel){
+        $this->db->where('id', $nieuwsArtikel->id);
+        $this->db->update('nieuwsArtikel', $nieuwsArtikel);
     }
 }

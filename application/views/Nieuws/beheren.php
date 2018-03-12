@@ -14,6 +14,7 @@ foreach ($nieuwsArtikels as $nieuwsArtikel) {
     echo '<h5 class="card-title">' . $nieuwsArtikel->titel . '</h5>';
     echo '<p class="card-text text-muted">' . $nieuwsArtikel->datumAangemaakt . '</p>';
     echo '<p class="card-text">' . $nieuwsArtikel->beschrijving . '</p>';
+    echo anchor('Nieuws/wijzig/' . $nieuwsArtikel->id, 'aanpassen', 'class="btn btn-primary"');
     echo '</div></div>';
 }
 
