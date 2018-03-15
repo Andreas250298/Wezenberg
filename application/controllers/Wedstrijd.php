@@ -26,7 +26,6 @@ class Wedstrijd extends CI_Controller {
 
       $this->load->model('wedstrijd_model');
 
-      $this->load->model('wedstrijd_model');
       $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/maken',
           'voetnoot' => 'main_footer');
@@ -34,7 +33,7 @@ class Wedstrijd extends CI_Controller {
     }
 
     public function registreer() {
-        $artikel = new stdClass();
+        $wedstrijd = new stdClass();
         $wedstrijd->id = $this->input->post('id');
         $wedstrijd->plaats = $this->input->post('plaats');
         $wedstrijd->naam = $this->input->post('naam');
