@@ -13,7 +13,7 @@ $link = array('class' => 'nav-link');
                     <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link);?>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Wedstrijden</a>
+                      <?php echo anchor('wedstrijd/index', 'Wedstrijden', $link);?>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Over ons</a>
