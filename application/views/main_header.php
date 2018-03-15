@@ -3,7 +3,7 @@ $link = array('class' => 'nav-link');
 ?>
 <!--Banner-->
 <nav class="navbar navbar-light">
-    <div class="container">   
+    <div class="container">
         <div class="justify-content-start d-flex flex-row">
             <a class="navbar-brand" href="#">
                 <?php echo toonAfbeelding("logo/teambelgium.png", 'width="110" height="150" class="d-inline-block align-top" alt="Logo Team Belgium"'); ?>
@@ -29,13 +29,13 @@ $link = array('class' => 'nav-link');
                 <li class="nav-item active">
                     <!--<a class="nav-link" href="home/index">Startpagina <span class="sr-only">(current)</span></a>-->
                     <?php echo anchor('gebruiker/index', 'Startpagina', $link);?>
-                    
+
                 </li>
                 <li class="nav-item">
                     <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link);?>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="home/wedstrijden">Wedstrijden</a>
+                    <?php echo anchor('wedstrijd/index', 'Wedstrijden', $link);?>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="home/overons">Over ons</a>
@@ -85,7 +85,7 @@ $link = array('class' => 'nav-link');
                         <?php
                         break;
                     case 'trainer': // trainer
-                        
+
                         ?>
 
                         <ul class="navbar-nav">
