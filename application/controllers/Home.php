@@ -11,30 +11,34 @@ class Home extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Wezenberg | startpagina';
-        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
-            $partials = array('hoofding' => 'main_header',
-                'inhoud' => 'startpagina',
-                'voetnoot' => 'main_footer');
+        $this->load->model('nieuws_model');
+        $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikels();
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->getAll();
+        
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'startpagina',
+            'voetnoot' => 'main_footer');
 
-            $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_master', $partials, $data);
     }
 
-    public function meldAan()
-{
-    $data['titel'] = 'Aanmelden';
-    $data['gebruiker']  = $this->authex->getGebruikerInfo();
+    public function meldAan() {
+        $data['titel'] = 'Aanmelden';
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
-    $partials = array('hoofding' => 'main_header',
-        'inhoud' => 'startpagina',
-        'voetnoot' => 'main_footer');
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'startpagina',
+            'voetnoot' => 'main_footer');
 
-    $this->template->load('main_master', $partials, $data);
-}
-    public function toonFout()
-    {
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    public function toonFout() {
         $data['titel'] = 'Fout';
-        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'login_fout',
@@ -43,8 +47,7 @@ class Home extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function controleerAanmelden()
-    {
+    public function controleerAanmelden() {
         $email = $this->input->post('email');
         $wachtwoord = $this->input->post('wachtwoord');
 
@@ -55,9 +58,9 @@ class Home extends CI_Controller {
         }
     }
 
-    public function meldAf()
-    {
+    public function meldAf() {
         $this->authex->meldAf();
         redirect('home/index');
     }
+
 }

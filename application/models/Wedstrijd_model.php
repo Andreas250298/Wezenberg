@@ -13,6 +13,13 @@ class Wedstrijd_model extends CI_Model
         $query = $this->db->get('wedstrijd');
         return $query->row();
     }
+    
+    public function getAll()
+    {
+        $this->db->order_by('beginDatum', 'asc');
+        $query = $this->db->get('wedstrijd');
+        return $query->result();
+    }
 
     public function toonWedstrijden()
     {
