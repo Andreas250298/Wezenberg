@@ -17,6 +17,10 @@ foreach ($wedstrijden as $wedstrijd) {
     '</td>
     </tr>';
 }
+
+echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken').'
+
+</p>'
 ?>
 
 <table class="table">

@@ -11,7 +11,7 @@ class Wedstrijd extends CI_Controller {
 
     public function index(){
       $data['titel'] = 'Wedstrijden bekijken';
-
+      $data['gebruiker']  = $this->authex->getGebruikerInfo();
       $this->load->model('wedstrijd_model');
       $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijden();
 
@@ -64,6 +64,18 @@ class Wedstrijd extends CI_Controller {
           'voetnoot' => 'main_footer');
       $this->template->load('main_master', $partials, $data);
     }
+    
+    public function beheerWedstrijden() {
+        $data['titel'] = 'Wedstrijden bekijken';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
+      $this->load->model('wedstrijd_model');
+      $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijden();
+
+      $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Wedstrijd/beheren',
+          'voetnoot' => 'main_footer');
+      $this->template->load('main_master', $partials, $data);
+    }
 
 }

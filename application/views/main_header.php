@@ -90,6 +90,9 @@ $link = array('class' => 'nav-link');
 
                         <ul class="navbar-nav">
                             <li class="nav-item">
+                    <?php echo anchor('wedstrijd/beheerWedstrijden', 'Wedstrijden beheren', $link);?>
+                </li>
+                            <li class="nav-item">
                                 <?php echo anchor('Nieuws/index', 'Nieuws beheren', 'class="nav-link"') ?>
                             </li>
                             <li class="nav-item">
