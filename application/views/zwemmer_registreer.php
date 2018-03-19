@@ -10,7 +10,6 @@ $dataInputEmail = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'na
 $dataInputWachtwoord = array('class' => 'form-control mr-sm-2', 'type' => 'password', 'name' => 'wachtwoord', 'id' => 'wachtwoord', 'placeholder' => 'Wachtwoord', 'aria-label' => 'Wachtwoord', 'size' => '30');
 $dataInputWoonplaats = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'woonplaats', 'id' => 'woonplaats', 'placeholder' => 'Woonplaats', 'aria-label' => 'Woonplaats', 'size' => '30');
 $dataInputAdres = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'adres', 'id' => 'adres', 'placeholder' => 'Adres', 'aria-label' => 'Adres', 'size' => '30');
-$dataInputSoortZwemmer = array('class' => 'form-control mr-sm-2', 'type' => 'radio', 'name' => 'soort', 'id' => 'soort', 'value' => 'zwemmer', 'checked' => 'true');
 $dataSubmit = array('class' => 'btn btn-outline-success my-2 my-sm0', 'value' => 'Registreren');
 ?>
 <table>
@@ -34,10 +33,6 @@ $dataSubmit = array('class' => 'btn btn-outline-success my-2 my-sm0', 'value' =>
     <tr>
         <td><?php echo form_label('Adres: ', 'adres'); ?></td>
         <td><?php echo form_input($dataInputAdres); ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label('Type gebruiker: ', 'soort'); ?></td>
-        <td><?php echo form_input($dataInputSoortZwemmer) . "Zwemmer"; ?></td>
     </tr>
     <tr>
         <td><?php echo form_submit($dataSubmit); ?></td>

@@ -99,7 +99,7 @@ $link = array('class' => 'nav-link');
                                 <a class="nav-link" href="home/account">Account</a>
                             </li>
                             <li class="nav-item">
-                                <?php echo anchor('Home/meldAf', 'Uitloggen', 'class="nav-item"') ?>
+                                <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"') ?>
                             </li>
                         </ul>
 
