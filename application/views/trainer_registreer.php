@@ -40,45 +40,11 @@ $dataSubmit = array('class' => 'btn btn-outline-success my-2 my-sm0', 'value' =>
     </tr>
     <tr>
         <td><?php echo form_label('Type gebruiker: ', 'soort'); ?></td>
-        <td><?php echo form_input($dataInputSoortZwemmer) . "Zwemmer"; ?></td>
-        <td><?php echo form_input($dataInputSoortTrainer) . "Trainer"; ?></td>
+        <td><?php echo form_input($dataInputSoortZwemmer); ?>Zwemmer</td>
+        <td><?php echo form_input($dataInputSoortTrainer); ?>Trainer</td>
     </tr>
     <tr>
         <td><?php echo form_submit($dataSubmit); ?></td>
     </tr>
     <?php echo form_close(); ?>
 </table>
-
-
-<?php
-////echo form_open('trainer/controleerRegistratie', 'class="form-inline my2 my-lg0"');
-////
-////echo form_label('Naam: ', 'naam');
-////echo form_input($dataInputNaam);
-////echo "<br />";
-////
-////echo form_label('E-mail: ', 'email');
-////echo form_input($dataInputEmail);
-////echo "<br />";
-//
-////echo form_label('Wachtwoord: ', 'wachtwoord');
-////echo form_input($dataInputWachtwoord);
-////echo "<br />";
-//
-//echo form_label('Woonplaats: ', 'woonplaats');
-//echo form_input($dataInputWoonplaats);
-//echo "<br />";
-//
-//echo form_label('Adres: ', 'adres');
-//echo form_input($dataInputAdres);
-//echo "<br />";
-//
-//echo form_label('Type gebruiker: ', 'soort');
-//echo form_input($dataInputSoortZwemmer) . "Zwemmer";
-//echo form_input($dataInputSoortTrainer) . "Trainer";
-//echo "<br />";
-//
-//echo form_submit($dataSubmit);
-//echo form_close();
-//
-//?>

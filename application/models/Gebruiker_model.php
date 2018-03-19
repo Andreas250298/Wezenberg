@@ -43,13 +43,13 @@ class Gebruiker_model extends CI_Model
         }
     }
 
-    public function voegToe($email, $wachtwoord, $naam, $address, $woonplaats, $soort)
+    public function voegToe($email, $wachtwoord, $naam, $address, $woonplaats)
     {
         $gebruiker = new stdClass();
         $gebruiker->naam = $naam;
         $gebruiker->adres = $address;
         $gebruiker->woonplaats = $woonplaats;
-        $gebruiker->soort = $soort;
+        $gebruiker->soort = "zwemmer";
         $gebruiker->email = $email;
         $gebruiker->status = 1;
         $gebruiker->wachtwoord = password_hash($wachtwoord, PASSWORD_DEFAULT);
