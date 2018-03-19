@@ -28,7 +28,7 @@ $link = array('class' => 'nav-link');
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <!--<a class="nav-link" href="home/index">Startpagina <span class="sr-only">(current)</span></a>-->
-                    <?php echo anchor('gebruiker/index', 'Startpagina', $link);?>
+                    <?php echo anchor('home/index', 'Startpagina', $link);?>
 
                 </li>
                 <li class="nav-item">
@@ -78,7 +78,7 @@ $link = array('class' => 'nav-link');
                             </li>
                             <li class="nav-item">
 
-                                <?php echo anchor('home/meldAf', 'Uitloggen', $link);?>
+                                <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"');?>
                             </li>
                         </ul>
 
@@ -90,13 +90,10 @@ $link = array('class' => 'nav-link');
 
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <?php echo anchor('Nieuws/index', 'Nieuws beheren', 'class="nav-link"') ?>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="home/account">Account</a>
                             </li>
                             <li class="nav-item">
-                                <?php echo anchor('Home/meldAf', 'Uitloggen', 'class="nav-item"') ?>
+                                <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"');?>
                             </li>
                         </ul>
 

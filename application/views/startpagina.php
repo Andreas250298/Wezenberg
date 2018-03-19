@@ -1,6 +1,8 @@
 <?php
 
 function haalArtikelsOp($nieuwsArtikels) {
+    echo '<h2>Laatste nieuws</h2>';
+    echo '<ul class="list-unstyled">';
     foreach ($nieuwsArtikels as $artikel) {
         echo '<a class="nieuwsartikels" href="#"><li class="media">';
         echo '<img class="mr-3" src="..." alt="Placeholder image">';
@@ -10,6 +12,7 @@ function haalArtikelsOp($nieuwsArtikels) {
         echo '</div>';
         echo '</li></a>';
     }
+    echo '</ul>';
 }
 
 function haalAgendaOp($agendaItems) {
@@ -22,11 +25,38 @@ function haalAgendaOp($agendaItems) {
         echo '<div class="col-9">';
         echo '<h5 class="text-uppercase">Belgisch kampioenschap</h5>';
         echo '<ul class="list-inline">';
-        echo '<li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> ' . date('l', strtotime($agendaItem->beginDatum)) . '</li>';
+        echo '<li class="list-inline-item"><i class="fa fa-calendar" aria-hidden="true"></i> ' . date('l', strtotime($agendaItem->beginDatum)) . '</li>';
         echo '<li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> ' . $agendaItem->plaats . '</li>';
         echo '</ul>';
         echo '</div>';
         echo '</div>';
+    }
+}
+
+function haalPaginaInhoudOp($nieuwsArtikels, $gebruiker) {
+    if ($gebruiker != null) {
+        switch ($gebruiker->soort) {
+            case 'zwemmer': // zwemmer
+                haalArtikelsOp($nieuwsArtikels);
+                break;
+            case 'trainer': // trainer
+                echo '<div class="row">';
+                echo '<div class="col-6">';
+                echo anchor('Nieuws/index', '<i class="far fa-newspaper fa-3x fa-fw"></i> Nieuws beheren', 'class="beheerknop"');
+                echo anchor('Wedstrijd/index', '<i class="fas fa-trophy fa-3x fa-fw"></i> Wedstrijden beheren', 'class="beheerknop"');
+                echo anchor('Trainer/index', '<i class="fas fa-users fa-3x fa-fw"></i> Zwemmers beheren', 'class="beheerknop"');
+                echo anchor('Trainer/index', '<i class="fas fa-info fa-3x fa-fw"></i> Info aanpassen', 'class="beheerknop"');
+                echo '</div>';
+                echo '<div class="col-6">';
+                echo anchor('Trainer/index', '<i class="far fa-calendar-alt fa-3x fa-fw"></i> Activiteiten beheren', 'class="beheerknop"');
+                echo anchor('Supplementen/index', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen toekennen', 'class="beheerknop"');
+                echo anchor('Nieuws/index', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen beheren', 'class="beheerknop"');
+                echo '</div>';
+                echo '</div>';
+                break;
+        }
+    } else {
+        haalArtikelsOp($nieuwsArtikels);
     }
 }
 
@@ -123,17 +153,28 @@ for ($day = 1; $day <= $day_count; $day++, $str++) {
     .today {
         background: orange;
     }
+    
+    .beheerknop{
+        padding: 20px;
+        background-color: black;
+        color: white;
+        display: block;
+        margin: 10px;
+        border-radius: 10px;
+    }
+    
+    .beheerknop:hover{
+        background-color: #253555;
+        color: white;
+    }
 </style>
 
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h2>Laatste nieuws</h2>
-            <ul class="list-unstyled">
-                <?php
-                haalArtikelsOp($nieuwsArtikels);
-                ?>
-            </ul>
+            <?php
+            haalPaginaInhoudOp($nieuwsArtikels, $gebruiker)
+            ?>
         </div>
         <div class="col-lg-4">
             <div>
