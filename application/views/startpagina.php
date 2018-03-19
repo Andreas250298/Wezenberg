@@ -43,7 +43,7 @@ function haalPaginaInhoudOp($nieuwsArtikels, $gebruiker) {
                 echo '<div class="row">';
                 echo '<div class="col-6">';
                 echo anchor('Nieuws/index', '<i class="far fa-newspaper fa-3x fa-fw"></i> Nieuws beheren', 'class="beheerknop"');
-                echo anchor('Wedstrijd/index', '<i class="fas fa-trophy fa-3x fa-fw"></i> Wedstrijden beheren', 'class="beheerknop"');
+                echo anchor('wedstrijd/beheerWedstrijden', '<i class="fas fa-trophy fa-3x fa-fw"></i> Wedstrijden beheren', 'class="beheerknop"');
                 echo anchor('Trainer/index', '<i class="fas fa-users fa-3x fa-fw"></i> Zwemmers beheren', 'class="beheerknop"');
                 echo anchor('Trainer/index', '<i class="fas fa-info fa-3x fa-fw"></i> Info aanpassen', 'class="beheerknop"');
                 echo '</div>';

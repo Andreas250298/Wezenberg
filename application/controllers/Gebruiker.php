@@ -12,7 +12,11 @@ class Gebruiker extends CI_Controller {
     public function index() {
         $data['titel'] = 'Startpagina';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
-
+        $this->load->model('nieuws_model');
+        $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikels();
+        $this->load->model('wedstrijd_model');
+      $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijden();
+        
         $this->load->model('gebruiker_model');
 
         $partials = array('hoofding' => 'main_header',
@@ -88,6 +92,31 @@ class Gebruiker extends CI_Controller {
         $data['zwemmers'] = $this->gebruiker_model->toonInactieveZwemmers();
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'inactieveZwemmers',
+            'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    public function toonZwemmerInfo($id) {
+        $this->load->model('gebruiker_model');
+        $huidigeZwemmer = $this->gebruiker_model->get($id);
+
+        $data['titel'] = $huidigeZwemmer->naam;
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $data['zwemmer'] = $huidigeZwemmer;
+
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'zwemmer_info',
+            'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function toonWedstrijden() {
+        $data['titel'] = 'Wedstrijden';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijden();
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'wedstrijd/bekijken',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
