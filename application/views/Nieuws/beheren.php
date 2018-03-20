@@ -7,7 +7,7 @@
  */
 
 echo "<p>" . anchor('Nieuws/maakNieuwsArtikel', "nieuw artikel") . "</p>";
-
+echo "<p>" . anchor('home/index', 'Terug') . "</p>";
 foreach ($nieuwsArtikels as $nieuwsArtikel) {
     echo "<div class='card'>";
     echo '<div class="card-body">';

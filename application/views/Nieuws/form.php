@@ -30,5 +30,5 @@ if(isset($nieuwsArtikel)){
 }
 
 echo form_submit($dataSubmit) . "";
-
+echo anchor('Nieuws/index', "Terug", "Class='btn btn-primary my-2 my-sm0'");
 echo form_close();
