@@ -26,7 +26,7 @@ $zwemmersTabel = "";
                     if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer')
                     {
                         echo "<br/>" . anchor('gebruiker/wijzig/' . $zwemmer->id,"<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ")
-                            . anchor('gebruiker/maakInactief/'. $zwemmer->id,"<button type=\"button\" class=\"btn btn-danger btn-xs btn-round\"><i class=\"fas fa-lock-open\"></i></button>");
+                            . anchor('gebruiker/maakInactief/'. $zwemmer->id,"<button type=\"button\" class=\"btn btn-danger btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button>");
                     }
                     //
 
