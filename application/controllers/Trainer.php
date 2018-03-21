@@ -35,7 +35,7 @@ class Trainer extends CI_Controller {
         if ($naam != null || $address != null || $woonplaats != null || $soort != null || $email != null || $wachtwoord != null)
         {
             $this->authex->registreer($email, $wachtwoord, $naam, $address, $woonplaats, $soort);
-            redirect('home');
+            redirect('gebruiker/toonZwemmers');
         }
         else
         {

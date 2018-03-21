@@ -32,9 +32,22 @@ function form_labelpro($label_text, $id) {
 
 function form_listboxpro($name = '', $objects = [], $valuefield, $textfield, $selected = [], $extra = []) {
     $options = [];
-	foreach ($objects as $object) {
+    foreach ($objects as $object) {
         $options[$object->{$valuefield}] = $object->{$textfield};
     }
 
     return form_dropdown($name, $options, $selected, $extra);
+}
+
+function form_buttonpro($name = '', $dataId = '', $titleTooltip = '', $soortGlyphicon = '', $soortButton = '') {
+    $CI = & get_instance();
+    $CI->load->helper('form');
+
+    $extraButton = array('class' => 'btn ' . $soortButton . ' btn-xs btn-round',
+        'data-id' => $dataId,
+        'data-toggle' => 'tooltip',
+        'title' => $titleTooltip
+    );
+
+    return form_button($name, "<span class='glyphicon " . $soortGlyphicon . "'></span>", $extraButton);
 }

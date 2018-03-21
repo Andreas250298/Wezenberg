@@ -55,7 +55,7 @@ $zwemmersTabel = "";
             };
             ?>
 
-            <a id="terug" href="javascript:history.go(-1);">Terug</a>
+            <?php echo '<p>' . anchor('home', 'Terug') . '</p>';?>
         </div>
     </div>
 </div>
