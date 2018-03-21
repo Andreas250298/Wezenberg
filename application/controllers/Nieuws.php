@@ -66,4 +66,12 @@ class Nieuws extends CI_Controller {
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+    
+    public function verwijder($id){
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $this->load->model('nieuws_model');
+        $this->nieuws_model->delete($id);
+        
+        redirect("/nieuws/index");
+    }
 }

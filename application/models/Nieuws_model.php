@@ -29,4 +29,9 @@ class Nieuws_model extends CI_Model
         $this->db->where('id', $nieuwsArtikel->id);
         $this->db->update('nieuwsArtikel', $nieuwsArtikel);
     }
+    
+    public function delete($id){
+        $this->db->where('id', $id);
+        $this->db->delete('nieuwsArtikel');
+    }
 }
