@@ -49,8 +49,8 @@ function haalPaginaInhoudOp($nieuwsArtikels, $gebruiker) {
                 echo '</div>';
                 echo '<div class="col-md-6">';
                 echo anchor('Trainer/index', '<i class="far fa-calendar-alt fa-3x fa-fw"></i> Activiteiten beheren', 'class="beheerknop"');
-                echo anchor('Supplementen/index', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen toekennen', 'class="beheerknop"');
-                echo anchor('Nieuws/index', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen beheren', 'class="beheerknop"');
+                echo anchor('Supplement/index', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen toekennen', 'class="beheerknop"');
+                echo anchor('Supplement/beheerSupplementen', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen beheren', 'class="beheerknop"');
                 echo '</div>';
                 echo '</div>';
                 break;
