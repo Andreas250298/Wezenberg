@@ -26,15 +26,15 @@ class Trainer extends CI_Controller {
     public function controleerRegistratie()
     {
         $naam = $this->input->post('naam');
-        $address = $this->input->post('adres');
+        $adres = $this->input->post('adres');
         $woonplaats = $this->input->post('woonplaats');
         $soort = $this->input->post('soort');
         $email = $this->input->post('email');
         $wachtwoord = $this->input->post('wachtwoord');
 
-        if ($naam != null || $address != null || $woonplaats != null || $soort != null || $email != null || $wachtwoord != null)
+        if ($naam != null || $adres != null || $woonplaats != null || $soort != null || $email != null || $wachtwoord != null)
         {
-            $this->authex->registreer($email, $wachtwoord, $naam, $address, $woonplaats, $soort);
+            $this->authex->registreer($email, $wachtwoord, $naam, $adres, $woonplaats, $soort);
             redirect('gebruiker/toonZwemmers');
         }
         else
@@ -42,6 +42,26 @@ class Trainer extends CI_Controller {
             redirect('login_fout');
         }
 
+    }
+
+    public function wijzigProfiel()
+    {
+        $naam = $this->input->post('naam');
+        $adres = $this->input->post('adres');
+        $woonplaats = $this->input->post('woonplaats');
+        $email = $this->input->post('email');
+        $wachtwoord = $this->input->post('wachtwoord');
+        $id = $this->input->post('id');
+
+        if ($naam != null || $adres != null || $woonplaats != null || $email != null || $wachtwoord != null || $id != null)
+        {
+            $this->authex->wijzig($email, $naam, $adres, $woonplaats, $wachtwoord, $id);
+            redirect('gebruiker/toonZwemmers');
+        }
+        else
+        {
+            redirect('login_fout');
+        }
     }
 
 

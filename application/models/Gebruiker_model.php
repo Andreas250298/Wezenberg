@@ -14,7 +14,20 @@ class Gebruiker_model extends CI_Model
 	return $query->row();
     }
 
-    public function getGebruiker($email, $wachtwoord)
+    public function getGebruiker($email)
+    {
+        $this->db->where('email', $email);
+        $query = $this->db->get('gebruiker');
+
+        if ($query->num_rows() == 1) {
+            $gebruiker = $query->row();
+                return $gebruiker;
+        } else {
+            return null;
+        }
+    }
+
+    public function getGebruikerMetWachtwoord($email, $wachtwoord)
     {
         $this->db->where('email', $email);
         $query = $this->db->get('gebruiker');
@@ -43,11 +56,11 @@ class Gebruiker_model extends CI_Model
         }
     }
 
-    public function voegToe($email, $wachtwoord, $naam, $address, $woonplaats)
+    public function voegToe($email, $wachtwoord, $naam, $adres, $woonplaats)
     {
         $gebruiker = new stdClass();
         $gebruiker->naam = $naam;
-        $gebruiker->adres = $address;
+        $gebruiker->adres = $adres;
         $gebruiker->woonplaats = $woonplaats;
         $gebruiker->soort = "zwemmer";
         $gebruiker->email = $email;
@@ -77,7 +90,17 @@ class Gebruiker_model extends CI_Model
         return $query->result();
     }
     
-    function update($gebruiker) {
+    function update($email, $naam, $adres, $woonplaats, $wachtwoord, $id) {
+        $gebruiker = new stdClass();
+        $gebruiker->id = $id;
+        $gebruiker->naam = $naam;
+        $gebruiker->adres = $adres;
+        $gebruiker->woonplaats = $woonplaats;
+        $gebruiker->soort = "zwemmer";
+        $gebruiker->email = $email;
+        $gebruiker->status = 1;
+        $gebruiker->wachtwoord = password_hash($wachtwoord, PASSWORD_DEFAULT);
+        
         $this->db->where('id', $gebruiker->id);
         $this->db->update('gebruiker', $gebruiker);
     }

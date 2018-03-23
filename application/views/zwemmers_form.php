@@ -10,7 +10,8 @@ $attributen = array('id' => 'mijnFormulier',
     'class' => 'form-inline my2 my-lg0',
     'data-toggle' => 'validator',
     'role' => 'form');
-echo form_open('trainer/controleerRegistratie', $attributen);
+echo form_open('trainer/wijzigProfiel', $attributen);
+echo form_hidden('id', $zwemmer->id);
 ?>
 <tr>
     <td>
@@ -48,7 +49,7 @@ echo form_open('trainer/controleerRegistratie', $attributen);
         <div class="form-group">
             <?php
             echo form_labelpro('Woonplaats', 'woonplaats');
-            echo form_input(array('name' => 'werknemers',
+            echo form_input(array('name' => 'woonplaats',
                 'id' => 'woonplaats',
                 'value' => $zwemmer->woonplaats,
                 'class' => 'form-control',
@@ -67,6 +68,22 @@ echo form_open('trainer/controleerRegistratie', $attributen);
             echo form_input(array('name' => 'adres',
                 'id' => 'adres',
                 'value' => $zwemmer->adres,
+                'class' => 'form-control',
+                'required' => 'required'));
+            ?>
+            <div class="help-block with-errors"></div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <div class="form-group">
+            <?php
+            echo form_labelpro('Wachtwoord', 'wachtwoord');
+            echo form_input(array('name' => 'wachtwoord',
+                'id' => 'wachtwoord',
+                'type' => 'password',
+                'placeholder' => '&#9679;&#9679;&#9679;&#9679;&#9679;',
                 'class' => 'form-control',
                 'required' => 'required'));
             ?>
