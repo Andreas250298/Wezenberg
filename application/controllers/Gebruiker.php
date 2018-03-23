@@ -12,7 +12,9 @@ class Gebruiker extends CI_Controller {
     
     public function index() {
         $data['titel'] = 'Startpagina';
+        $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        
         $this->load->model('nieuws_model');
         $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikels();
         $this->load->model('wedstrijd_model');
@@ -34,6 +36,7 @@ class Gebruiker extends CI_Controller {
     
     public function toonZwemmers() {
         $data['titel'] = 'Zwemmers';
+        $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         
         //gebruiker_model inladen
@@ -47,6 +50,7 @@ class Gebruiker extends CI_Controller {
     
     public function maakGebruiker() {
         $data['titel'] = "Registreer";
+        $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         
         $partials = array('hoofding' => 'main_header',
@@ -56,6 +60,8 @@ class Gebruiker extends CI_Controller {
     }
     
     public function wijzig($id) {
+        $data['paginaVerantwoordelijke'] = '';
+        
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('gebruiker_model');
         $data['zwemmer'] = $this->gebruiker_model->get($id);
@@ -86,6 +92,7 @@ class Gebruiker extends CI_Controller {
     
     public function toonInactieveZwemmers() {
         $data['titel'] = 'Zwemmers';
+        $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         
         //gebruiker_model inladen
@@ -98,6 +105,8 @@ class Gebruiker extends CI_Controller {
     }
 
     public function toonZwemmerInfo($id) {
+        $data['paginaVerantwoordelijke'] = '';
+        
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
 
@@ -113,6 +122,8 @@ class Gebruiker extends CI_Controller {
     
     public function toonWedstrijden() {
         $data['titel'] = 'Wedstrijden';
+        $data['paginaVerantwoordelijke'] = '';
+        
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijden();

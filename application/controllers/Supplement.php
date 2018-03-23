@@ -12,8 +12,9 @@ class Supplement extends CI_Controller
 
     public function index()
     {
+        $data['paginaVerantwoordelijke'] = '';
         $data['titel'] = 'Supplement bekijken';
-
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $this->load->model('supplement_model');
         $data['supplementen'] = $this->supplement_model->toonSupplementen();
 
@@ -25,12 +26,14 @@ class Supplement extends CI_Controller
 
     public function maakSupplement()
     {
+        $data['paginaVerantwoordelijke'] = '';
         $data['titel'] = 'Supplementen aanmaken';
-
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $data['supplement'] = null;
         $this->load->model('supplement_model');
 
         $partials = array('hoofding' => 'main_header',
-         'inhoud' => 'Supplement/maken',
+         'inhoud' => 'Supplement/form',
          'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
@@ -48,5 +51,40 @@ class Supplement extends CI_Controller
         } else {
             $this->supplement_model->update($supplement);
         }
+        
+        redirect('/supplement/beheerSupplementen');
+    }
+    
+    public function beheerSupplementen() {
+        $data['titel'] = 'Supplementen beheren';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+
+      $this->load->model('supplement_model');
+      $data['supplementen'] = $this->supplement_model->toonSupplementen();
+
+      $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Supplement/beheren',
+          'voetnoot' => 'main_footer');
+      $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function wijzig($id) {
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $this->load->model('supplement_model');
+        $data['supplement'] = $this->supplement_model->get($id);
+        $data['titel'] = 'Supplementen wijzigen';
+
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'Supplement/form',
+            'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function verwijder($id){
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $this->load->model('supplement_model');
+        $this->supplement_model->delete($id);
+        
+        redirect("/supplement/index");
     }
 }

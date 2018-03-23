@@ -12,6 +12,7 @@ class Trainer extends CI_Controller {
 
     public function registreer()
     {
+        $data['paginaVerantwoordelijke'] = '';
         $data['titel'] = 'Wezenberg | Gebruiker aanmaken';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 

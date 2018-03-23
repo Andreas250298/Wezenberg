@@ -11,6 +11,7 @@ class Home extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Wezenberg | startpagina';
+        $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
         $this->load->model('nieuws_model');
@@ -27,6 +28,7 @@ class Home extends CI_Controller {
 
     public function meldAan() {
         $data['titel'] = 'Aanmelden';
+        $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
         $partials = array('hoofding' => 'main_header',
@@ -36,8 +38,22 @@ class Home extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function toonFout() {
+    public function toonFout($foutMelding) {
         $data['titel'] = 'Fout';
+        $data['paginaVerantwoordelijke'] = '';
+        
+        switch ($foutMelding) {
+            case 'aanmelden':
+                $data['foutMelding'] = 'Foute aanmeld gegevens, probeer opnieuw!';
+                break;
+
+            default:
+                $data['foutMelding'] = '';
+                break;
+        }
+        
+        
+        
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
         $partials = array('hoofding' => 'main_header',
@@ -54,7 +70,7 @@ class Home extends CI_Controller {
         if ($this->authex->meldAan($email, $wachtwoord)) {
             redirect('home');
         } else {
-            redirect('home/toonFout');
+            redirect('home/toonFout/aanmelden');
         }
     }
 
