@@ -33,10 +33,13 @@ function haalAgendaOp($agendaItems) {
     }
 }
 
-function haalPaginaInhoudOp($nieuwsArtikels, $gebruiker) {
+function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker) {
     if ($gebruiker != null) {
         switch ($gebruiker->soort) {
             case 'zwemmer': // zwemmer
+                echo '<div><h2>Welkom</h2>';
+                echo $trainingscentrum->beschrijvingWelkom;
+                echo '</div>';
                 haalArtikelsOp($nieuwsArtikels);
                 break;
             case 'trainer': // trainer
@@ -56,6 +59,7 @@ function haalPaginaInhoudOp($nieuwsArtikels, $gebruiker) {
                 break;
         }
     } else {
+        echo $trainingscentrum->beschrijvingWelkom;
         haalArtikelsOp($nieuwsArtikels);
     }
 }
@@ -105,7 +109,7 @@ function haalPaginaInhoudOp($nieuwsArtikels, $gebruiker) {
 <div class="row">
     <div class="col-12 col-lg-8">
         <?php
-        haalPaginaInhoudOp($nieuwsArtikels, $gebruiker)
+        haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker)
         ?>
     </div>
     <div class="col-12 col-lg-4">

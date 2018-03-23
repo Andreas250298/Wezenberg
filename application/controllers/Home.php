@@ -16,8 +16,12 @@ class Home extends CI_Controller {
 
         $this->load->model('nieuws_model');
         $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikels();
+        
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->getAll();
+        
+        $this->load->model('trainingscentrum_model');
+        $data['trainingscentrum'] = $this->trainingscentrum_model->get();
         
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'startpagina',
