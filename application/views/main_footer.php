@@ -2,7 +2,7 @@
 $link = array('class' => 'nav-link');
 ?>
 <!--Navigatiebalk-->
-<nav class="navbar navbar-expand-lg navbar-light fixed-bottom">
+<nav class="navbar navbar-expand-lg navbar-light sticky-bottom">
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">

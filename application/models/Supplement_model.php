@@ -14,7 +14,7 @@ class Supplement_model extends CI_Model
         return $query->row();
     }
 
-    public function toonWedstrijden()
+    public function toonSupplementen()
     {
         $this->db->order_by('naam', 'asc');
         $query = $this->db->get('supplement');
