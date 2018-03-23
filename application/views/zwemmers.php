@@ -55,7 +55,7 @@ $zwemmersTabel = "";
             };
             ?>
 
-            <?php echo '<p>' . anchor('home', 'Terug') . '</p>';?>
+            <?php echo '<p>' . anchor('home', 'Terug', "Class='btn btn-primary my-2 my-sm0'") . '</p>';?>
         </div>
     </div>
 </div>

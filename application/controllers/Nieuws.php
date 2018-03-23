@@ -72,6 +72,7 @@ class Nieuws extends CI_Controller {
     
     public function verwijder($id){
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $data['paginaVerantwoordelijke'] = '';
         $this->load->model('nieuws_model');
         $this->nieuws_model->delete($id);
         

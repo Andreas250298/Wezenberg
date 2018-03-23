@@ -20,4 +20,4 @@ foreach ($supplementen as $supplement) {
     echo '</div></div>';
 }
 
-echo anchor('home', 'Terug');
+echo anchor('home', 'Terug', "Class='btn btn-primary my-2 my-sm0'");

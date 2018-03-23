@@ -32,6 +32,7 @@ class Gebruiker extends CI_Controller {
     public function getGebruiker(){
       $gebruikerEmail = $this->input->get('email');
       $gebruikerWachtwoord = $this->input->get('wachtwoord');
+      $gebruikerGeboortedatum = $this->input->get('geboortedatum');
     }
     
     public function toonZwemmers() {
@@ -54,7 +55,7 @@ class Gebruiker extends CI_Controller {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         
         $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'zwemmer_registreer',
+            'inhoud' => 'zwemmers_form',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
