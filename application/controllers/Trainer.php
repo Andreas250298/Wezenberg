@@ -16,11 +16,17 @@ class Trainer extends CI_Controller {
         $data['paginaVerantwoordelijke'] = '';
         $data['titel'] = 'Wezenberg | Gebruiker aanmaken';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $this->load->model('gebruiker_model');
+        if($gebruiker->id == null) {
+            $this->wedstrijd_model->insert($gebruiker);
+        }
+        else {
+            $this->wedstrijd_model->update($gebruiker);
+        }
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'trainer_registreer',
             'voetnoot' => 'main_footer');
-
         $this->template->load('main_master', $partials, $data);
     }
 
