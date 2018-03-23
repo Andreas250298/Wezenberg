@@ -34,16 +34,12 @@ class Trainer extends CI_Controller {
         $email = $this->input->post('email');
         $wachtwoord = $this->input->post('wachtwoord');
         $geboortedatum = zetOmNaarYYYYMMDD($this->input->post('geboortedatum'));
-
-<<<<<<< HEAD
-        if ($naam != null || $address != null || $woonplaats != null || $soort != null || $email != null || $wachtwoord != null || $geboortedatum != null)
+        if ($naam != null || $adres != null || $woonplaats != null || $soort != null || $email != null || $wachtwoord != null || $geboortedatum != null)
         {
             $this->authex->registreer($email, $wachtwoord, $naam, $address, $woonplaats, $soort, $geboortedatum);
-=======
         if ($naam != null || $adres != null || $woonplaats != null || $soort != null || $email != null || $wachtwoord != null)
         {
             $this->authex->registreer($email, $wachtwoord, $naam, $adres, $woonplaats, $soort);
->>>>>>> 54a018435fb986c4ad82543d5a2c5e6a77440d2b
             redirect('gebruiker/toonZwemmers');
         }
         else
@@ -51,6 +47,7 @@ class Trainer extends CI_Controller {
             redirect('login_fout');
         }
 
+    }
     }
 
     public function wijzigProfiel()
