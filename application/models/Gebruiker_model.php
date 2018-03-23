@@ -56,7 +56,7 @@ class Gebruiker_model extends CI_Model
         }
     }
 
-    public function voegToe($email, $wachtwoord, $naam, $adres, $woonplaats)
+    public function voegToe($email, $wachtwoord, $naam, $adres, $woonplaats, $geboortedatum)
     {
         $gebruiker = new stdClass();
         $gebruiker->naam = $naam;
@@ -66,6 +66,7 @@ class Gebruiker_model extends CI_Model
         $gebruiker->email = $email;
         $gebruiker->status = 1;
         $gebruiker->wachtwoord = password_hash($wachtwoord, PASSWORD_DEFAULT);
+        $gebruiker->geboortedatum = $geboortedatum;
         $this->db->insert('gebruiker', $gebruiker);
         return $this->db->insert_id();
     }
@@ -90,7 +91,7 @@ class Gebruiker_model extends CI_Model
         return $query->result();
     }
     
-    function update($email, $naam, $adres, $woonplaats, $id) {
+    function update($email, $naam, $adres, $woonplaats, $id, $geboortedatum) {
         $gebruiker = new stdClass();
         $gebruiker->id = $id;
         $gebruiker->naam = $naam;
@@ -99,7 +100,7 @@ class Gebruiker_model extends CI_Model
         $gebruiker->soort = "zwemmer";
         $gebruiker->email = $email;
         $gebruiker->status = 1;
-        
+        $geboortedatum->geboortedatum = $geboortedatum;
         $this->db->where('id', $gebruiker->id);
         $this->db->update('gebruiker', $gebruiker);
     }

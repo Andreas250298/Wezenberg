@@ -36,10 +36,10 @@ class Trainer extends CI_Controller {
         $geboortedatum = zetOmNaarYYYYMMDD($this->input->post('geboortedatum'));
         if ($naam != null || $adres != null || $woonplaats != null || $soort != null || $email != null || $wachtwoord != null || $geboortedatum != null)
         {
-            $this->authex->registreer($email, $wachtwoord, $naam, $address, $woonplaats, $soort, $geboortedatum);
+            $this->authex->registreer($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum);
         if ($naam != null || $adres != null || $woonplaats != null || $soort != null || $email != null || $wachtwoord != null)
         {
-            $this->authex->registreer($email, $wachtwoord, $naam, $adres, $woonplaats, $soort);
+            $this->authex->registreer($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum);
             redirect('gebruiker/toonZwemmers');
         }
         else
@@ -57,10 +57,11 @@ class Trainer extends CI_Controller {
         $woonplaats = $this->input->post('woonplaats');
         $email = $this->input->post('email');
         $id = $this->input->post('id');
+        $geboortedatum = $this->input->post('geboortedatum');
 
-        if ($naam != null || $adres != null || $woonplaats != null || $email != null || $id != null)
+        if ($naam != null || $adres != null || $woonplaats != null || $email != null || $id != null || $geboortedatum != NULL)
         {
-            $this->authex->wijzig($email, $naam, $adres, $woonplaats, $id);
+            $this->authex->wijzig($email, $naam, $adres, $woonplaats, $id, $geboortedatum);
             redirect('gebruiker/toonZwemmers');
         }
         else
