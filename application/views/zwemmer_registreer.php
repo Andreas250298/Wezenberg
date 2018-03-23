@@ -10,6 +10,7 @@ $dataInputEmail = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'na
 $dataInputWachtwoord = array('class' => 'form-control mr-sm-2', 'type' => 'password', 'name' => 'wachtwoord', 'id' => 'wachtwoord', 'placeholder' => 'Wachtwoord', 'aria-label' => 'Wachtwoord', 'size' => '30', 'required' => 'required');
 $dataInputWoonplaats = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'woonplaats', 'id' => 'woonplaats', 'placeholder' => 'Woonplaats', 'aria-label' => 'Woonplaats', 'size' => '30', 'required' => 'required');
 $dataInputAdres = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'adres', 'id' => 'adres', 'placeholder' => 'Adres', 'aria-label' => 'Adres', 'size' => '30', 'required' => 'required');
+$dataInputGeboortedatum = array('class' => 'form-control mr-sm-2', 'type' => 'date','name' => 'geboortedatum', 'id' => 'geboortedatum', 'placeholder' => 'Geboortedatum', 'aria-label' => 'Geboortedatum', 'size' => '30', 'required' => 'required');
 $dataSubmit = array('class' => 'btn btn-outline-success my-2 my-sm0', 'value' => 'Registreren');
 echo haalJavascriptOp("validator.js");
 ?>
@@ -44,6 +45,10 @@ echo haalJavascriptOp("validator.js");
     <tr>
         <td><?php echo form_labelpro('Adres: ', 'adres'); ?></td>
         <td><?php echo form_input($dataInputAdres); ?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_labelpro('Geboortedatum: ', 'geboortedatum'); ?></td>
+        <td><?php echo form_input($dataInputGeboortedatum); ?></td>
     </tr>
     <tr>
         <td><?php echo form_submit($dataSubmit); ?></td>

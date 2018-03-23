@@ -45,7 +45,7 @@ $disciplines = "100m vlinderslag";
 
     <div class="row text-center mt-5">
         <div class="col-md-11">
-            <a id="terug" href="javascript:history.go(-1);">Terug</a>
+            <?php echo anchor('gebruiker/toonZwemmers', 'Terug', "Class='btn btn-primary my-2 my-sm0'");?>
         </div>
     </div>
 </div>
