@@ -5,12 +5,8 @@ $link = array('class' => 'nav-link');
 <nav class="navbar navbar-light">
     <div class="container">
         <div class="justify-content-start d-flex flex-row">
-            <a class="navbar-brand" href="#">
-                <?php echo toonAfbeelding("logo/teambelgium.png", 'width="110" height="150" class="d-inline-block align-top" alt="Logo Team Belgium"'); ?>
-            </a>
-            <a class="navbar-brand align-self-end" href="#">
-                <span class="align-bottom display-4 d-none d-lg-block">Wezenberg trainingscentrum</span>
-            </a>
+            <?php echo anchor('home/index', toonAfbeelding("logo/teambelgium.png", 'width="110" height="150" class="d-inline-block align-top" alt="Logo Team Belgium"'), 'class="navbar-brand"');?>
+            <?php echo anchor('home/index', '<span class="align-bottom display-4 d-none d-lg-block">Wezenberg trainingscentrum</span>', 'class="navbar-brand align-self-end"');?>
         </div>
     </div>
 </nav>
@@ -26,10 +22,9 @@ $link = array('class' => 'nav-link');
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <!--<a class="nav-link" href="home/index">Startpagina <span class="sr-only">(current)</span></a>-->
                     <?php echo anchor('home/index', 'Startpagina', $link);?>
-
                 </li>
                 <li class="nav-item">
                     <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link);?>
