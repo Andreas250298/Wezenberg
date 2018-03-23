@@ -51,12 +51,11 @@ class Trainer extends CI_Controller {
         $adres = $this->input->post('adres');
         $woonplaats = $this->input->post('woonplaats');
         $email = $this->input->post('email');
-        $wachtwoord = $this->input->post('wachtwoord');
         $id = $this->input->post('id');
 
-        if ($naam != null || $adres != null || $woonplaats != null || $email != null || $wachtwoord != null || $id != null)
+        if ($naam != null || $adres != null || $woonplaats != null || $email != null || $id != null)
         {
-            $this->authex->wijzig($email, $naam, $adres, $woonplaats, $wachtwoord, $id);
+            $this->authex->wijzig($email, $naam, $adres, $woonplaats, $id);
             redirect('gebruiker/toonZwemmers');
         }
         else

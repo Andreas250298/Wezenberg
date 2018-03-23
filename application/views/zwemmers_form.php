@@ -78,22 +78,6 @@ echo form_hidden('id', $zwemmer->id);
 <tr>
     <td>
         <div class="form-group">
-            <?php
-            echo form_labelpro('Wachtwoord', 'wachtwoord');
-            echo form_input(array('name' => 'wachtwoord',
-                'id' => 'wachtwoord',
-                'type' => 'password',
-                'placeholder' => '&#9679;&#9679;&#9679;&#9679;&#9679;',
-                'class' => 'form-control',
-                'required' => 'required'));
-            ?>
-            <div class="help-block with-errors"></div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <div class="form-group">
             <?php echo form_submit('knop', 'Verzenden', "class='btn btn-primary'") ?>
         </div>
     </td>

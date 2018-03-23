@@ -87,11 +87,11 @@ class Authex {
         }
     }
 
-    function wijzig($email, $naam, $adres, $woonplaats, $wachtwoord, $id) {
+    function wijzig($email, $naam, $adres, $woonplaats, $id) {
         // bestaande gebruiker updaten
         $CI = & get_instance();
         
-        $CI->gebruiker_model->update($email, $naam, $adres, $woonplaats, $wachtwoord, $id);
+        $CI->gebruiker_model->update($email, $naam, $adres, $woonplaats, $id);
     }
 
 

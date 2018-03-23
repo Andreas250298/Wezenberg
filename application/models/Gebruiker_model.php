@@ -90,7 +90,7 @@ class Gebruiker_model extends CI_Model
         return $query->result();
     }
     
-    function update($email, $naam, $adres, $woonplaats, $wachtwoord, $id) {
+    function update($email, $naam, $adres, $woonplaats, $id) {
         $gebruiker = new stdClass();
         $gebruiker->id = $id;
         $gebruiker->naam = $naam;
@@ -99,7 +99,6 @@ class Gebruiker_model extends CI_Model
         $gebruiker->soort = "zwemmer";
         $gebruiker->email = $email;
         $gebruiker->status = 1;
-        $gebruiker->wachtwoord = password_hash($wachtwoord, PASSWORD_DEFAULT);
         
         $this->db->where('id', $gebruiker->id);
         $this->db->update('gebruiker', $gebruiker);
