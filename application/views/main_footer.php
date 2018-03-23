@@ -2,26 +2,24 @@
 $link = array('class' => 'nav-link');
 ?>
 <!--Navigatiebalk-->
-<nav class="navbar navbar-expand-lg navbar-light fixed-bottom">
-    <div class="container">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <?php echo anchor('gebruiker/index', 'Startpagina', $link);?>
-                </li>
-                <li class="nav-item">
-                    <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link);?>
-                </li>
-                <li class="nav-item">
-                      <?php echo anchor('wedstrijd/index', 'Wedstrijden', $link);?>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Over ons</a>
-                </li>
-            </ul>
-        </div>
-        <span class="navbar-text">
-            &COPY; Wezenberg, Team-12, 2018
-        </span>
+<nav class="navbar navbar-expand-lg navbar-light text-center">
+    <div class="container text-center">
+        <div class="row">
+            <div class="text-center col-12">
+                <span class="navbar-text text-center">
+                    Dit is een testproject van Team-12 voor Mangelschots Kristine
+                </span>
+            </div>
+            <div class="text-center col-12">
+                <span class="navbar-text text-center">
+                    &COPY; Andreas Aerts, Bols Jordi, De Coninck Mattias, De Pauw Sacha & D'Haene Florian 
+                </span>
+            </div>
+            <div class="text-center col-12">
+                <span class="navbar-text text-center">
+                    Verantwoordelijke : <?php echo $paginaVerantwoordelijke; ?>
+                </span>
+            </div>    
+        </div>   
     </div>
 </nav>

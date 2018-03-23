@@ -12,6 +12,7 @@ class Supplement extends CI_Controller
 
     public function index()
     {
+        $data['paginaVerantwoordelijke'] = '';
         $data['titel'] = 'Supplement bekijken';
 
         $this->load->model('supplement_model');
@@ -25,6 +26,7 @@ class Supplement extends CI_Controller
 
     public function maakSupplement()
     {
+        $data['paginaVerantwoordelijke'] = '';
         $data['titel'] = 'Supplementen aanmaken';
 
         $this->load->model('supplement_model');

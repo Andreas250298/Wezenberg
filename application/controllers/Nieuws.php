@@ -10,6 +10,7 @@ class Nieuws extends CI_Controller {
     }
 
     public function index() {
+        $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
         $data['titel'] = "Nieuws beheren";
@@ -24,6 +25,7 @@ class Nieuws extends CI_Controller {
     }
 
     public function maakNieuwsArtikel() {
+        $data['paginaVerantwoordelijke'] = '';
         $data['titel'] = 'Nieuwsartikel aanmaken';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
@@ -56,6 +58,7 @@ class Nieuws extends CI_Controller {
     }
     
     public function wijzig($id) {
+        $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('nieuws_model');
         $data['nieuwsArtikel'] = $this->nieuws_model->get($id);
