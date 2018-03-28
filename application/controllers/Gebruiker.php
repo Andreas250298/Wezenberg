@@ -10,9 +10,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 class Gebruiker extends CI_Controller
 {
-  /**
-  * Constructor
-  */
+    /**
+    * Constructor
+    */
     public function __construct()
     {
         parent::__construct();
@@ -21,7 +21,8 @@ class Gebruiker extends CI_Controller
     }
 
     /**
-    * Weergeven van StartpaginaF
+    * Weergeven van Startpagina
+    * Functie te vinden in \dotinclude Gebruiker.php
     *\see Authex::getGebruikerInfo()
     *\see Nieuws_model::getAllNieuwsArtikels()
     *\see Wedstrijd_model::toonWedstrijden()
@@ -134,7 +135,7 @@ class Gebruiker extends CI_Controller
     * Zwemmer of inactief zetten volgens id
     *\see Gebruiker_model::get()
     *\see Gebruiker_model::update()
-    *\see toonZwemmer.php
+    *\see Gebruiker::toonZwemmers()
     */
     public function maakInactief($id)
     {
@@ -148,8 +149,8 @@ class Gebruiker extends CI_Controller
     /**
     * Zwemmer of actief zetten volgens id
     *\see Gebruiker_model::get()
-    *\see Gebruiker_model::update()
-    *\see toonZwemmer.php
+    *\see Gebruiker_model::update
+    *\see Gebruiker::toonZwemmers()
     */
     public function maakActief($id)
     {
