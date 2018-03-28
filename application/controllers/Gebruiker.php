@@ -13,7 +13,9 @@ class Gebruiker extends CI_Controller {
     public function index() {
       /**
       * Weergeven van Startpagina
-      *
+      *\see Gebruiker_model::getAllNieuwsArtikels()
+      *\see Gebruiker_model::toonWedstrijden()
+      *\see startpagina.php
       */
         $data['titel'] = 'Startpagina';
         $data['paginaVerantwoordelijke'] = '';
