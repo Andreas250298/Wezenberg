@@ -4,11 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Nieuws extends CI_Controller {
 
+    /**
+     * Constructor
+     */
     public function __construct() {
         parent::__construct();
         $this->load->helper('form', 'date');
     }
 
+    /**
+     * Toont een lijst van alle nieuwsartikelen.
+     */
     public function index() {
         $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -24,6 +30,9 @@ class Nieuws extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+     * Toont het formulier om een nieuw nieuwsartikel aan te maken.
+     */
     public function maakNieuwsArtikel() {
         $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $data['titel'] = 'Nieuwsartikel aanmaken';
@@ -38,6 +47,9 @@ class Nieuws extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+     * Voegt een nieuw nieuwsartikel toe aan de databank en toont dan opnieuw de lijst van nieuwsartikels.
+     */
     public function registreer() {
         $artikel = new stdClass();
         $artikel->id = $this->input->post('id');
@@ -57,6 +69,10 @@ class Nieuws extends CI_Controller {
         redirect('/nieuws/index');
     }
     
+    /**
+     * Toont een formulier met alle gegevens ingevuld van het gekoze nieuwsartikel.
+     * @param $id van het aangeduide nieuwsartikel
+     */
     public function wijzig($id) {
         $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -70,6 +86,10 @@ class Nieuws extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
+    /**
+     * Verwijdert het nieuwsartikel en toont opnieuw de lijst van nieuwsartikels.
+     * @param $id van de te verwijderen nieuwsartikel
+     */
     public function verwijder($id){
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
