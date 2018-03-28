@@ -50,6 +50,12 @@ echo form_input($dataInputGeboortedatum) . "\n";
 echo "</div>";
 if(isset($zwemmer)){
     echo form_hidden('id', $zwemmer->id);
+    echo form_hidden('soort',$zwemmer->soort);
+    echo form_hidden('status',"1");
+} else{
+  echo form_hidden('id');
+  echo form_hidden('soort',"zwemmer");
+  echo form_hidden('status',"1");
 }
 
 echo form_submit($dataSubmit) . " ";

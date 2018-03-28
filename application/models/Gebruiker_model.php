@@ -64,7 +64,7 @@ class Gebruiker_model extends CI_Model
 
     public function update($gebruiker)
     {
-      $this->db->where('id', $gebruiker);
+      $this->db->where('id', $gebruiker->id);
       $this->db->update('gebruiker', $gebruiker);
     }
 
