@@ -21,7 +21,8 @@ class Gebruiker extends CI_Controller
     }
 
     /**
-    * Weergeven van Startpagina
+    * Weergeven van StartpaginaF
+    *\see Authex::getGebruikerInfo()
     *\see Nieuws_model::getAllNieuwsArtikels()
     *\see Wedstrijd_model::toonWedstrijden()
     *\see startpagina.php
