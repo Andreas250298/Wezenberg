@@ -70,23 +70,6 @@ class Gebruiker extends CI_Controller
         $data['titel'] = "Registreer";
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        $gebruiker = new stdClass();
-        $gebruiker->id = $this->input->get('id');
-        $gebruiker->naam = $this->input->get('naam');
-        $gebruiker->adres = $this->input->get('adres');
-        $gebruiker->woonplaats = $this->input->get('woonplaats');
-        $gebruiker->soort = $this->input->get('soort');
-        $gebruiker->email = $this->input->get('email');
-        $gebruiker->geboortedatum = $this->input->get('geboortedatum');
-        $gebruiker->wachtwoord = $this->input->get('wachtwoord');
-
-        $this->load->model('gebruiker_model');
-        if($gebruiker->id == null) {
-            $this->gebruiker_model->voegToe($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
-        }
-        else {
-            $this->gebruiker_model->update($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
-        }
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmers_form',
             'voetnoot' => 'main_footer');
@@ -114,6 +97,10 @@ class Gebruiker extends CI_Controller
 
     public function maakInactief($id)
     {
+      /**
+      * Inactief maken van de gebruiker via de gewenste id.
+      * \param id De id van de gebruiker die inactief gemaakt dient te worden.
+      */
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
         $huidigeZwemmer->status = 0;
@@ -123,6 +110,10 @@ class Gebruiker extends CI_Controller
 
     public function maakActief($id)
     {
+        /**
+        * Actief maken van de gebruiker via de gewenste id.
+        * \param id De id van de gebruiker die terug actief gemaakt dient te worden.
+        */
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
 
@@ -133,6 +124,9 @@ class Gebruiker extends CI_Controller
 
     public function toonInactieveZwemmers()
     {
+        /**
+        * Lijst van inactieve zwemmers tonen.
+        */
         $data['titel'] = 'Zwemmers';
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();

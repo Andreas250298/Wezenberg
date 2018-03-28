@@ -16,7 +16,7 @@ if(isset($zwemmer)) {
     $dataInputEmail = array('class' => 'form-control mr-sm-2', 'name' => 'email', 'id' => 'email', 'placeholder' => 'E-mail', 'aria-label' => 'Email', 'size' => '30', 'value' => $zwemmer->email);
     $dataInputWoonplaats = array('class' => 'form-control mr-sm-2', 'name' => 'woonplaats', 'id' => 'woonplaats', 'placeholder' => 'Woonplaats', 'aria-label' => 'Woonplaats', 'size' => '30', 'value' => $zwemmer->woonplaats);
     $dataInputAdres = array('class' => 'form-control mr-sm-2', 'name' => 'adres', 'id' => 'adres', 'placeholder' => 'Adres', 'aria-label' => 'Adres', 'size' => '30', 'value' => $zwemmer->adres);
-    $dataInputGeboortedatum = array('class' => 'form-control mr-sm-2', 'type' => 'date','name' => 'geboortedatum', 'id' => 'geboortedatum', 'placeholder' => 'Geboortedatum', 'aria-label' => 'Geboortedatum', 'size' => '30', 'value' => $zwemmer->geboortedatum);
+    $dataInputGeboortedatum = array('class' => 'form-control mr-sm-2', 'type' => 'date','name' => 'geboortedatum', 'id' => 'geboortedatum', 'placeholder' => 'Geboortedatum', 'aria-label' => 'Geboortedatum', 'size' => '30', 'value' => zetOmNaarDDMMYYYY($zwemmer->geboortedatum));
 }
 else {
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam', 'aria-label' => 'Naam', 'size' => '30');
@@ -27,7 +27,7 @@ else {
 }
     $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
 
-echo form_open('gebruiker/maakGebruiker', 'class="form-group"', $attributen);
+echo form_open('trainer/controleerRegistratie', 'class="form-group"', $attributen);
 echo "<div class='form-group'>";
 echo form_labelpro("Naam", 'naam') . "\n";
 echo form_input($dataInputNaam) . "\n";

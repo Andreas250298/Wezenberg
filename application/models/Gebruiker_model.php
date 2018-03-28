@@ -91,7 +91,7 @@ class Gebruiker_model extends CI_Model
         return $query->result();
     }
 
-    function update($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum) {
+    function update($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum, $id) {
         $gebruiker = new stdClass();
         $gebruiker->id = $id;
         $gebruiker->naam = $naam;
