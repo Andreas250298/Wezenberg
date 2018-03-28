@@ -11,6 +11,10 @@ class Gebruiker extends CI_Controller {
     }
 
     public function index() {
+      /**
+      * Weergeven van Startpagina
+      *
+      */
         $data['titel'] = 'Startpagina';
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
@@ -70,7 +74,6 @@ class Gebruiker extends CI_Controller {
         else {
             $this->gebruiker_model->update($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
         }
-
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmers_form',
             'voetnoot' => 'main_footer');
@@ -78,6 +81,10 @@ class Gebruiker extends CI_Controller {
     }
 
     public function wijzig($id) {
+      /**
+      * Wijzigen van de gebruiker via het gewenste id.
+      * \param id De id van de gebruiker die zal moeten worden aangepast.
+      */
         $data['paginaVerantwoordelijke'] = '';
 
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
