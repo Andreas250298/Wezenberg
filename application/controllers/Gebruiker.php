@@ -9,17 +9,21 @@ class Gebruiker extends CI_Controller {
         $this->load->helper('notation');
         $this->load->helper('form');
     }
-    
+
     public function index() {
+      /**
+      * Weergeven van Startpagina
+      *
+      */
         $data['titel'] = 'Startpagina';
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
-        
+
         $this->load->model('nieuws_model');
         $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikels();
         $this->load->model('wedstrijd_model');
       $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijden();
-        
+
         $this->load->model('gebruiker_model');
 
         $partials = array('hoofding' => 'main_header',
@@ -34,12 +38,12 @@ class Gebruiker extends CI_Controller {
       $gebruikerWachtwoord = $this->input->get('wachtwoord');
       $gebruikerGeboortedatum = $this->input->get('geboortedatum');
     }
-    
+
     public function toonZwemmers() {
         $data['titel'] = 'Zwemmers';
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
-        
+
         //gebruiker_model inladen
         $this->load->model('gebruiker_model');
         $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
@@ -48,21 +52,25 @@ class Gebruiker extends CI_Controller {
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     public function maakGebruiker() {
         $data['titel'] = "Registreer";
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        
+
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmers_form',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     public function wijzig($id) {
+      /**
+      * Wijzigen van de gebruiker via het gewenste id.
+      * \param id De id van de gebruiker die zal moeten worden aangepast.
+      */
         $data['paginaVerantwoordelijke'] = '';
-        
+
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('gebruiker_model');
         $data['zwemmer'] = $this->gebruiker_model->get($id);
@@ -73,7 +81,7 @@ class Gebruiker extends CI_Controller {
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-  
+
     public function maakInactief($id) {
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
@@ -81,7 +89,7 @@ class Gebruiker extends CI_Controller {
         $this->gebruiker_model->update($huidigeZwemmer);
         redirect('gebruiker/toonZwemmers');
     }
-    
+
     public function maakActief($id) {
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
@@ -90,12 +98,12 @@ class Gebruiker extends CI_Controller {
         $this->gebruiker_model->update($huidigeZwemmer);
         redirect('gebruiker/toonZwemmers');
     }
-    
+
     public function toonInactieveZwemmers() {
         $data['titel'] = 'Zwemmers';
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
-        
+
         //gebruiker_model inladen
         $this->load->model('gebruiker_model');
         $data['zwemmers'] = $this->gebruiker_model->toonInactieveZwemmers();
@@ -107,7 +115,7 @@ class Gebruiker extends CI_Controller {
 
     public function toonZwemmerInfo($id) {
         $data['paginaVerantwoordelijke'] = '';
-        
+
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
 
@@ -120,11 +128,11 @@ class Gebruiker extends CI_Controller {
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     public function toonWedstrijden() {
         $data['titel'] = 'Wedstrijden';
         $data['paginaVerantwoordelijke'] = '';
-        
+
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijden();
@@ -133,5 +141,5 @@ class Gebruiker extends CI_Controller {
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
 }
