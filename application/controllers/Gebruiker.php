@@ -90,8 +90,6 @@ class Gebruiker extends CI_Controller
         $data['titel'] = "Registreer";
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-<<<<<<< HEAD
-=======
         $gebruiker = new stdClass();
         $gebruiker->id = $this->input->get('id');
         $gebruiker->naam = $this->input->get('naam');
@@ -108,7 +106,6 @@ class Gebruiker extends CI_Controller
         } else {
             $this->gebruiker_model->update($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
         }
->>>>>>> b30c60b7d749ca0b177ee4c1ead00cbd5566a9ae
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmers_form',
             'voetnoot' => 'main_footer');
