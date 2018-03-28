@@ -11,7 +11,7 @@ class Gebruiker_model extends CI_Model
     {
         $this->db->where('id', $id);
         $query = $this->db->get('gebruiker');
-	return $query->row();
+	      return $query->row();
     }
 
     public function getGebruiker($email)
@@ -56,7 +56,7 @@ class Gebruiker_model extends CI_Model
         }
     }
 
-    public function voegToe($email, $wachtwoord, $naam, $adres, $woonplaats, $geboortedatum)
+    public function voegToe($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum)
     {
         $gebruiker = new stdClass();
         $gebruiker->naam = $naam;
@@ -70,28 +70,28 @@ class Gebruiker_model extends CI_Model
         $this->db->insert('gebruiker', $gebruiker);
         return $this->db->insert_id();
     }
-    
+
     public function toonZwemmers() {
         $this->db->where('soort', 'zwemmer');
         $this->db->where('status', '1');
         $query = $this->db->get('gebruiker');
         return $query->result();
     }
-    
+
     function delete($id)
     {
         $this->db->where('id', $id);
         $this->db->delete('gebruiker');
     }
-    
+
     public function toonInactieveZwemmers() {
         $this->db->where('soort', 'zwemmer');
         $this->db->where('status', '0');
         $query = $this->db->get('gebruiker');
         return $query->result();
     }
-    
-    function update($email, $naam, $adres, $woonplaats, $id, $geboortedatum) {
+
+    function update($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum) {
         $gebruiker = new stdClass();
         $gebruiker->id = $id;
         $gebruiker->naam = $naam;
@@ -100,7 +100,7 @@ class Gebruiker_model extends CI_Model
         $gebruiker->soort = "zwemmer";
         $gebruiker->email = $email;
         $gebruiker->status = 1;
-        $geboortedatum->geboortedatum = $geboortedatum;
+        $gebruiker->geboortedatum = $geboortedatum;
         $this->db->where('id', $gebruiker->id);
         $this->db->update('gebruiker', $gebruiker);
     }
