@@ -1,11 +1,9 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+/**
+*\file beheren.php
+*
+* View waarin men de supplementen kan beheren.
+*/
 echo '<p>'.anchor('supplement/maakSupplement', 'Nieuw supplement aanmaken').'
 
 </p>';
