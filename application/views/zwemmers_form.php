@@ -27,7 +27,7 @@ else {
 }
     $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
 
-echo form_open('trainer/controleerRegistratie', 'class="form-group"', $attributen);
+echo form_open('gebruiker/maakGebruiker', 'class="form-group"', $attributen);
 echo "<div class='form-group'>";
 echo form_labelpro("Naam", 'naam') . "\n";
 echo form_input($dataInputNaam) . "\n";

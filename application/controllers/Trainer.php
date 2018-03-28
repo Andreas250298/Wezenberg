@@ -63,7 +63,7 @@ class Trainer extends CI_Controller {
         $woonplaats = $this->input->post('woonplaats');
         $email = $this->input->post('email');
         $id = $this->input->post('id');
-        $geboortedatum = $this->input->post('geboortedatum');
+        $geboortedatum = zetOmNaarYYYYMMDD($this->input->post('geboortedatum'));
 
         if ($naam != null || $adres != null || $woonplaats != null || $email != null || $id != null || $geboortedatum != NULL)
         {

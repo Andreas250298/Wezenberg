@@ -70,7 +70,23 @@ class Gebruiker extends CI_Controller
         $data['titel'] = "Registreer";
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $gebruiker = new stdClass();
+        $gebruiker->id = $this->input->get('id');
+        $gebruiker->naam = $this->input->get('naam');
+        $gebruiker->adres = $this->input->get('adres');
+        $gebruiker->woonplaats = $this->input->get('woonplaats');
+        $gebruiker->soort = $this->input->get('soort');
+        $gebruiker->email = $this->input->get('email');
+        $gebruiker->geboortedatum = $this->input->get('geboortedatum');
+        $gebruiker->wachtwoord = $this->input->get('wachtwoord');
 
+        $this->load->model('gebruiker_model');
+        if($gebruiker->id == null) {
+            $this->gebruiker_model->voegToe($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
+        }
+        else {
+            $this->gebruiker_model->update($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
+        }
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmers_form',
             'voetnoot' => 'main_footer');

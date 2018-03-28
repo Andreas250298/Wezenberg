@@ -14,7 +14,7 @@ class Authex {
     // |
     // +----------------------------------------------------------
     // | Nelson Wells (http://nelsonwells.net/2010/05/creating-a-simple-extensible-codeigniter-authentication-library/)
-    // | 
+    // |
     // | aangepast door Thomas More
     // +----------------------------------------------------------
 
@@ -74,23 +74,23 @@ class Authex {
 
         $CI->session->unset_userdata('gebruiker_id');
     }
-    function registreer($email, $wachtwoord, $naam, $address, $woonplaats, $soort, $geboortedatum) {
+    function registreer($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum) {
         // nieuwe gebruiker registreren als email nog niet bestaat
         $CI = & get_instance();
 
         if ($CI->gebruiker_model->controleerEmailVrij($email)) {
-            $id = $CI->gebruiker_model->voegToe($email, $wachtwoord, $naam, $address, $woonplaats, $soort, $geboortedatum);
+            $id = $CI->gebruiker_model->voegToe($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum);
             return $id;
         } else {
             return 0;
         }
     }
 
-    function wijzig($email, $naam, $adres, $woonplaats, $id, $geboortedatum) {
+    function wijzig($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum) {
         // bestaande gebruiker updaten
         $CI = & get_instance();
-        
-        $CI->gebruiker_model->update($email, $naam, $adres, $woonplaats, $id, $geboortedatum);
+
+        $CI->gebruiker_model->update($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum);
     }
 
 
