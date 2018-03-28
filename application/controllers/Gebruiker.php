@@ -16,7 +16,6 @@ class Gebruiker extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper('notation');
         $this->load->helper('form');
     }
 
@@ -59,29 +58,50 @@ class Gebruiker extends CI_Controller
     */
     public function maakGebruiker()
     {
-        $data['titel'] = "Registreer";
+        $data['titel'] = "Gebruiker aanmaken";
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        $gebruiker = new stdClass();
-        $gebruiker->id = $this->input->get('id');
-        $gebruiker->naam = $this->input->get('naam');
-        $gebruiker->adres = $this->input->get('adres');
-        $gebruiker->woonplaats = $this->input->get('woonplaats');
-        $gebruiker->soort = $this->input->get('soort');
-        $gebruiker->email = $this->input->get('email');
-        $gebruiker->geboortedatum = $this->input->get('geboortedatum');
-        $gebruiker->wachtwoord = $this->input->get('wachtwoord');
-
-        $this->load->model('gebruiker_model');
-        if ($gebruiker->id == null) {
-            $this->gebruiker_model->voegToe($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
-        } else {
-            $this->gebruiker_model->update($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
-        }
+        $this->load->model("gebruiker_model");
+        // $gebruiker = new stdClass();
+        // $gebruiker->id = $this->input->get('id');
+        // $gebruiker->naam = $this->input->get('naam');
+        // $gebruiker->adres = $this->input->get('adres');
+        // $gebruiker->woonplaats = $this->input->get('woonplaats');
+        // $gebruiker->soort = $this->input->get('soort');
+        // $gebruiker->email = $this->input->get('email');
+        // $gebruiker->geboortedatum = $this->input->get('geboortedatum');
+        // $gebruiker->wachtwoord = $this->input->get('wachtwoord');
+        //
+        // $this->load->model('gebruiker_model');
+        // if ($gebruiker->id == null) {
+        //     $this->gebruiker_model->voegToe($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
+        // } else {
+        //     $this->gebruiker_model->update($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
+        // }
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmers_form',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
+    }
+
+    public function registreer(){
+      $gebruiker = new stdClass();
+      $gebruiker->id = $this->input->post('id');
+      $gebruiker->naam = $this->input->post('naam');
+      $gebruiker->adres = $this->input->post('adres');
+      $gebruiker->woonplaats = $this->input->post('woonplaats');
+      $gebruiker->soort = $this->input->post('soort');
+      $gebruiker->email = $this->input->post('email');
+      $gebruiker->geboortedatum = $this->input->post('geboortedatum');
+
+      $this->load->model('gebruiker_model');
+      if ($gebruiker->id == null) {
+          $this->gebruiker_model->insert($gebruiker);
+      } else {
+          $this->gebruiker_model->update($gebruiker);
+      }
+
+      redirect('/gebruiker/toonZwemmers');
     }
 
     /**
