@@ -10,6 +10,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 class Gebruiker extends CI_Controller
 {
+  /**
+  * Constructor
+  */
     public function __construct()
     {
         parent::__construct();
@@ -43,6 +46,9 @@ class Gebruiker extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Opvragen van input in verband met de gebruiker
+    */
     public function getGebruiker()
     {
         $gebruikerEmail = $this->input->get('email');
@@ -50,6 +56,12 @@ class Gebruiker extends CI_Controller
         $gebruikerGeboortedatum = $this->input->get('geboortedatum');
     }
 
+    /**
+    * Weergeven van zwemmers op zwemmers.php
+    *\see Authex::getGebruikerInfo()
+    *\see Gebruiker_model::toonZwemmers()
+    *\see zwemmers.php
+    */
     public function toonZwemmers()
     {
         $data['titel'] = 'Zwemmers';
@@ -65,6 +77,12 @@ class Gebruiker extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Aanmaken van gebruiker via input uit zwemmers_form.php
+    *\see Authex::getGebruikerInfo()
+    *\see Gebruiker_model::voegToe()
+    *\see zwemmers_form.php
+    */
     public function maakGebruiker()
     {
         $data['titel'] = "Registreer";
@@ -81,10 +99,9 @@ class Gebruiker extends CI_Controller
         $gebruiker->wachtwoord = $this->input->get('wachtwoord');
 
         $this->load->model('gebruiker_model');
-        if($gebruiker->id == null) {
+        if ($gebruiker->id == null) {
             $this->gebruiker_model->voegToe($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
-        }
-        else {
+        } else {
             $this->gebruiker_model->update($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
         }
         $partials = array('hoofding' => 'main_header',
@@ -93,12 +110,12 @@ class Gebruiker extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Wijzigen van de gebruiker volgens id
+    * \param id De id van de gebruiker die zal moeten worden aangepast
+    */
     public function wijzig($id)
     {
-        /**
-        * Wijzigen van de gebruiker via het gewenste id.
-        * \param id De id van de gebruiker die zal moeten worden aangepast.
-        */
         $data['paginaVerantwoordelijke'] = '';
 
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -112,6 +129,12 @@ class Gebruiker extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Zwemmer of inactief zetten volgens id
+    *\see Gebruiker_model::get()
+    *\see Gebruiker_model::update()
+    *\see toonZwemmer.php
+    */
     public function maakInactief($id)
     {
         $this->load->model('gebruiker_model');
@@ -121,6 +144,12 @@ class Gebruiker extends CI_Controller
         redirect('gebruiker/toonZwemmers');
     }
 
+    /**
+    * Zwemmer of actief zetten volgens id
+    *\see Gebruiker_model::get()
+    *\see Gebruiker_model::update()
+    *\see toonZwemmer.php
+    */
     public function maakActief($id)
     {
         $this->load->model('gebruiker_model');
@@ -131,6 +160,12 @@ class Gebruiker extends CI_Controller
         redirect('gebruiker/toonZwemmers');
     }
 
+    /**
+    * Inactieve zwemmers tonen
+    *\see Authex::getGebruikerInfo()
+    *\see Gebruiker_model::toonInactieveZwemmers()
+    *\see inactieveZwemmers.php
+    */
     public function toonInactieveZwemmers()
     {
         $data['titel'] = 'Zwemmers';
@@ -146,6 +181,12 @@ class Gebruiker extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Info tonen van zwemmer volgens id
+    *\see Gebruiker_model::getGebruikerInfo()
+    *\see Authex::getGebruikerInfo()
+    *\see zwemmer_info.php
+    */
     public function toonZwemmerInfo($id)
     {
         $data['paginaVerantwoordelijke'] = '';
@@ -163,6 +204,12 @@ class Gebruiker extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Wedstrijden tonen
+    *\see Authex::getGebruikerInfo()
+    *\see Wedstrijd_model::toonWedstrijden()
+    *\see wedstrijd/bekijken.php
+    */
     public function toonWedstrijden()
     {
         $data['titel'] = 'Wedstrijden';
