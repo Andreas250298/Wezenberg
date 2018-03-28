@@ -21,34 +21,6 @@ class Gebruiker extends CI_Controller
     }
 
     /**
-    * Weergeven van Startpagina
-    * Functie te vinden in \dotinclude Gebruiker.php
-    *\see Authex::getGebruikerInfo()
-    *\see Nieuws_model::getAllNieuwsArtikels()
-    *\see Wedstrijd_model::toonWedstrijden()
-    *\see startpagina.php
-    */
-    public function index()
-    {
-        $data['titel'] = 'Startpagina';
-        $data['paginaVerantwoordelijke'] = '';
-        $data['gebruiker']  = $this->authex->getGebruikerInfo();
-
-        $this->load->model('nieuws_model');
-        $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikels();
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijden();
-
-        $this->load->model('gebruiker_model');
-
-        $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'startpagina',
-                'voetnoot' => 'main_footer');
-
-        $this->template->load('main_master', $partials, $data);
-    }
-
-    /**
     * Opvragen van input in verband met de gebruiker
     */
     public function getGebruiker()
