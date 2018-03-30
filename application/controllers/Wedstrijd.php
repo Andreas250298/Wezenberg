@@ -29,7 +29,7 @@ class Wedstrijd extends CI_Controller {
       $data['paginaVerantwoordelijke'] = 'De Coninck Mattias';
       $data['gebruiker']  = $this->authex->getGebruikerInfo();
       $this->load->model('wedstrijd_model');
-      $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijden();
+      $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
 
       $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/bekijken',

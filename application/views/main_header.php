@@ -5,8 +5,8 @@ $link = array('class' => 'nav-link');
 <nav class="navbar navbar-light">
     <div class="container">
         <div class="justify-content-start d-flex flex-row">
-            <?php echo anchor('home/index', toonAfbeelding("logo/teambelgium.png", 'width="110" height="150" class="d-inline-block align-top" alt="Logo Team Belgium"'), 'class="navbar-brand"');?>
-            <?php echo anchor('home/index', '<span class="align-bottom display-4 d-none d-lg-block">Wezenberg trainingscentrum</span>', 'class="navbar-brand align-self-end"');?>
+            <?php echo anchor('home/', toonAfbeelding("logo/teambelgium.png", 'width="110" height="150" class="d-inline-block align-top" alt="Logo Team Belgium"'), 'class="navbar-brand"'); ?>
+            <?php echo anchor('home/', '<span class="align-bottom display-4 d-none d-lg-block">Wezenberg trainingscentrum</span>', 'class="navbar-brand align-self-end"'); ?>
         </div>
     </div>
 </nav>
@@ -14,7 +14,7 @@ $link = array('class' => 'nav-link');
 <!--Navigatiebalk-->
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
-        <a class="navbar-brand display-1 d-lg-none mb-0 h1" href="#">Wezenberg trainingscentrum</a>
+        <?php echo anchor('home/', 'Wezenberg trainingscentrum', 'class="navbar-brand display-1 d-lg-none mb-0 h1"'); ?>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,17 +23,16 @@ $link = array('class' => 'nav-link');
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <!--<a class="nav-link" href="home/index">Startpagina <span class="sr-only">(current)</span></a>-->
-                    <?php echo anchor('home/index', 'Startpagina', $link);?>
+                    <?php echo anchor('home/', 'Startpagina', $link); ?>
                 </li>
                 <li class="nav-item">
-                    <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link);?>
+                    <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link); ?>
                 </li>
                 <li class="nav-item">
-                    <?php echo anchor('wedstrijd/index', 'Wedstrijden', $link);?>
+                    <?php echo anchor('wedstrijd/', 'Wedstrijden', $link); ?>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="home/overons">Over ons</a>
+                    <?php echo anchor('trainingscentrum/', 'Over ons', $link); ?>
                 </li>
             </ul>
             <?php
@@ -54,50 +53,40 @@ $link = array('class' => 'nav-link');
             else if ($gebruiker != null) {
                 switch ($gebruiker->soort) {
                     case 'zwemmer': // zwemmer
-                        //echo "<p>Welkom zwemmer" . $gebruiker->naam . "</p>";
-                        //echo divAnchor('product/bestel', 'Producten bestellen');
                         ?>
-
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="home/supplementen">Supplementen</a>
+                                <?php echo anchor('supplementen/', 'Supplementen', $link); ?>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="home/mijnagenda">Mijn Agenda</a>
+                                <?php echo anchor('gebruiker/agenda', 'Mijn agenda', $link); ?>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="home/inschrijvingen">Inschrijvingen</a>
+                                <?php echo anchor('wedstrijd/inschrijvingen', 'Inschrijvingen', $link); ?>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="home/account">Account</a>
+                                <?php echo anchor('gebruiker/account', 'Account', $link); ?>
                             </li>
                             <li class="nav-item">
-
-                                <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"');?>
+                                <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"'); ?>
                             </li>
                         </ul>
-
                         <?php
                         break;
                     case 'trainer': // trainer
-
                         ?>
-
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="home/account">Account</a>
+                                <?php echo anchor('gebruiker/account', 'Account', $link); ?>
                             </li>
                             <li class="nav-item">
-                                <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"');?>
+                                <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"'); ?>
                             </li>
                         </ul>
-
                         <?php
                         break;
                 }
             }
-
-            ;
             ?>
         </div>
     </div>
