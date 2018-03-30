@@ -82,10 +82,9 @@ class Gebruiker extends CI_Controller
         $gebruiker->naam = $this->input->post('naam');
         $gebruiker->adres = $this->input->post('adres');
         $gebruiker->woonplaats = $this->input->post('woonplaats');
-        $gebruiker->soort = $this->input->post('soort');
-        $gebruiker->status = $this->input->post('status');
         $gebruiker->email = $this->input->post('email');
         $gebruiker->geboortedatum = $this->input->post('geboortedatum');
+        $gebruiker->beschrijving = $this->input->post('beschrijving');
 
         $this->load->model('gebruiker_model');
         if ($gebruiker->id == null) {
@@ -214,5 +213,25 @@ class Gebruiker extends CI_Controller
             'inhoud' => 'wedstrijd/bekijken',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
+    }
+
+    /**
+    * Account info tonen aan de hand van de id
+    * \param id De id van de gebruiker waarvan de info getoond dient te worden.
+    *\see Authex::getGebruikerInfo()
+    *\see gebruiker_info.php
+    */
+    public function account($id) {
+      $data['titel'] = 'Account';
+      $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+      $data['gebruiker']  = $this->authex->getGebruikerInfo();
+      $this->load->model('gebruiker_model');
+      $huidigeGebruiker = $this->gebruiker_model->get($id);
+      $data['gebruikerInfo'] = $huidigeGebruiker;
+
+      $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'gebruiker_info',
+          'voetnoot' => 'main_footer');
+      $this->template->load('main_master', $partials, $data);
     }
 }

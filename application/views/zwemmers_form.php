@@ -17,6 +17,7 @@ if(isset($zwemmer)) {
     $dataInputWoonplaats = array('class' => 'form-control mr-sm-2', 'name' => 'woonplaats', 'id' => 'woonplaats', 'placeholder' => 'Woonplaats', 'aria-label' => 'Woonplaats', 'size' => '30', 'value' => $zwemmer->woonplaats);
     $dataInputAdres = array('class' => 'form-control mr-sm-2', 'name' => 'adres', 'id' => 'adres', 'placeholder' => 'Adres', 'aria-label' => 'Adres', 'size' => '30', 'value' => $zwemmer->adres);
     $dataInputGeboortedatum = array('class' => 'form-control mr-sm-2', 'type' => 'date','name' => 'geboortedatum', 'id' => 'geboortedatum', 'placeholder' => 'Geboortedatum', 'aria-label' => 'Geboortedatum', 'size' => '30', 'value' => $zwemmer->geboortedatum);
+    $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'type' => 'textarea','name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Beschrijving', 'aria-label' => 'Beschrijving', 'size' => '30', 'value' => $zwemmer->beschrijving);
 }
 else {
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam', 'aria-label' => 'Naam', 'size' => '30');
@@ -24,6 +25,7 @@ else {
     $dataInputWoonplaats = array('class' => 'form-control mr-sm-2', 'name' => 'woonplaats', 'id' => 'woonplaats', 'placeholder' => 'Woonplaats', 'aria-label' => 'Woonplaats', 'size' => '30');
     $dataInputAdres = array('class' => 'form-control mr-sm-2', 'name' => 'adres', 'id' => 'adres', 'placeholder' => 'Adres', 'aria-label' => 'Adres', 'size' => '30');
     $dataInputGeboortedatum = array('class' => 'form-control mr-sm-2', 'type' => 'text','name' => 'geboortedatum', 'id' => 'geboortedatum', 'placeholder' => 'Geboortedatum', 'aria-label' => 'Geboortedatum', 'size' => '30');
+    $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'type' => 'textarea','name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Beschrijving', 'aria-label' => 'Beschrijving', 'size' => '30');
 }
     $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
 
@@ -48,14 +50,13 @@ echo "<div class='form-group'>";
 echo form_labelpro("Geboortedatum", 'geboortedatum') . "\n";
 echo form_input($dataInputGeboortedatum) . "\n";
 echo "</div>";
+echo "<div class='form-group'>";
+echo form_labelpro("Beschrijving", 'beschrijving') . "\n";
+echo form_textarea($dataInputBeschrijving) . "\n";
+echo "</div>";
 if(isset($zwemmer)){
     echo form_hidden('id', $zwemmer->id);
-    echo form_hidden('soort',$zwemmer->soort);
-    echo form_hidden('status',"1");
-} else{
-  echo form_hidden('id');
-  echo form_hidden('soort',"zwemmer");
-  echo form_hidden('status',"1");
+
 }
 
 echo form_submit($dataSubmit) . " ";
