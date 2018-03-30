@@ -88,6 +88,8 @@ class Gebruiker extends CI_Controller
 
         $this->load->model('gebruiker_model');
         if ($gebruiker->id == null) {
+            $gebruiker->status = 1;
+            $gebruiker->soort = "zwemmer";
             $this->gebruiker_model->insert($gebruiker);
         } else {
             $this->gebruiker_model->update($gebruiker);
@@ -113,6 +115,14 @@ class Gebruiker extends CI_Controller
             'inhoud' => 'zwemmers_form',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
+    }
+
+    public function verwijder($id)
+    {
+        $this->load->model('gebruiker_model');
+        $this->gebruiker_model->delete($id);
+
+        redirect('/gebruiker/toonZwemmers');
     }
 
     /**
