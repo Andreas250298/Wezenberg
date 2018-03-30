@@ -82,8 +82,6 @@ class Gebruiker extends CI_Controller
         $gebruiker->naam = $this->input->post('naam');
         $gebruiker->adres = $this->input->post('adres');
         $gebruiker->woonplaats = $this->input->post('woonplaats');
-        $gebruiker->soort = $this->input->post('soort');
-        $gebruiker->status = $this->input->post('status');
         $gebruiker->email = $this->input->post('email');
         $gebruiker->geboortedatum = $this->input->post('geboortedatum');
 
