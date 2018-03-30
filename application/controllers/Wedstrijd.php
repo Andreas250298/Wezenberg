@@ -44,6 +44,7 @@ class Wedstrijd extends CI_Controller {
     public function maakWedstrijd(){
       $data['titel'] = 'Wedstrijden aanmaken';
       $data['paginaVerantwoordelijke'] = 'De Coninck Mattias';
+      $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
       $this->load->model('wedstrijd_model');
 
