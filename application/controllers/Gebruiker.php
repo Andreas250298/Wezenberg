@@ -62,47 +62,39 @@ class Gebruiker extends CI_Controller
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model("gebruiker_model");
-        // $gebruiker = new stdClass();
-        // $gebruiker->id = $this->input->get('id');
-        // $gebruiker->naam = $this->input->get('naam');
-        // $gebruiker->adres = $this->input->get('adres');
-        // $gebruiker->woonplaats = $this->input->get('woonplaats');
-        // $gebruiker->soort = $this->input->get('soort');
-        // $gebruiker->email = $this->input->get('email');
-        // $gebruiker->geboortedatum = $this->input->get('geboortedatum');
-        // $gebruiker->wachtwoord = $this->input->get('wachtwoord');
-        //
-        // $this->load->model('gebruiker_model');
-        // if ($gebruiker->id == null) {
-        //     $this->gebruiker_model->voegToe($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
-        // } else {
-        //     $this->gebruiker_model->update($gebruiker->$email, $gebruiker->$wachtwoord, $gebruiker->$naam, $gebruiker->$adres, $gebruiker->$woonplaats, $gebruiker->$soort, $gebruiker->$geboortedatum);
-        // }
+
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmers_form',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function registreer(){
-      $gebruiker = new stdClass();
-      $gebruiker->id = $this->input->post('id');
-      $gebruiker->naam = $this->input->post('naam');
-      $gebruiker->adres = $this->input->post('adres');
-      $gebruiker->woonplaats = $this->input->post('woonplaats');
-      $gebruiker->soort = $this->input->post('soort');
-      $gebruiker->status = $this->input->post('status');
-      $gebruiker->email = $this->input->post('email');
-      $gebruiker->geboortedatum = $this->input->post('geboortedatum');
+    /**
+    * registreer functie voor het aanmaken of update van een gebruiker_id
+    *\see Gebruiker_model::insert()
+    *\see Gebruiker_model::update()
+    *\see zwemmers_form.php
+    */
+    public function registreer()
+    {
+        $gebruiker = new stdClass();
+        $gebruiker->id = $this->input->post('id');
+        $gebruiker->naam = $this->input->post('naam');
+        $gebruiker->adres = $this->input->post('adres');
+        $gebruiker->woonplaats = $this->input->post('woonplaats');
+        $gebruiker->soort = $this->input->post('soort');
+        $gebruiker->status = $this->input->post('status');
+        $gebruiker->email = $this->input->post('email');
+        $gebruiker->geboortedatum = $this->input->post('geboortedatum');
 
-      $this->load->model('gebruiker_model');
-      if ($gebruiker->id == null) {
-          $this->gebruiker_model->insert($gebruiker);
-      } else {
-          $this->gebruiker_model->update($gebruiker);
-      }
+        $this->load->model('gebruiker_model');
+        if ($gebruiker->id == null) {
+            $this->gebruiker_model->insert($gebruiker);
+        } else {
+            $this->gebruiker_model->update($gebruiker);
+        }
 
-      redirect('/gebruiker/toonZwemmers');
+        redirect('/gebruiker/toonZwemmers');
     }
 
     /**
@@ -126,16 +118,13 @@ class Gebruiker extends CI_Controller
 
     /**
     * Zwemmer of inactief zetten volgens id
+    * \param id De id van de gebruiker die inactief gemaakt dient te worden.
     *\see Gebruiker_model::get()
     *\see Gebruiker_model::update()
     *\see Gebruiker::toonZwemmers()
     */
     public function maakInactief($id)
     {
-      /**
-      * Inactief maken van de gebruiker via de gewenste id.
-      * \param id De id van de gebruiker die inactief gemaakt dient te worden.
-      */
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
         $huidigeZwemmer->status = 0;
@@ -171,9 +160,6 @@ class Gebruiker extends CI_Controller
     */
     public function toonInactieveZwemmers()
     {
-        /**
-        * Lijst van inactieve zwemmers tonen.
-        */
         $data['titel'] = 'Zwemmers';
         $data['paginaVerantwoordelijke'] = '';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
