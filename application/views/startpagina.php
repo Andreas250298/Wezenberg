@@ -1,21 +1,24 @@
 <?php
 
 function haalArtikelsOp($nieuwsArtikels) {
-    echo '<h2>Laatste nieuws</h2>';
+    echo '<h2 class="startTitel">Laatste nieuws</h2>';
+    echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-up fa-2x"></i></a>';
     echo '<ul class="list-unstyled">';
     foreach ($nieuwsArtikels as $artikel) {
-        echo '<a class="nieuwsartikels" href="#"><li class="media">';
+        echo '<a class="nieuwsartikel" href="#"><li class="media">';
         echo toonAfbeelding("image-placeholder.png", 'width="100" height="100" class="mr-3" alt="Placeholder image"');
         echo '<div class="media-body">';
         echo '<h5 class="mt-0 mb-1">' . $artikel->titel . '</h5>';
-        echo $artikel->beschrijving;
+        echo substr($artikel->beschrijving, 0, 144). '...';
         echo '</div>';
         echo '</li></a>';
     }
     echo '</ul>';
+    echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-down fa-2x"></i></a>';
 }
 
 function haalAgendaOp($agendaItems) {
+     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-up fa-2x"></i></a>';
     foreach ($agendaItems as $agendaItem) {
         echo '<div class="row row-striped">';
         echo '<div class="col-3 text-right">';
@@ -31,13 +34,14 @@ function haalAgendaOp($agendaItems) {
         echo '</div>';
         echo '</div>';
     }
+    echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-down fa-2x"></i></a>';
 }
 
 function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker) {
     if ($gebruiker != null) {
         switch ($gebruiker->soort) {
             case 'zwemmer': // zwemmer
-                echo '<div><h2>Welkom</h2>';
+                echo '<div><h2 class="startTitel">Welkom</h2>';
                 echo $trainingscentrum->beschrijvingWelkom;
                 echo '</div>';
                 haalArtikelsOp($nieuwsArtikels);
@@ -59,7 +63,9 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker) {
                 break;
         }
     } else {
+        echo '<div><h2 class="startTitel">Welkom</h2>';
         echo $trainingscentrum->beschrijvingWelkom;
+        echo '</div>';
         haalArtikelsOp($nieuwsArtikels);
     }
 }
@@ -76,7 +82,10 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker) {
     .row-striped {
         padding: 10px 0;
     }
-    .nieuwsartikels{
+    .nieuwsartikel{
+        color: black;
+    }
+    .nieuwsartikel:hover{
         color: black;
     }
     th {
@@ -104,6 +113,30 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker) {
         background-color: #253555;
         color: white;
     }
+    
+    .startTitel{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .media{
+        margin-bottom: 20px;
+    }
+    
+    .scrollknop{
+        background-color: lightgray;
+        display: block;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        color: black;
+    }
+    .scrollknop:hover{
+        background-color: gray;
+        display: block;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        color: white;
+    }
 </style>
 
 <div class="row">
@@ -114,7 +147,7 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker) {
     </div>
     <div class="col-12 col-lg-4">
         <div>
-            <h3>Agenda</h3>
+            <h2 class="startTitel">Agenda</h2>
             <br>
             <?php
             haalAgendaOp($wedstrijden);
