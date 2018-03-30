@@ -16,11 +16,7 @@ if(isset($zwemmer)) {
     $dataInputEmail = array('class' => 'form-control mr-sm-2', 'name' => 'email', 'id' => 'email', 'placeholder' => 'E-mail', 'aria-label' => 'Email', 'size' => '30', 'value' => $zwemmer->email);
     $dataInputWoonplaats = array('class' => 'form-control mr-sm-2', 'name' => 'woonplaats', 'id' => 'woonplaats', 'placeholder' => 'Woonplaats', 'aria-label' => 'Woonplaats', 'size' => '30', 'value' => $zwemmer->woonplaats);
     $dataInputAdres = array('class' => 'form-control mr-sm-2', 'name' => 'adres', 'id' => 'adres', 'placeholder' => 'Adres', 'aria-label' => 'Adres', 'size' => '30', 'value' => $zwemmer->adres);
-<<<<<<< HEAD
     $dataInputGeboortedatum = array('class' => 'form-control mr-sm-2', 'type' => 'date','name' => 'geboortedatum', 'id' => 'geboortedatum', 'placeholder' => 'Geboortedatum', 'aria-label' => 'Geboortedatum', 'size' => '30', 'value' => $zwemmer->geboortedatum);
-=======
-    $dataInputGeboortedatum = array('class' => 'form-control mr-sm-2', 'type' => 'text','name' => 'geboortedatum', 'id' => 'geboortedatum', 'placeholder' => 'Geboortedatum', 'aria-label' => 'Geboortedatum', 'size' => '30', 'value' => zetOmNaarDDMMYYYY($zwemmer->geboortedatum));
->>>>>>> 98cc216b3f15687428df24cca1da4afa695f7467
 }
 else {
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam', 'aria-label' => 'Naam', 'size' => '30');
