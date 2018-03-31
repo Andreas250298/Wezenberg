@@ -101,6 +101,8 @@ class Gebruiker extends CI_Controller
     /**
     * Wijzigen van de gebruiker volgens id
     * \param id De id van de gebruiker die zal moeten worden aangepast
+    * \see Authex::getGebruikerInfo()
+    * \see Gebruiker_model::get()
     */
     public function wijzig($id)
     {
@@ -117,6 +119,10 @@ class Gebruiker extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Verwijderen van gebruiker via id
+    *\param id De id van de gebruiker die zal worden verwijdert
+    */
     public function verwijder($id)
     {
         $this->load->model('gebruiker_model');
