@@ -27,7 +27,7 @@ $disciplines = "100m vlinderslag";
             <p><b>Leeftijd: </b><?php echo $leeftijd; ?></p>
             <p><b>Woonplaats: </b><?php echo $zwemmer->woonplaats; ?></p>
             <p><b>Dsiciplines: </b><?php echo $disciplines; ?></p>
-            <p><b>Bio: </b>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad at autem delectus, distinctio explicabo illum iusto laborum laudantium maiores, maxime minima minus natus possimus reprehenderit repudiandae rerum temporibus veniam veritatis?</p>
+            <p><b>Bio: </b><?php echo $zwemmer->beschrijving; ?></p>
         </div>
     </div>
 
