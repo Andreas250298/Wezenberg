@@ -181,7 +181,7 @@ class Gebruiker extends CI_Controller
     */
     public function toonZwemmerInfo($id)
     {
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Jordi Bols';
 
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
@@ -189,6 +189,7 @@ class Gebruiker extends CI_Controller
         $data['titel'] = $huidigeZwemmer->naam;
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['zwemmer'] = $huidigeZwemmer;
+        $data['wedstrijden'] = $this->gebruiker_model->getZwemmerWedstrijden($id);
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmer_info',
@@ -215,4 +216,5 @@ class Gebruiker extends CI_Controller
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+
 }

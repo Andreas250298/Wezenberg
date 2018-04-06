@@ -5,6 +5,7 @@ class Gebruiker_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('notation');
     }
 
     public function get($id)
@@ -86,5 +87,47 @@ class Gebruiker_model extends CI_Model
         $this->db->where('status', '0');
         $query = $this->db->get('gebruiker');
         return $query->result();
+    }
+
+    /**
+    * Opvragen van de aanstaande wedstrijden van een zwemmer
+    *\see wedstrijd_model::getDeelnames()
+    *\see wedstrijd_model::getReeks()
+    *\see wedstrijd_model::getAfstand()
+    *\see wedstrijd_model::getSlag()
+    *\see wedstrijd_model::getWedstrijd()
+    * @param zwemmerId ID van de getoonde zwemmer
+    * @return De opgevraagde wedstrijden
+    */
+    public function getZwemmerWedstrijden($id)
+    {
+      $this->load->model('wedstrijd_model');
+      $deelnames = $this->wedstrijd_model->getDeelnames($id);
+
+      if ($deelnames == null)
+      {
+        return null ;
+      }
+      else
+      {
+        $i = 0;
+        $output[] = "";
+
+        foreach($deelnames as $deelname)
+        {
+          $reeksen[$i] = $this->wedstrijd_model->getReeks($deelname->reeksId);
+          $afstanden[$i] = $this->wedstrijd_model->getAfstand($reeksen[$i]->afstandId);
+          $slagen[$i] = $this->wedstrijd_model->getSlag($reeksen[$i]->slagId);
+          $wedstrijden[$i] = $this->wedstrijd_model->getWedstrijd($reeksen[$i]->wedstrijdId);
+
+          $output[$i] = array("datum" => zetOmNaarGeschreven($reeksen[$i]->datum), "tijdstip" => verkortTijdstip($reeksen[$i]->tijdstip),
+                        "afstand" => $afstanden[$i]->afstand, "slag" => $slagen[$i]->soort, "wedstrijd" => $wedstrijden[$i]->naam, "plaats" => $wedstrijden[$i]->plaats);
+
+          $i++;
+        }
+
+        return $output;
+
+      }
     }
 }
