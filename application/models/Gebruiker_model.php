@@ -11,7 +11,7 @@ class Gebruiker_model extends CI_Model
     {
         $this->db->where('id', $id);
         $query = $this->db->get('gebruiker');
-	      return $query->row();
+        return $query->row();
     }
 
     public function getGebruiker($email)
@@ -21,7 +21,7 @@ class Gebruiker_model extends CI_Model
 
         if ($query->num_rows() == 1) {
             $gebruiker = $query->row();
-                return $gebruiker;
+            return $gebruiker;
         } else {
             return null;
         }
@@ -44,7 +44,8 @@ class Gebruiker_model extends CI_Model
         }
     }
 
-    function controleerEmailVrij($email) {
+    public function controleerEmailVrij($email)
+    {
         // is email al dan niet aanwezig
         $this->db->where('email', $email);
         $query = $this->db->get('gebruiker');
@@ -58,30 +59,44 @@ class Gebruiker_model extends CI_Model
 
     public function insert($gebruiker)
     {
-      $this->db->insert('gebruiker', $gebruiker);
-      return $this->db->insert_id();
+        $this->db->insert('gebruiker', $gebruiker);
+        return $this->db->insert_id();
     }
 
     public function update($gebruiker)
     {
-      $this->db->where('id', $gebruiker->id);
-      $this->db->update('gebruiker', $gebruiker);
+        $this->db->where('id', $gebruiker->id);
+        $this->db->update('gebruiker', $gebruiker);
     }
 
-    public function toonZwemmers() {
+    public function toonZwemmers()
+    {
         $this->db->where('soort', 'zwemmer');
         $this->db->where('status', '1');
         $query = $this->db->get('gebruiker');
         return $query->result();
     }
 
-    function delete($id)
+    public function delete($id)
     {
+        $this->db->where('gebruikerIdZwemmer', $id);
+        $this->db->delete('deelname');
+
+        $this->db->where('gebruikerIdZwemmer', $id);
+        $this->db->delete('supplementPerZwemmer');
+
+        $this->db->where('gebruikerIdZwemmer', $id);
+        $this->db->delete('activiteitPerGebruiker');
+
+        $this->db->where('gebruikerId', $id);
+        $this->db->delete('meldingPerGebruiker');
+
         $this->db->where('id', $id);
         $this->db->delete('gebruiker');
     }
 
-    public function toonInactieveZwemmers() {
+    public function toonInactieveZwemmers()
+    {
         $this->db->where('soort', 'zwemmer');
         $this->db->where('status', '0');
         $query = $this->db->get('gebruiker');

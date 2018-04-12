@@ -118,7 +118,7 @@ class Gebruiker extends CI_Controller
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-
+    
     /**
     * Verwijderen van gebruiker via id
     *\param id De id van de gebruiker die zal worden verwijdert
@@ -237,17 +237,18 @@ class Gebruiker extends CI_Controller
     *\see Authex::getGebruikerInfo()
     *\see gebruiker_info.php
     */
-    public function account($id) {
-      $data['titel'] = 'Account';
-      $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
-      $data['gebruiker']  = $this->authex->getGebruikerInfo();
-      $this->load->model('gebruiker_model');
-      $huidigeGebruiker = $this->gebruiker_model->get($id);
-      $data['gebruikerInfo'] = $huidigeGebruiker;
+    public function account($id)
+    {
+        $data['titel'] = 'Account';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $this->load->model('gebruiker_model');
+        $huidigeGebruiker = $this->gebruiker_model->get($id);
+        $data['gebruikerInfo'] = $huidigeGebruiker;
 
-      $partials = array('hoofding' => 'main_header',
+        $partials = array('hoofding' => 'main_header',
           'inhoud' => 'gebruiker_info',
           'voetnoot' => 'main_footer');
-      $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_master', $partials, $data);
     }
 }
