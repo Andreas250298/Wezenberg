@@ -1,7 +1,12 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/**
+ * @class Nieuws
+ * @brief Controller-klasse voor Nieuws
+ * 
+ * 
+ */
 class Nieuws extends CI_Controller {
 
     /**
