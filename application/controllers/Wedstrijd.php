@@ -44,6 +44,7 @@ class Wedstrijd extends CI_Controller {
     public function maakWedstrijd(){
       $data['titel'] = 'Wedstrijden aanmaken';
       $data['paginaVerantwoordelijke'] = 'De Coninck Mattias';
+      $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
       $this->load->model('wedstrijd_model');
 
@@ -110,7 +111,7 @@ class Wedstrijd extends CI_Controller {
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
       $this->load->model('wedstrijd_model');
-      $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijden();
+      $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
 
       $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/beheren',
@@ -118,4 +119,45 @@ class Wedstrijd extends CI_Controller {
       $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Toont de pagina waarin een zwemmer zich kan inschrijven voor een wedstrijd
+    *\see Authex::getGebruikerInfo()
+    *\see Wedstrijd_model::toonWedstrijden()
+    *\see Deelname_model::getStatusPerGebruiker()
+    *\see Deelname_model::get()
+    *\see inschrijvingen.php
+    */
+    public function inschrijvingen() {
+      $data['titel'] = "Inschrijven webstrijden";
+      $data['gebruiker']  = $this->authex->getGebruikerInfo();
+      $gebruiker = $this->authex->getGebruikerInfo();
+      $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+
+      $this->load->model('wedstrijd_model');
+      $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
+      $this->load->model('deelname_model');
+      $data['status'] = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
+      $data['deelname'] = $this->deelname_model->get($gebruiker->id);
+
+      $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Wedstrijd/inschrijvingen',
+          'voetnoot' => 'main_footer');
+      $this->template->load('main_master', $partials, $data);
+    }
+
+    /**
+    * Toont de pagina waarin een zwemmer de melding krijgt om te wachten op goedkeuring voor de inschrijving
+    *\see Authex::getGebruikerInfo()
+    *\see inschrijven.php
+    */
+    public function inschrijven() {
+      $data['titel'] = "Inschrijven webstrijden";
+      $data['gebruiker']  = $this->authex->getGebruikerInfo();
+      $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+
+      $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Wedstrijd/inschrijven',
+          'voetnoot' => 'main_footer');
+      $this->template->load('main_master', $partials, $data);
+    }
 }
