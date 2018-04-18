@@ -38,7 +38,7 @@ class Gebruiker extends CI_Controller
     public function toonZwemmers()
     {
         $data['titel'] = 'Zwemmers';
-        $data['paginaVerantwoordelijke'] = 'Jordi Bols';
+        $data['paginaVerantwoordelijke'] = 'Bols Jordi';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
         //gebruiker_model inladen
@@ -170,7 +170,7 @@ class Gebruiker extends CI_Controller
     public function toonInactieveZwemmers()
     {
         $data['titel'] = 'Zwemmers';
-        $data['paginaVerantwoordelijke'] = 'Jordi Bols';
+        $data['paginaVerantwoordelijke'] = 'Bols Jordi';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
         //gebruiker_model inladen
@@ -190,7 +190,7 @@ class Gebruiker extends CI_Controller
     */
     public function toonZwemmerInfo($id)
     {
-        $data['paginaVerantwoordelijke'] = 'Jordi Bols';
+        $data['paginaVerantwoordelijke'] = 'Bols Jordi';
 
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
@@ -198,7 +198,9 @@ class Gebruiker extends CI_Controller
         $data['titel'] = $huidigeZwemmer->naam;
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['zwemmer'] = $huidigeZwemmer;
-        $data['wedstrijden'] = $this->gebruiker_model->getZwemmerWedstrijden($id);
+
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijdenZwemmer($id);
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmer_info',
@@ -244,5 +246,40 @@ class Gebruiker extends CI_Controller
           'inhoud' => 'gebruiker_info',
           'voetnoot' => 'main_footer');
       $this->template->load('main_master', $partials, $data);
+    }
+
+    /** Persoonlijke agenda tonen
+    *
+    */
+    public function agenda($week, $jaar)
+    {
+      $data['titel'] = 'Mijn Agenda';
+      $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+      $gebruiker  = $this->authex->getGebruikerInfo();
+      $data['gebruiker'] = $gebruiker;
+      $id = $gebruiker->id;
+
+      $data['week'] = $week;
+      $data['jaar'] = $jaar;
+
+      $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'zwemmer_agenda',
+          'voetnoot' => 'main_footer');
+      $this->template->load('main_master', $partials, $data);
+    }
+
+    /** Data om te tonen in agenda ophalen
+    *
+    */
+    public function haalJsonOp_Wedstrijden()
+    {
+      $gebruiker = $this->authex->getGebruikerInfo();
+      $week = $this->input->get('huidigeWeek');
+      $jaar = $this->input->get('huidigJaar');
+
+      $this->load->model('wedstrijd_model');
+      $wedstrijdweek = $this->wedstrijd_model->getWedstrijdenInWeek($gebruiker->id, $week, $jaar);
+
+      echo json_encode($wedstrijdweek);
     }
 }

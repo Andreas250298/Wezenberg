@@ -40,8 +40,8 @@ $disciplines = "100m vlinderslag";
 
             } else {
               foreach ($wedstrijden as $wedstrijd)
-              { //tijdstip, afstand, slag, wedstrijd
-                  echo "<p><b>" . $wedstrijd['datum'] . "</b><br />"
+              {
+                  echo "<p><b>" . zetOmNaarGeschreven($wedstrijd['datum']) . "</b><br />"
                   . $wedstrijd['wedstrijd'] . "<br />"
                   . "te " . $wedstrijd['plaats'] . " om " . $wedstrijd['tijdstip'] . "<br />"
                   . $wedstrijd['afstand'] . " " . $wedstrijd['slag'] . "</p><br />";

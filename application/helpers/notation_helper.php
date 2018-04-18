@@ -18,7 +18,7 @@ function zetOmNaarDDMMYYYY($input) {
         return "";
     } else {
         $datum = explode("-", $input);
-        return $datum[2] . "/" . $datum[1] . "/" . $datum[0];
+        return $datum[2] . "-" . $datum[1] . "-" . $datum[0];
     }
 }
 
@@ -91,6 +91,28 @@ function verkortTijdstip($input) {
   } else {
       $datum = explode(":", $input);
       return $datum[0] . ":" . $datum[1];
+  }
+}
+
+// Laat dubbelpunt wegvallen bij tijdstip (08:00 naar 0800)
+
+function verwijderDubbelpunt($input) {
+    if ($input == "") {
+        return "";
+    } else {
+        $uur = explode(":", $input);
+        return $uur[0] . $uur[1];
+    }
+}
+
+// Verhoogt uur van opgegeven tijdstip met 1 (09:00 naar 10:00)
+
+function verhoogUur($input) {
+  if ($input == "") {
+    return "";
+  } else {
+    $uur = explode(":", $input);
+    return (int)$uur[0] + 1 . ':' . $uur[1];
   }
 }
 
