@@ -16,9 +16,9 @@ var id = "";
         $.ajax({type: "GET",
         url: site_url + "/gebruiker/verwijder",
         data:{id : id},
-        // success: function(){
-        //   window.location.reload();
-        // },
+        success: function(){
+          window.location.reload();
+        },
         error: function (xhr, status, error){
           aler("--ERROR IN AJAX --\n\n" + xhr.responseText);
         }
