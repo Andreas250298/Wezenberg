@@ -118,13 +118,14 @@ class Gebruiker extends CI_Controller
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     /**
     * Verwijderen van gebruiker via id
     *\param id De id van de gebruiker die zal worden verwijdert
     */
-    public function verwijder($id)
+    public function verwijder()
     {
+        $id = $this->input->get('id');
         $this->load->model('gebruiker_model');
         $this->gebruiker_model->delete($id);
 

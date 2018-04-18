@@ -1,11 +1,30 @@
 <script>
+var id = "";
     $(document).ready(function () {
-        $("#knopWis").click(function() {
-          var id = $(this).parent().prop('id')
-          $("#resultaat").html(id);
+        $(".modal-trigger").click(function() {
+          id = $(this).parent().prop('id')
+          // $("#zwemmerID").html(id);
+          // $("#zwemmerID").hide();
           $('#mijnDialoogscherm').modal('show')
         })
+
+      $("#buttonDelete").click(function(){
+        verwijderZwemmer(id);
       })
+
+      function verwijderZwemmer(id){
+        $.ajax({type: "GET",
+        url: site_url + "/gebruiker/verwijder",
+        data:{id : id},
+        // success: function(){
+        //   window.location.reload();
+        // },
+        error: function (xhr, status, error){
+          aler("--ERROR IN AJAX --\n\n" + xhr.responseText);
+        }
+      });
+      }
+    })
 
 </script>
 <?php
@@ -34,7 +53,7 @@ $zwemmersTabel = "";
     if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
         echo "<br/>" . anchor('gebruiker/wijzig/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ")
                             . anchor('gebruiker/maakInactief/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button> ")
-                            . "<button type=\"button\" id=\"knopWis\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>";
+                            . "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>";
     }
     //
 
@@ -72,14 +91,18 @@ $zwemmersTabel = "";
         <!-- Inhoud dialoogvenster-->
         <div class="modal-content">
             <div class="modal-header">
+              <h4 class="modal-title">Pas Op</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Pas Op</h4>
             </div>
             <div class="modal-body">
-                <p><div id="resultaat"></div></p>
+            <!-- <p id="zwemmerID"></p> -->
+            <p>
+              Bent u zeker dat u deze zwemmer wilt verwijderen?
+            </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
+                <button type="button" class="btn btn-default btn-round btn-primary" data-dismiss="modal">Sluit</button>
+                <button type="button" id="buttonDelete" class="btn btn-default btn-round btn-danger">Verwijder</button>
             </div>
         </div>
 

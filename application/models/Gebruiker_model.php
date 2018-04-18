@@ -80,9 +80,6 @@ class Gebruiker_model extends CI_Model
     public function delete($id)
     {
         $this->db->where('gebruikerIdZwemmer', $id);
-        $this->db->delete('deelname');
-
-        $this->db->where('gebruikerIdZwemmer', $id);
         $this->db->delete('supplementPerZwemmer');
 
         $this->db->where('gebruikerIdZwemmer', $id);
@@ -90,6 +87,9 @@ class Gebruiker_model extends CI_Model
 
         $this->db->where('gebruikerId', $id);
         $this->db->delete('meldingPerGebruiker');
+
+        $this->db->where('gebruikerIdZwemmer', $id);
+        $this->db->delete('deelname');
 
         $this->db->where('id', $id);
         $this->db->delete('gebruiker');
