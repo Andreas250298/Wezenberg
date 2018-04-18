@@ -1,7 +1,6 @@
 <script>
-
     $(document).ready(function () {
-        $(".modal-trigger").click(function() {
+        $("#knopWis").click(function() {
           var id = $(this).parent().prop('id')
           $("#resultaat").html(id);
           $('#mijnDialoogscherm').modal('show')
@@ -35,7 +34,7 @@ $zwemmersTabel = "";
     if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
         echo "<br/>" . anchor('gebruiker/wijzig/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ")
                             . anchor('gebruiker/maakInactief/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button> ")
-                            . "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>";
+                            . "<button type=\"button\" id=\"knopWis\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>";
     }
     //
 
@@ -55,7 +54,7 @@ $zwemmersTabel = "";
             <?php
             // link gebruiker maken tonen enkel indien als trainer ingelogd
             if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
-                echo "<p>" . anchor('gebruiker/maakGebruiker', "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-user-plus\"></i></button>") .
+                echo "<p id='test'>" . anchor('gebruiker/maakGebruiker', "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-user-plus\"></i></button>") .
                 "&nbsp;&nbsp;&nbsp;" . anchor('gebruiker/toonInactieveZwemmers', 'Toon inactieve zwemmers') ."</p>";
             } else {
                 echo "<p>" . anchor('gebruiker/toonInactieveZwemmers', 'Toon inactieve zwemmers') ."</p>";
