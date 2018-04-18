@@ -10,10 +10,10 @@ foreach ($wedstrijden as $wedstrijd) {
     .$wedstrijd->plaats.
     '</td>
     <td>'
-    .$wedstrijd->beginDatum.
+    .zetOmNaarDDMMYYYY($wedstrijd->beginDatum).
     '</td>
     <td>'
-    .$wedstrijd->eindDatum.
+    .zetOmNaarDDMMYYYY($wedstrijd->eindDatum).
     '</td>
     </tr>';
 }
