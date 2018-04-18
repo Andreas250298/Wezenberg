@@ -19,6 +19,7 @@ function haalArtikelsOp($nieuwsArtikels) {
 
 function haalAgendaOp($agendaItems) {
      echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-up fa-2x"></i></a>';
+     echo '<div class="col">';
     foreach ($agendaItems as $agendaItem) {
         echo '<div class="row row-striped">';
         echo '<div class="col-3 text-right">';
@@ -34,6 +35,7 @@ function haalAgendaOp($agendaItems) {
         echo '</div>';
         echo '</div>';
     }
+    echo '</div>';
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-down fa-2x"></i></a>';
 }
 
