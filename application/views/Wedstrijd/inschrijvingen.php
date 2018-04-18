@@ -21,17 +21,18 @@ foreach ($wedstrijden as $wedstrijd) {
     .$wedstrijd->eindDatum.
     '</td><td>'.
     form_submit($dataSubmit);
-    '</td>';
+    '</td><td></tr>';
 
 }
-
-foreach ($deelname as $deel) {
-  $lijstWedstrijden .= "<td>" .
-  $deel .
-  '</td></tr>';
+  foreach ($status as $deel) {
+    if (isset($status)) {
+  if ($deel->naam != null) {
+  $lijstWedstrijden .= "<tr><td>" .
+  $deel->naam ."</td></tr>";
+}
+}
 }
 ?>
-
 <table class="table">
   <?php echo form_open('Wedstrijd/inschrijven', 'class="form-group"', $attributen);?>
   <thead>
