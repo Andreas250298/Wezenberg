@@ -119,4 +119,37 @@ class Wedstrijd extends CI_Controller {
       $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Toont de pagina waarin een zwemmer zich kan inschrijven voor een wedstrijd
+    *\see Authex::getGebruikerInfo()
+    *\see Wedstrijd_model::toonWedstrijden()
+    *\see inschrijvingen.php
+    */
+    public function inschrijvingen() {
+      $data['titel'] = "Inschrijven webstrijden";
+      $data['gebruiker']  = $this->authex->getGebruikerInfo();
+      $gebruiker = $this->authex->getGebruikerInfo();
+      $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+
+      $this->load->model('wedstrijd_model');
+      $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
+      $this->load->model('deelname_model');
+      $data['deelname'] = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
+
+      $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Wedstrijd/inschrijvingen',
+          'voetnoot' => 'main_footer');
+      $this->template->load('main_master', $partials, $data);
+    }
+
+    public function inschrijven() {
+      $data['titel'] = "Inschrijven webstrijden";
+      $data['gebruiker']  = $this->authex->getGebruikerInfo();
+      $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+
+      $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Wedstrijd/inschrijven',
+          'voetnoot' => 'main_footer');
+      $this->template->load('main_master', $partials, $data);
+    }
 }
