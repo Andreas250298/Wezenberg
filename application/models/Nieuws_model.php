@@ -32,6 +32,11 @@ class Nieuws_model extends CI_Model
         return $query->result();
     }
 
+    public function getAllNieuwsArtikelsPaging($aantal, $startrij){
+      $this->db->order_by('datumAangemaakt', 'desc');
+      $query = $this->db->get('nieuwsArtikel', $aantal, $startrij);
+      return $query->result();
+    }
     /**
      * Creeërt een nieuw nieuwsartikel en voegt die toe aan de databank.
      * @param $nieuwsArtikel een nieuwsartikel object
@@ -57,5 +62,11 @@ class Nieuws_model extends CI_Model
     public function delete($id){
         $this->db->where('id', $id);
         $this->db->delete('nieuwsArtikel');
+    }
+    /**
+      * opvragen van het aantal records.
+      */
+    function getCountAll() {
+        return $this->db->count_all('nieuwsArtikel');
     }
 }
