@@ -14,8 +14,13 @@ foreach ($wedstrijden as $wedstrijd) {
     '</td>
     <td>'
     .$wedstrijd->eindDatum.
-    '</td>
-    </tr>';
+    '</td><td>'.
+anchor('wedstrijd/updateWedstrijd/' . $wedstrijd->id, 'Wijzig').
+    '</td><td>'.
+anchor('wedstrijd/reeksenToevoegen/' . $wedstrijd->id, 'Reeksen toevoegen').
+    '</td><td>'
+    .anchor('wedstrijd/verwijder/' . $wedstrijd->id, 'Verwijder').
+    '</td></tr>';
 }
 
 echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken').'
@@ -37,6 +42,12 @@ echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken').'
     </td>
     <td>
       Einde
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td>
     </td>
     </tr>
   </thead>
