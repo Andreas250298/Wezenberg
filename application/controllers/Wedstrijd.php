@@ -77,6 +77,10 @@ class Wedstrijd extends CI_Controller {
             $this->wedstrijd_model->update($wedstrijd);
         }
 
+        $this->load->model('deelname_model');
+        $status = $this->deelname_model->get($wedstrijd->id);
+        $status->statusId = '4';
+
         redirect('/wedstrijd/index');
     }
 
@@ -88,7 +92,7 @@ class Wedstrijd extends CI_Controller {
      */
     public function updateWedstrijd($id){
       $data['titel'] = 'Wedstrijden wijzigen';
-      $data['paginaVerantwoordelijke'] = '';
+      $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
       $this->load->model('wedstrijd_model');
       $data['wedstrijd'] = $this->wedstrijd_model->get($id);
 
@@ -99,6 +103,7 @@ class Wedstrijd extends CI_Controller {
       $this->template->load('main_master', $partials, $data);
     }
 
+
     /**
      * Toont de pagina voor de wedstrijden te beheren
      *\see Authex::getGebruikerInfo()
@@ -107,7 +112,7 @@ class Wedstrijd extends CI_Controller {
      */
     public function beheerWedstrijden() {
         $data['titel'] = 'Wedstrijden bekijken';
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
       $this->load->model('wedstrijd_model');
@@ -123,6 +128,8 @@ class Wedstrijd extends CI_Controller {
     * Toont de pagina waarin een zwemmer zich kan inschrijven voor een wedstrijd
     *\see Authex::getGebruikerInfo()
     *\see Wedstrijd_model::toonWedstrijden()
+    *\see Deelname_model::getStatusPerGebruiker()
+    *\see Deelname_model::get()
     *\see inschrijvingen.php
     */
     public function inschrijvingen() {
@@ -134,7 +141,8 @@ class Wedstrijd extends CI_Controller {
       $this->load->model('wedstrijd_model');
       $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
       $this->load->model('deelname_model');
-      $data['deelname'] = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
+      $data['status'] = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
+      $data['deelname'] = $this->deelname_model->get($gebruiker->id);
 
       $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/inschrijvingen',
@@ -142,6 +150,11 @@ class Wedstrijd extends CI_Controller {
       $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Toont de pagina waarin een zwemmer de melding krijgt om te wachten op goedkeuring voor de inschrijving
+    *\see Authex::getGebruikerInfo()
+    *\see inschrijven.php
+    */
     public function inschrijven() {
       $data['titel'] = "Inschrijven webstrijden";
       $data['gebruiker']  = $this->authex->getGebruikerInfo();

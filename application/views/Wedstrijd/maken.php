@@ -6,12 +6,12 @@
  * and open the template in the editor.
  */
 
-    $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam Wedstrijd', 'aria-label' => 'Titel', 'size' => '30');
-    $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'plaats', 'id' => 'plaats', 'placeholder' => 'Plaats Wedstrijd', 'aria-label' => 'Plaats', 'size' => '30');
-    $dataInputBeginDatum = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'name' => 'beginDatum', 'id' => 'beginDatum','size' => '30');
-    $dataInputEindDatum = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'name' => 'eindDatum', 'id' => 'eindDatum','size' => '30');
-    $dataInputLaatseInschrijvingDatum = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'name' => 'laatsteInschrijvingDatum', 'id' => 'laatsteInschrijvingDatum','size' => '30');
-    $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Schrijf hier de beschrijving van de wedstrijd', 'aria-label' => 'beschrijving', 'size' => '30');
+    $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam Wedstrijd', 'aria-label' => 'Titel', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul hier de naam van de wedstrijd in.');
+    $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'plaats', 'id' => 'plaats', 'placeholder' => 'Plaats Wedstrijd', 'aria-label' => 'Plaats', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul de gemeente in waar de wedstrijd plaatsvindt.');
+    $dataInputBeginDatum = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'name' => 'beginDatum', 'id' => 'beginDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de startdatum in van de wedstrijd(Deze kan verschillen van de einddatum).');
+    $dataInputEindDatum = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'name' => 'eindDatum', 'id' => 'eindDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de einddatum in van de wedstrijd(deze kan verschillen van de begindatum).');
+    $dataInputLaatseInschrijvingDatum = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'name' => 'laatsteInschrijvingDatum', 'id' => 'laatsteInschrijvingDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier de uiterste datum waarop zwemmers zich kunnen inschrijven voor deze wedstrijd.');
+    $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Schrijf hier de beschrijving van de wedstrijd', 'aria-label' => 'beschrijving', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier een beschrijving voor deze wedstrijd.');
     $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
 
 echo form_open('Wedstrijd/registreer', 'class="form-group"');

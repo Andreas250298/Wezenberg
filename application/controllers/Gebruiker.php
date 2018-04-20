@@ -38,7 +38,7 @@ class Gebruiker extends CI_Controller
     public function toonZwemmers()
     {
         $data['titel'] = 'Zwemmers';
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'De Coninck Mattias';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
         //gebruiker_model inladen

@@ -115,16 +115,16 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker) {
         background-color: #253555;
         color: white;
     }
-    
+
     .startTitel{
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    
+
     .media{
         margin-bottom: 20px;
     }
-    
+
     .scrollknop{
         background-color: lightgray;
         display: block;
@@ -153,7 +153,7 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker) {
             <br>
             <?php
             haalAgendaOp($wedstrijden);
-            ?>           
+            ?>
         </div>
     </div>
 </div>
