@@ -4,8 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @class Nieuws
  * @brief Controller-klasse voor Nieuws
+<<<<<<< HEAD
+ * 
+ * 
+=======
  *
  *
+>>>>>>> 2600964dca5558f57fcf9160242501cabfe88843
  */
 class Nieuws extends CI_Controller {
 
