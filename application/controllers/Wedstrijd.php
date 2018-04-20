@@ -77,6 +77,10 @@ class Wedstrijd extends CI_Controller {
             $this->wedstrijd_model->update($wedstrijd);
         }
 
+        $this->load->model('deelname_model');
+        $status = $this->deelname_model->get($wedstrijd->id);
+        $status->statusId = '4';
+
         redirect('/wedstrijd/index');
     }
 

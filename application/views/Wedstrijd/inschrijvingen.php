@@ -5,6 +5,7 @@ $attributen = array('id' => 'mijnFormulier',
     'class' => 'form-inline my2 my-lg0',
     'data-toggle' => 'validator',
     'role' => 'form');
+$stat = "";
 
 foreach ($wedstrijden as $wedstrijd) {
     $lijstWedstrijden .= '<tr>
@@ -19,18 +20,23 @@ foreach ($wedstrijden as $wedstrijd) {
     '</td>
     <td>'
     .$wedstrijd->eindDatum.
-    '</td><td>'. 
-    form_submit($dataSubmit);
-    '</td><td></tr>';
+    '</td>';
 
-}
+
   foreach ($status as $deel) {
-    if (isset($status)) {
-  if ($deel->naam != null) {
-  $lijstWedstrijden .= "<tr><td>" .
-  $deel->naam ."</td></tr>";
+    if (isset($deel->naam)) {
+      $stat = $deel->naam;
+  if ($deel != null) {
+  $lijstWedstrijden .= "<td>" .
+  $deel->naam ."</td>";
 }
 }
+}
+//if ($stat == "open") {
+  $lijstWedstrijden .= '<td>'.
+  form_submit($dataSubmit);
+  '</td><td></tr>';
+//}
 }
 ?>
 <table class="table">
@@ -48,6 +54,11 @@ foreach ($wedstrijden as $wedstrijd) {
     </td>
     <td>
       Einde
+    </td>
+    <td>
+      Status
+    </td>
+    <td>
     </td>
     </tr>
   </thead>
