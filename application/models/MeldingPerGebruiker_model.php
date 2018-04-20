@@ -1,6 +1,6 @@
 <?php
 
-class Melding_model extends CI_Model
+class MeldingPerGebruiker_model extends CI_Model
 {
     /**
      * Constructor
@@ -18,27 +18,28 @@ class Melding_model extends CI_Model
     public function get($id)
     {
         $this->db->where('id', $id);
-        $query = $this->db->get('melding');
+        $query = $this->db->get('meldingPerGebruiker');
         return $query->row();
     }
 
-    public function getOrderdByVerzondenDatum($id)
-    {
-        $this->db->order_by('verzondenDatum', 'asc');
-        $this->db->where('id', $id);
-        $query = $this->db->get('melding');
-        return $query->row();
-    }
-    
     /**
     * Opvragen van alle meldingen van een bepaalde gebruiker uit de database.
     * @param $gebruikerId een gebruiker object
     * \return De opgevraagde meldingen
     */
-    public function getAll(){
-        /*$this->db->where('id', $gebruikerId);*/
-        $query = $this->db->get('melding');
-        return $query->result();
+    public function getAllPerGebruiker($gebruikerId){
+        $this->db->where('gebruikerId', $gebruikerId);
+        $query = $this->db->get('meldingPerGebruiker');
+        
+        $meldingenPerGebruiker = $query->result();
+
+        $this->load->model('melding_model');
+
+        foreach ($meldingenPerGebruiker as $meldingPerGebruiker) {
+            $meldingPerGebruiker->melding = $this->melding_model->getOrderdByVerzondenDatum($meldingPerGebruiker->id);
+        }
+        
+        return $meldingenPerGebruiker;
     }
 
     /**
@@ -47,7 +48,7 @@ class Melding_model extends CI_Model
      * @return het id van het juist aangemaakte melding.
      */
     public function insert($melding){
-        $this->db->insert('melding', $melding);
+        $this->db->insert('meldingPerGebruiker', $melding);
         return $this->db->insert_id();
     }
 
@@ -55,9 +56,9 @@ class Melding_model extends CI_Model
      * Voert de aanpassingen aan een bepaalde melding door aan de databank.
      * @param type $melding een melding object
      */
-    public function update($melding){
-        $this->db->where('id', $melding->id);
-        $this->db->update('melding', $melding);
+    public function update($meldingPerGebruiker){
+        $this->db->where('id', $meldingPerGebruiker->id);
+        $this->db->update('meldingPerGebruiker', $melding);
     }
     /**
      * Verwijdert een melding uit de databank.
@@ -65,6 +66,6 @@ class Melding_model extends CI_Model
      */
     public function delete($id){
         $this->db->where('id', $id);
-        $this->db->delete('melding');
+        $this->db->delete('meldingPerGebruiker');
     }
 }
