@@ -252,4 +252,38 @@ class Gebruiker extends CI_Controller
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+    
+        /**
+    * Meldingen tonen aan de hand van de gebruiker ID
+    * \param id De id van de gebruiker waarvan de info getoond dient te worden.
+    *\see Authex::getGebruikerInfo()
+    *\see main_header.php
+    */
+    public function haalAjaxOp_Meldingen() {
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        
+        $this->load->model('meldingPerGebruiker_model');
+        $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($data['gebruiker']->id);
+
+        $this->load->view('ajax_meldingTonen', $data);
+    }
+    
+    public function haalAjaxOp_MaakMeldingGezien() {
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        
+        $meldingPerGebruiker->id = $this->input->get('id');
+        $meldingPerGebruiker->gezien = 1;
+        
+        $this->load->model('meldingPerGebruiker_model');        
+        $this->meldingPerGebruiker_model->update($meldingPerGebruiker);  
+        
+        
+        
+        $data['meldingGezien'] = $this->meldingPerGebruiker_model->update($id);
+        
+        $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($data['gebruiker']->id);
+
+        $this->load->view('ajax_meldingTonen', $data);
+    }
+    
 }
