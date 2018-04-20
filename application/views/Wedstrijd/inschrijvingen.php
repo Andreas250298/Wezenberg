@@ -19,7 +19,7 @@ foreach ($wedstrijden as $wedstrijd) {
     '</td>
     <td>'
     .$wedstrijd->eindDatum.
-    '</td><td>'.
+    '</td><td>'. 
     form_submit($dataSubmit);
     '</td><td></tr>';
 
