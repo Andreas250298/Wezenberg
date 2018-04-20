@@ -40,16 +40,6 @@ class Supplement_model extends CI_Model
     }
 
     /**
-    ** Opvragen van supplementen volgens id zwemmer
-    * @param $id Het ID van de zwememr
-    */
-    public function toonSupplementenPerZemmer($id)
-    {
-        $this->db->where('gebruikerIdZwemmer', $id);
-        $query = $this->db->get('supplementPerZwemmer');
-    }
-
-    /**
      * Een supplement toevoegen aan de database
      * @param $supplement Het supplement dat moet toegevoegd worden
      * @return De insert functie van het supplement

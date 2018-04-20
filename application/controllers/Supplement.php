@@ -8,23 +8,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 *
 * Controller-klasse met methoden die worden gebruikt door het Supplement
 */
-class Supplement extends CI_Controller {
+class Supplement extends CI_Controller
+{
 
   /**
   * Constructor
   */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->helper('form');
     }
 
-/**
-* Weergeven van Supplementen
-*\see Authex::getGebruikerInfo()
-*\see Supplement_model::toonSupplementen()
-*\see Supplement/bekijken.php
-*/
-    public function index() {
+    /**
+    * Weergeven van Supplementen
+    *\see Authex::getGebruikerInfo()
+    *\see Supplement_model::toonSupplementen()
+    *\see Supplement/bekijken.php
+    */
+    public function index()
+    {
         $data['paginaVerantwoordelijke'] = '';
         $data['titel'] = 'Supplement bekijken';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -42,7 +45,8 @@ class Supplement extends CI_Controller {
     *\see Authex::getGebruikerInfo()
     *\see Supplement/form.php
     */
-    public function maakSupplement() {
+    public function maakSupplement()
+    {
         $data['paginaVerantwoordelijke'] = '';
         $data['titel'] = 'Supplementen aanmaken';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -61,7 +65,8 @@ class Supplement extends CI_Controller {
     *\see Supplement_model::update()
     *\see Supplement::beheerSupplementen()
     */
-    public function registreer() {
+    public function registreer()
+    {
         $supplement = new stdClass();
         $supplement->id = $this->input->post('id');
         $supplement->naam = $this->input->post('naam');
@@ -83,7 +88,8 @@ class Supplement extends CI_Controller {
     *\see Supplement_model::toonSupplementen()
     *\see Supplementen/beheren.php
     */
-    public function beheerSupplementen() {
+    public function beheerSupplementen()
+    {
         $data['titel'] = 'Supplementen beheren';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = '';
@@ -103,7 +109,8 @@ class Supplement extends CI_Controller {
     *\see Supplement_model::get()
     *\see Supplementen/form.php
     */
-    public function wijzig($id) {
+    public function wijzig($id)
+    {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = '';
         $this->load->model('supplement_model');
@@ -122,7 +129,8 @@ class Supplement extends CI_Controller {
     *\see Supplement_model::delete()
     *\see Supplement::index()
     */
-    public function verwijder($id) {
+    public function verwijder($id)
+    {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = '';
         $this->load->model('supplement_model');
@@ -131,4 +139,18 @@ class Supplement extends CI_Controller {
         redirect("/supplement/index");
     }
 
+    public function supplementenPerZemmer($id)
+    {
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $this->load->model('supplementPerZwemmer_model');
+        $data['supplementenPerZwemmer'] = $this->supplementPerZwemmer_model->toonSupplementenPerZemmer($id);
+
+
+        $data['titel'] = 'Supplementen voor zwemmer';
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Supplement/zwemmer',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
 }

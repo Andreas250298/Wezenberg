@@ -50,13 +50,13 @@ $link = array('class' => 'nav-link');
             }
             //
             // Indien ingelogd, toont welkom bericht
-            else if ($gebruiker != null) {
+            elseif ($gebruiker != null) {
                 switch ($gebruiker->soort) {
                     case 'zwemmer': // zwemmer
                         ?>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <?php echo anchor('supplementen/', 'Supplementen', $link); ?>
+                                <?php echo anchor('supplement/supplementenPerZemmer/'.$gebruiker->id, 'Supplementen', $link); ?>
                             </li>
                             <li class="nav-item">
                                 <?php echo anchor('gebruiker/agenda', 'Mijn agenda', $link); ?>

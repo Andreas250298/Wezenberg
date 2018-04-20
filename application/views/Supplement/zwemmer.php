@@ -1,20 +1,17 @@
 <?php
-$lijstSupplementen = '';
+$lijstSupplementenPerZwemmer = '';
 
-foreach ($supplementen as $supplement) {
-    $lijstSupplementen .= '<tr>
-    <td>'
-    .$supplement->naam.
-    '</td>
-    <td>'
-    .$supplement->beschrijving.
-    '</td>
-    <td>'
-    .$supplement->.
-    '</td>
-    <td>'
-    .zetOmNaarDDMMYYYY($wedstrijd->eindDatum).
-    '</td>
+foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
+    $lijstSupplementenPerZwemmer .= '<tr>
+    <td>'.$supplementPerZwemmer->supplement->naam.'</td>
+    <td>'.$supplementPerZwemmer->supplement->beschrijving.'</td>
+    <td>
+    '.zetOmNaarDDMMYYYY($supplementPerZwemmer->datumIname).'
+    </td><td>
+      '.$supplementPerZwemmer->tijdstipIname.'
+      </td><td>
+      '.$supplementPerZwemmer->hoeveelheid.' g
+      </td>
     </tr>';
 }
 ?>
@@ -41,7 +38,7 @@ foreach ($supplementen as $supplement) {
   </thead>
   <tbody>
     <?php
-    echo $lijstSupplementen;
+    echo $lijstSupplementenPerZwemmer;
     ?>
   </tbody>
 </table>
