@@ -16,9 +16,9 @@ var id = "";
         $.ajax({type: "GET",
         url: site_url + "/nieuws/verwijder",
         data:{id : id},
-        // success: function(){
-        //   window.location.reload();
-        // },
+          success: function(){
+          window.location.reload();
+         },
         error: function (xhr, status, error){
           alert("--ERROR IN AJAX --\n\n" + xhr.responseText);
         }
@@ -39,8 +39,8 @@ var id = "";
  * and open the template in the editor.
  */
 
-echo "<p>" . anchor('Nieuws/maakNieuwsArtikel', "nieuw artikel") . "</p>";
-echo "<p>" . anchor('home/index', 'Terug', "Class='btn btn-primary my-2 my-sm0'") . "</p>";
+echo "<p>" . anchor('Nieuws/maakNieuwsArtikel', "nieuw artikel", "Class='btn btn-primary my-2 my-sm0'") . " ";
+echo anchor('home/index', 'Terug', "Class='btn btn-primary my-2 my-sm0'") . "</p>";
 foreach ($nieuwsArtikels as $nieuwsArtikel) {
     echo "<div class='card'>";
     echo '<div class="card-body" id="' . $nieuwsArtikel->id . '">';

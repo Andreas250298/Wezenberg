@@ -39,7 +39,7 @@ class Trainingscentrum extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     /**
      * Weergeven van Over_ons_aanpassen
      * \see Authex::getGebruikerInfo()
@@ -60,7 +60,7 @@ class Trainingscentrum extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
-    
+
      /**
      * Toont een formulier met alle gegevens ingevuld van het gekoze nieuwsartikel.
      * @param $id van het aangeduide nieuwsartikel
@@ -72,7 +72,7 @@ class Trainingscentrum extends CI_Controller {
         $trainingscentrum->beschrijvingLocatie = $this->input->post('beschrijvingLocatie');
         $trainingscentrum->beschrijvingTeam = $this->input->post('beschrijvingTeam');
         $trainingscentrum->beschrijvingTrainer = $this->input->post('beschrijvingTrainer');
-        
+
         $this->load->model('trainingscentrum_model');
         $this->trainingscentrum_model->update($trainingscentrum);
 
