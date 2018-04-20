@@ -107,7 +107,8 @@ class Nieuws extends CI_Controller {
      * Verwijdert het nieuwsartikel en toont opnieuw de lijst van nieuwsartikels.
      * @param $id van de te verwijderen nieuwsartikel
      */
-    public function verwijder($id){
+    public function verwijder(){
+        $id = $this->input->get('id');
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $this->load->model('nieuws_model');

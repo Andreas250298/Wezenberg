@@ -20,7 +20,7 @@ var id = "";
         //   window.location.reload();
         // },
         error: function (xhr, status, error){
-          aler("--ERROR IN AJAX --\n\n" + xhr.responseText);
+          alert("--ERROR IN AJAX --\n\n" + xhr.responseText);
         }
       });
       }
