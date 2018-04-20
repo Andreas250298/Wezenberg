@@ -1,6 +1,6 @@
 <?php
 $lijstSupplementenPerZwemmer = '';
-
+if($supplementenPerZwemmer != null) {
 foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
     $lijstSupplementenPerZwemmer .= '<tr>
     <td>'.$supplementPerZwemmer->supplement->naam.'</td>
@@ -14,34 +14,42 @@ foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
       </td>
     </tr>';
 }
+}
 ?>
 
-<table class="table">
-  <thead>
-    <tr>
+
+<?
+if($supplementenPerZwemmer == null){
+  echo "<div>Je moet momenteel geen supplementen innemen of de trainer heeft je supplementen nog niet toegevoegd.</div>";
+} else {
+  echo "<table class=\"table\">
+    <thead>
+      <tr>
+        <td>
+          Naam
+        </td>
       <td>
-        Naam
+        Beschrijving
       </td>
-    <td>
-      Beschrijving
-    </td>
-    <td>
-      Datum
-    </td>
-    <td>
-      Tijdstip
-    </td>
-    <td>
-      Hoeveelheid
-    </td>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    echo $lijstSupplementenPerZwemmer;
-    ?>
-  </tbody>
-</table>
+      <td>
+        Datum
+      </td>
+      <td>
+        Tijdstip
+      </td>
+      <td>
+        Hoeveelheid
+      </td>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      echo $lijstSupplementenPerZwemmer;
+      ?>
+    </tbody>
+  </table>";
+}
+?>
 <p>
     <a id="terug" href="javascript:history.go(-1);">Terug</a>
 </p>
