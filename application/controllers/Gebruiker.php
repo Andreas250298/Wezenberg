@@ -249,7 +249,11 @@ class Gebruiker extends CI_Controller
     }
 
     /** Persoonlijke agenda tonen
-    *
+    *\see Authex::getGebruikerInfo()
+    *\see Wedstrijd_model::getWedstrijdenInWeek()
+    *\see zwemmer_agenda.php
+    * @param week Te tonen $week
+    * @param jaar Jaar van te tonen week
     */
     public function agenda($week, $jaar)
     {
@@ -257,10 +261,12 @@ class Gebruiker extends CI_Controller
       $data['paginaVerantwoordelijke'] = 'Bols Jordi';
       $gebruiker  = $this->authex->getGebruikerInfo();
       $data['gebruiker'] = $gebruiker;
-      $id = $gebruiker->id;
 
       $data['week'] = $week;
       $data['jaar'] = $jaar;
+
+      $this->load->model('deelname_model');
+      $data['wedstrijden'] = $this->deelname_model->getDeelnamesInWeek($gebruiker->id, $week, $jaar);
 
       $partials = array('hoofding' => 'main_header',
           'inhoud' => 'zwemmer_agenda',
@@ -268,8 +274,9 @@ class Gebruiker extends CI_Controller
       $this->template->load('main_master', $partials, $data);
     }
 
-    /** Data om te tonen in agenda ophalen
-    *
+    /** Wedstrijden om te tonen in agenda ophalen
+    *\see Authex::getGebruikerInfo()
+    *\see Wedstrijd_model::getWedstrijdenInWeek()
     */
     public function haalJsonOp_Wedstrijden()
     {
@@ -277,9 +284,38 @@ class Gebruiker extends CI_Controller
       $week = $this->input->get('huidigeWeek');
       $jaar = $this->input->get('huidigJaar');
 
-      $this->load->model('wedstrijd_model');
-      $wedstrijdweek = $this->wedstrijd_model->getWedstrijdenInWeek($gebruiker->id, $week, $jaar);
+      $this->load->model('deelname_model');
+      $deelnames = $this->deelname_model->getDeelnamesInWeek($gebruiker->id, $week, $jaar);
 
-      echo json_encode($wedstrijdweek);
+      $i = 0;
+
+      if (isset($deelnames->dezeWeek))
+      {
+          foreach ($deelnames as $deelname)
+          {
+              if ($deelname->reeks->isDezeWeek == 1)
+              {
+                  $deelname->id = $i;
+                  $i++;
+              }
+          }
+      }
+          echo json_encode($deelnames);
+      }
+
+    /** Supplementen om te tonen in agenda ophalen
+    *\see Authex::getGebruikerInfo()
+    *\see Supplement_model::getSupplementenInWeek()
+    */
+    public function haalJsonOp_Supplementen()
+    {
+        $gebruiker = $this->authex->getGebruikerInfo();
+        $week = $this->input->get('huidigeWeek');
+        $jaar = $this->input->get('huidigJaar');
+
+        $this->load->model('supplement_model');
+        $supplementweek = $this->suplement_model->getSupplementenInWeek($gebuiker->id, $week, $jaar);
+
+        echo json_encode($supplementweek);
     }
 }

@@ -8,13 +8,17 @@ function haalWedstrijdenOp(week, jaar) {
             try {
                 // datum = .datum tijdstip = .tijdstip afstand = .afstand slag = .soort wedstrijd = .naam plaats = .plaats beschrijving = .beschrijving reeksid = .id
                 var wedstrijdenWeek = jQuery.parseJSON(result);
+                var i = 0;
                 console.log(JSON.stringify(result));
 
-                for (var i = 0; i < wedstrijdenWeek.length; i++) {
-                    var tijd = wedstrijdenWeek[i].tijdstip;
-                    var datum = wedstrijdenWeek[i].datum;
+                if (wedstrijdenWeek != null) {
+                    $.each(wedstrijdenWeek, function() {
+                        var tijd = wedstrijdenWeek.dezeWeek.reeks.tijdstip;
+                        var datum =  wedstrijdenWeek.dezeWeek.reeks.datum;
 
-                    $("tr[class=" + tijd + "]").find("td[class=" + datum + "]").css("background-color", "yellow").addClass("wedstrijd").addClass("wedstrijd" + i);
+                        $("tr[class=" + tijd + "]").find("[class=" + datum + "]").css("background-color", "#598bdb").addClass("font-weight-bold").addClass("text-dark").addClass("wedstrijd").attr('id', "wedstrijd_" + i).html(wedstrijdenWeek.dezeWeek.wedstrijd.naam);
+                        i++;
+                    });
                 }
             } catch (error) {
                 alert("-- ERROR IN JSON --\n" + result);
@@ -34,10 +38,12 @@ $(document).ready(function () {
     var output = "test";
 
     haalWedstrijdenOp(week, jaar);
+    $("[class*=wedstrijd]").hide();
 
 
     $("table").on('click', '.wedstrijd', function () {
-            $(".event").html(output);
+        var huidigeWedstrijd = $(this).attr("id");
+        $("[id=" + huidigeWedstrijd + "]").show();
     });
 
 });
@@ -68,13 +74,6 @@ if ($week == 1)
     $vorigeWeek = $week - 1;
     $vorigJaar = $jaar;
 }
-
-// Verwijderen
-// foreach ($wedstrijdWeek as $wedstrijd) {
-//     $datumnotatie = explode('-', $wedstrijd['datum']);
-//     $wedstrijd['datum'] = $datumnotatie[2] . $datumnotatie[1] . $datumnotatie[0];
-// }
-
 
 $dt = clone $maandag;
 
@@ -119,18 +118,6 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
           ?>
       </h3>
       <p>Klik op een evenement om de details te bekijken</p>
-      <?php echo form_button(array("content" => "Test", "class" => "btn btn-primary", "id" => "knop")); ?>
-
-      <!-- PHP test
-      <p id="phpwedstrijden">
-          <?php
-          print_r($wedstrijdWeek); ?>
-      </p> -->
-
-      <div id="jquery">
-          <p id="test"></p>
-      </div>
-
     </div>
   </div>
 
@@ -148,12 +135,13 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
   <div class="row">
     <div class="col-sm-12">
       <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-          <thead>
+        <table class="table table-striped table-bordered text-muted">
+          <thead class="font-weight-bold">
             <?php
                 $t = 1;
+                $maand = $dt->format('n');
                 do {
-                    echo "<td>" . $dagen[$t] . "<br>" . $dt->format('d-m-Y') . "</td>\n";
+                    echo "<td>" . $dagen[$t] . "<br>" . $dt->format('j') . " " . $maanden[$maand] . " " . $dt->format('Y') . "</td>\n";
                     $dt->modify('+1 day');
                     $t++;
                 } while ($w == $dt->format('W'));
@@ -161,12 +149,12 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
           </thead>
           <?php
               for ($i=1; $i < 19; $i++) {
-                echo '<tr class="' . str_replace(':', '', $uren[$i]) . '">';
+                echo '<tr class="' . substr($uren[$i], 0, 2) . '">';
                 $dt3 = clone $dt;
                 $dt3->modify('-1 week');
                 for ($j=1; $j < 8; $j++)
                 {
-                  echo '<td class="' . $dt3->format('Y-m-d'). '">' . '&nbsp;' . $uren[$i] . '</td>';
+                  echo '<td class="' . $dt3->format('Y-m-d'). '">' . '&nbsp;' . $uren[$i] .  '</td>';
                   $dt3->modify('+1 day');
                 }
                 echo '</tr>';
@@ -179,8 +167,23 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
 
   <div class="row">
       <div class="col-sm-12">
-          <div class="event">
-              &nbsp;
+          <div class="event text-left">
+              <?php
+                $teller = 0;
+                if ($wedstrijden != null && isset($wedstrijden->dezeWeek->reeks->isDezeWeek))
+                {
+                    foreach ($wedstrijden as $wedstrijd)
+                    {
+                            echo "<div class='wedstrijd' id='wedstrijd_" . $teller . "'>";
+                            echo "<span><b>" . $wedstrijd->wedstrijd->naam . " " . $wedstrijd->wedstrijd->plaats . "</b></span><br />";
+                            echo "Beginuur: " . $wedstrijd->reeks->beginUur . "<br />";
+                            echo "Slag: " . $wedstrijd->slag->soort . "<br />";
+                            echo "Afstand: " . $wedstrijd->afstand->afstand . "<br />";
+                            echo "Beschrijving: " . $wedstrijd->wedstrijd->beschrijving . "<br />";
+                            $teller++;
+                    }
+                }
+              ;?>
           </div>
       </div>
   </div>

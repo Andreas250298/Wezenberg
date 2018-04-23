@@ -28,83 +28,83 @@ class Wedstrijd_model extends CI_Model
         return $query->row();
     }
 
-    /**
-     * Deelname(s) van een zwemmer ophalen uit de database
-     * @param $id Het id van de zwemmer waar de deelnames aan gekoppeld zijn
-     * @return De opgevraagde record(s)
-     */
-    public function getDeelnames($id)
-    {
-      $this->db->where('statusId', '2');
-      $this->db->where('gebruikerIdZwemmer', $id);
-      $query = $this->db->get('deelname');
+    // /**
+    //  * Deelname(s) van een zwemmer ophalen uit de database
+    //  * @param $id Het id van de zwemmer waar de deelnames aan gekoppeld zijn
+    //  * @return De opgevraagde record(s)
+    //  */
+    // public function getDeelnames($id)
+    // {
+    //   $this->db->where('statusId', '2');
+    //   $this->db->where('gebruikerIdZwemmer', $id);
+    //   $query = $this->db->get('deelname');
+    //
+    //     if ($query->num_rows() == 0)
+    //     {
+    //       return null;
+    //     }
+    //
+    //     else
+    //     {
+    //       $i = 0;
+    //       $rijen = $query->num_rows();
+    //
+    //       while ($i <= $rijen)
+    //       {
+    //         $deelnames[$i] = $query->row($i);
+    //         $i++;
+    //       }
+    //       return $deelnames;
+    //     }
+    // }
 
-        if ($query->num_rows() == 0)
-        {
-          return null;
-        }
+    // /**
+    //  * Reeks behorende bij een deelname uit de database ophalen
+    //  * @param $id Het id van de deelname waar de reeks aan gekoppeld is
+    //  * @return De opgevraagde record
+    //  */
+    // public function getReeks($id)
+    // {
+    //   $this->db->where('id', $id);
+    //   $query = $this->db->get('reeks');
+    //   return $query->row();
+    // }
 
-        else
-        {
-          $i = 0;
-          $rijen = $query->num_rows();
+    // /**
+    //  * Afstand behorende bij een reeks uit de database ophalen
+    //  * @param $id Het id van de reeks waar de afstand aan gekoppeld is
+    //  * @return De opgevraagde record
+    //  */
+    // public function getAfstand($id)
+    // {
+    //   $this->db->where('id', $id);
+    //   $query = $this->db->get('afstand');
+    //   return $query->row();
+    // }
 
-          while ($i <= $rijen)
-          {
-            $deelnames[$i] = $query->row($i);
-            $i++;
-          }
-          return $deelnames;
-        }
-    }
+    // /**
+    //  * Slag behorende bij een reeks uit de database ophalen
+    //  * @param $id Het id van de reeks waar de slag aan gekoppeld is
+    //  * @return De opgevraagde record
+    //  */
+    // public function getSlag($id)
+    // {
+    //   $this->db->where('id', $id);
+    //   $query = $this->db->get('slag');
+    //   return $query->row();
+    // }
 
-    /**
-     * Reeks behorende bij een deelname uit de database ophalen
-     * @param $id Het id van de deelname waar de reeks aan gekoppeld is
-     * @return De opgevraagde record
-     */
-    public function getReeks($id)
-    {
-      $this->db->where('id', $id);
-      $query = $this->db->get('reeks');
-      return $query->row();
-    }
-
-    /**
-     * Afstand behorende bij een reeks uit de database ophalen
-     * @param $id Het id van de reeks waar de afstand aan gekoppeld is
-     * @return De opgevraagde record
-     */
-    public function getAfstand($id)
-    {
-      $this->db->where('id', $id);
-      $query = $this->db->get('afstand');
-      return $query->row();
-    }
-
-    /**
-     * Slag behorende bij een reeks uit de database ophalen
-     * @param $id Het id van de reeks waar de slag aan gekoppeld is
-     * @return De opgevraagde record
-     */
-    public function getSlag($id)
-    {
-      $this->db->where('id', $id);
-      $query = $this->db->get('slag');
-      return $query->row();
-    }
-
-    /**
-     * Wedstrijd behorende bij een reeks uit de database ophalen
-     * @param $id Het id van de reeks waar de wedstrijd aan gekoppeld is
-     * @return De opgevraagde record
-     */
-    public function getWedstrijd($id)
-    {
-      $this->db->where('id', $id);
-      $query = $this->db->get('wedstrijd');
-      return $query->row();
-    }
+    // /**
+    //  * Wedstrijd behorende bij een reeks uit de database ophalen
+    //  * @param $id Het id van de reeks waar de wedstrijd aan gekoppeld is
+    //  * @return De opgevraagde record
+    //  */
+    // public function getWedstrijd($id)
+    // {
+    //   $this->db->where('id', $id);
+    //   $query = $this->db->get('wedstrijd');
+    //   return $query->row();
+    // }
 
     /**
      * Opvragen van alle wedstrijden uit de database, oplopend gesorteerd
@@ -166,12 +166,16 @@ class Wedstrijd_model extends CI_Model
     *\see wedstrijd_model::getAfstand()
     *\see wedstrijd_model::getSlag()
     *\see wedstrijd_model::getWedstrijd()
-    * @param zwemmerId ID van de getoonde zwemmer
-    * @return De opgevraagde wedstrijden
+    * @param id ID van de zwemmer in kwestie
+    * @return De opgevraagde wedstrijden.
     */
-    public function getWedstrijdenZwemmer($id)
+    public function getWedstrijdInformatieZwemmer($id)
     {
-      $deelnames = $this->wedstrijd_model->getDeelnames($id);
+      $this->load->model('deelname_model');
+      $this->load->model('slag_model');
+      $this->load->model('afstand_model');
+      $this->load->model('reeks_model');
+      $deelname = $this->deelname_model->getDeelnamesPerZwemmer($id);
 
       if ($deelnames == null)
       {
@@ -184,13 +188,13 @@ class Wedstrijd_model extends CI_Model
 
         foreach($deelnames as $deelname)
         {
-          $reeksen[$i] = $this->wedstrijd_model->getReeks($deelname->reeksId);
-          $afstanden[$i] = $this->wedstrijd_model->getAfstand($reeksen[$i]->afstandId);
-          $slagen[$i] = $this->wedstrijd_model->getSlag($reeksen[$i]->slagId);
-          $wedstrijden[$i] = $this->wedstrijd_model->getWedstrijd($reeksen[$i]->wedstrijdId);
-          $einduur = verhoogUur($reeksen[$i]->tijdstip);
+          $reeksen[$i] = $this->reeks_model->get($deelname->reeksId);
+          $afstanden[$i] = $this->afstand_model->get($reeksen[$i]->afstandId);
+          $slagen[$i] = $this->slag_model->get($reeksen[$i]->slagId);
+          $wedstrijden[$i] = $this->wedstrijd_model->get($reeksen[$i]->wedstrijdId);
+          $tijdstip = (string) $reeksen[$i]->tijdstip;
 
-          $output[$i] = array("datum" => $reeksen[$i]->datum, "tijdstip" => verkortTijdstip($reeksen[$i]->tijdstip),
+          $output[$i] = array("datum" => $reeksen[$i]->datum, "tijdstip" => $tijdstip, "beginUur" => verkortTijdstip($tijdstip),
                         "afstand" => $afstanden[$i]->afstand, "slag" => $slagen[$i]->soort, "wedstrijd" => $wedstrijden[$i]->naam, "plaats" => $wedstrijden[$i]->plaats, "beschrijving" => $wedstrijden[$i]->beschrijving, "reeksId" => $reeksen[$i]->id);
 
           $i++;
@@ -201,26 +205,22 @@ class Wedstrijd_model extends CI_Model
       }
     }
 
-    public function getReeksenInWeek($maandag, $zondag)
-    {
-        $this->db->where('datum >=', $maandag->format('Y-m-d') );
-        $this->db->where('datum <=', $zondag->format('Y-m-d') );
-        $query = $this->db->get('reeks');
-        return $query->result();
-    }
-
     /**
-     * Haalt wedstrijden in opgegeven week op
-     *
-     *
-     */
+    * Vergelijken van wedstrijden in een week met wedstrijden van een zwemmer
+    *\see wedstrijd_model::getReeksenInWeek()
+    *\see wedstrijd_model::getWedstrijdenZwemmer()
+    * @param id ID van de zwemmer in kwestie
+    * @return Wedstrijden in opgegeven week van opgegeven zwemmer.
+    */
      public function getWedstrijdenInWeek($id, $week, $jaar)
      {
+         $this->load->model('reeks_model');
+
          $maandag = new DateTime;
          $maandag->setISODate(intval($jaar), intval($week));
          $zondag = clone $maandag;
          $zondag->modify('+6 day');
-         $reeksenInWeek = $this->wedstrijd_model->getReeksenInWeek($maandag, $zondag);
+         $reeksenInWeek = $this->reeks_model->getReeksenInWeek($maandag, $zondag);
          $zwemmerWedstrijden = $this->wedstrijd_model->getWedstrijdenZwemmer($id);
          $wedstrijdenInWeek = array();
          $i = 0;
@@ -228,7 +228,7 @@ class Wedstrijd_model extends CI_Model
          foreach ($zwemmerWedstrijden as $wedstrijd) {
              foreach ($reeksenInWeek as $reeks) {
                  if ($reeks->id == $wedstrijd['reeksId']) {
-                     $wedstrijd["tijdstip"] = verwijderDubbelpunt($wedstrijd["tijdstip"]);
+                     $wedstrijd["tijdstip"] = substr($wedstrijd["tijdstip"], 0, 2);
                      $wedstrijdenInWeek[$i] = $wedstrijd;
                      $i++;
                  }

@@ -89,8 +89,10 @@ function verkortTijdstip($input) {
   if ($input == "") {
       return "";
   } else {
-      $datum = explode(":", $input);
-      return $datum[0] . ":" . $datum[1];
+      $string = (string) $input;
+      $datum = explode(':', $string);
+      $uit = $datum[0] . ':' . $datum[1];
+      return $uit;
   }
 }
 

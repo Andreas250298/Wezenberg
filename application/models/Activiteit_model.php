@@ -70,9 +70,15 @@ class Activiteit_model extends CI_Model
       return $soort->naam;
     }
 
+    /**
+    * Opvragen van de aanstaande activiteiten van een zwemmer
+    *\see activiteit_model::getActiviteitenPerZwemmer()
+    *\see activiteit_model::getSoort()
+    * @param id ID van de zwemmer in kwestie
+    * @return De opgevraagde activiteiten.
+    */
     public function getAndereActiviteitenZwemmer($id)
     {
-      $this->load->model('activiteit_model');
       $activiteitpergebruiker = $this->activiteit_model->getActiviteitenPerZwemmer($id);
 
       if ($activiteitpergebruiker == null)
@@ -84,13 +90,61 @@ class Activiteit_model extends CI_Model
         {
           $ander[$i] = $this->activiteit_model->getActiviteitInformatie($activiteit->andereActiviteitId);
           $soort[$i] = $this->activiteit_model->getSoort($ander[$i]->soortId);
+          $tijdstip = (string) $ander[$i]->tijdstip;
 
           $activiteiten[$i] = array('naam' => $ander[$i]->naam, 'beschrijving' => $ander[$i]->beschrijving, 'beginDatum' => $ander[$i]->beginDatum, 'eindDatum' => $ander[$i]->eindDatum,
-                                    'tijdstip' => $ander[$i]->tijdstip, 'plaats' => $ander[$i]->plaat, 'soort' => $soort[$i]);
+                                    'tijdstip' => $tijdstip, 'plaats' => $ander[$i]->plaats, 'soort' => $soort[$i]->naam, 'anderId' => $ander[$i]->id);
 
           $i++;
         }
         return $activiteiten;
       }
     }
+
+    /**
+    * Opvragen van activiteiten in een opgegeven week
+    * @param maandag Datum van maandag
+    * @param zondag Datum van zondag
+    * @return De opgevraagde activiteiten.
+    */
+    public function getActiviteitenInWeek($maandag, $zondag)
+    {
+        $this->db->where('beginDatum >=', $maandag->format('Y-m-d') )
+                ->andWhere('beginDatum <=', $zondag->format('Y-m-d') );
+        $this->db->orWhere('eindDatum >=', $maandag->format('Y-m-d') )
+                ->andWhere('eindDatum <=', $zondag->format('Y-m-d') );
+        $query = $this->db->get('anderactiviteit');
+        return $query->result();
+    }
+
+    /**
+    * Vergelijken van wedstrijden in een week met wedstrijden van een zwemmer
+    *\see wedstrijd_model::getReeksenInWeek()
+    *\see wedstrijd_model::getWedstrijdenZwemmer()
+    * @param id ID van de zwemmer in kwestie
+    * @return Wedstrijden in opgegeven week van opgegeven zwemmer.
+    */
+     public function getActiviteitenInWeekPerZwemmer($id, $week, $jaar)
+     {
+         $maandag = new DateTime;
+         $maandag->setISODate(intval($jaar), intval($week));
+         $zondag = clone $maandag;
+         $zondag->modify('+6 day');
+         $activiteitenInWeek = $this->activiteit_model->getActiviteitenInWeek($maandag, $zondag);
+         $zwemmerActiviteiten = $this->activiteit_model->getAndereActiviteitenZwemmer($id);
+         $activiteitenInWeekPerZwemmer = array();
+         $i = 0;
+
+         foreach ($zwemmerActiviteiten as $a) {
+             foreach ($activiteitenInWeek as $b) {
+                 if ($b->id == $a['reeksId']) {
+                     $wedstrijd["tijdstip"] = substr($wedstrijd["tijdstip"], 0, 2);
+                     $wedstrijdenInWeek[$i] = $wedstrijd;
+                     $i++;
+                 }
+             }
+         }
+
+         return $wedstrijdenInWeek;
+     }
 }
