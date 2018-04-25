@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @class Deelname_model
  * @brief Model-klasse voor deelnames
@@ -19,6 +18,7 @@ class Deelname_model extends CI_Model
     /**
      * Een reeks ophalen uit de database
      * @param $id Het id van de reeks waar de slag aan gekoppeld is
+
      * @return De opgevraagde record
      */
     public function get($id)
