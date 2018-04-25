@@ -28,7 +28,7 @@ class Supplement extends CI_Controller
     */
     public function index()
     {
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['titel'] = 'Supplement bekijken';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('supplement_model');
@@ -47,7 +47,7 @@ class Supplement extends CI_Controller
     */
     public function maakSupplement()
     {
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['titel'] = 'Supplementen aanmaken';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['supplement'] = null;
@@ -92,7 +92,7 @@ class Supplement extends CI_Controller
     {
         $data['titel'] = 'Supplementen beheren';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
 
         $this->load->model('supplement_model');
         $data['supplementen'] = $this->supplement_model->getSupplementen();
@@ -112,7 +112,7 @@ class Supplement extends CI_Controller
     public function wijzig($id)
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('supplement_model');
         $data['supplement'] = $this->supplement_model->get($id);
         $data['titel'] = 'Supplementen wijzigen';
@@ -132,7 +132,7 @@ class Supplement extends CI_Controller
     public function verwijder($id)
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('supplement_model');
         $this->supplement_model->delete($id);
 
