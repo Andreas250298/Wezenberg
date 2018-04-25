@@ -12,6 +12,12 @@ nav{
     font-family: 'Raleway', sans-serif;
 }
 
+.paginaTitel{
+    font-family: 'Raleway', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 /*EIND ALGEMENE CSS*/
 
 /*STARTPAGINA.PHP*/
