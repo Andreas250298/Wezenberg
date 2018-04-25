@@ -1,8 +1,8 @@
 <?php
 $lijstSupplementenPerZwemmer = '';
-if($supplementenPerZwemmer != null) {
-foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
-    $lijstSupplementenPerZwemmer .= '<tr>
+if ($supplementenPerZwemmer != null) {
+    foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
+        $lijstSupplementenPerZwemmer .= '<tr>
     <td>'.$supplementPerZwemmer->supplement->naam.'</td>
     <td>'.$supplementPerZwemmer->supplement->beschrijving.'</td>
     <td>
@@ -13,16 +13,16 @@ foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
       '.$supplementPerZwemmer->hoeveelheid.' g
       </td>
     </tr>';
-}
+    }
 }
 ?>
 
 
-<?
-if($supplementenPerZwemmer == null){
-  echo "<div>Je moet momenteel geen supplementen innemen of de trainer heeft je supplementen nog niet toegevoegd.</div>";
+<?php
+if ($supplementenPerZwemmer == null) {
+    echo "<div>Je moet momenteel geen supplementen innemen of de trainer heeft je supplementen nog niet toegevoegd.</div>";
 } else {
-  echo "<table class=\"table\">
+    echo "<table class=\"table\">
     <thead>
       <tr>
         <td>
@@ -50,6 +50,7 @@ if($supplementenPerZwemmer == null){
   </table>";
 }
 ?>
+<br/>
 <p>
     <a id="terug" href="javascript:history.go(-1);">Terug</a>
 </p>
