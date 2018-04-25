@@ -18,7 +18,7 @@ function zetOmNaarDDMMYYYY($input) {
         return "";
     } else {
         $datum = explode("-", $input);
-        return $datum[2] . "/" . $datum[1] . "/" . $datum[0];
+        return $datum[2] . "-" . $datum[1] . "-" . $datum[0];
     }
 }
 
@@ -63,6 +63,60 @@ function zetOmNaarPunt($input) {
     }
 }
 
+// ingegeven datum omzetten naar geschreven notatie (van 2018-12-31 naar 31 December 2018)
+
+function zetOmNaarGeschreven($input) {
+  $maanden = array("01" => "Januari", "02" => "Ferbuari", "03" => "Maart", "04" => "April", "05" => "Mei", "06" => "Juni",
+                  "07" => "Juli", "08" => "Augustus", "09" => "September", "10" => "Oktober", "11" => "November", "12" => "December");
+
+  if ($input == "") {
+      return "";
+  } else {
+    $datum = explode("-", $input);
+    if (count($datum) == 3) {
+      $maand = $datum[1];
+
+      return $datum[2] . " " . $maanden[$maand] . " " . $datum[0];
+    } else {
+      return $datum[0];
+    }
+  }
+}
+
+// laat ms wegvallen bij tijdstip (08:30:00 naar 08:00)
+
+function verkortTijdstip($input) {
+  if ($input == "") {
+      return "";
+  } else {
+      $string = (string) $input;
+      $datum = explode(':', $string);
+      $uit = $datum[0] . ':' . $datum[1];
+      return $uit;
+  }
+}
+
+// Laat dubbelpunt wegvallen bij tijdstip (08:00 naar 0800)
+
+function verwijderDubbelpunt($input) {
+    if ($input == "") {
+        return "";
+    } else {
+        $uur = explode(":", $input);
+        return $uur[0] . $uur[1];
+    }
+}
+
+// Verhoogt uur van opgegeven tijdstip met 1 (09:00 naar 10:00)
+
+function verhoogUur($input) {
+  if ($input == "") {
+    return "";
+  } else {
+    $uur = explode(":", $input);
+    return (int)$uur[0] + 1 . ':' . $uur[1];
+  }
+}
 
 /* End of file notation_helper.php */
 /* Location: helpers/notation_helper.php */

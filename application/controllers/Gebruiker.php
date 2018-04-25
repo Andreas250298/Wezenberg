@@ -177,7 +177,7 @@ class Gebruiker extends CI_Controller
     public function toonInactieveZwemmers()
     {
         $data['titel'] = 'Zwemmers';
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Bols Jordi';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
         //gebruiker_model inladen
@@ -197,7 +197,7 @@ class Gebruiker extends CI_Controller
     */
     public function toonZwemmerInfo($id)
     {
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Bols Jordi';
 
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
@@ -205,6 +205,9 @@ class Gebruiker extends CI_Controller
         $data['titel'] = $huidigeZwemmer->naam;
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['zwemmer'] = $huidigeZwemmer;
+
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijdenZwemmer($id);
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmer_info',
@@ -252,38 +255,142 @@ class Gebruiker extends CI_Controller
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
-        /**
+
+    /**
     * Meldingen tonen aan de hand van de gebruiker ID
     * \param id De id van de gebruiker waarvan de info getoond dient te worden.
     *\see Authex::getGebruikerInfo()
     *\see main_header.php
     */
-    public function haalAjaxOp_Meldingen() {
+    public function haalAjaxOp_Meldingen()
+    {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        
+
         $this->load->model('meldingPerGebruiker_model');
         $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($data['gebruiker']->id);
 
         $this->load->view('ajax_meldingTonen', $data);
     }
-    
-    public function haalAjaxOp_MaakMeldingGezien() {
+
+    public function haalAjaxOp_MaakMeldingGezien()
+    {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        
+
         $meldingPerGebruiker->id = $this->input->get('id');
         $meldingPerGebruiker->gezien = 1;
-        
-        $this->load->model('meldingPerGebruiker_model');        
-        $this->meldingPerGebruiker_model->update($meldingPerGebruiker);  
-        
-        
-        
+
+        $this->load->model('meldingPerGebruiker_model');
+        $this->meldingPerGebruiker_model->update($meldingPerGebruiker);
+
+
+
         $data['meldingGezien'] = $this->meldingPerGebruiker_model->update($id);
-        
+
         $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($data['gebruiker']->id);
 
         $this->load->view('ajax_meldingTonen', $data);
     }
-    
+
+    /** Persoonlijke agenda tonen
+    *\see Authex::getGebruikerInfo()
+    *\see Deelname_model::getInformatieDeelnames()
+    *\see SupplementPerZwemmer_model::getInformatieSupplementen()
+    *\see ActiviteitPerGebruiker_model::getInformatieActiviteiten()
+    *\see zwemmer_agenda.php
+    * @param week Te tonen week
+    * @param jaar Jaar van te tonen week
+    */
+    public function agenda($week, $jaar)
+    {
+        $data['titel'] = 'Mijn Agenda';
+        $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+        $gebruiker  = $this->authex->getGebruikerInfo();
+        $data['gebruiker'] = $gebruiker;
+
+        $data['week'] = $week;
+        $data['jaar'] = $jaar;
+
+        $this->load->model('deelname_model');
+        $data['wedstrijden'] = $this->deelname_model->getInformatieDeelnames($gebruiker->id, $week, $jaar);
+
+        $this->load->model('supplementPerZwemmer_model');
+        $data['supplementen'] = $this->supplementPerZwemmer_model->getInformatieSupplementen($gebruiker->id, $week, $jaar);
+
+        $this->load->model('activiteitPerGebruiker_model');
+        $data['activiteiten'] = $this->activiteitPerGebruiker_model->getInformatieActiviteiten($gebruiker->id, $week, $jaar);
+
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'zwemmer_agenda',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    /** Wedstrijden om te tonen in agenda ophalen
+    *\see Authex::getGebruikerInfo()
+    *\see Deelname_model::getInformatieDeelnames()
+    */
+    public function haalJsonOp_Wedstrijden()
+    {
+        $gebruiker = $this->authex->getGebruikerInfo();
+        $week = $this->input->get('huidigeWeek');
+        $jaar = $this->input->get('huidigJaar');
+
+        $this->load->model('deelname_model');
+        $deelnames = $this->deelname_model->getInformatieDeelnames($gebruiker->id, $week, $jaar);
+
+        $i = 0;
+
+        foreach ($deelnames as $deelname) {
+            $deelname->id = $i;
+            $i++;
+        }
+
+        echo json_encode($deelnames);
+    }
+
+    /** Supplementen om te tonen in agenda ophalen
+    *\see Authex::getGebruikerInfo()
+    *\see SupplementPerZwemmer_model::getInformatieSupplementen()
+    */
+    public function haalJsonOp_Supplementen()
+    {
+        $gebruiker = $this->authex->getGebruikerInfo();
+        $week = $this->input->get('huidigeWeek');
+        $jaar = $this->input->get('huidigJaar');
+
+        $this->load->model('supplementPerZwemmer_model');
+        $supplementen = $this->supplementPerZwemmer_model->getInformatieSupplementen($gebruiker->id, $week, $jaar);
+
+        $i = 0;
+
+        foreach ($supplementen as $supplement) {
+            $supplement->id = $i;
+            $i++;
+        }
+
+        echo json_encode($supplementen);
+    }
+
+    /** Activiteiten om te tonen in agenda ophalen
+    *\see Authex::getGebruikerInfo()
+    *\see ActiviteitPerGebruiker_model::getInformatieActiviteiten()
+    */
+    public function haalJsonOp_Activiteiten()
+    {
+        $gebruiker = $this->authex->getGebruikerInfo();
+        $week = $this->input->get('huidigeWeek');
+        $jaar = $this->input->get('huidigJaar');
+
+        $this->load->model('activiteitPerGebruiker_model');
+        $activiteiten = $this->activiteitPerGebruiker_model->getInformatieActiviteiten($gebruiker->id, $week, $jaar);
+
+        $i = 0;
+
+        foreach ($activiteiten as $activiteit) {
+            $activiteit->id = $i;
+            $i++;
+        }
+
+        echo json_encode($activiteiten);
+    }
 }
