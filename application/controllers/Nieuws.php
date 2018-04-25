@@ -121,4 +121,18 @@ class Nieuws extends CI_Controller {
 
         redirect("/nieuws/index");
     }
+    
+    /**
+     * Toont een tutorial over hoe je het nieuws op de pagina van nieuws/beheren kan aanpassen
+     */
+    public function tutorial() {
+        $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
+        $data['titel'] = 'Tutorial - Nieuws beheren';
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'nieuws/tutorial',
+            'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
 }
