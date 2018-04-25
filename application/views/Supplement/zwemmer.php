@@ -17,10 +17,9 @@ if ($supplementenPerZwemmer != null) {
 }
 ?>
 
-
 <?php
 if ($supplementenPerZwemmer == null) {
-    echo "<div>Je moet momenteel geen supplementen innemen of de trainer heeft je supplementen nog niet toegevoegd.</div>";
+    echo '<div>Je moet momenteel geen supplementen innemen of de trainer heeft je supplementen nog niet toegevoegd.</div>';
 } else {
     echo "<table class=\"table\">
     <thead>
@@ -43,9 +42,7 @@ if ($supplementenPerZwemmer == null) {
       </tr>
     </thead>
     <tbody>
-      <?php
-      echo $lijstSupplementenPerZwemmer;
-      ?>
+      $lijstSupplementenPerZwemmer
     </tbody>
   </table>";
 }
