@@ -36,12 +36,12 @@ var id = "";
         border: 1px solid darkgray;
         border-radius: 10px;
     }
-    .tab { 
-       display:inline-block; 
-       margin-left: 20px; 
+    .tab {
+       display:inline-block;
+       margin-left: 20px;
 }
-    
-    
+
+
 </style>
 <h2 class="paginaTitel">Nieuws Beheren</h2>
 <div class="alert alert-dark" role="alert">
@@ -67,6 +67,7 @@ foreach ($nieuwsArtikels as $nieuwsArtikel) {
     echo '<p class="card-text text-muted">' . $nieuwsArtikel->datumAangemaakt . '</p>';
     echo '<p class="card-text">' . substr($nieuwsArtikel->beschrijving, 0, 144) . '...</p>';
     echo anchor('Nieuws/wijzig/' . $nieuwsArtikel->id, 'aanpassen', 'class="btn btn-primary"') . " ";
+    echo anchor('Nieuws/bekijk/' . $nieuwsArtikel->id, 'bekijken', 'class="btn btn-primary"') . " ";
     echo "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>";
     echo '</div></div>';
 }
