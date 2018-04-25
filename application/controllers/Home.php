@@ -11,15 +11,23 @@ class Home extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Wezenberg | startpagina';
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-
+        $gebruiker = $data['gebruiker'];
+        
         $this->load->model('nieuws_model');
         $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikels();
 
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
 
+        if ($gebruiker != null) {
+            
+        $this->load->model('deelname_model');
+            $data['status'] = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
+            $data['deelname'] = $this->deelname_model->get($gebruiker->id);
+        }
+        
         $this->load->model('trainingscentrum_model');
         $data['trainingscentrum'] = $this->trainingscentrum_model->get();
 

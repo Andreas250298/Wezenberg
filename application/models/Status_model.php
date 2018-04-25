@@ -12,4 +12,9 @@ class Status_model extends CI_Model
         $query = $this->db->get('status');
         return $query->row();
     }
+
+    public function getAll(){
+      $query = $this->db->get('status');
+      return $query->result();
+    }
 }
