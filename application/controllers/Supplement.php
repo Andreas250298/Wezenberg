@@ -139,7 +139,7 @@ class Supplement extends CI_Controller
         redirect("/supplement/index");
     }
 
-    public function supplementenPerZemmer($id)
+    public function supplementenPerZwemmer($id)
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
