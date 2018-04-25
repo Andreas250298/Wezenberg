@@ -217,8 +217,9 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
           <thead class="font-weight-bold">
             <?php
                 $t = 1;
-                $maand = $dt->format('n');
+
                 do {
+                    $maand = $dt->format('n');
                     echo "<td>" . $dagen[$t] . "<br>" . $dt->format('j') . " " . $maanden[$maand] . " " . $dt->format('Y') . "</td>\n";
                     $dt->modify('+1 day');
                     $t++;
