@@ -61,9 +61,11 @@ $jaar = $dt->format('Y');
     <div class="container">
         <?php echo anchor('home/', 'Wezenberg trainingscentrum', 'class="navbar-brand display-1 d-lg-none mb-0 h1"'); ?>
         <div>
-            <?php if ($gebruiker != null) { ?>
+            <?php if ($gebruiker != null) {
+    ?>
                 <button type="button" class="melding-popover btn d-lg-none" data-trigger="focus" data-placement="bottom" data-toggle="popover" title="Meldingen"><i class=" fas fa-bell"></i></button>
-            <?php } ?>
+            <?php
+} ?>
             <button class="navbar-toggler btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -99,13 +101,12 @@ $jaar = $dt->format('Y');
 
             // Indien ingelogd, toont welkom bericht
             elseif ($gebruiker != null) {
-
                 switch ($gebruiker->soort) {
                     case 'zwemmer': // zwemmer
                         ?>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <?php echo anchor('supplement/supplementenPerZemmer/'.$gebruiker->id, 'Supplementen', $link); ?>
+                                <?php echo anchor('supplement/supplementenPerZwemmer/'.$gebruiker->id, 'Supplementen', $link); ?>
                             </li>
                             <li class="nav-item">
                                 <?php echo anchor('gebruiker/agenda/' . $week . '/' . $jaar, 'Mijn agenda', $link); ?>

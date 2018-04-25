@@ -32,10 +32,10 @@ class Supplement extends CI_Controller
         $data['titel'] = 'Supplement bekijken';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('supplement_model');
-        $data['supplementen'] = $this->supplement_model->toonSupplementen();
+        $data['supplementen'] = $this->supplement_model->getSupplementen();
 
         $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'Supplement/bekijken',
+            'inhoud' => 'Supplement/beheren',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
@@ -95,7 +95,7 @@ class Supplement extends CI_Controller
         $data['paginaVerantwoordelijke'] = '';
 
         $this->load->model('supplement_model');
-        $data['supplementen'] = $this->supplement_model->toonSupplementen();
+        $data['supplementen'] = $this->supplement_model->getSupplementen();
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'Supplement/beheren',
@@ -139,12 +139,12 @@ class Supplement extends CI_Controller
         redirect("/supplement/index");
     }
 
-    public function supplementenPerZemmer($id)
+    public function supplementenPerZwemmer($id)
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
         $this->load->model('supplementPerZwemmer_model');
-        $data['supplementenPerZwemmer'] = $this->supplementPerZwemmer_model->toonSupplementenPerZemmer($id);
+        $data['supplementenPerZwemmer'] = $this->supplementPerZwemmer_model->getSupplementenPerZwemmer($id);
 
 
         $data['titel'] = 'Supplementen voor zwemmer';

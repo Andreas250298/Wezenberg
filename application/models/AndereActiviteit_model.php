@@ -64,7 +64,7 @@ class AndereActiviteit_model extends CI_Model
   public function getActiviteitenInWeek($maandag, $zondag)
   {
       $this->db->select('id');
-      $this->db->from('andereactiviteit');
+      $this->db->from('andereActiviteit');
       $this->db->group_start()
                 ->where('beginDatum >=', $maandag->format('Y-m-d') )
                 ->where('beginDatum <=', $zondag->format('Y-m-d') )
