@@ -82,6 +82,17 @@ class Wedstrijd_model extends CI_Model
         return $query->result();
     }
 
+    public function getSlagenPerWedstrijd($id)
+    {
+        $this->db->where('wedstrijdId', $id);
+        $query = $this->db->get('reeks');
+        $wedstrijd =  $query->row();
+
+        $this->load->model('slag_model');
+        $wedstrijd->slag = $this->slag_model->getSlag($wedstrijd->id);
+        return $wedstrijd;
+    }
+
     /**
      * Een wedstrijd toevoegen aan de database
      * @param $wedstrijd De wedstrijd die moet toegevoegd worden

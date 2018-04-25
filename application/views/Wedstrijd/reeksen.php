@@ -10,8 +10,17 @@ foreach ($reeksen as $reeks) {
   '</td>
   <td>'
   .$reeks->tijdstip.
-  '</td>
-  </tr>';
+  '</td>';
+    foreach ($slag as $sl) {
+        if (isset($sl->soort)) {
+            if ($sl != null) {
+                $lijstReeksen .= "<td>"
+      . $sl->soort . "</td>";
+            }
+        }
+    }
+
+    $lijstReeksen .= '</tr>';
 }
 echo '<p>'.anchor('wedstrijd/maakReeks', 'Reeks toevoegen').'
 </p>';
@@ -27,6 +36,9 @@ echo '<p>'.anchor('wedstrijd/maakReeks', 'Reeks toevoegen').'
     </td>
     <td>
       Tijdstip
+    </td>
+    <td>
+      Slag
     </td>
     </tr>
   </thead>
