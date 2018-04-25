@@ -23,7 +23,7 @@ class AndereActiviteit_model extends CI_Model
   public function get($id)
   {
       $this->db->where('id', $id);
-      $query = $this->db->get('andereactiviteit');
+      $query = $this->db->get('andereActiviteit');
       return $query->row();
   }
   /**
@@ -33,7 +33,7 @@ class AndereActiviteit_model extends CI_Model
    */
   public function insert($activiteit)
   {
-      $this->db->insert('andereactiviteit', $activiteit);
+      $this->db->insert('andereActiviteit', $activiteit);
       return $this->db->insert_id();
   }
   /**
@@ -43,7 +43,7 @@ class AndereActiviteit_model extends CI_Model
   public function update($activiteit)
   {
       $this->db->where('id', $activiteit->id);
-      $this->db->update('andereactiviteit', $activiteit);
+      $this->db->update('andereActiviteit', $activiteit);
   }
   /**
    * Een supplement verwijderen uit de database
@@ -52,7 +52,7 @@ class AndereActiviteit_model extends CI_Model
   public function delete($id)
   {
       $this->db->where('id', $id);
-      $this->db->delete('andereactiviteit');
+      $this->db->delete('andereActiviteit');
   }
 
   /**

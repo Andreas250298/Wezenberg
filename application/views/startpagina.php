@@ -5,13 +5,14 @@ function haalArtikelsOp($nieuwsArtikels) {
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-up fa-2x"></i></a>';
     echo '<ul class="list-unstyled">';
     foreach ($nieuwsArtikels as $artikel) {
-        echo '<a class="nieuwsartikel" href="#"><li class="media">';
+        echo '<p class="nieuwsartikel"><li class="media">';
         echo toonAfbeelding("image-placeholder.png", 'width="100" height="100" class="mr-3" alt="Placeholder image"');
         echo '<div class="media-body">';
         echo '<h5 class="mt-0 mb-1">' . $artikel->titel . '</h5>';
         echo substr($artikel->beschrijving, 0, 144) . '...';
+        echo anchor('Nieuws/bekijk/' . $artikel->id, 'verder lezen');
         echo '</div>';
-        echo '</li></a>';
+        echo '</li></p>';
     }
     echo '</ul>';
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-down fa-2x"></i></a>';
@@ -67,9 +68,9 @@ function haalOpenInschrijvingenOp($wedstrijden) {
         echo '</div>';
         echo '</div>';
         echo '</li>';
-        
+
         if($i == 2){
-            break;  
+            break;
         }
     }
     echo '</ul>';
