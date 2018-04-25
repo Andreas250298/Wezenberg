@@ -4,13 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @class Nieuws
  * @brief Controller-klasse voor Nieuws
-<<<<<<< HEAD
- * 
- * 
-=======
- *
- *
->>>>>>> 2600964dca5558f57fcf9160242501cabfe88843
  */
 class Nieuws extends CI_Controller {
 
@@ -121,4 +114,23 @@ class Nieuws extends CI_Controller {
 
         redirect("/nieuws/index");
     }
+
+    /**
+     * Toont een bepaald artikel volledig op een aparte pagina.
+     * @param $d van het te bekijken nieuwsartikel
+     */
+     public function bekijk($id){
+       $data['gebruiker'] = $this->authex->getGebruikerInfo();
+       $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
+
+
+       $this->load->model('nieuws_model');
+       $data['nieuwsArtikel'] = $this->nieuws_model->get($id);
+       $data['titel'] = $data['nieuwsArtikel']->titel;
+
+       $partials = array('hoofding' => 'main_header',
+           'inhoud' => 'Nieuws/bekijken',
+           'voetnoot' => 'main_footer');
+       $this->template->load('main_master', $partials, $data);
+     }
 }
