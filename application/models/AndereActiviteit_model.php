@@ -23,7 +23,7 @@ class AndereActiviteit_model extends CI_Model
   public function get($id)
   {
       $this->db->where('id', $id);
-      $query = $this->db->get('andereactiviteit');
+      $query = $this->db->get('andereActiviteit');
       return $query->row();
   }
   /**
