@@ -61,7 +61,6 @@ function haalActiviteitenOp(week, jaar) {
             try {
                 // datum = .datum tijdstip = .tijdstip afstand = .afstand slag = .soort wedstrijd = .naam plaats = .plaats beschrijving = .beschrijving reeksid = .id
                 var activiteitenWeek = jQuery.parseJSON(result);
-                var i = 0;
 
                 if (activiteitenWeek != null) {
                     $.each(activiteitenWeek, function(index) {
@@ -70,10 +69,9 @@ function haalActiviteitenOp(week, jaar) {
                           var datum = activiteitenWeek[index].andereActiviteit.beginDatum;
                             $("table").find("[class=" + datum + "]:not(:first)").remove();
                             $("[class=" + datum + "]").attr('rowspan', 18).css("border", "2px solid #777777").css("background-color", "#f9a557").addClass("font-weight-bold").addClass("text-dark").addClass("activiteit").attr('id', "activiteit_" + index).html(activiteitenWeek[index].andereActiviteit.naam);
-
                         } else {
                           var tijd = activiteitenWeek[index].andereActiviteit.tijdstip;
-                          var datum =  activiteitenWeek[index].andereActiviteit.beginDatum;
+                          var datum = activiteitenWeek[index].andereActiviteit.beginDatum;
 
                           $("tr[class=" + tijd + "]").find("[class=" + datum + "]").css("border", "2px solid #777777").css("background-color", "#a9f285").addClass("font-weight-bold").addClass("text-dark").addClass("activiteit").attr('id', "activiteit_" + index).html(activiteitenWeek[index].andereActiviteit.naam);
                         }
@@ -286,8 +284,13 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                     {
                             echo "<div class='activiteit gebeurtenis' id='activiteit_" . $teller . "'>";
                             echo "<span><b>" . $activiteit->andereActiviteit->naam . "</b></span><br />";
-                            echo "Locatie: " . $activiteit->andereActiviteit->plaats . "<br />";
+                            if ($activiteit->andereActiviteit->soortId == 1)
+                            {
+                              echo "Vertrek: " . zetOmNaarDDMMYYYY($activiteit->andereActiviteit->beginDatum) . "<br />";
+                              echo "Terug: " . zetOmNaarDDMMYYYY($activiteit->andereActiviteit->eindDatum) . "<br />";
+                            }
                             echo "Tijdstip: " . $activiteit->andereActiviteit->uur . "<br />";
+                            echo "Locatie: " . $activiteit->andereActiviteit->plaats . "<br />";
                             echo "Beschrijving: " . $activiteit->andereActiviteit->beschrijving . "<br />";
                             echo "</div>";
                             $teller++;
