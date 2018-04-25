@@ -60,6 +60,13 @@ class Wedstrijd_model extends CI_Model
         return $query->result();
     }
 
+    public function getReeksen($id)
+    {
+        $this->db->where('wedstrijdId', $id);
+        $query = $this->db->get('reeks');
+        return $query->row();
+    }
+
     /**
      * Slagen uit de database ophalen
      * @return De opgevraagde record
@@ -84,13 +91,19 @@ class Wedstrijd_model extends CI_Model
 
     public function getSlagenPerWedstrijd($id)
     {
-        $this->db->where('wedstrijdId', $id);
+        /*$this->db->where('wedstrijdId', $id);
         $query = $this->db->get('reeks');
-        $wedstrijd =  $query->row();
+        $reeks =  $query->row();
 
         $this->load->model('slag_model');
-        $wedstrijd->slag = $this->slag_model->getSlag($wedstrijd->id);
-        return $wedstrijd;
+        if (isset($reeks)) {
+            $reeks->slag = $this->slag_model->getSlag($reeks->slagId);
+        }
+
+        return $reeks;*/
+        $this->db->where('id', $id);
+        $query = $this->db->get('slag');
+        return $query->result();
     }
 
     /**

@@ -11,11 +11,13 @@ foreach ($reeksen as $reeks) {
   <td>'
   .$reeks->tijdstip.
   '</td>';
-    foreach ($slag as $sl) {
-        if (isset($sl->soort)) {
-            if ($sl != null) {
-                $lijstReeksen .= "<td>"
+    if (isset($slag)) {
+        foreach ($slag as $sl) {
+            if (isset($sl->soort)) {
+                if ($sl != null) {
+                    $lijstReeksen .= "<td>"
       . $sl->soort . "</td>";
+                }
             }
         }
     }

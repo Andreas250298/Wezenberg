@@ -206,9 +206,9 @@ class Wedstrijd extends CI_Controller
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
-        $reeks = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
+        $reeks = $this->wedstrijd_model->getReeksen($id);
         $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
-        $data['slag'] = $this->wedstrijd_model->getSlagenPerWedstrijd($id);
+        $data['slag'] = $this->wedstrijd_model->getSlagenPerWedstrijd($reeks->slagId);
 
         $partials = array('hoofding' => 'main_header',
         'inhoud' => 'Wedstrijd/reeksen',
