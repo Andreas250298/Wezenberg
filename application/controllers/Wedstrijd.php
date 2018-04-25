@@ -134,6 +134,11 @@ class Wedstrijd extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Hiermee verwijdert de trainer een wedstrijd
+    *\param id De id van de aan te verwijderen wedstrijd
+    *\see Authex::getGebruikerInfo()
+    */
     public function verwijder($id)
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -188,6 +193,13 @@ class Wedstrijd extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Toont de pagina waarin een trainer reeksen per wedstrijd kan toevoegen
+    *\param id De id van de wedstrijd waar reeksen aan moeten toegevoegd worden
+    *\see Authex::getGebruikerInfo()
+    *\see Wedstrijd_model::getReeksenPerWedstrijd()
+    *\see reeksen.php
+    */
     public function reeksenToevoegen($id)
     {
         $data['titel'] = "Reeksen toeveogen";
@@ -202,6 +214,11 @@ class Wedstrijd extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Toont het invulformulier dat de trainer dient in te vullen om een reeks toe te voegen
+    *\see Authex::getGebruikerInfo()
+    *\see maakReeks.php
+    */
     public function maakReeks()
     {
         $data['titel'] = "Reeksen toeveogen";
