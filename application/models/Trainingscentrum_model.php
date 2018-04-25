@@ -30,8 +30,8 @@ class Trainingscentrum_model extends CI_Model
     /**
     * Het bewerken van alle data
     */
-    public function update(){
+    public function update($trainingscentrum){
         $this->db->where('id', 1);
-        $this->db->update('beschrijvingWelkom', $beschrijvingWelkom);
+        $this->db->update('trainingscentrum', $trainingscentrum);
     }
 }

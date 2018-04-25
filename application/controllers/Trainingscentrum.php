@@ -27,7 +27,7 @@ class Trainingscentrum extends CI_Controller {
      */
     public function index() {
         $data['titel'] = 'Over ons';
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
         $this->load->model('trainingscentrum_model');
@@ -38,6 +38,45 @@ class Trainingscentrum extends CI_Controller {
             'voetnoot' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
+    }
+
+    /**
+     * Weergeven van Over_ons_aanpassen
+     * \see Authex::getGebruikerInfo()
+     * \see Trainingscentrum_model::get()
+     * \see over_ons_aanpassen.php
+     */
+    public function aanpassen() {
+        $data['titel'] = 'Aanpassen info';
+        $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+
+        $this->load->model('trainingscentrum_model');
+        $data['trainingscentrum'] = $this->trainingscentrum_model->get();
+
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'over_ons_aanpassen',
+            'voetnoot' => 'main_footer');
+
+        $this->template->load('main_master', $partials, $data);
+    }
+
+     /**
+     * Toont een formulier met alle gegevens ingevuld van het gekoze nieuwsartikel.
+     * @param $id van het aangeduide nieuwsartikel
+     */
+    public function registreer() {
+        $trainingscentrum = new stdClass();
+        $trainingscentrum->id = 1;
+        $trainingscentrum->beschrijvingWelkom = $this->input->post('beschrijvingWelkom');
+        $trainingscentrum->beschrijvingLocatie = $this->input->post('beschrijvingLocatie');
+        $trainingscentrum->beschrijvingTeam = $this->input->post('beschrijvingTeam');
+        $trainingscentrum->beschrijvingTrainer = $this->input->post('beschrijvingTrainer');
+
+        $this->load->model('trainingscentrum_model');
+        $this->trainingscentrum_model->update($trainingscentrum);
+
+        redirect("trainingscentrum/aanpassen");
     }
 
 }

@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 /**
  * @class Deelname_model
  * @brief Model-klasse voor deelnames
@@ -19,10 +20,25 @@ class Deelname_model extends CI_Model
     /**
      * Een reeks ophalen uit de database
      * @param $id Het id van de reeks waar de slag aan gekoppeld is
+=======
+class Deelname_model extends CI_Model
+{
+    public function __construct()
+    {
+      /**
+       * Constructor
+       */
+        parent::__construct();
+    }
+    /**
+     * Een deelname ophalen uit de database
+     * @param $id Het id van de deelname die opgevraagd wordt
+>>>>>>> 503ea392d0202db6fc3d1317569532d51b2f12b9
      * @return De opgevraagde record
      */
     public function get($id)
     {
+<<<<<<< HEAD
           $this->db->where('id', $id);
           $query = $this->db->get('deelname');
           return $query->row();
@@ -122,4 +138,26 @@ class Deelname_model extends CI_Model
            }
 
          }
+=======
+        $this->db->where('id', $id);
+        $query = $this->db->get('deelname');
+        return $query->row();
+    }
+
+    /**
+     * Een status ophalen uit de database
+     * @param $id Het id van de gebruiker waarvan de status opgevraagd wordt
+     * @return De opgevraagde record
+     */
+    public function getStatusPerGebruiker($id)
+    {
+      $this->db->where('id', $id);
+      $query = $this->db->get('deelname');
+      $deelname = $query->row();
+
+      $this->load->model('status_model');
+      $deelname->status = $this->status_model->get($deelname->id);
+      return $deelname;
+    }
+>>>>>>> 503ea392d0202db6fc3d1317569532d51b2f12b9
 }

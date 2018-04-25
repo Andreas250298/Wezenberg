@@ -1,4 +1,8 @@
 <?php
+<<<<<<< HEAD
+=======
+
+>>>>>>> 503ea392d0202db6fc3d1317569532d51b2f12b9
 /**
  * @class SupplementPerZwemmer_model
  * @brief Model-klasse voor supplementen per zwemmer
@@ -14,14 +18,26 @@ class SupplementPerZwemmer_model extends CI_Model
     {
         parent::__construct();
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 503ea392d0202db6fc3d1317569532d51b2f12b9
     /**
     ** Opvragen van supplementen volgens id zwemmer
     * @param $id Het ID van de zwemmer
     */
+<<<<<<< HEAD
     public function getSupplementenPerZemmer($id)
     {
         $this->db->where('gebruikerIdZwemmer', $id);
         $supplementenPerZwemmer = $this->db->get('supplementPerZwemmer')->result();
+=======
+    public function toonSupplementenPerZemmer($id)
+    {
+        $this->db->where('gebruikerIdZwemmer', $id);
+        $supplementenPerZwemmer = $this->db->get('supplementPerZwemmer')->result();
+
+>>>>>>> 503ea392d0202db6fc3d1317569532d51b2f12b9
         if ($supplementenPerZwemmer == null) {
             return null ;
         } else {
@@ -32,6 +48,7 @@ class SupplementPerZwemmer_model extends CI_Model
             return $supplementenPerZwemmer;
         }
     }
+<<<<<<< HEAD
 
     /**
     * Opvragen van reeksen in een opgegeven week
@@ -117,4 +134,6 @@ class SupplementPerZwemmer_model extends CI_Model
         }
 
       }
+=======
+>>>>>>> 503ea392d0202db6fc3d1317569532d51b2f12b9
 }

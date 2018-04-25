@@ -5,6 +5,47 @@ $dt = new DateTime;
 $week = $dt->format('W');
 $jaar = $dt->format('Y');
 ?>
+<script>
+    $(document).ready(function () {
+        $('.melding-popover').popover({
+            html: true,
+            content: function () {
+                return $('#meldingen_content_wrapper').html();
+            }
+        });
+        $.ajax({type: "GET",
+            url: site_url + "/gebruiker/haalAjaxOp_Meldingen",
+//            data: {id: id},
+            success: function (result) {
+                $("#meldingen_content_wrapper").html(result);
+            },
+            error: function (xhr, status, error) {
+                alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+            }
+        });
+        $(".meldingGezien").click(function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            maakMeldingGezien(id);
+        });
+    });
+
+    function maakMeldingGezien(id)
+    {
+        $.ajax({type: "GET",
+            url: site_url + "/gebruiker/haalAjaxOp_MeldingGezien",
+            data: {id: id},
+            success: function (result) {
+                $("#meldingen_content_wrapper").html(result);
+            },
+            error: function (xhr, status, error) {
+                alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+            }
+        });
+    }
+</script>
+
+
 <!--Banner-->
 <nav class="navbar navbar-light">
     <div class="container">
@@ -19,11 +60,14 @@ $jaar = $dt->format('Y');
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
         <?php echo anchor('home/', 'Wezenberg trainingscentrum', 'class="navbar-brand display-1 d-lg-none mb-0 h1"'); ?>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
+        <div>
+            <?php if ($gebruiker != null) { ?>
+                <button type="button" class="melding-popover btn d-lg-none" data-trigger="focus" data-placement="bottom" data-toggle="popover" title="Meldingen"><i class=" fas fa-bell"></i></button>
+            <?php } ?>
+            <button class="navbar-toggler btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -40,7 +84,7 @@ $jaar = $dt->format('Y');
                 </li>
             </ul>
             <?php
-            // Indien niet ingelogd, toont loginformulier
+// Indien niet ingelogd, toont loginformulier
             if (!$this->session->has_userdata('gebruiker_id')) {
                 $dataInputEmail = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'email', 'id' => 'email', 'placeholder' => 'E-mail', 'aria-label' => 'E-mail');
                 $dataInputWachtwoord = array('class' => 'form-control mr-sm-2', 'type' => 'password', 'name' => 'wachtwoord', 'id' => 'wachtwoord', 'placeholder' => 'Wachtwoord', 'aria-label' => 'Wachtwoord');
@@ -52,15 +96,16 @@ $jaar = $dt->format('Y');
                 echo form_submit($dataSubmit);
                 echo form_close();
             }
-            //
+
             // Indien ingelogd, toont welkom bericht
-            else if ($gebruiker != null) {
+            elseif ($gebruiker != null) {
+
                 switch ($gebruiker->soort) {
                     case 'zwemmer': // zwemmer
                         ?>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <?php echo anchor('supplementen/', 'Supplementen', $link); ?>
+                                <?php echo anchor('supplement/supplementenPerZemmer/'.$gebruiker->id, 'Supplementen', $link); ?>
                             </li>
                             <li class="nav-item">
                                 <?php echo anchor('gebruiker/agenda/' . $week . '/' . $jaar, 'Mijn agenda', $link); ?>
@@ -69,7 +114,7 @@ $jaar = $dt->format('Y');
                                 <?php echo anchor('wedstrijd/inschrijvingen', 'Inschrijvingen', $link); ?>
                             </li>
                             <li class="nav-item">
-                                <?php echo anchor('gebruiker/account/' . $gebruiker->id, 'Account', $link); ?>
+                                <?php echo anchor('gebruiker/account/' . $gebruiker->id, $gebruiker->naam, $link); ?>
                             </li>
                             <li class="nav-item">
                                 <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"'); ?>
@@ -81,7 +126,7 @@ $jaar = $dt->format('Y');
                         ?>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <?php echo anchor('gebruiker/account/' . $gebruiker->id, 'Account', $link); ?>
+                                <?php echo anchor('gebruiker/account/' . $gebruiker->id, $gebruiker->naam, $link); ?>
                             </li>
                             <li class="nav-item">
                                 <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"'); ?>
@@ -90,8 +135,16 @@ $jaar = $dt->format('Y');
                         <?php
                         break;
                 }
+                if ($gebruiker != null) {
+                    ?>
+                    <button type="button" class="melding-popover btn d-none d-lg-block" data-trigger="focus" data-placement="bottom" data-toggle="popover" title="Meldingen"><i class=" fas fa-bell"></i></button>
+
+                    <div id="meldingen_content_wrapper" style="display: none"></div>
+                    <?php
+                }
             }
             ?>
+
         </div>
     </div>
 </nav>

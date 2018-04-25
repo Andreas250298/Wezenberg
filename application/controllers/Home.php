@@ -2,24 +2,52 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * @class Home
+ * @brief Controller-klasse voor de startpagina en navigatie
+ *
+ * Controller-klasse met methoden die worden gebruikt bij het tonen van de startpagina.
+ */
 class Home extends CI_Controller {
 
+    /**
+     * Constructor
+     */
     public function __construct() {
         parent::__construct();
         $this->load->helper('form');
     }
 
+    /**
+     * Haalt alles op dat op de startpagina van de verschillende gebruikers getoond moet worden, zoals: nieuws via nieuws_model, 
+     * wedstrijden via Wedstrijd_model, deelname via deelname_model en trainingcentrum gegevens via trainingscentrum_model deze worden getoond in de view startpagina.php
+     *\see Authex::getGebruikerInfo()
+     *\see Wedstrijd_model::toonWedstrijden()
+     *\see Wedstrijd_model::toonWedstrijden()
+     *\see Wedstrijd_model::toonWedstrijden()
+     *\see Wedstrijd_model::toonWedstrijden()
+     * 
+     *\see bekijken.php
+     */
     public function index() {
         $data['titel'] = 'Wezenberg | startpagina';
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-
+        $gebruiker = $data['gebruiker'];
+        
         $this->load->model('nieuws_model');
         $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikels();
 
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
 
+        if ($gebruiker != null) {
+            
+        $this->load->model('deelname_model');
+            $data['status'] = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
+            $data['deelname'] = $this->deelname_model->get($gebruiker->id);
+        }
+        
         $this->load->model('trainingscentrum_model');
         $data['trainingscentrum'] = $this->trainingscentrum_model->get();
 

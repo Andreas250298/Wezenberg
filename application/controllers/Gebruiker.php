@@ -38,7 +38,11 @@ class Gebruiker extends CI_Controller
     public function toonZwemmers()
     {
         $data['titel'] = 'Zwemmers';
+<<<<<<< HEAD
         $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+=======
+        $data['paginaVerantwoordelijke'] = 'De Coninck Mattias';
+>>>>>>> 503ea392d0202db6fc3d1317569532d51b2f12b9
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
         //gebruiker_model inladen
@@ -101,6 +105,8 @@ class Gebruiker extends CI_Controller
     /**
     * Wijzigen van de gebruiker volgens id
     * \param id De id van de gebruiker die zal moeten worden aangepast
+    * \see Authex::getGebruikerInfo()
+    * \see Gebruiker_model::get()
     */
     public function wijzig($id)
     {
@@ -117,8 +123,13 @@ class Gebruiker extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function verwijder($id)
+    /**
+    * Verwijderen van gebruiker via id
+    *\param id De id van de gebruiker die zal worden verwijdert
+    */
+    public function verwijder()
     {
+        $id = $this->input->get('id');
         $this->load->model('gebruiker_model');
         $this->gebruiker_model->delete($id);
 
@@ -234,19 +245,54 @@ class Gebruiker extends CI_Controller
     *\see Authex::getGebruikerInfo()
     *\see gebruiker_info.php
     */
-    public function account($id) {
-      $data['titel'] = 'Account';
-      $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
-      $data['gebruiker']  = $this->authex->getGebruikerInfo();
-      $this->load->model('gebruiker_model');
-      $huidigeGebruiker = $this->gebruiker_model->get($id);
-      $data['gebruikerInfo'] = $huidigeGebruiker;
+    public function account($id)
+    {
+        $data['titel'] = 'Account';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $this->load->model('gebruiker_model');
+        $huidigeGebruiker = $this->gebruiker_model->get($id);
+        $data['gebruikerInfo'] = $huidigeGebruiker;
 
-      $partials = array('hoofding' => 'main_header',
+        $partials = array('hoofding' => 'main_header',
           'inhoud' => 'gebruiker_info',
           'voetnoot' => 'main_footer');
-      $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_master', $partials, $data);
     }
+    
+        /**
+    * Meldingen tonen aan de hand van de gebruiker ID
+    * \param id De id van de gebruiker waarvan de info getoond dient te worden.
+    *\see Authex::getGebruikerInfo()
+    *\see main_header.php
+    */
+    public function haalAjaxOp_Meldingen() {
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        
+        $this->load->model('meldingPerGebruiker_model');
+        $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($data['gebruiker']->id);
+
+        $this->load->view('ajax_meldingTonen', $data);
+    }
+    
+    public function haalAjaxOp_MaakMeldingGezien() {
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        
+        $meldingPerGebruiker->id = $this->input->get('id');
+        $meldingPerGebruiker->gezien = 1;
+        
+        $this->load->model('meldingPerGebruiker_model');        
+        $this->meldingPerGebruiker_model->update($meldingPerGebruiker);  
+        
+        
+        
+        $data['meldingGezien'] = $this->meldingPerGebruiker_model->update($id);
+        
+        $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($data['gebruiker']->id);
+
+        $this->load->view('ajax_meldingTonen', $data);
+    }
+<<<<<<< HEAD
 
     /** Persoonlijke agenda tonen
     *\see Authex::getGebruikerInfo()
@@ -353,4 +399,7 @@ class Gebruiker extends CI_Controller
 
       echo json_encode($activiteiten);
     }
+=======
+    
+>>>>>>> 503ea392d0202db6fc3d1317569532d51b2f12b9
 }

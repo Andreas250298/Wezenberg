@@ -1,15 +1,3 @@
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Raleway');
-    
-    .overOns{
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .overOns h2{
-        font-family: 'Raleway', sans-serif;
-        font-weight: bold;
-    }
-</style>
 <div class="row">
     <div class="col-sm-8 overOns">
         <h2>Welkom</h2>

@@ -1,6 +1,10 @@
+<?php
+$dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
+?>
+
 <style>
     @import url('https://fonts.googleapis.com/css?family=Raleway');
-    
+
     .overOns{
         margin-top: 20px;
         margin-bottom: 20px;
@@ -10,33 +14,46 @@
         font-weight: bold;
     }
 </style>
-<div class="row">
-    <div class="col-sm-8 overOns">
-        <h2>Welkom</h2>
-        <?php echo $trainingscentrum->beschrijvingWelkom; ?>
+<div class="form-row col-12">
+    <?php echo form_open('trainingscentrum/registreer', 'class="col-12"') ?>
+    <div class=" col-12 overOns form-group">
+        <?php
+        echo form_label("Pas welkomtekst aan", 'welkom') . "\n";
+        echo form_textarea('beschrijvingWelkom', $trainingscentrum->beschrijvingWelkom, 'class="form-control"');
+        ?>
     </div>
-    <div class="col-sm-12 overOns">
-        <?php echo toonAfbeelding('trainingscentrum/' . $trainingscentrum->fotoWelkom, 'width="100%"') ?>
+    <div class="col-12 form-group">
+        <?php echo form_button('afbeelding', 'Nieuwe afbeelding', 'class="btn-primary btn"'); ?>
     </div>
-    <div class="col-sm-4 overOns">
-        <?php echo toonAfbeelding('trainingscentrum/' . $trainingscentrum->fotoLocatie, 'width="100%"') ?>
-    </div> 
-    <div class="col-sm-8 overOns">
-        <h2>Locatie Wezenberg</h2>
-        <?php echo $trainingscentrum->beschrijvingLocatie; ?>
+    <div class="col-12 overOns form-group">
+        <?php
+        echo form_label("Pas locatietekst aan", 'locatie') . "\n";
+        echo form_textarea('beschrijvingLocatie', $trainingscentrum->beschrijvingLocatie, 'class="form-control"');
+        ?>
     </div>
-    <div class="col-sm-8 overOns">
-        <h2>Het nationaal zwemteam</h2>
-        <?php echo $trainingscentrum->beschrijvingTeam; ?>
+    <div class="col-12 form-group">
+        <?php echo form_button('afbeelding', 'Nieuwe afbeelding', 'class="btn-primary btn"'); ?>
     </div>
-    <div class="col-sm-4 overOns">
-        <?php echo toonAfbeelding('trainingscentrum/' . $trainingscentrum->fotoTeam, 'width="100%"') ?>
+    <div class="col-12 overOns form-group">
+        <?php
+        echo form_label("Pas teamtekst aan", 'team') . "\n";
+        echo form_textarea('beschrijvingTeam', $trainingscentrum->beschrijvingTeam, 'class="form-control"');
+        ?>
     </div>
-    <div class="col-sm-4 overOns">
-        <?php echo toonAfbeelding('trainingscentrum/' . $trainingscentrum->fotoTrainer, 'width="100%"') ?>
-    </div> 
-    <div class="col-sm-8 overOns">
-        <h2>De trainers</h2>
-        <?php echo $trainingscentrum->beschrijvingTrainer; ?>
+    <div class="col-12 form-group">
+        <?php echo form_button('afbeelding', 'Nieuwe afbeelding', 'class="btn-primary btn"'); ?>
     </div>
+    <div class="col-12 overOns form-group">
+        <?php
+        echo form_label("Pas trainertekst aan", 'welkom') . "\n";
+        echo form_textarea('beschrijvingTrainer', $trainingscentrum->beschrijvingTrainer, 'class="form-control"');
+        ?>
+    </div>
+    <div class="col-12 form-group">
+        <?php echo form_button('afbeelding', 'Nieuwe afbeelding', 'class="btn-primary btn"'); ?>
+    </div>
+
+    <?php echo form_submit($dataSubmit) . "";
+    echo form_close();
+    ?>
 </div>

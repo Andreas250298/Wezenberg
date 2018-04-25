@@ -51,6 +51,49 @@ class Wedstrijd_model extends CI_Model
     }
 
     /**
+     * Afstanden uit de database ophalen
+     * @return De opgevraagde record
+     */
+    public function getAfstanden()
+    {
+        $query = $this->db->get('afstand');
+        return $query->result();
+    }
+
+    /**
+     * Slagen uit de database ophalen
+     * @return De opgevraagde record
+     */
+    public function getSlagen()
+    {
+        $query = $this->db->get('slag');
+        return $query->result();
+    }
+
+    /**
+     * Reeks behorende bij een deelname uit de database ophalen
+     * @param $id Het id van de deelname waar de reeks aan gekoppeld is
+     * @return De opgevraagde record
+     */
+    public function getReeksenPerWedstrijd($id)
+    {
+        $this->db->where('wedstrijdId', $id);
+        $query = $this->db->get('reeks');
+        return $query->result();
+    }
+
+    public function getSlagenPerWedstrijd($id)
+    {
+        $this->db->where('wedstrijdId', $id);
+        $query = $this->db->get('reeks');
+        $wedstrijd =  $query->row();
+
+        $this->load->model('slag_model');
+        $wedstrijd->slag = $this->slag_model->getSlag($wedstrijd->id);
+        return $wedstrijd;
+    }
+
+    /**
      * Een wedstrijd toevoegen aan de database
      * @param $wedstrijd De wedstrijd die moet toegevoegd worden
      * @return De insert functie van de wedstrijd
