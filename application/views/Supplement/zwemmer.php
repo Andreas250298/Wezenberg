@@ -6,9 +6,9 @@ if ($supplementenPerZwemmer != null) {
     <td>'.$supplementPerZwemmer->supplement->naam.'</td>
     <td>'.$supplementPerZwemmer->supplement->beschrijving.'</td>
     <td>
-    '.zetOmNaarDDMMYYYY($supplementPerZwemmer->datumIname).'
+    '.zetOmNaarDDMMYYYY($supplementPerZwemmer->datumInname).'
     </td><td>
-      '.$supplementPerZwemmer->tijdstipIname.'
+      '.$supplementPerZwemmer->tijdstipInname.'
       </td><td>
       '.$supplementPerZwemmer->hoeveelheid.' g
       </td>
