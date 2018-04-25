@@ -44,11 +44,11 @@ class Home extends CI_Controller
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
 
-        if ($gebruiker != null) {
-            $this->load->model('deelname_model');
-            $data['status'] = $this->deelname_model->getDeelnamesPerZwemmer($gebruiker->id);
-            $data['deelname'] = $this->deelname_model->get($gebruiker->id);
-        }
+//        if ($gebruiker != null) {
+//            $this->load->model('deelname_model');
+//            $data['status'] = $this->deelname_model->getDeelnamesPerZwemmer($gebruiker->id);
+//            $data['deelname'] = $this->deelname_model->get($gebruiker->id);
+//        }
 
         $this->load->model('trainingscentrum_model');
         $data['trainingscentrum'] = $this->trainingscentrum_model->get();
