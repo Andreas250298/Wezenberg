@@ -36,9 +36,16 @@ class Reeks_model extends CI_Model
     */
     public function getReeksenInWeek($maandag, $zondag)
     {
+        $this->db->select('id');
+        $this->db->from('reeks');
         $this->db->where('datum >=', $maandag->format('Y-m-d') );
         $this->db->where('datum <=', $zondag->format('Y-m-d') );
-        $query = $this->db->get('reeks');
-        return $query->result();
+        $query = $this->db->get();
+        if ($query->num_rows() == 0)
+        {
+          return null;
+        } else {
+          return $query->result();
+        }
     }
 }

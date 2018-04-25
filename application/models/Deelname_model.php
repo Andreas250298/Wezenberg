@@ -50,80 +50,76 @@ class Deelname_model extends CI_Model
         }
     }
 
-
         /**
-        * Opvragen van de aanstaande deelnames van een zwemmer
-        *\see wedstrijd_model::getDeelnames()
-        *\see wedstrijd_model::getReeks()
-        *\see wedstrijd_model::getAfstand()
-        *\see wedstrijd_model::getSlag()
-        *\see wedstrijd_model::getWedstrijd()
-        * @param id ID van de zwemmer in kwestie
-        * @return De opgevraagde wedstrijden.
-        */
-        public function getDeelnamesZwemmer($id)
-        {
-          $this->load->model('wedstrijd_model');
-          $this->load->model('slag_model');
-          $this->load->model('afstand_model');
-          $this->load->model('reeks_model');
-          $deelnames = $this->deelname_model->getDeelnamesPerZwemmer($id);
-
-          if ($deelnames == null)
-          {
-            return null ;
-          }
-          else
-          {
-            foreach($deelnames as $deelname)
-            {
-                $deelname->reeks = $this->reeks_model->get($deelname->reeksId);
-                $deelname->afstand = $this->afstand_model->get($deelname->reeks->afstandId);
-                $deelname->slag = $this->slag_model->get($deelname->reeks->slagId);
-                $deelname->wedstrijd = $this->wedstrijd_model->get($deelname->reeks->wedstrijdId);
-                $deelname->reeks->tijdstip = (string) $deelname->reeks->tijdstip;
-            }
-
-            return $deelnames;
-
-          }
-        }
-
-        /**
-        * Vergelijken van deelnames in een week met deelnames van een zwemmer
+        * Haalt deelnames in week op van bepaalde zwemmer
         *\see reeks_model::getReeksenInWeek()
-        *\see deelname_model::getDeelnamesZwemmer()
         * @param id ID van de zwemmer in kwestie
         * @param week Week in de agenda
         * @param jaar Jaar in de agenda
-        * @return Wedstrijden in opgegeven week van opgegeven zwemmer.
+        * @return query Deelnames die week van opgegeven zwemmer.
         */
-         public function getDeelnamesInWeek($id, $week, $jaar)
+         public function getDeelnamesInWeekPerZwemmer($id, $week, $jaar)
          {
-             $this->load->model('reeks_model');
+           $maandag = new DateTime;
+           $maandag->setISODate(intval($jaar), intval($week));
+           $zondag = clone $maandag;
+           $zondag->modify('+6 day');
 
-             $maandag = new DateTime;
-             $maandag->setISODate(intval($jaar), intval($week));
-             $zondag = clone $maandag;
-             $zondag->modify('+6 day');
-
-             $reeksenInWeek = $this->reeks_model->getReeksenInWeek($maandag, $zondag);
-             $zwemmerWedstrijden = $this->deelname_model->getDeelnamesZwemmer($id);
-
-             $wedstrijdenWeek = new stdClass;
-
-             foreach ($zwemmerWedstrijden as $wedstrijd) {
-                 foreach ($reeksenInWeek as $reeks) {
-                     if ($reeks->id == $wedstrijd->reeks->id) {
-                         $tijdstip = (string) $wedstrijd->reeks->tijdstip;
-                         $wedstrijdenWeek->dezeWeek = $wedstrijd;                         
-                         $wedstrijdenWeek->dezeWeek->reeks->beginUur = verkortTijdstip($tijdstip);
-                         $wedstrijdenWeek->dezeWeek->reeks->tijdstip = substr($tijdstip, 0, 2);
-                         $wedstrijdenWeek->dezeWeek->reeks->isDezeWeek = 1;
-                     }
-                 }
+           $this->load->model('reeks_model');
+           $reeksenInWeek = $this->reeks_model->getReeksenInWeek($maandag, $zondag);
+           if ($reeksenInWeek != null)
+           {
+             foreach ($reeksenInWeek as $reeks)
+             {
+               $ids[] = $reeks->id;
              }
 
-             return $wedstrijdenWeek;
+             $this->db->where('statusId', '2');
+             $this->db->where('gebruikerIdZwemmer', $id);
+             $this->db->where_in('reeksId', $ids);
+             $query = $this->db->get('deelname')->result();
+
+             return $query;
+           } else {
+             return null;
+           }
+
+         }
+
+         /**
+         * Haalt informatie
+         *\see deelname_model::getDeelnamesInWeekPerZwemmer()
+         * @param id ID van de zwemmer in kwestie
+         * @param week Week in de agenda
+         * @param jaar Jaar in de agenda
+         * @return deelnames Wedstrijden die week van opgegeven zwemmer.
+         */
+         public function getInformatieDeelnames($id, $week, $jaar)
+         {
+           $deelnames = $this->deelname_model->getDeelnamesInWeekPerZwemmer($id, $week, $jaar);
+           if ($deelnames != null)
+           {
+             $this->load->model('wedstrijd_model');
+             $this->load->model('slag_model');
+             $this->load->model('afstand_model');
+             $this->load->model('reeks_model');
+
+             foreach ($deelnames as $deelname)
+             {
+               $deelname->reeks = $this->reeks_model->get($deelname->reeksId);
+               $tijdstip = (string) $deelname->reeks->tijdstip;
+               $deelname->reeks->uur = verkortTijdstip($tijdstip);
+               $deelname->reeks->tijdstip = substr($tijdstip, 0, 2);
+               $deelname->afstand = $this->afstand_model->get($deelname->reeks->afstandId);
+               $deelname->slag = $this->slag_model->get($deelname->reeks->slagId);
+               $deelname->wedstrijd = $this->wedstrijd_model->get($deelname->reeks->wedstrijdId);
+               $deelname->reeks->tijdstip = (string) $deelname->reeks->tijdstip;
+             }
+
+             return $deelnames;
+           } else {
+             return null;
+           }
+
          }
 }

@@ -1,5 +1,4 @@
 <script type="text/javascript">
-
 function haalWedstrijdenOp(week, jaar) {
     $.ajax({type: "GET",
         url: site_url + "/gebruiker/haalJsonOp_Wedstrijden",
@@ -8,16 +7,78 @@ function haalWedstrijdenOp(week, jaar) {
             try {
                 // datum = .datum tijdstip = .tijdstip afstand = .afstand slag = .soort wedstrijd = .naam plaats = .plaats beschrijving = .beschrijving reeksid = .id
                 var wedstrijdenWeek = jQuery.parseJSON(result);
-                var i = 0;
-                console.log(JSON.stringify(result));
 
                 if (wedstrijdenWeek != null) {
-                    $.each(wedstrijdenWeek, function() {
-                        var tijd = wedstrijdenWeek.dezeWeek.reeks.tijdstip;
-                        var datum =  wedstrijdenWeek.dezeWeek.reeks.datum;
+                    $.each(wedstrijdenWeek, function(index) {
+                        var tijd = wedstrijdenWeek[index].reeks.tijdstip;
+                        var datum =  wedstrijdenWeek[index].reeks.datum;
 
-                        $("tr[class=" + tijd + "]").find("[class=" + datum + "]").css("background-color", "#598bdb").addClass("font-weight-bold").addClass("text-dark").addClass("wedstrijd").attr('id', "wedstrijd_" + i).html(wedstrijdenWeek.dezeWeek.wedstrijd.naam);
-                        i++;
+                        $("tr[class=" + tijd + "]").find("[class=" + datum + "]").css("border", "2px solid #777777").css("background-color", "#94c3f7").addClass("font-weight-bold").addClass("text-dark").addClass("wedstrijd").attr('id', "wedstrijd_" + index).html(wedstrijdenWeek[index].wedstrijd.naam);
+                    });
+                }
+            } catch (error) {
+                alert("-- ERROR IN JSON --\n" + result);
+            }
+        },
+        error: function (xhr, status, error) {
+            alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+        }
+    });
+};
+
+function haalSupplementenOp(week, jaar) {
+    $.ajax({type: "GET",
+        url: site_url + "/gebruiker/haalJsonOp_Supplementen",
+        data: {huidigeWeek: week, huidigJaar: jaar},
+        success: function (result) {
+            try {
+                // datum = .datum tijdstip = .tijdstip afstand = .afstand slag = .soort wedstrijd = .naam plaats = .plaats beschrijving = .beschrijving reeksid = .id
+                var supplementenWeek = jQuery.parseJSON(result);
+
+                if (supplementenWeek != null) {
+                    $.each(supplementenWeek, function(index) {
+                        var tijd = supplementenWeek[index].tijdstip;
+                        var datum =  supplementenWeek[index].datumInname;
+
+                        $("tr[class=" + tijd + "]").find("[class=" + datum + "]").css("border", "2px solid #777777").css("background-color", "#bfbfbf").addClass("font-weight-bold").addClass("text-dark").addClass("supplement").attr('id', "supplement_" + index).html(supplementenWeek[index].informatie.naam);
+                    });
+                }
+            } catch (error) {
+                alert("-- ERROR IN JSON --\n" + result);
+            }
+        },
+        error: function (xhr, status, error) {
+            alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+        }
+    });
+};
+
+function haalActiviteitenOp(week, jaar) {
+    $.ajax({type: "GET",
+        url: site_url + "/gebruiker/haalJsonOp_Activiteiten",
+        data: {huidigeWeek: week, huidigJaar: jaar},
+        success: function (result) {
+            try {
+                // datum = .datum tijdstip = .tijdstip afstand = .afstand slag = .soort wedstrijd = .naam plaats = .plaats beschrijving = .beschrijving reeksid = .id
+                var activiteitenWeek = jQuery.parseJSON(result);
+                var i = 0;
+
+                if (activiteitenWeek != null) {
+                    $.each(activiteitenWeek, function(index) {
+                        if (activiteitenWeek[index].andereActiviteit.soortId == 1 )
+                        {
+                          while (activiteitenWeek[index].andereActiviteit.beginDatum <= activiteitenWeek[index].andereActiviteit.eindDatum)
+                          {
+                            $("table").find("[class=" + activiteitenWeek[index].andereActiviteit.beginDatum + "]:not(:first)").remove();
+                            $("[class=" + activiteitenWeek[index].andereActiviteit.beginDatum + "]").attr('rowspan', 18).css("border", "2px solid #777777").css("background-color", "#f9a557").addClass("font-weight-bold").addClass("text-dark").addClass("activiteit").attr('id', "activiteit_" + index).html(activiteitenWeek[index].andereActiviteit.naam);
+                            activiteitenWeek[index].andereActiviteit.beginDatum = activiteitenWeek[index].andereActiviteit.beginDatum.add(Date.DAY, 1);
+                          }
+                        } else {
+                          var tijd = activiteitenWeek[index].andereActiviteit.tijdstip;
+                          var datum =  activiteitenWeek[index].andereActiviteit.beginDatum;
+
+                          $("tr[class=" + tijd + "]").find("[class=" + datum + "]").css("border", "2px solid #777777").css("background-color", "#a9f285").addClass("font-weight-bold").addClass("text-dark").addClass("activiteit").attr('id', "activiteit_" + index).html(activiteitenWeek[index].andereActiviteit.naam);
+                        }
                     });
                 }
             } catch (error) {
@@ -40,11 +101,30 @@ $(document).ready(function () {
     haalWedstrijdenOp(week, jaar);
     $("[class*=wedstrijd]").hide();
 
+    haalSupplementenOp(week, jaar);
+    $("[class*=supplement]").hide();
+
+    haalActiviteitenOp(week, jaar);
+    $("[class*=activiteit]").hide();
+
 
     $("table").on('click', '.wedstrijd', function () {
+        $(".gebeurtenis").hide();
         var huidigeWedstrijd = $(this).attr("id");
         $("[id=" + huidigeWedstrijd + "]").show();
-    });
+      });
+
+    $("table").on('click', '.supplement', function () {
+        $(".gebeurtenis").hide();
+        var huidigSupplement = $(this).attr("id");
+        $("[id=" + huidigSupplement + "]").show();
+      });
+
+      $("table").on('click', '.activiteit', function () {
+          $(".gebeurtenis").hide();
+          var huidigeActiviteit = $(this).attr("id");
+          $("[id=" + huidigeActiviteit + "]").show();
+        });
 
 });
 
@@ -167,19 +247,50 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
 
   <div class="row">
       <div class="col-sm-12">
-          <div class="event text-left">
+          <div class="text-left">
               <?php
                 $teller = 0;
-                if ($wedstrijden != null && isset($wedstrijden->dezeWeek->reeks->isDezeWeek))
+                if ($wedstrijden != null)
                 {
                     foreach ($wedstrijden as $wedstrijd)
                     {
-                            echo "<div class='wedstrijd' id='wedstrijd_" . $teller . "'>";
+                            echo "<div class='wedstrijd gebeurtenis' id='wedstrijd_" . $teller . "'>";
                             echo "<span><b>" . $wedstrijd->wedstrijd->naam . " " . $wedstrijd->wedstrijd->plaats . "</b></span><br />";
-                            echo "Beginuur: " . $wedstrijd->reeks->beginUur . "<br />";
+                            echo "Beginuur: " . $wedstrijd->reeks->uur . "<br />";
                             echo "Slag: " . $wedstrijd->slag->soort . "<br />";
                             echo "Afstand: " . $wedstrijd->afstand->afstand . "<br />";
                             echo "Beschrijving: " . $wedstrijd->wedstrijd->beschrijving . "<br />";
+                            echo "</div>";
+                            $teller++;
+                    }
+                }
+
+                $teller = 0;
+                if ($supplementen != null)
+                {
+                    foreach ($supplementen as $supplement)
+                    {
+                            echo "<div class='supplement gebeurtenis' id='supplement_" . $teller . "'>";
+                            echo "<span><b>" . $supplement->informatie->naam . "</b></span><br />";
+                            echo "Tijdstip: " . $supplement->uur . "<br />";
+                            echo "Hoeveelheid: " . $supplement->hoeveelheid . "g<br />";
+                            echo "Beschrijving: " . $supplement->informatie->beschrijving . "<br />";
+                            echo "</div>";
+                            $teller++;
+                    }
+                }
+
+                $teller = 0;
+                if ($activiteiten != null)
+                {
+                    foreach ($activiteiten as $activiteit)
+                    {
+                            echo "<div class='activiteit gebeurtenis' id='activiteit_" . $teller . "'>";
+                            echo "<span><b>" . $activiteit->andereActiviteit->naam . "</b></span><br />";
+                            echo "Locatie: " . $activiteit->andereActiviteit->plaats . "<br />";
+                            echo "Tijdstip: " . $activiteit->andereActiviteit->uur . "<br />";
+                            echo "Beschrijving: " . $activiteit->andereActiviteit->beschrijving . "<br />";
+                            echo "</div>";
                             $teller++;
                     }
                 }

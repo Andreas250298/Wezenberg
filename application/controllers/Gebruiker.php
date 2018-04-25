@@ -250,9 +250,11 @@ class Gebruiker extends CI_Controller
 
     /** Persoonlijke agenda tonen
     *\see Authex::getGebruikerInfo()
-    *\see Wedstrijd_model::getWedstrijdenInWeek()
+    *\see Deelname_model::getInformatieDeelnames()
+    *\see SupplementPerZwemmer_model::getInformatieSupplementen()
+    *\see ActiviteitPerGebruiker_model::getInformatieActiviteiten()
     *\see zwemmer_agenda.php
-    * @param week Te tonen $week
+    * @param week Te tonen week
     * @param jaar Jaar van te tonen week
     */
     public function agenda($week, $jaar)
@@ -266,7 +268,13 @@ class Gebruiker extends CI_Controller
       $data['jaar'] = $jaar;
 
       $this->load->model('deelname_model');
-      $data['wedstrijden'] = $this->deelname_model->getDeelnamesInWeek($gebruiker->id, $week, $jaar);
+      $data['wedstrijden'] = $this->deelname_model->getInformatieDeelnames($gebruiker->id, $week, $jaar);
+
+      $this->load->model('supplementPerZwemmer_model');
+      $data['supplementen'] = $this->supplementPerZwemmer_model->getInformatieSupplementen($gebruiker->id, $week, $jaar);
+
+      $this->load->model('activiteitPerGebruiker_model');
+      $data['activiteiten'] = $this->activiteitPerGebruiker_model->getInformatieActiviteiten($gebruiker->id, $week, $jaar);
 
       $partials = array('hoofding' => 'main_header',
           'inhoud' => 'zwemmer_agenda',
@@ -276,7 +284,7 @@ class Gebruiker extends CI_Controller
 
     /** Wedstrijden om te tonen in agenda ophalen
     *\see Authex::getGebruikerInfo()
-    *\see Wedstrijd_model::getWedstrijdenInWeek()
+    *\see Deelname_model::getInformatieDeelnames()
     */
     public function haalJsonOp_Wedstrijden()
     {
@@ -285,37 +293,64 @@ class Gebruiker extends CI_Controller
       $jaar = $this->input->get('huidigJaar');
 
       $this->load->model('deelname_model');
-      $deelnames = $this->deelname_model->getDeelnamesInWeek($gebruiker->id, $week, $jaar);
+      $deelnames = $this->deelname_model->getInformatieDeelnames($gebruiker->id, $week, $jaar);
 
       $i = 0;
 
-      if (isset($deelnames->dezeWeek))
+      foreach ($deelnames as $deelname)
       {
-          foreach ($deelnames as $deelname)
-          {
-              if ($deelname->reeks->isDezeWeek == 1)
-              {
-                  $deelname->id = $i;
-                  $i++;
-              }
-          }
+          $deelname->id = $i;
+          $i++;
       }
-          echo json_encode($deelnames);
-      }
+
+      echo json_encode($deelnames);
+    }
 
     /** Supplementen om te tonen in agenda ophalen
     *\see Authex::getGebruikerInfo()
-    *\see Supplement_model::getSupplementenInWeek()
+    *\see SupplementPerZwemmer_model::getInformatieSupplementen()
     */
     public function haalJsonOp_Supplementen()
     {
-        $gebruiker = $this->authex->getGebruikerInfo();
-        $week = $this->input->get('huidigeWeek');
-        $jaar = $this->input->get('huidigJaar');
+      $gebruiker = $this->authex->getGebruikerInfo();
+      $week = $this->input->get('huidigeWeek');
+      $jaar = $this->input->get('huidigJaar');
 
-        $this->load->model('supplement_model');
-        $supplementweek = $this->suplement_model->getSupplementenInWeek($gebuiker->id, $week, $jaar);
+      $this->load->model('supplementPerZwemmer_model');
+      $supplementen = $this->supplementPerZwemmer_model->getInformatieSupplementen($gebruiker->id, $week, $jaar);
 
-        echo json_encode($supplementweek);
+      $i = 0;
+
+      foreach ($supplementen as $supplement)
+      {
+          $supplement->id = $i;
+          $i++;
+      }
+
+      echo json_encode($supplementen);
+    }
+
+    /** Activiteiten om te tonen in agenda ophalen
+    *\see Authex::getGebruikerInfo()
+    *\see ActiviteitPerGebruiker_model::getInformatieActiviteiten()
+    */
+    public function haalJsonOp_Activiteiten()
+    {
+      $gebruiker = $this->authex->getGebruikerInfo();
+      $week = $this->input->get('huidigeWeek');
+      $jaar = $this->input->get('huidigJaar');
+
+      $this->load->model('activiteitPerGebruiker_model');
+      $activiteiten = $this->activiteitPerGebruiker_model->getInformatieActiviteiten($gebruiker->id, $week, $jaar);
+
+      $i = 0;
+
+      foreach ($activiteiten as $activiteit)
+      {
+          $activiteit->id = $i;
+          $i++;
+      }
+
+      echo json_encode($activiteiten);
     }
 }
