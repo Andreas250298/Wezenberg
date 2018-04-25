@@ -67,12 +67,10 @@ function haalActiviteitenOp(week, jaar) {
                     $.each(activiteitenWeek, function(index) {
                         if (activiteitenWeek[index].andereActiviteit.soortId == 1 )
                         {
-                          while (activiteitenWeek[index].andereActiviteit.beginDatum <= activiteitenWeek[index].andereActiviteit.eindDatum)
-                          {
-                            $("table").find("[class=" + activiteitenWeek[index].andereActiviteit.beginDatum + "]:not(:first)").remove();
-                            $("[class=" + activiteitenWeek[index].andereActiviteit.beginDatum + "]").attr('rowspan', 18).css("border", "2px solid #777777").css("background-color", "#f9a557").addClass("font-weight-bold").addClass("text-dark").addClass("activiteit").attr('id', "activiteit_" + index).html(activiteitenWeek[index].andereActiviteit.naam);
-                            activiteitenWeek[index].andereActiviteit.beginDatum = activiteitenWeek[index].andereActiviteit.beginDatum.add(Date.DAY, 1);
-                          }
+                          var datum = activiteitenWeek[index].andereActiviteit.beginDatum;
+                            $("table").find("[class=" + datum + "]:not(:first)").remove();
+                            $("[class=" + datum + "]").attr('rowspan', 18).css("border", "2px solid #777777").css("background-color", "#f9a557").addClass("font-weight-bold").addClass("text-dark").addClass("activiteit").attr('id', "activiteit_" + index).html(activiteitenWeek[index].andereActiviteit.naam);
+
                         } else {
                           var tijd = activiteitenWeek[index].andereActiviteit.tijdstip;
                           var datum =  activiteitenWeek[index].andereActiviteit.beginDatum;
