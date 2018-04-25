@@ -34,7 +34,22 @@ $disciplines = "100m vlinderslag";
     <div class="row text-left mt-5">
         <div class="col-md-3 offset-2">
             <h5>Aanstaande wedstrijden</h5>
-            <p>To-do</p>
+            <?php
+            if ($wedstrijden == null) {
+              echo "Geen aanstaande wedstrijden";
+
+            } else {
+              foreach ($wedstrijden as $wedstrijd)
+              {
+                  echo "<p><b>" . zetOmNaarGeschreven($wedstrijd['datum']) . "</b><br />"
+                  . $wedstrijd['wedstrijd'] . "<br />"
+                  . "te " . $wedstrijd['plaats'] . " om " . $wedstrijd['tijdstip'] . "<br />"
+                  . $wedstrijd['afstand'] . " " . $wedstrijd['slag'] . "</p><br />";
+              }
+            }
+
+
+            ;?>
         </div>
 
         <div class="col-md-3 offset-1">

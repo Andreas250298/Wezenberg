@@ -1,5 +1,9 @@
 <?php
 $link = array('class' => 'nav-link');
+
+$dt = new DateTime;
+$week = $dt->format('W');
+$jaar = $dt->format('Y');
 ?>
 <script>
     $(document).ready(function () {
@@ -104,7 +108,7 @@ $link = array('class' => 'nav-link');
                                 <?php echo anchor('supplement/supplementenPerZemmer/'.$gebruiker->id, 'Supplementen', $link); ?>
                             </li>
                             <li class="nav-item">
-                                <?php echo anchor('gebruiker/agenda', 'Mijn agenda', $link); ?>
+                                <?php echo anchor('gebruiker/agenda/' . $week . '/' . $jaar, 'Mijn agenda', $link); ?>
                             </li>
                             <li class="nav-item">
                                 <?php echo anchor('wedstrijd/inschrijvingen', 'Inschrijvingen', $link); ?>

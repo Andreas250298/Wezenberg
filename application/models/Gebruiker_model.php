@@ -5,6 +5,8 @@ class Gebruiker_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('notation');
+        $this->load->helper('date');
     }
 
     public function get($id)
@@ -102,4 +104,5 @@ class Gebruiker_model extends CI_Model
         $query = $this->db->get('gebruiker');
         return $query->result();
     }
+
 }

@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @class Slag_model
+ * @brief Model-klasse voor slagen
+ *
+ * Model-klasse die alle methodes bevat om te interageren met de slag tabel
+ */
 class Slag_model extends CI_Model
 {
     /**
@@ -8,12 +15,13 @@ class Slag_model extends CI_Model
     {
         parent::__construct();
     }
+
     /**
-         * Slag behorende bij een reeks uit de database ophalen
-         * @param $id Het id van de reeks waar de slag aan gekoppeld is
-         * @return De opgevraagde record
-         */
-    public function getSlag($id)
+     * Een slag ophalen uit de database
+     * @param $id Het id van de reeks waar de slag aan gekoppeld is
+     * @return De opgevraagde record
+     */
+    public function get($id)
     {
         $this->db->where('id', $id);
         $query = $this->db->get('slag');

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @class Supplement_model
  * @brief Model-klasse voor supplementen
@@ -15,7 +14,6 @@ class Supplement_model extends CI_Model
     {
         parent::__construct();
     }
-
     /**
      * Een supplement ophalen uit de database
      * @param $id Het id van het supplement dat opgevraagd wordt
@@ -27,18 +25,16 @@ class Supplement_model extends CI_Model
         $query = $this->db->get('supplement');
         return $query->row();
     }
-
     /**
      * Opvragen van supplementen uit de database
      * @return De opgevraagde records
      */
-    public function toonSupplementen()
+    public function getSupplementen()
     {
         $this->db->order_by('naam', 'asc');
         $query = $this->db->get('supplement');
         return $query->result();
     }
-
     /**
      * Een supplement toevoegen aan de database
      * @param $supplement Het supplement dat moet toegevoegd worden
@@ -49,7 +45,6 @@ class Supplement_model extends CI_Model
         $this->db->insert('supplement', $supplement);
         return $this->db->insert_id();
     }
-
     /**
      * Een supplement wijzigen in de database
      * @param $supplement Het supplement dat moet gewijzigd worden
@@ -59,7 +54,6 @@ class Supplement_model extends CI_Model
         $this->db->where('id', $supplement->id);
         $this->db->update('supplement', $supplement);
     }
-
     /**
      * Een supplement verwijderen uit de database
      * @param $id Het id van het supplement dat moet verwijderd worden
