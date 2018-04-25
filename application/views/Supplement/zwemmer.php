@@ -15,10 +15,6 @@ foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
     </tr>';
 }
 }
-?>
-
-
-<?
 if($supplementenPerZwemmer == null){
   echo "<div>Je moet momenteel geen supplementen innemen of de trainer heeft je supplementen nog niet toegevoegd.</div>";
 } else {
