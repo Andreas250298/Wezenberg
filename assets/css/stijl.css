@@ -1,6 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+/*ALGEMENE CSS*/
+
 body{
     background-color: white;
 }
 nav{
     background-color: #FCF9F2;
+}
+.navbar-brand{
+    font-family: 'Raleway', sans-serif;
+}
+
+/*EIND ALGEMENE CSS*/
+
+/*STARTPAGINA.PHP*/
+.startTitel{
+    font-family: 'Raleway', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.nieuwsartikel{
+    color: black;
+}
+.nieuwsartikel:hover{
+    color: black;
+}
+.inschrijving{
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    background-color: #efefef;
+}
+.scrollknop{
+    padding: 4px;
+    background-color: lightgray;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: black;
+    font-weight: 0;
+    font-size: 18px;
+}
+.scrollknop .fa-2x{
+    padding: 0px;
+    font-size: 20px;
+}
+.scrollknop:hover{
+    background-color: gray;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: white;
+}
+.row-striped:nth-of-type(odd){
+    background-color: #efefef;
+}
+.row-striped:nth-of-type(even){
+    background-color: #ffffff;
+}
+.row-striped {
+    padding: 10px 0;
+}
+.beheerknop{
+    padding: 20px;
+    background-color: black;
+    color: white;
+    display: block;
+    margin: 10px;
+    border-radius: 10px;
+}
+.beheerknop:hover{
+    background-color: #253555;
+    color: white;
+}
+.media{
+    margin-bottom: 20px;
+}
+
+/*EIND CSS STARTPAGINA.PHP*/
+
+/*CSS OVER_ONS.PHP*/
+
+.overOns{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.overOns h2{
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
 }
