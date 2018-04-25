@@ -15,11 +15,16 @@ if ($supplementenPerZwemmer != null) {
     </tr>';
     }
 }
+<<<<<<< HEAD
+if($supplementenPerZwemmer == null){
+  echo "<div>Je moet momenteel geen supplementen innemen of de trainer heeft je supplementen nog niet toegevoegd.</div>";
+=======
 ?>
 
 <?php
 if ($supplementenPerZwemmer == null) {
     echo '<div>Je moet momenteel geen supplementen innemen of de trainer heeft je supplementen nog niet toegevoegd.</div>';
+>>>>>>> a4364f58c161afa02f8336cb29cb4da4acb8a3fc
 } else {
     echo "<table class=\"table\">
     <thead>
