@@ -21,6 +21,16 @@ foreach ($reeksen as $reeks) {
             }
         }
     }
+    if (isset($afstand)) {
+        foreach ($afstand as $afst) {
+            if (isset($afst->afstand)) {
+                if ($afst != null) {
+                    $lijstReeksen .= "<td>"
+      . $afst->afstand . "</td>";
+                }
+            }
+        }
+    }
 
     $lijstReeksen .= '</tr>';
 }
@@ -41,6 +51,9 @@ echo '<p>'.anchor('wedstrijd/maakReeks', 'Reeks toevoegen').'
     </td>
     <td>
       Slag
+    </td>
+    <td>
+      Afstand
     </td>
     </tr>
   </thead>

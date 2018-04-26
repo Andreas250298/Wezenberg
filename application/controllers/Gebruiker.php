@@ -207,7 +207,7 @@ class Gebruiker extends CI_Controller
         $data['zwemmer'] = $huidigeZwemmer;
 
         $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijdenZwemmer($id);
+        $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijdInformatieZwemmer($id);
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmer_info',
@@ -339,12 +339,11 @@ class Gebruiker extends CI_Controller
         $deelnames = $this->deelname_model->getInformatieDeelnames($gebruiker->id, $week, $jaar);
 
         $i = 0;
-        if ($deelnames != null)
-        {
-          foreach ($deelnames as $deelname) {
-              $deelname->id = $i;
-              $i++;
-          }
+        if ($deelnames != null) {
+            foreach ($deelnames as $deelname) {
+                $deelname->id = $i;
+                $i++;
+            }
         }
 
         echo json_encode($deelnames);
@@ -364,13 +363,11 @@ class Gebruiker extends CI_Controller
         $supplementen = $this->supplementPerZwemmer_model->getInformatieSupplementen($gebruiker->id, $week, $jaar);
 
         $i = 0;
-        if ($supplementen != null)
-        {
-          foreach ($supplementen as $supplement)
-          {
-              $supplement->id = $i;
-              $i++;
-          }
+        if ($supplementen != null) {
+            foreach ($supplementen as $supplement) {
+                $supplement->id = $i;
+                $i++;
+            }
         }
 
         echo json_encode($supplementen);
@@ -390,13 +387,11 @@ class Gebruiker extends CI_Controller
         $activiteiten = $this->activiteitPerGebruiker_model->getInformatieActiviteiten($gebruiker->id, $week, $jaar);
 
         $i = 0;
-        if ($activiteiten != null)
-        {
-          foreach ($activiteiten as $activiteit)
-          {
-              $activiteit->id = $i;
-              $i++;
-          }
+        if ($activiteiten != null) {
+            foreach ($activiteiten as $activiteit) {
+                $activiteit->id = $i;
+                $i++;
+            }
         }
 
         echo json_encode($activiteiten);
