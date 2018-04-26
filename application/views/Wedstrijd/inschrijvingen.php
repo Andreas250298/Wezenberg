@@ -22,21 +22,25 @@ foreach ($wedstrijden as $wedstrijd) {
     .$wedstrijd->eindDatum.
     '</td>';
 
-
-  foreach ($status as $deel) {
-    if (isset($deel->naam)) {
-      $stat = $deel->naam;
-  if ($deel != null) {
-  $lijstWedstrijden .= "<td>" .
-  $deel->naam ."</td>";
-}
-}
-}
-//if ($stat == "open") {
-  $lijstWedstrijden .= '<td>'.
+    if (isset($status)) {
+        foreach ($status as $deel) {
+            if (isset($deel->naam)) {
+                $stat = $deel->naam;
+                if ($deel != null) {
+                    $lijstWedstrijden .= "<td>" .
+    $deel->naam ."</td>";
+                }
+            }
+        }
+    } else {
+        $stat = "open";
+        $lijstWedstrijden .= "<td>" . $stat . "</td>";
+    }
+    if ($stat == "open") {
+        $lijstWedstrijden .= '<td>'.
   form_submit($dataSubmit);
-  '</td><td></tr>';
-//}
+        '</td><td></tr>';
+    }
 }
 ?>
 <table class="table">
