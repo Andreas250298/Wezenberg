@@ -35,6 +35,10 @@ echo "<div class='form-group'>";
 echo form_label("Tijdstip", 'tijdstip') . "\n";
 echo form_input($dataInputBeginDatum) . "\n";
 echo "</div>";
+echo "<div class='form-group'>";
+echo form_label("Afstand", 'afstand') . "\n";
+echo form_input($dataInputAfstand) . "\n";
+echo "</div>";
 echo form_submit($dataSubmit) . "";
 
 echo form_close();

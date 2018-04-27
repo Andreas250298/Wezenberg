@@ -86,11 +86,14 @@ class Deelname_model extends CI_Model
      */
     public function getStatusPerGebruiker($id)
     {
-        $this->db->where('id', $id);
+        $this->db->where('gebruikerIdZwemmer', $id);
         $query = $this->db->get('deelname');
         $deelname = $query->row();
         $this->load->model('status_model');
-        $deelname->status = $this->status_model->get($deelname->id);
+        if (isset($deelname)) {
+            $deelname->status = $this->status_model->get($deelname->statusId);
+        }
+
         return $deelname;
     }
 
