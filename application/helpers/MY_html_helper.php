@@ -1,5 +1,6 @@
 <?php
-function toonAfbeelding($afbeelding, $attributen = '') {
+function toonAfbeelding($afbeelding, $attributen = '')
+{
     $CI = & get_instance();
     $CI->load->helper('url');
 
@@ -7,22 +8,25 @@ function toonAfbeelding($afbeelding, $attributen = '') {
             "\"" . _stringify_attributes($attributen) . " />";
 }
 
-function toonVideo($video, $attributen = '') {
+function toonVideo($video, $attributen = '')
+{
     $CI = & get_instance();
     $CI->load->helper('url');
 
-    return "<video controls " . _stringify_attributes($attributen) . "><source src=\"" . base_url("assets/images/videos/" . $video) .
-            "\" type'video/mp4' >Your browser does not support the video tag.</video>";
+    return "<video controls " . _stringify_attributes($attributen) . " width=\"100%\"><source src=\"" . base_url("assets/images/videos/" . $video) .
+            "\" type'video/mp4'>Your browser does not support the video tag.</video>";
 }
 
-function haalJavascriptOp($js) {
+function haalJavascriptOp($js)
+{
     $CI = & get_instance();
     $CI->load->helper('url');
 
     return "<script src=\"" . base_url("assets/js/" . $js) . "\"></script>";
 }
 
-function pasStylesheetAan($css) {
+function pasStylesheetAan($css)
+{
     $CI = & get_instance();
     $CI->load->helper('url');
 
