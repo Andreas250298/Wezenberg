@@ -27,4 +27,10 @@ class Slag_model extends CI_Model
         $query = $this->db->get('slag');
         return $query->row();
     }
+
+    public function getAllSlagen()
+    {
+        $query = $this->db->get('slag');
+        return $query->result();
+    }
 }

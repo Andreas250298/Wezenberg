@@ -20,9 +20,10 @@ if (isset($wedstrijd)) {
     $dataInputLaatseInschrijvingDatum = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'name' => 'laatsteInschrijvingDatum', 'id' => 'laatsteInschrijvingDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier de uiterste datum waarop zwemmers zich kunnen inschrijven voor deze wedstrijd.');
     $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Schrijf hier de beschrijving van de wedstrijd', 'aria-label' => 'beschrijving', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier een beschrijving voor deze wedstrijd.');
     $dataInputAfstand = array('class' => 'form-control mr-sm-2', 'name' => 'afstand', 'id' => 'afstand', 'placeholder' => 'Afstand', 'aria-label' => 'afstand', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier de afstand van de wedstrijd.');
+    $dataInputSlag = array('class' => 'form-control mr-sm-2', 'name' => 'slag', 'id' => 'slag', 'placeholder' => 'Slag', 'aria-label' => 'slag', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier de slag van de reeks.');
 }
 $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
-echo form_open('Wedstrijd/registreer', 'class="form-group"');
+echo form_open('Wedstrijd/registreerReeks', 'class="form-group"');
 echo "<div class='form-group'>";
 echo form_label("Reeks", 'reeks') . "\n";
 echo form_input($dataInputNaam) . "\n";
@@ -36,9 +37,22 @@ echo form_label("Tijdstip", 'tijdstip') . "\n";
 echo form_input($dataInputBeginDatum) . "\n";
 echo "</div>";
 echo "<div class='form-group'>";
-echo form_label("Afstand", 'afstand') . "\n";
-echo form_input($dataInputAfstand) . "\n";
+echo form_label("Afstand ", 'afstand') . "\n";
+echo "<select name='afstand' id='afstand'>";
+foreach ($afstanden as $afstand) {
+    echo "<option value='" . $afstand->id . "'>" . $afstand->afstand . "</option>\n";
+}
+echo "</select>";
 echo "</div>";
-echo form_submit($dataSubmit) . "";
+echo "<div class='form-group'>";
+echo form_label("Slag ", 'slag') . "\n";
+echo "<select name='slag' id='slag'>";
+foreach ($slagen as $slag) {
+    echo "<option value='" . $slag->id . "'>" . $slag->soort . "</option>\n";
+}
+echo "</select>";
+echo "</div>";
+echo form_hidden('id', '6');
+echo form_submit($dataSubmit) . " ";
 
 echo form_close();

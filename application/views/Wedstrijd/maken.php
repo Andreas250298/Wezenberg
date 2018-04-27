@@ -47,6 +47,9 @@ echo "<div class='form-group'>";
 echo form_label("Beschrijving", 'beschrijving') . "\n";
 echo form_textarea($dataInputBeschrijving) . "\n";
 echo "</div>";
+if (isset($wedstrijd)) {
+    echo form_hidden('id', $wedstrijd->id);
+}
 /*echo "<div class='form-group'>";
 echo form_label("Status: ", 'status') . "\n";
 echo "<select name='status' id='status'>";

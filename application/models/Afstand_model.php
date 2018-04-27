@@ -23,8 +23,14 @@ class Afstand_model extends CI_Model
      */
     public function get($id)
     {
-          $this->db->where('id', $id);
-          $query = $this->db->get('afstand');
-          return $query->row();
+        $this->db->where('id', $id);
+        $query = $this->db->get('afstand');
+        return $query->row();
+    }
+
+    public function getAllAfstanden()
+    {
+        $query = $this->db->get('afstand');
+        return $query->result();
     }
 }
