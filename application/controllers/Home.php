@@ -116,4 +116,18 @@ class Home extends CI_Controller
         $this->authex->meldAf();
         redirect('home/index');
     }
+    
+    public function demo()
+    {
+        $data['titel'] = 'Wezenberg | Demo';
+        $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $gebruiker = $data['gebruiker'];
+
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'zwemmer_demo',
+            'voetnoot' => 'main_footer');
+
+        $this->template->load('main_master', $partials, $data);
+    }
 }

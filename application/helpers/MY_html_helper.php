@@ -7,6 +7,14 @@ function toonAfbeelding($afbeelding, $attributen = '') {
             "\"" . _stringify_attributes($attributen) . " />";
 }
 
+function toonVideo($video, $attributen = '') {
+    $CI = & get_instance();
+    $CI->load->helper('url');
+
+    return "<video controls " . _stringify_attributes($attributen) . "><source src=\"" . base_url("assets/images/videos/" . $video) .
+            "\" type'video/mp4' >Your browser does not support the video tag.</video>";
+}
+
 function haalJavascriptOp($js) {
     $CI = & get_instance();
     $CI->load->helper('url');

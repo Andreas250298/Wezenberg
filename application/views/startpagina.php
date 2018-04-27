@@ -45,9 +45,9 @@ function haalOpenInschrijvingenOp($wedstrijden) {
     echo '<ul class="list-unstyled">';
     $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Inschrijven');
     $attributen = array('id' => 'mijnFormulier',
-    'class' => 'form-inline my2 my-lg0',
-    'data-toggle' => 'validator',
-    'role' => 'form');
+        'class' => 'form-inline my2 my-lg0',
+        'data-toggle' => 'validator',
+        'role' => 'form');
     $i = 0;
     foreach ($wedstrijden as $wedstrijd) {
         $i++;
@@ -69,7 +69,7 @@ function haalOpenInschrijvingenOp($wedstrijden) {
         echo '</div>';
         echo '</li>';
 
-        if($i == 2){
+        if ($i == 2) {
             break;
         }
     }
@@ -109,6 +109,20 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wed
     }
 }
 ?>
+<style>
+    .helpBar{
+        margin: 20px 0 10px 0;
+        display: block;
+        padding: 10px;
+        background-color: lightgray;
+        border: 1px solid darkgray;
+        border-radius: 10px;
+    }
+    .tab {
+        display:inline-block;
+        margin-left: 20px;
+    }
+</style>
 <div class="row">
     <div class="col-12 col-lg-8">
         <?php
@@ -116,11 +130,13 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wed
         ?>
     </div>
     <div class="col-12 col-lg-4">
-        <div>
-            <h2 class="startTitel">Agenda</h2>
-            <?php
-            haalAgendaOp($wedstrijden);
-            ?>
+        <h2 class="startTitel">Agenda</h2>
+        <?php
+        haalAgendaOp($wedstrijden);
+        ?>
+        <div class="alert alert-dark" role="alert">
+            <i class="far fa-question-circle fa-2x"></i><span class="tab">Nieuw hier? <?php echo anchor('home/demo', "Bekijk de demo", "") ?>
         </div>
     </div>
+
 </div>
