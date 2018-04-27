@@ -75,9 +75,7 @@ $zwemmersTabel = "";
             if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
                 echo "<p id='test'>" . anchor('gebruiker/maakGebruiker', "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-user-plus\"></i></button>") .
                 "&nbsp;&nbsp;&nbsp;" . anchor('gebruiker/toonInactieveZwemmers', 'Toon inactieve zwemmers') ."</p>";
-            } else {
-                echo "<p>" . anchor('gebruiker/toonInactieveZwemmers', 'Toon inactieve zwemmers') ."</p>";
-            };
+            }
             ?>
 
             <?php echo '<p>' . anchor('home', 'Terug', "Class='btn btn-primary my-2 my-sm0'") . '</p>';?>
