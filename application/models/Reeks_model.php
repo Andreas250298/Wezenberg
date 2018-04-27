@@ -49,8 +49,8 @@ class Reeks_model extends CI_Model
     }
 
     /**
-     * Een wedstrijd toevoegen aan de database
-     * @param $wedstrijd De wedstrijd die moet toegevoegd worden
+     * Een reeks toevoegen aan de database
+     * @param $reeks De reeks die moet toegevoegd worden
      * @return De insert functie van de wedstrijd
      */
     public function insert($reeks)
@@ -70,8 +70,8 @@ class Reeks_model extends CI_Model
     }
 
     /**
-     * Een wedstrijd verwijderen uit de database
-     * @param $id Het id van de wedstrijd die moet verwijderd worden
+     * Een reeks verwijderen uit de database
+     * @param $id Het id van de reeks die moet verwijderd worden
      */
     public function delete($id)
     {

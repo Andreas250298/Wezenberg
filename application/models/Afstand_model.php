@@ -28,6 +28,10 @@ class Afstand_model extends CI_Model
         return $query->row();
     }
 
+    /**
+     * Een afstanden ophalen uit de database voor een keuzenlijst
+     * @return Alle bestaande afstanden uit de database
+     */
     public function getAllAfstanden()
     {
         $query = $this->db->get('afstand');
