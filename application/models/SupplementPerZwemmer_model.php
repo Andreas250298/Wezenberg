@@ -110,4 +110,14 @@ class SupplementPerZwemmer_model extends CI_Model
             return null;
         }
     }
+
+    /**
+    *Voegt een nieuw supplementPerZwemmer toevoegen
+    * @param supplementPerZwemmer supplement per zwemmer
+    */
+    public function insert($supplementPerZwemmer)
+    {
+        $this->db->insert('supplementPerZwemmer', $supplementPerZwemmer);
+        return $this->db->insert_id();
+    }
 }

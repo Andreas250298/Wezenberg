@@ -139,6 +139,12 @@ class Supplement extends CI_Controller
         redirect("/supplement/index");
     }
 
+    /**
+    * Tonen van supplementen voor een zwemmer
+    * @param id id van de Zwemmer
+    *\see SupplementPerZwemmer_model::getSupplementenPerZwemmer()
+    *\see Authex::getGebruikerInfo()
+    */
     public function supplementenPerZwemmer($id)
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -152,5 +158,15 @@ class Supplement extends CI_Controller
           'inhoud' => 'Supplement/zwemmer',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
+    }
+
+    public function supplementenToekennen()
+    {
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $this->load->model('supplement_model');
+        $this->load->model('gebruiker_model');
+
+        $data['supplementen'] = $this->supplementenPerZwemmer_model->getSupplementen();
+        $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
     }
 }
