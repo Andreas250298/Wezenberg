@@ -1,16 +1,18 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @class Nieuws
  * @brief Controller-klasse voor Nieuws
  */
-class Nieuws extends CI_Controller {
+class Nieuws extends CI_Controller
+{
 
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->helper('form', 'date');
         $this->load->library('pagination');
@@ -19,7 +21,8 @@ class Nieuws extends CI_Controller {
     /**
      * Toont een lijst van alle nieuwsartikelen.
      */
-    public function index($startrij = 0) {
+    public function index($startrij = 0)
+    {
         $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['titel'] = "Nieuws beheren";
@@ -48,7 +51,8 @@ class Nieuws extends CI_Controller {
     /**
      * Toont het formulier om een nieuw nieuwsartikel aan te maken.
      */
-    public function maakNieuwsArtikel() {
+    public function maakNieuwsArtikel()
+    {
         $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $data['titel'] = 'Nieuwsartikel aanmaken';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -65,19 +69,20 @@ class Nieuws extends CI_Controller {
     /**
      * Voegt een nieuw nieuwsartikel toe aan de databank en toont dan opnieuw de lijst van nieuwsartikels.
      */
-    public function registreer() {
+    public function registreer()
+    {
         $artikel = new stdClass();
         $artikel->id = $this->input->post('id');
         $artikel->titel = $this->input->post('titel');
         $artikel->beschrijving = $this->input->post('beschrijving');
+        $artikel->gebruikerIdTrainer = $this->authex->getGebruikerInfo()->id;
         $datestring = date("Y-m-d");
         $artikel->datumAangemaakt = $datestring;
 
         $this->load->model('nieuws_model');
-        if($artikel->id == null) {
+        if ($artikel->id == null) {
             $this->nieuws_model->insert($artikel);
-        }
-        else {
+        } else {
             $this->nieuws_model->update($artikel);
         }
 
@@ -88,7 +93,8 @@ class Nieuws extends CI_Controller {
      * Toont een formulier met alle gegevens ingevuld van het gekoze nieuwsartikel.
      * @param $id van het aangeduide nieuwsartikel
      */
-    public function wijzig($id) {
+    public function wijzig($id)
+    {
         $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('nieuws_model');
@@ -105,7 +111,8 @@ class Nieuws extends CI_Controller {
      * Verwijdert het nieuwsartikel en toont opnieuw de lijst van nieuwsartikels.
      * @param $id van de te verwijderen nieuwsartikel
      */
-    public function verwijder(){
+    public function verwijder()
+    {
         $id = $this->input->get('id');
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
@@ -119,26 +126,28 @@ class Nieuws extends CI_Controller {
      * Toont een bepaald artikel volledig op een aparte pagina.
      * @param $d van het te bekijken nieuwsartikel
      */
-     public function bekijk($id){
-       $data['gebruiker'] = $this->authex->getGebruikerInfo();
-       $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
+    public function bekijk($id)
+    {
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
 
 
-       $this->load->model('nieuws_model');
-       $data['nieuwsArtikel'] = $this->nieuws_model->get($id);
-       $data['titel'] = $data['nieuwsArtikel']->titel;
+        $this->load->model('nieuws_model');
+        $data['nieuwsArtikel'] = $this->nieuws_model->get($id);
+        $data['titel'] = $data['nieuwsArtikel']->titel;
 
-       $partials = array('hoofding' => 'main_header',
+        $partials = array('hoofding' => 'main_header',
            'inhoud' => 'Nieuws/bekijken',
            'voetnoot' => 'main_footer');
-       $this->template->load('main_master', $partials, $data);
-     }
+        $this->template->load('main_master', $partials, $data);
+    }
 
 
     /**
      * Toont een tutorial over hoe je het nieuws op de pagina van nieuws/beheren kan aanpassen
      */
-    public function tutorial() {
+    public function tutorial()
+    {
         $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
         $data['titel'] = 'Tutorial - Nieuws beheren';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -148,5 +157,4 @@ class Nieuws extends CI_Controller {
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-
 }
