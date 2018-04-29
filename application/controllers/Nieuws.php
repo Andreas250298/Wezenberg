@@ -153,7 +153,7 @@ class Nieuws extends CI_Controller
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
         $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'nieuws/tutorial',
+            'inhoud' => 'Nieuws/tutorial',
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
