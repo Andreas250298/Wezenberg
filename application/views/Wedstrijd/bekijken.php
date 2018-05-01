@@ -4,7 +4,7 @@ $lijstWedstrijden = '';
 foreach ($wedstrijden as $wedstrijd) {
     $lijstWedstrijden .= '<tr>
     <td>'
-    .$wedstrijd->naam.
+    .anchor('Wedstrijd/info/' . $wedstrijd->id, $wedstrijd->naam).
     '</td>
     <td>'
     .$wedstrijd->plaats.

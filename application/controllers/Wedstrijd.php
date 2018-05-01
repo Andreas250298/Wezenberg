@@ -256,19 +256,24 @@ class Wedstrijd extends CI_Controller
     /**
     * Toont het invulformulier dat de trainer dient in te vullen om een reeks toe te voegen
     *\see Authex::getGebruikerInfo()
+    *\see Wedstrijd_model::getReeksenPerWedstrijd()
+    *\see Wedstrijd_model::getSlagenPerWedstrijd()
+    *\see Wedstrijd_model::getAfstandenPerWedstrijd()
+    *\see Slag_model::getAllSlagen()
+    *\see Afstand_model::getAllAfstanden()
     *\see maakReeks.php
     */
     public function maakReeks($id = 0)
     {
-        $data['titel'] = "Reeksen toeveogen";
+        $data['titel'] = "Reeksen toevoegen";
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
-        $reeks = $this->wedstrijd_model->getReeksen($id);
+        $reeksen = $this->wedstrijd_model->getReeksen($id);
         $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
         if (isset($reeks)) {
-            $data['slag'] = $this->wedstrijd_model->getSlagenPerWedstrijd($reeks->slagId);
-            $data['afstand'] = $this->wedstrijd_model->getAfstandenPerWedstrijd($reeks->afstandId);
+            $data['slag'] = $this->wedstrijd_model->getSlagenPerWedstrijd($reeksen->slagId);
+            $data['afstand'] = $this->wedstrijd_model->getAfstandenPerWedstrijd($reeksen->afstandId);
         }
         $this->load->model('slag_model');
         $data['slagen'] = $this->slag_model->getAllSlagen();
@@ -276,6 +281,35 @@ class Wedstrijd extends CI_Controller
         $data['afstanden'] = $this->afstand_model->getAllAfstanden();
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/maakReeks',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    /**
+    * Toont en overzicht met meer informatie over een bepaalde wedstrijd
+    *\see Authex::getGebruikerInfo()
+    *\see Wedstrijd_model::getReeksenPerWedstrijd()
+    *\see Wedstrijd_model::getSlagenPerWedstrijd()
+    *\see Wedstrijd_model::getAfstandenPerWedstrijd()
+    *\see info.php
+    */
+    public function info($id)
+    {
+        $data['titel'] = "Meer info van wedstrijd";
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+        $this->load->model('wedstrijd_model');
+        $wedstrijd = $this->wedstrijd_model->get($id);
+        $reeksen = $this->wedstrijd_model->getReeksen($id);
+        $data['wedstrijd'] = $this->wedstrijd_model->get($id);
+        $id = $reeksen->wedstrijdId;
+        $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
+        if (isset($reeksen)) {
+            $data['slagen'] = $this->wedstrijd_model->getSlagenPerWedstrijd($reeksen->slagId);
+            $data['afstanden'] = $this->wedstrijd_model->getAfstandenPerWedstrijd($reeksen->afstandId);
+        }
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Wedstrijd/info',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
