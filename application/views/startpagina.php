@@ -1,6 +1,7 @@
 <?php
 
-function haalArtikelsOp($nieuwsArtikels) {
+function haalArtikelsOp($nieuwsArtikels)
+{
     echo '<h2 class="startTitel">Laatste nieuws</h2>';
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-up fa-2x"></i></a>';
     echo '<ul class="list-unstyled">';
@@ -18,7 +19,8 @@ function haalArtikelsOp($nieuwsArtikels) {
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-down fa-2x"></i></a>';
 }
 
-function haalAgendaOp($agendaItems) {
+function haalAgendaOp($agendaItems)
+{
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-up fa-2x"></i></a>';
     echo '<div class="col">';
     foreach ($agendaItems as $agendaItem) {
@@ -40,7 +42,8 @@ function haalAgendaOp($agendaItems) {
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-down fa-2x"></i></a>';
 }
 
-function haalOpenInschrijvingenOp($wedstrijden) {
+function haalOpenInschrijvingenOp($wedstrijden)
+{
     echo '<h2 class="startTitel">Openstaande Inschrijvingen</h2>';
     echo '<ul class="list-unstyled">';
     $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Inschrijven');
@@ -77,7 +80,8 @@ function haalOpenInschrijvingenOp($wedstrijden) {
     echo anchor('wedstrijd/inschrijvingen', 'Alle openstaande inschrijvingen bekijken', 'class="scrollknop text-center"');
 }
 
-function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wedstrijden) {
+function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wedstrijden)
+{
     if ($gebruiker != null) {
         switch ($gebruiker->soort) {
             case 'zwemmer': // zwemmer
@@ -95,7 +99,7 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wed
                 echo '</div>';
                 echo '<div class="col-md-6">';
                 echo anchor('Activiteiten/index', '<i class="far fa-calendar-alt fa-3x fa-fw"></i> Activiteiten beheren', 'class="beheerknop"');
-                echo anchor('Supplement/index', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen toekennen', 'class="beheerknop"');
+                echo anchor('supplement/supplementenToekennen', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen toekennen', 'class="beheerknop"');
                 echo anchor('Supplement/beheerSupplementen', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen beheren', 'class="beheerknop"');
                 echo '</div>';
                 echo '</div>';

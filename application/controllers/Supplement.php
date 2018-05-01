@@ -160,13 +160,25 @@ class Supplement extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Als trainer supplementen toekennen aan een zwemmer
+    *\see Supplementen_model::getSupplementen()
+    *\see Gebruiker_model::toonZwemmers()
+    */
     public function supplementenToekennen()
     {
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('supplement_model');
         $this->load->model('gebruiker_model');
 
-        $data['supplementen'] = $this->supplementenPerZwemmer_model->getSupplementen();
+        $data['supplementen'] = $this->supplement_model->getSupplementen();
         $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
+
+        $data['titel'] = 'Supplement toekennen';
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Supplement/toekennen',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
     }
 }
