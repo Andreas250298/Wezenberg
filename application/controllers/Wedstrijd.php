@@ -35,7 +35,7 @@ class Wedstrijd extends CI_Controller
         $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
 
         $partials = array('hoofding' => 'main_header',
-          'inhoud' => 'Wedstrijd/bekijken',
+          'inhoud' => 'Wedstrijd/beheren',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
@@ -193,7 +193,7 @@ class Wedstrijd extends CI_Controller
     */
     public function inschrijvingen()
     {
-        $data['titel'] = "Inschrijven webstrijden";
+        $data['titel'] = "Inschrijven wedstrijden";
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $gebruiker = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
@@ -310,6 +310,27 @@ class Wedstrijd extends CI_Controller
         }
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/info',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    /**
+     * Toont de pagina met alle afgelopen wedstrijden
+     *\see Authex::getGebruikerInfo()
+     *\see Wedstrijd_model::toonWedstrijden()
+     *\see beheren.php
+     */
+    public function toonAfgelopen()
+    {
+        $data['titel'] = 'Wedstrijden bekijken';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
+
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Wedstrijd/afgelopen',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }

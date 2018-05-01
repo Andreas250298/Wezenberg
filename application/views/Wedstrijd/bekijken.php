@@ -2,7 +2,8 @@
 $lijstWedstrijden = '';
 
 foreach ($wedstrijden as $wedstrijd) {
-    $lijstWedstrijden .= '<tr>
+    if ($wedstrijd->beginDatum > date("Y-m-d")) {
+        $lijstWedstrijden .= '<tr>
     <td>'
     .anchor('Wedstrijd/info/' . $wedstrijd->id, $wedstrijd->naam).
     '</td>
@@ -16,6 +17,7 @@ foreach ($wedstrijden as $wedstrijd) {
     .zetOmNaarDDMMYYYY($wedstrijd->eindDatum).
     '</td>
     </tr>';
+    }
 }
 ?>
 
@@ -42,6 +44,8 @@ foreach ($wedstrijden as $wedstrijd) {
     ?>
   </tbody>
 </table>
+<?php echo anchor('Wedstrijd/toonAfgelopen', 'Toon afgelopen wedstrijden')?>
+<br/><br/>
 <p>
     <a id="terug" href="javascript:history.go(-1);">Terug</a>
 </p>
