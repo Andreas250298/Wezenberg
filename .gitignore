@@ -36,4 +36,3 @@ application/config/config.php
 system/ci_session/*
 
 # upload files
-uploads/nieuws/*
