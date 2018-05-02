@@ -28,7 +28,7 @@ var id = "";
 <?php
 
 $namen = [];
-foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
+foreach ($supplementenPerAlleZwemmers as $supplementPerZwemmer) {
     array_push($namen, $supplementPerZwemmer->zwemmer->id);
 }
 
@@ -60,7 +60,7 @@ foreach ($zwemmers as $zwemmer) {
             </tr>
         </thead>
         <tbody>";
-        foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
+        foreach ($supplementenPerAlleZwemmers as $supplementPerZwemmer) {
             if ($supplementPerZwemmer->zwemmer->id == $zwemmer->id) {
                 $data = array('type' => 'hidden', 'name' => 'supplementPerZwemmerId', 'id' => 'id', 'value' => $supplementPerZwemmer->id);
                 echo "<tr>

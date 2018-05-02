@@ -35,21 +35,32 @@ class SupplementPerZwemmer_model extends CI_Model
 
     /**
     ** Opvragen van supplementen voor alle zwemmers
+    *\see Supplement_model::get
+    *\see Gebruiker_model::get
+    *\return de supplementen voor alle zwemmers
     */
     public function getSupplementenPerAlleZwemmers()
     {
-        $this->db->order_by('datumInname', 'asc');
-        $supplementenPerZwemmer = $this->db->get('supplementPerZwemmer')->result();
-        if ($supplementenPerZwemmer == null) {
+        $this->db->order_by('datumInname ASC, tijdstipInname ASC');
+        $query = $this->db->get('supplementPerZwemmer')->result();
+        $supplementenPerAlleZwemmers = [];
+         
+        foreach($query as $q){
+            if ($q->datumInname > date('Y-m-d')){
+                array_push($supplementenPerAlleZwemmers, $q);
+            }
+        }
+
+        if ($supplementenPerAlleZwemmers == null) {
             return null ;
         } else {
             $this->load->model('supplement_model');
             $this->load->model('gebruiker_model');
-            foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
+            foreach ($supplementenPerAlleZwemmers as $supplementPerZwemmer) {
                 $supplementPerZwemmer->supplement = $this->supplement_model->get($supplementPerZwemmer->supplementId);
                 $supplementPerZwemmer->zwemmer = $this->gebruiker_model->get($supplementPerZwemmer->gebruikerIdZwemmer);
             }
-            return $supplementenPerZwemmer;
+            return $supplementenPerAlleZwemmers;
         }
     }
 

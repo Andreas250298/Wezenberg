@@ -184,10 +184,9 @@ class Supplement extends CI_Controller
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('supplementPerZwemmer_model');
         $this->load->model('gebruiker_model');
-        $data['supplementenPerZwemmer'] = $this->supplementPerZwemmer_model->getSupplementenPerAlleZwemmers();
+        $data['supplementenPerAlleZwemmers'] = $this->supplementPerZwemmer_model->getSupplementenPerAlleZwemmers();
         $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
 
-        // var_dump($data['supplementenPerZwemmer']);
         $data['titel'] = 'Supplementen voor alle zwemmers';
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'SupplementPerZwemmer/bekijken',
@@ -220,16 +219,40 @@ class Supplement extends CI_Controller
     {
         $zwemmers = $this->input->post('zwemmers');
         foreach ($zwemmers as $zwemmer) {
+            $this->load->model('supplementPerZwemmer_model');
+    
             $supplementPerZwemmer = new stdClass();
             $supplementPerZwemmer->gebruikerIdZwemmer = $zwemmer;
             $supplementPerZwemmer->supplementId = $this->input->post('supplement');
             $supplementPerZwemmer->hoeveelheid = $this->input->post('hoeveelheid');
-            $supplementPerZwemmer->datumInname = $this->input->post('datum');
-            $supplementPerZwemmer->tijdstipInname = $this->input->post('tijdstip');
-
-            $this->load->model('supplementPerZwemmer_model');
-            $this->supplementPerZwemmer_model->insert($supplementPerZwemmer);
+            $startDatum = new DateTime($this->input->post('startDatum'));
+            $eindeDatum = new DateTime($this->input->post('eindeDatum'));
+        
+            if ($startDatum > $eindeDatum){
+                $message = "Start datum ligt verder in de toekomst dan Einde datum!";
+                return $this->error($message);
+            }
+            else {
+                for ($i = $startDatum; $startDatum <= $eindeDatum; $i->modify('+1 day')) { 
+                    $supplementPerZwemmer->datumInname = $i->format('Y-m-d');
+                    $supplementPerZwemmer->tijdstipInname = $this->input->post('tijdstip');
+                    $this->supplementPerZwemmer_model->insert($supplementPerZwemmer);
+                }
+            }
+          
         }
         redirect("/supplement/supplementenPerZwemmerTrainer");
+    }
+
+    public function error($message){
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $data['message'] = $message;
+
+        $data['titel'] = 'Error';
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'SupplementPerZwemmer/error',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
     }
 }
