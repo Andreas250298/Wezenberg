@@ -5,15 +5,16 @@ function haalWedstrijdenOp(week, jaar) {
         data: {huidigeWeek: week, huidigJaar: jaar},
         success: function (result) {
             try {
-                // datum = .datum tijdstip = .tijdstip afstand = .afstand slag = .soort wedstrijd = .naam plaats = .plaats beschrijving = .beschrijving reeksid = .id
                 var wedstrijdenWeek = jQuery.parseJSON(result);
 
                 if (wedstrijdenWeek != null) {
                     $.each(wedstrijdenWeek, function(index) {
                         var tijd = wedstrijdenWeek[index].reeks.tijdstip;
                         var datum =  wedstrijdenWeek[index].reeks.datum;
+                        var td = $("tr[class=" + tijd + "]").find("." + datum);
 
-                        $("tr[class=" + tijd + "]").find("[class=" + datum + "]").css("border", "2px solid #777777").css("background-color", "#94c3f7").addClass("font-weight-bold").addClass("text-dark").addClass("wedstrijd").attr('id', "wedstrijd_" + index).html(wedstrijdenWeek[index].wedstrijd.naam);
+                        td.addClass("font-weight-bold text-dark");
+                        td.find(".event-rij").find(".1").addClass("event event-wed").attr('id', 'wed' + index);
                     });
                 }
             } catch (error) {
@@ -32,15 +33,16 @@ function haalSupplementenOp(week, jaar) {
         data: {huidigeWeek: week, huidigJaar: jaar},
         success: function (result) {
             try {
-                // datum = .datum tijdstip = .tijdstip afstand = .afstand slag = .soort wedstrijd = .naam plaats = .plaats beschrijving = .beschrijving reeksid = .id
                 var supplementenWeek = jQuery.parseJSON(result);
 
                 if (supplementenWeek != null) {
                     $.each(supplementenWeek, function(index) {
                         var tijd = supplementenWeek[index].tijdstip;
                         var datum =  supplementenWeek[index].datumInname;
+                        var td = $("tr[class=" + tijd + "]").find("." + datum);
 
-                        $("tr[class=" + tijd + "]").find("[class=" + datum + "]").css("border", "2px solid #777777").css("background-color", "#bfbfbf").addClass("font-weight-bold").addClass("text-dark").addClass("supplement").attr('id', "supplement_" + index).html(supplementenWeek[index].informatie.naam);
+                        td.addClass("font-weight-bold text-dark");
+                        td.find(".event-rij").find(".2").addClass("event event-supp").attr('id', 'supp' + index);
                     });
                 }
             } catch (error) {
@@ -59,21 +61,21 @@ function haalActiviteitenOp(week, jaar) {
         data: {huidigeWeek: week, huidigJaar: jaar},
         success: function (result) {
             try {
-                // datum = .datum tijdstip = .tijdstip afstand = .afstand slag = .soort wedstrijd = .naam plaats = .plaats beschrijving = .beschrijving reeksid = .id
                 var activiteitenWeek = jQuery.parseJSON(result);
 
                 if (activiteitenWeek != null) {
                     $.each(activiteitenWeek, function(index) {
-                        if (activiteitenWeek[index].andereActiviteit.soortId == 1 )
-                        {
-                          var datum = activiteitenWeek[index].andereActiviteit.beginDatum;
-                            $("table").find("[class=" + datum + "]:not(:first)").remove();
-                            $("[class=" + datum + "]").attr('rowspan', 18).css("border", "2px solid #777777").css("background-color", "#f9a557").addClass("font-weight-bold").addClass("text-dark").addClass("activiteit").attr('id', "activiteit_" + index).html(activiteitenWeek[index].andereActiviteit.naam);
-                        } else {
-                          var tijd = activiteitenWeek[index].andereActiviteit.tijdstip;
-                          var datum = activiteitenWeek[index].andereActiviteit.beginDatum;
+                        var tijd = activiteitenWeek[index].andereActiviteit.tijdstip;
+                        var datum = activiteitenWeek[index].andereActiviteit.beginDatum;
+                        var td = $("tr[class=" + tijd + "]").find("." + datum);
 
-                          $("tr[class=" + tijd + "]").find("[class=" + datum + "]").css("border", "2px solid #777777").css("background-color", "#a9f285").addClass("font-weight-bold").addClass("text-dark").addClass("activiteit").attr('id', "activiteit_" + index).html(activiteitenWeek[index].andereActiviteit.naam);
+                        td.addClass("font-weight-bold text-dark");
+
+                        if (activiteitenWeek[index].andereActiviteit.soortId == 2)
+                        {
+                        td.find(".event-rij").find(".3").addClass("event event-ander").attr('id', 'ander' + index);
+                        } else {
+                        td.find(".event-rij").find(".4").addClass("event event-stage").attr('id', 'ander' + index);
                         }
                     });
                 }
@@ -92,36 +94,19 @@ $(document).ready(function () {
     var id = $("input[name=id]").val();
     var week = $("input[name=week]").val();
     var jaar = $("input[name=jaar]").val();
-    var output = "test";
 
     haalWedstrijdenOp(week, jaar);
-    $("[class*=wedstrijd]").hide();
-
     haalSupplementenOp(week, jaar);
-    $("[class*=supplement]").hide();
-
     haalActiviteitenOp(week, jaar);
-    $("[class*=activiteit]").hide();
 
+    $(".gebeurtenis").hide();
 
-    $("table").on('click', '.wedstrijd', function () {
+    $("table").on('click', '.event', function () {
         $(".gebeurtenis").hide();
-        var huidigeWedstrijd = $(this).attr("id");
-        $("[id=" + huidigeWedstrijd + "]").show();
+        var id = $(this).attr("id");
+        var klasse = $(this).parent().parent().parent().attr("class");
+        $("div." + id + "." + klasse).show();
       });
-
-    $("table").on('click', '.supplement', function () {
-        $(".gebeurtenis").hide();
-        var huidigSupplement = $(this).attr("id");
-        $("[id=" + huidigSupplement + "]").show();
-      });
-
-      $("table").on('click', '.activiteit', function () {
-          $(".gebeurtenis").hide();
-          var huidigeActiviteit = $(this).attr("id");
-          $("[id=" + huidigeActiviteit + "]").show();
-        });
-
 });
 
 </script>
@@ -172,7 +157,7 @@ $maanden = array('1' => "Januari", '2' => "Februari", '3' => "Maart", '4' => "Ap
                   '7' => "Juli", '8' => "Augustus", '9' => "September", '10' => "Oktober", '11' => "November", '12' => "December");
 $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5' => "11:00", '6' => "12:00",
               '7' => "13:00", '8' => "14:00", '9' => "15:00", '10' => "16:00", '11' => "17:00", '12' => "18:00",
-              '13' => "19:00", '14' => "20:00", '15' => "21:00", '16' => "22:00", '17' => "23:00", '18' => "24:00");
+              '13' => "19:00", '14' => "20:00", '15' => "21:00", '16' => "22:00");
 ;?>
 
 
@@ -218,20 +203,26 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
 
                 do {
                     $maand = $dt->format('n');
-                    echo "<td>" . $dagen[$t] . "<br>" . $dt->format('j') . " " . $maanden[$maand] . " " . $dt->format('Y') . "</td>\n";
+                    echo "<th>" . $dagen[$t] . "<br>" . $dt->format('j') . " " . $maanden[$maand] . " " . $dt->format('Y') . "</th>\n";
                     $dt->modify('+1 day');
                     $t++;
                 } while ($w == $dt->format('W'));
             ;?>
           </thead>
           <?php
-              for ($i=1; $i < 19; $i++) {
+              for ($i=1; $i < 17; $i++) {
                 echo '<tr class="' . substr($uren[$i], 0, 2) . '">';
                 $dt3 = clone $dt;
                 $dt3->modify('-1 week');
                 for ($j=1; $j < 8; $j++)
                 {
-                  echo '<td class="' . $dt3->format('Y-m-d'). '">' . '&nbsp;' . $uren[$i] .  '</td>';
+                  echo '<td class="' . $dt3->format('Y-m-d'). '">' . '&nbsp;' . $uren[$i]
+                  . '<div class="event-rij">'
+                  . '<div class="1"></div>'
+                  . '<div class="2"></div>'
+                  . '<div class="3"></div>'
+                  . '<div class="4"></div>'
+                  . '</div></td>';
                   $dt3->modify('+1 day');
                 }
                 echo '</tr>';
@@ -251,7 +242,7 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                 {
                     foreach ($wedstrijden as $wedstrijd)
                     {
-                            echo "<div class='wedstrijd gebeurtenis' id='wedstrijd_" . $teller . "'>";
+                            echo "<div class='gebeurtenis " . $wedstrijd->reeks->datum . " " . $wedstrijd->reeks->tijdstip . " wed" . $teller. "'>";
                             echo "<span><b>" . $wedstrijd->wedstrijd->naam . " " . $wedstrijd->wedstrijd->plaats . "</b></span><br />";
                             echo "Beginuur: " . $wedstrijd->reeks->uur . "<br />";
                             echo "Slag: " . $wedstrijd->slag->soort . "<br />";
@@ -267,7 +258,7 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                 {
                     foreach ($supplementen as $supplement)
                     {
-                            echo "<div class='supplement gebeurtenis' id='supplement_" . $teller . "'>";
+                            echo "<div class='gebeurtenis " . $supplement->tijdstip . " " . $supplement->datumInname . " supp" . $teller . "'>";
                             echo "<span><b>" . $supplement->informatie->naam . "</b></span><br />";
                             echo "Tijdstip: " . $supplement->uur . "<br />";
                             echo "Hoeveelheid: " . $supplement->hoeveelheid . "g<br />";
@@ -282,7 +273,7 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                 {
                     foreach ($activiteiten as $activiteit)
                     {
-                            echo "<div class='activiteit gebeurtenis' id='activiteit_" . $teller . "'>";
+                            echo "<div class='gebeurtenis " . $activiteit->andereActiviteit->beginDatum . " " . $activiteit->andereActiviteit->tijdstip . " ander" . $teller . "'>";
                             echo "<span><b>" . $activiteit->andereActiviteit->naam . "</b></span><br />";
                             if ($activiteit->andereActiviteit->soortId == 1)
                             {

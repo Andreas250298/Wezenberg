@@ -98,4 +98,33 @@ nav{
     font-weight: bold;
 }
 
-/*EIND CSS OVER_ONS.PHP*/ 
+/*EIND CSS OVER_ONS.PHP*/
+
+/*CSS ZWEMMER_AGENDA.PHP*/
+
+.event {
+display: block;
+width: 12px;
+height: 12px;
+-webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+border-radius: 6px;
+float: left;
+border: 1px solid #777777;}
+.event-wed {
+  background-color: #94c3f7;
+}
+.event-supp {
+  background-color: #bfbfbf;
+  margin-left: 3px;
+}
+.event-ander {
+  background-color: #a9f285;
+  margin-left: 3px;
+}
+.event-stage {
+  background-color: #f9a557;
+  margin-left: 3px;
+}
+
+/*EIND CSS ZWEMMER_AGENDA.PHP*/
