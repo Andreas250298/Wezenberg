@@ -14,7 +14,7 @@ class Nieuws extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper('form', 'date');
+        $this->load->helper('form', 'date', 'file');
         $this->load->library('pagination');
     }
 
@@ -135,6 +135,9 @@ class Nieuws extends CI_Controller
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $this->load->model('nieuws_model');
+        $nieuwsArtikel = $this->nieuws_model->get($id);
+        $this->load->helper("file");
+        unlink($nieuwsArtikel->foto);
         $this->nieuws_model->delete($id);
 
         redirect("/nieuws/index");

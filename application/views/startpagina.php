@@ -125,7 +125,7 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wed
                 echo '</div>';
                 echo '<div class="col-md-6">';
                 echo anchor('Activiteiten/index', '<i class="far fa-calendar-alt fa-3x fa-fw"></i> Activiteiten beheren', 'class="beheerknop"');
-                echo anchor('supplement/supplementenToekennen', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen toekennen', 'class="beheerknop"');
+                echo anchor('supplement/supplementenPerZwemmerTrainer', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen toekennen', 'class="beheerknop"');
                 echo anchor('Supplement/beheerSupplementen', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen beheren', 'class="beheerknop"');
                 echo '</div>';
                 echo '</div>';
