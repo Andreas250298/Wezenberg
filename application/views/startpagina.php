@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file startpagina.php
  * 
@@ -13,14 +14,19 @@
  * Als je als trainer bent ingelogd krijg je ook te zien:
  * - Extra menu opties om bepaalde functionaliteiten te beheren.
  */
-
 function haalArtikelsOp($nieuwsArtikels) {
     echo '<h2 class="startTitel">Laatste nieuws</h2>';
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-up fa-2x"></i></a>';
     echo '<ul class="list-unstyled">';
     foreach ($nieuwsArtikels as $artikel) {
         echo '<p class="nieuwsartikel"><li class="media">';
-        echo toonAfbeelding("image-placeholder.png", 'width="100" height="100" class="mr-3" alt="Placeholder image"');
+        if ($artikel->foto != null) {
+            echo "<img class='img-fluid mr-3' src='" . base_url($artikel->foto) . "' width='200' height='100'/>";
+        }
+        else{
+            echo toonAfbeelding('neuws.png', 'class="img-fluid mr-3" width="80" maxheight="100"');
+        }
+
         echo '<div class="media-body">';
         echo '<h5 class="mt-0 mb-1">' . $artikel->titel . '</h5>';
         echo substr($artikel->beschrijving, 0, 144) . '...';
@@ -76,7 +82,7 @@ function haalOpenInschrijvingenOp($wedstrijden) {
         echo $wedstrijd->beginDatum . ' - ' . $wedstrijd->eindDatum;
         echo '</div>';
         echo '<div class="col-2">';
-        
+
         echo form_open('Wedstrijd/inschrijven', 'class="form-group"', $attributen);
         echo form_submit($dataSubmit);
         echo form_close();
