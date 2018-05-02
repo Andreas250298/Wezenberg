@@ -1,9 +1,10 @@
 <?php
+  echo "<img class='img-fluid' src='" . base_url($nieuwsArtikel->foto) . "'/>";
   echo "<H1 class='title'>" . $nieuwsArtikel->titel . "</h1>";
   echo "<p class='text-muted'>" . zetOmNaarDDMMYYYY($nieuwsArtikel->datumAangemaakt) . "</p>";
   echo "<p>" . $nieuwsArtikel->beschrijving . "</p>";
 
-  if ($gebruiker != null) {
+if ($gebruiker->soort == 'trainer') {
     echo anchor('Nieuws/index', 'terug', 'class="btn btn-primary"');
   } else {
     echo anchor('home/index', 'terug', 'class="btn btn-primary"');

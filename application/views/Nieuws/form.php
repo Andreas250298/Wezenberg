@@ -4,7 +4,7 @@
  *
  * View waarin men de een nieuwsitem kan toevoegen
  */
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -28,7 +28,7 @@ echo "</div>";
 echo "<div class='form-group'>";
 echo form_label("Beschrijving", 'beschrijving') . "\n";
 echo form_textarea($dataInputBeschrijving) . "\n";
-
+echo '<input type="file" name="userfile" size="20" />';
 echo "</div>";
 if(isset($nieuwsArtikel)){
     echo form_hidden('id', $nieuwsArtikel->id);

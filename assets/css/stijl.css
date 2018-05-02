@@ -87,7 +87,7 @@ nav{
 
 /*EIND CSS STARTPAGINA.PHP*/
 
-/*CSS OVER_ONS.PHP*/
+/*OVER_ONS.PHP*/
 
 .overOns{
     margin-top: 20px;
@@ -98,6 +98,7 @@ nav{
     font-weight: bold;
 }
 
+<<<<<<< HEAD
 
 /*CSS ZWEMMER_AGENDA.PHP*/
 
@@ -127,3 +128,6 @@ border: 1px solid #777777;}
 }
 
 /*EIND CSS ZWEMMER_AGENDA.PHP*/
+=======
+/*EIND CSS OVER_ONS.PHP*/ 
+>>>>>>> 37059127d1ece864fcb2155e578fe02b61de7959
