@@ -60,6 +60,7 @@ $zwemmersTabel = "";
     echo "</td>";
 
     if ($teller == 4) { // teller resetten
+        echo "</tr>";
         $teller = 0;
     }
     $teller++;

@@ -119,7 +119,8 @@ class Wedstrijd extends CI_Controller
         }
 
         $this->load->model('deelname_model');
-        $status = $this->deelname_model->get($wedstrijd->id);
+        $gebruiker = $this->authex->getGebruikerInfo();
+        $status = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
         $status->statusId = '4';
 
         redirect('/wedstrijd/beheerWedstrijden');
@@ -195,7 +196,7 @@ class Wedstrijd extends CI_Controller
     {
         $data['titel'] = "Inschrijven wedstrijden";
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
-        $gebruiker = $this->authex->getGebruikerInfo();
+        $gebruiker = $data['gebruiker'];
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
 
         $this->load->model('wedstrijd_model');
@@ -263,22 +264,23 @@ class Wedstrijd extends CI_Controller
     *\see Afstand_model::getAllAfstanden()
     *\see maakReeks.php
     */
-    public function maakReeks($id = 0)
+    public function maakReeks()
     {
         $data['titel'] = "Reeksen toevoegen";
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
-        $reeksen = $this->wedstrijd_model->getReeksen($id);
+        /*$reeksen = $this->wedstrijd_model->getReeksen($id);
         $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
         if (isset($reeks)) {
             $data['slag'] = $this->wedstrijd_model->getSlagenPerWedstrijd($reeksen->slagId);
             $data['afstand'] = $this->wedstrijd_model->getAfstandenPerWedstrijd($reeksen->afstandId);
-        }
+        }*/
         $this->load->model('slag_model');
         $data['slagen'] = $this->slag_model->getAllSlagen();
         $this->load->model('afstand_model');
         $data['afstanden'] = $this->afstand_model->getAllAfstanden();
+        $data['reeks'] = null;
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/maakReeks',
           'voetnoot' => 'main_footer');
@@ -300,14 +302,19 @@ class Wedstrijd extends CI_Controller
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
         $wedstrijd = $this->wedstrijd_model->get($id);
-        $reeksen = $this->wedstrijd_model->getReeksen($id);
+        $reeksen = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
-        $id = $reeksen->wedstrijdId;
+        //$wedstrijdId = $reeksen->wedstrijdId;
         $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
         if (isset($reeksen)) {
-            $data['slagen'] = $this->wedstrijd_model->getSlagenPerWedstrijd($reeksen->slagId);
-            $data['afstanden'] = $this->wedstrijd_model->getAfstandenPerWedstrijd($reeksen->afstandId);
+            foreach ($reeksen as $reeks) {
+                $slagId = $reeks->slagId;
+                $afstandId = $reeks->afstandId;
+            }
         }
+        $data['slagen'] = $this->wedstrijd_model->getSlagenPerReeks($slagId);
+
+        $data['afstanden'] = $this->wedstrijd_model->getAfstandenPerReeks($afstandId);
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/info',
           'voetnoot' => 'main_footer');

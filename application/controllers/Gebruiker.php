@@ -94,8 +94,13 @@ class Gebruiker extends CI_Controller
         } else {
             $this->gebruiker_model->update($gebruiker);
         }
+        $gebruiker = $this->authex->getGebruikerInfo();
+        if($gebruiker->soort == "zwemmer"){
+          redirect('gebruiker/account/' . $gebruiker->id);
+        } else {
+          redirect('/gebruiker/toonZwemmers');
+        }
 
-        redirect('/gebruiker/toonZwemmers');
     }
 
     /**
