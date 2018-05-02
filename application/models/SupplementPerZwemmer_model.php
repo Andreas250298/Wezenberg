@@ -38,7 +38,7 @@ class SupplementPerZwemmer_model extends CI_Model
     */
     public function getSupplementenPerAlleZwemmers()
     {
-        $this->db->order_by('gebruikerIdZwemmer', 'asc');
+        $this->db->order_by('datumInname', 'asc');
         $supplementenPerZwemmer = $this->db->get('supplementPerZwemmer')->result();
         if ($supplementenPerZwemmer == null) {
             return null ;
@@ -139,5 +139,15 @@ class SupplementPerZwemmer_model extends CI_Model
     {
         $this->db->insert('supplementPerZwemmer', $supplementPerZwemmer);
         return $this->db->insert_id();
+    }
+
+    /**
+     * Een supplementPerZwemmer verwijderen uit de database
+     * @param $id Het id van het supplementPerZwemmer dat moet verwijderd worden
+     */
+    public function delete($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('supplementPerZwemmer');
     }
 }

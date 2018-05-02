@@ -139,6 +139,23 @@ class Supplement extends CI_Controller
         redirect("/supplement/index");
     }
 
+     /**
+    * Verwijderen van supplementPerZwemmer volgens id
+    *\see Authex::getGebruikerInfo()
+    *\see Supplement_model::delete()
+    *\see Supplement::index()
+    */
+    public function verwijderSupplementPerZwemmer()
+    {
+        $id = $this->input->get('id');
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $this->load->model('supplementPerZwemmer_model');
+        $this->supplementPerZwemmer_model->delete($id);
+
+        redirect("/supplement/supplementenPerZwemmerTrainer");
+    }
+
     /**
     * Tonen van supplementen voor een zwemmer
     * @param id id van de Zwemmer
@@ -170,6 +187,7 @@ class Supplement extends CI_Controller
         $data['supplementenPerZwemmer'] = $this->supplementPerZwemmer_model->getSupplementenPerAlleZwemmers();
         $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
 
+        // var_dump($data['supplementenPerZwemmer']);
         $data['titel'] = 'Supplementen voor alle zwemmers';
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'SupplementPerZwemmer/bekijken',
@@ -212,6 +230,6 @@ class Supplement extends CI_Controller
             $this->load->model('supplementPerZwemmer_model');
             $this->supplementPerZwemmer_model->insert($supplementPerZwemmer);
         }
-        redirect("/supplement/index");
+        redirect("/supplement/supplementenPerZwemmerTrainer");
     }
 }
