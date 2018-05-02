@@ -79,14 +79,32 @@ class Nieuws extends CI_Controller
         $datestring = date("Y-m-d");
         $artikel->datumAangemaakt = $datestring;
 
-        $this->load->model('nieuws_model');
-        if ($artikel->id == null) {
-            $this->nieuws_model->insert($artikel);
+        $config['upload_path']          = './uploads/nieuws';
+        $config['allowed_types']        = 'gif|jpg|jpeg|png';
+        /* $config['max_size']             = 1000;
+        $config['max_width']            = 1920;
+        $config['max_height']           = 1080; */
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('userfile'))
+        {
+          $error = array('error' => $this->upload->display_errors());
+
+          $this->load->view('Nieuws/error', $error);
         } else {
-            $this->nieuws_model->update($artikel);
+          $upload_data = $this->upload->data();
+          $artikel->foto = 'uploads/nieuws/' . $upload_data['file_name'];
+
+          $this->load->model('nieuws_model');
+          if ($artikel->id == null) {
+              $this->nieuws_model->insert($artikel);
+          } else {
+              $this->nieuws_model->update($artikel);
+          }
+          redirect('/nieuws/index');
         }
 
-        redirect('/nieuws/index');
     }
 
     /**
