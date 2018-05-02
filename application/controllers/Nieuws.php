@@ -87,6 +87,19 @@ class Nieuws extends CI_Controller
 
         $this->load->library('upload', $config);
 
+        if($this->upload->do_upload('userfile')){
+          $upload_data = $this->upload->data();
+          $artikel->foto = 'uploads/nieuws/' . $upload_data['file_name'];
+        }
+
+        $this->load->model('nieuws_model');
+        if ($artikel->id == null) {
+            $this->nieuws_model->insert($artikel);
+        } else {
+            $this->nieuws_model->update($artikel);
+        }
+        redirect('/nieuws/index');
+        /*
         if (!$this->upload->do_upload('userfile'))
         {
           $error = array('error' => $this->upload->display_errors());
@@ -103,7 +116,7 @@ class Nieuws extends CI_Controller
               $this->nieuws_model->update($artikel);
           }
           redirect('/nieuws/index');
-        }
+        } */
 
     }
 
