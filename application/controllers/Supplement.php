@@ -160,6 +160,22 @@ class Supplement extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+
+    public function supplementenPerZwemmerTrainer()
+    {
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $this->load->model('supplementPerZwemmer_model');
+        $this->load->model('gebruiker_model');
+        $data['supplementenPerZwemmer'] = $this->supplementPerZwemmer_model->getSupplementenPerAlleZwemmers();
+        $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
+
+        $data['titel'] = 'Supplementen voor alle zwemmers';
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'SupplementPerZwemmer/bekijken',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
     /**
     * Als trainer supplementen toekennen aan een zwemmer
     *\see Supplementen_model::getSupplementen()
@@ -177,8 +193,25 @@ class Supplement extends CI_Controller
 
         $data['titel'] = 'Supplement toekennen';
         $partials = array('hoofding' => 'main_header',
-          'inhoud' => 'Supplement/toekennen',
+          'inhoud' => 'SupplementPerZwemmer/toekennen',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
+    }
+
+    public function toekennen()
+    {
+        $zwemmers = $this->input->post('zwemmers');
+        foreach ($zwemmers as $zwemmer) {
+            $supplementPerZwemmer = new stdClass();
+            $supplementPerZwemmer->gebruikerIdZwemmer = $zwemmer;
+            $supplementPerZwemmer->supplementId = $this->input->post('supplement');
+            $supplementPerZwemmer->hoeveelheid = $this->input->post('hoeveelheid');
+            $supplementPerZwemmer->datumInname = $this->input->post('datum');
+            $supplementPerZwemmer->tijdstipInname = $this->input->post('tijdstip');
+
+            $this->load->model('supplementPerZwemmer_model');
+            $this->supplementPerZwemmer_model->insert($supplementPerZwemmer);
+        }
+        redirect("/supplement/index");
     }
 }

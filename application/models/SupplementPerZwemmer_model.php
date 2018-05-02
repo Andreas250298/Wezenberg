@@ -34,6 +34,26 @@ class SupplementPerZwemmer_model extends CI_Model
     }
 
     /**
+    ** Opvragen van supplementen voor alle zwemmers
+    */
+    public function getSupplementenPerAlleZwemmers()
+    {
+        $this->db->order_by('gebruikerIdZwemmer', 'asc');
+        $supplementenPerZwemmer = $this->db->get('supplementPerZwemmer')->result();
+        if ($supplementenPerZwemmer == null) {
+            return null ;
+        } else {
+            $this->load->model('supplement_model');
+            $this->load->model('gebruiker_model');
+            foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
+                $supplementPerZwemmer->supplement = $this->supplement_model->get($supplementPerZwemmer->supplementId);
+                $supplementPerZwemmer->zwemmer = $this->gebruiker_model->get($supplementPerZwemmer->gebruikerIdZwemmer);
+            }
+            return $supplementenPerZwemmer;
+        }
+    }
+
+    /**
     * Opvragen van reeksen in een opgegeven week
     * @param maandag Datum van maandag
     * @param zondag Datum van zondag
