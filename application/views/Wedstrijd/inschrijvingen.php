@@ -26,21 +26,19 @@ foreach ($wedstrijden as $wedstrijd) {
         foreach ($status as $deel) {
             if (isset($deel->naam)) {
                 $stat = $deel->naam;
-                if ($deel != null) {
-                    $lijstWedstrijden .= "<td>" .
-    $deel->naam ."</td>";
-                }
             }
         }
     } else {
         $stat = "open";
-        $lijstWedstrijden .= "<td>" . $stat . "</td>";
     }
+    $lijstWedstrijden .= "<td>" . $stat . "</td>";
+
     if ($stat == "open") {
         $lijstWedstrijden .= '<td>'.
   form_submit($dataSubmit);
-        '</td><td></tr>';
+        '</td>';
     }
+    $lijstWedstrijden .= "</tr>";
 }
 ?>
 <table class="table">

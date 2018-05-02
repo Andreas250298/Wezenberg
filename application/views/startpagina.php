@@ -1,20 +1,20 @@
 <?php
 /**
  * @file startpagina.php
- * 
+ *
  * View waarop de gebruiker als eerste komt bij het bezoeken van de website.
  * - Welkomtekst met een $trainingscentrum-object
  * - Nieuwsartikels worden getoond door middel van $artikel-objecten.
  * - AgendaItems worden getoond door middel van $agendaItem-objecten.
- * 
+ *
  * Als je als zwemmer bent ingelogd krijg je ook te zien:
  * - $wedstrijd-objecten waarvoor hij zich nog kan inschrijven.
- * 
+ *
  * Als je als trainer bent ingelogd krijg je ook te zien:
  * - Extra menu opties om bepaalde functionaliteiten te beheren.
  */
-
-function haalArtikelsOp($nieuwsArtikels) {
+function haalArtikelsOp($nieuwsArtikels)
+{
     echo '<h2 class="startTitel">Laatste nieuws</h2>';
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-up fa-2x"></i></a>';
     echo '<ul class="list-unstyled">';
@@ -32,7 +32,8 @@ function haalArtikelsOp($nieuwsArtikels) {
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-down fa-2x"></i></a>';
 }
 
-function haalAgendaOp($agendaItems) {
+function haalAgendaOp($agendaItems)
+{
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-up fa-2x"></i></a>';
     echo '<div class="col">';
     foreach ($agendaItems as $agendaItem) {
@@ -54,10 +55,14 @@ function haalAgendaOp($agendaItems) {
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-down fa-2x"></i></a>';
 }
 
-function haalOpenInschrijvingenOp($wedstrijden) {
+function haalOpenInschrijvingenOp($wedstrijden)
+{
+    $stat = "";
     echo '<h2 class="startTitel">Openstaande Inschrijvingen</h2>';
     echo '<ul class="list-unstyled">';
+
     $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Inschrijven');
+
     $attributen = array('id' => 'mijnFormulier',
         'class' => 'form-inline my2 my-lg0',
         'data-toggle' => 'validator',
@@ -76,9 +81,18 @@ function haalOpenInschrijvingenOp($wedstrijden) {
         echo $wedstrijd->beginDatum . ' - ' . $wedstrijd->eindDatum;
         echo '</div>';
         echo '<div class="col-2">';
-        
         echo form_open('Wedstrijd/inschrijven', 'class="form-group"', $attributen);
-        echo form_submit($dataSubmit);
+        if (isset($status)) {
+            foreach ($status as $deel) {
+                if (isset($deel->naam)) {
+                    $stat = $deel->naam;
+                }
+            }
+        }
+        if ($stat == "open") {
+            echo form_submit($dataSubmit);
+        }
+
         echo form_close();
         echo '</div>';
         echo '</div>';
@@ -92,7 +106,8 @@ function haalOpenInschrijvingenOp($wedstrijden) {
     echo anchor('wedstrijd/inschrijvingen', 'Alle openstaande inschrijvingen bekijken', 'class="scrollknop text-center"');
 }
 
-function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wedstrijden) {
+function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wedstrijden)
+{
     if ($gebruiker != null) {
         switch ($gebruiker->soort) {
             case 'zwemmer': // zwemmer

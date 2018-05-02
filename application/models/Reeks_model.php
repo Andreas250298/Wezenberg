@@ -60,8 +60,8 @@ class Reeks_model extends CI_Model
     }
 
     /**
-     * Een wedstrijd wijzigen in de database
-     * @param $wedstrijd De wedstrijd die moet gewijzigd worden
+     * Een reeks wijzigen in de database
+     * @param $reeks De reeks die moet gewijzigd worden
      */
     public function update($reeks)
     {
