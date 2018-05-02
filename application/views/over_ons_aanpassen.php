@@ -1,19 +1,15 @@
 <?php
+/**
+ * @file over_ons_aanpassen.php
+ * 
+ * View waarin de informatie over het trainingscentrum Wezenberg aangepast kan worden.
+ * - Krijgt een $trainingscentrum-object binnen
+ * - Wijzigingen gebeuren in de controller Trainingscentrum.php
+ */
+
 $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
 ?>
 
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Raleway');
-
-    .overOns{
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .overOns h2{
-        font-family: 'Raleway', sans-serif;
-        font-weight: bold;
-    }
-</style>
 <div class="form-row col-12">
     <?php echo form_open('trainingscentrum/registreer', 'class="col-12"') ?>
     <div class=" col-12 overOns form-group">
