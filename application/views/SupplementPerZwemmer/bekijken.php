@@ -2,28 +2,27 @@
 var id = "";
     $(document).ready(function () {
         $(".modal-trigger").click(function() {
-          id = $(this).parent().find('#id').val()
-          $('#mijnDialoogscherm').modal('show')
+            id = $(this).parent().find('#id').val()
+            $('#mijnDialoogscherm').modal('show')
         })
 
-      $("#buttonDelete").click(function(){
-        verwijderSupplementPerZwemmer(id);
-      })
+        $("#buttonDelete").click(function(){
+            verwijderSupplementPerZwemmer(id);
+        })
 
-      function verwijderSupplementPerZwemmer(id){
-        $.ajax({type: "GET",
-        url: site_url + "/supplement/verwijderSupplementPerZwemmer",
-        data:{id : id},
-        success: function(){
-          window.location.reload();
-        },
-        error: function (xhr, status, error){
-          alert("--ERROR IN AJAX --\n\n" + xhr.responseText);
-        }
-      });
-      }
-    })
-
+        function verwijderSupplementPerZwemmer(id){
+         $.ajax({type: "GET",
+            url: site_url + "/supplement/verwijderSupplementPerZwemmer",
+            data:{id : id},
+            success: function(){
+             window.location.reload();
+            },
+            error: function (xhr, status, error){
+              alert("--ERROR IN AJAX --\n\n" + xhr.responseText);
+            }
+        });
+    }
+})
 </script>
 <?php
 
@@ -76,7 +75,7 @@ foreach ($zwemmers as $zwemmer) {
                   <td>
                   ".zetOmNaarDDMMYYYY($supplementPerZwemmer->datumInname)."
                   </td>
-                  <td>".form_input($data)."<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button></td>
+                  <td>".form_input($data) . anchor('supplement/aanpassenSupplementPerZwemmer/'.$supplementPerZwemmer->id ,'<button type="button" class="btn btn-success btn-xs btn-round"><i class="fas fa-edit"></i></button>')."<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button></td>
                 </tr>";
             }
         }
@@ -85,6 +84,7 @@ foreach ($zwemmers as $zwemmer) {
         echo "</br>";
     }
 }
+echo anchor('home/index',"<button type=\"button\" class=\"btn btn-primary mx-auto\">Terug</button>");
 ?>
 <!-- Dialoogvenster -->
 <div class="modal fade" id="mijnDialoogscherm" role="dialog">
