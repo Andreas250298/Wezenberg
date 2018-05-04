@@ -4,11 +4,21 @@ $lijstWedstrijden = "";
   echo "<p>" . $wedstrijd->beschrijving . "</p>";
   foreach ($reeksen as $reeks) {
       $lijstWedstrijden .= "<tr><td>" .
-      $reeks->id . "</td><td>" .
-      $slagen->soort . "</td><td>" .
-      $afstanden->afstand . "</td><td>" .
-      $reeks->tijdstip ."</td></tr>"
-      ;
+      $reeks->id . "</td><td>";
+      foreach ($slagenPerReeks as $slag) {
+          if (isset($slag->soort)) {
+              $lijstWedstrijden .= $slag->soort;
+          }
+      }
+
+      $lijstWedstrijden .= "</td><td>";
+      foreach ($afstanden as $afstand) {
+          if (isset($afstand->afstand)) {
+              $lijstWedstrijden .= $afstand->afstand;
+          }
+      }
+
+      $lijstWedstrijden .= "</td><td>" . $reeks->tijdstip ."</td></tr>";
   }
 ?>
 <table class="table">
