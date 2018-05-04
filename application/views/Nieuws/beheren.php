@@ -60,16 +60,24 @@ var id = "";
  */
 echo "<p>" . anchor('home/index', 'Terug', "Class='btn btn-primary my-2 my-sm0'")  . " ";
 echo anchor('Nieuws/maakNieuwsArtikel', "nieuw artikel", "Class='btn btn-primary my-2 my-sm0'") . "</p>";
-foreach ($nieuwsArtikels as $nieuwsArtikel) {
-    echo "<div class='card'>";
-    echo '<div class="card-body" id="' . $nieuwsArtikel->id . '">';
-    echo '<h5 class="card-title">' . $nieuwsArtikel->titel . '</h5>';
-    echo '<p class="card-text text-muted">' . $nieuwsArtikel->datumAangemaakt . '</p>';
-    echo '<p class="card-text">' . substr($nieuwsArtikel->beschrijving, 0, 144) . '...</p>';
-    echo anchor('Nieuws/wijzig/' . $nieuwsArtikel->id, 'aanpassen', 'class="btn btn-primary"') . " ";
-    echo anchor('Nieuws/bekijk/' . $nieuwsArtikel->id, 'bekijken', 'class="btn btn-primary"') . " ";
+
+foreach ($nieuwsArtikels as $artikel) {
+    echo '<p class="nieuwsartikel"><li class="media">';
+    if ($artikel->foto != null) {
+        echo "<img class='img-fluid mr-3' src='" . base_url($artikel->foto) . "' width='200' height='100'/>";
+    }
+    else{
+        echo toonAfbeelding('neuws.png', 'class="img-fluid mr-3" width="80" maxheight="100"');
+    }
+
+    echo '<div class="media-body">';
+    echo '<h5 class="mt-0 mb-1">' . $artikel->titel . '</h5>';
+    echo substr($artikel->beschrijving, 0, 144) . '...';
+    echo '<p>' . anchor('Nieuws/wijzig/' . $artikel->id, 'aanpassen', 'class="btn btn-primary"') . " ";
+    echo anchor('Nieuws/bekijk/' . $artikel->id, 'bekijken', 'class="btn btn-primary"') . " ";
     echo "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>";
-    echo '</div></div>';
+    echo '</p></div>';
+    echo '</li></p>';
 }
 
 echo "<p>" . $links . "</p>\n";
