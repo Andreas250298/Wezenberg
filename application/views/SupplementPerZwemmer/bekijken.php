@@ -33,7 +33,7 @@ foreach ($supplementenPerAlleZwemmers as $supplementPerZwemmer) {
 
 echo anchor(
     "supplement/supplementenToekennen",
-    "<button type=\"button\" class=\"btn btn-primary mx-auto\">Supplement toekennen</button>"
+    "<button type=\"button\" class=\"btn btn-primary mx-auto\">Supplement toekennen</button> "
 );
 
 foreach ($zwemmers as $zwemmer) {
@@ -75,7 +75,7 @@ foreach ($zwemmers as $zwemmer) {
                   <td>
                   ".zetOmNaarDDMMYYYY($supplementPerZwemmer->datumInname)."
                   </td>
-                  <td>".form_input($data) . anchor('supplement/aanpassenSupplementPerZwemmer/'.$supplementPerZwemmer->id ,'<button type="button" class="btn btn-success btn-xs btn-round"><i class="fas fa-edit"></i></button>')."<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button></td>
+                  <td>".form_input($data) . anchor('supplement/aanpassenSupplementPerZwemmer/'.$supplementPerZwemmer->id, '<button type="button" class="btn btn-success btn-xs btn-round"><i class="fas fa-edit"></i></button>')."<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button></td>
                 </tr>";
             }
         }
@@ -84,7 +84,7 @@ foreach ($zwemmers as $zwemmer) {
         echo "</br>";
     }
 }
-echo anchor('home/index',"<button type=\"button\" class=\"btn btn-primary mx-auto\">Terug</button>");
+echo anchor('home/index', "<button type=\"button\" class=\"btn btn-primary mx-auto\">Terug</button>");
 ?>
 <!-- Dialoogvenster -->
 <div class="modal fade" id="mijnDialoogscherm" role="dialog">
