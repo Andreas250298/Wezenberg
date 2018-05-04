@@ -1,4 +1,17 @@
 <?php
+/**
+ * @file inschrijvingen.php
+ * 
+ * View waarop de zwemmer .
+
+ * - $wedstrijd-objecten waarvoor hij zich nog kan inschrijven.
+ * 
+ * Als je als trainer bent ingelogd krijg je ook te zien:
+ * - Extra menu opties om bepaalde functionaliteiten te beheren.
+ */
+
+
+
 $lijstWedstrijden = '';
 $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Inschrijven');
 $attributen = array('id' => 'mijnFormulier',
@@ -43,6 +56,7 @@ foreach ($wedstrijden as $wedstrijd) {
     }
 }
 ?>
+<h2 class="startTitel">Open inschrijvingen</h2>
 <table class="table">
   <?php echo form_open('Wedstrijd/inschrijven', 'class="form-group"', $attributen);?>
   <thead>
@@ -73,6 +87,9 @@ foreach ($wedstrijden as $wedstrijd) {
   </tbody>
   <?php echo form_close();?>
 </table>
+
+<h2 class="startTitel">Voorbije inschrijvingen</h2>
+
 <p>
     <a id="terug" href="javascript:history.go(-1);">Terug</a>
 </p>

@@ -130,20 +130,6 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wed
     }
 }
 ?>
-<style>
-    .helpBar{
-        margin: 20px 0 10px 0;
-        display: block;
-        padding: 10px;
-        background-color: lightgray;
-        border: 1px solid darkgray;
-        border-radius: 10px;
-    }
-    .tab {
-        display:inline-block;
-        margin-left: 20px;
-    }
-</style>
 <div class="row">
     <div class="col-12 col-lg-8">
         <?php
