@@ -50,9 +50,10 @@ class Wedstrijd extends CI_Controller
         $data['paginaVerantwoordelijke'] = 'De Coninck Mattias';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
-        $this->load->model('wedstrijd_model');
-        $data['afstanden'] = $this->wedstrijd_model->getAfstanden();
-        $data['slagen'] = $this->wedstrijd_model->getSlagen();
+        $this->load->model('afstand_model');
+        $data['afstanden'] = $this->afstand_model->getAllAfstanden();
+        $this->load->model('slag_model');
+        $data['slagen'] = $this->slag_model->getAllSlagen();
         $this->load->model('status_model');
         $data['statussen'] = $this->status_model->getAll();
         $partials = array('hoofding' => 'main_header',
