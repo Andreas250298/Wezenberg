@@ -68,7 +68,10 @@ class Reeks_model extends CI_Model
         $this->db->where('wedstrijdId', $id);
         $reeks = $this->db->get('reeks')->row();
         $this->load->model('afstand_model');
-        $reeks->afstand = $this->afstand_model->get($reeks->afstandId);
+        if (isset($reeks->afstandId)) {
+            $reeks->afstand = $this->afstand_model->get($reeks->afstandId);
+        }
+
         return $reeks;
     }
 
@@ -82,7 +85,10 @@ class Reeks_model extends CI_Model
         $this->db->where('wedstrijdId', $id);
         $reeks = $this->db->get('reeks')->row();
         $this->load->model('slag_model');
-        $reeks->slag= $this->slag_model->get($reeks->slagId);
+        if (isset($reeks->slagId)) {
+            $reeks->slag= $this->slag_model->get($reeks->slagId);
+        }
+
         return $reeks;
     }
 
