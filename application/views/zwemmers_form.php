@@ -28,7 +28,7 @@ if (isset($zwemmer)) {
 }
     $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
 
-echo form_open('Gebruiker/registreer', 'class="form-group"', $attributen);
+echo form_open_multipart('Gebruiker/registreer', 'class="form-group"', $attributen);
 echo "<div class='form-group'>";
 echo form_labelpro("Naam", 'naam') . "\n";
 echo form_input($dataInputNaam) . "\n";
@@ -52,6 +52,7 @@ echo "</div>";
 echo "<div class='form-group'>";
 echo form_labelpro("Beschrijving", 'beschrijving') . "\n";
 echo form_textarea($dataInputBeschrijving) . "\n";
+echo '<input type="file" name="userfile" size="20" />';
 echo "</div>";
 if (isset($zwemmer)) {
     echo form_hidden('id', $zwemmer->id);

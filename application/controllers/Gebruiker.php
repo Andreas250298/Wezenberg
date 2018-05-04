@@ -86,6 +86,19 @@ class Gebruiker extends CI_Controller
         $gebruiker->geboortedatum = $this->input->post('geboortedatum');
         $gebruiker->beschrijving = $this->input->post('beschrijving');
 
+        $config['upload_path']          = './uploads/gebruikers';
+        $config['allowed_types']        = 'gif|jpg|jpeg|png';
+        /* $config['max_size']             = 1000;
+        $config['max_width']            = 1920;
+        $config['max_height']           = 1080; */
+
+        $this->load->library('upload', $config);
+
+        if($this->upload->do_upload('userfile')){
+          $upload_data = $this->upload->data();
+          $gebruiker->foto = 'uploads/gebruikers/' . $upload_data['file_name'];
+        }
+
         $this->load->model('gebruiker_model');
         if ($gebruiker->id == null) {
             $gebruiker->status = 1;
@@ -94,6 +107,8 @@ class Gebruiker extends CI_Controller
         } else {
             $this->gebruiker_model->update($gebruiker);
         }
+
+
         $gebruiker = $this->authex->getGebruikerInfo();
         if($gebruiker->soort == "zwemmer"){
           redirect('gebruiker/account/' . $gebruiker->id);
@@ -132,7 +147,12 @@ class Gebruiker extends CI_Controller
     {
         $id = $this->input->get('id');
         $this->load->model('gebruiker_model');
+        $gebruiker = $this->gebruiker_model->get($id);
+        $this->load->helper("file");
+        unlink($gebruiker->foto);
         $this->gebruiker_model->delete($id);
+
+
 
         redirect('/gebruiker/toonZwemmers');
     }
@@ -343,14 +363,6 @@ class Gebruiker extends CI_Controller
         $this->load->model('deelname_model');
         $deelnames = $this->deelname_model->getInformatieDeelnames($gebruiker->id, $week, $jaar);
 
-        $i = 0;
-        if ($deelnames != null) {
-            foreach ($deelnames as $deelname) {
-                $deelname->id = $i;
-                $i++;
-            }
-        }
-
         echo json_encode($deelnames);
     }
 
@@ -367,14 +379,6 @@ class Gebruiker extends CI_Controller
         $this->load->model('supplementPerZwemmer_model');
         $supplementen = $this->supplementPerZwemmer_model->getInformatieSupplementen($gebruiker->id, $week, $jaar);
 
-        $i = 0;
-        if ($supplementen != null) {
-            foreach ($supplementen as $supplement) {
-                $supplement->id = $i;
-                $i++;
-            }
-        }
-
         echo json_encode($supplementen);
     }
 
@@ -390,14 +394,6 @@ class Gebruiker extends CI_Controller
 
         $this->load->model('activiteitPerGebruiker_model');
         $activiteiten = $this->activiteitPerGebruiker_model->getInformatieActiviteiten($gebruiker->id, $week, $jaar);
-
-        $i = 0;
-        if ($activiteiten != null) {
-            foreach ($activiteiten as $activiteit) {
-                $activiteit->id = $i;
-                $i++;
-            }
-        }
 
         echo json_encode($activiteiten);
     }
