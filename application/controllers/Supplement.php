@@ -177,7 +177,11 @@ class Supplement extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
-
+     /**
+     * Alle supplementPerZwemmer tonen aan de trainer
+     * \see SupplementPerZwemmer_model::getSupplementenPerAlleZwemmers
+     * \see Gebruiker_model::toonZwemmers
+     */
     public function supplementenPerZwemmerTrainer()
     {
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
@@ -215,6 +219,57 @@ class Supplement extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+     /**
+     * Aanpassen supplementPerZwemmer als de trainer
+     * \see SupplementPerZwemmer_model::get
+     * \see Supplement_model->getSupplementen
+     */
+    public function aanpassenSupplementPerZwemmer($id){
+        $this->load->model('supplementPerZwemmer_model');
+        $this->load->model('supplement_model');
+
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $data['supplementPerZwemmer'] = $this->supplementPerZwemmer_model->get($id);
+        $data['supplementen'] = $this->supplement_model->getSupplementen();
+
+        $data['titel'] = 'Supplement aanpassen';
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'SupplementPerZwemmer/aanpassen',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+
+     /**
+     * Aanpassen supplementPerZwemmer als de trainer
+     * \see SupplementPerZwemmer_model::get
+     * \see Supplement_model->getSupplementen
+     */
+    public function aanpassen()
+    {   
+        $supplementPerZwemmer = new stdClass();
+        $supplementPerZwemmer->id = $this->input->post('id');
+        $supplementPerZwemmer->supplementId = $this->input->post('supplement');
+        $supplementPerZwemmer->gebruikerIdZwemmer = $this->input->post('zwemmer');
+        $supplementPerZwemmer->hoeveelheid = $this->input->post('hoeveelheid');
+        $supplementPerZwemmer->datumInname = $this->input->post('datum');
+        $supplementPerZwemmer->tijdstipInname = $this->input->post('tijdstip');
+
+        if ($supplementPerZwemmer->datumInname < date('Y-m-d')){
+            $message = "Datum moet verder liggen als vandaag!";
+            return $this->error($message);
+        } else{
+            $this->load->model('supplementPerZwemmer_model');
+            $this->supplementPerZwemmer_model->update($supplementPerZwemmer);
+            redirect("/supplement/supplementenPerZwemmerTrainer");
+        }
+    }
+
+     /**
+     * Toekennen supplementPerZwemmer als de trainer
+     * \see SupplementPerZwemmer_model::insert
+     * \see Supplement::error
+     */
     public function toekennen()
     {
         $zwemmers = $this->input->post('zwemmers');
@@ -244,6 +299,10 @@ class Supplement extends CI_Controller
         redirect("/supplement/supplementenPerZwemmerTrainer");
     }
 
+    /**
+     * Tonen van error
+     * @param message de boodschap die moet worden weergegeven
+     */
     public function error($message){
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();

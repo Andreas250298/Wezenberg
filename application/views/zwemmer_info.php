@@ -13,7 +13,7 @@ $disciplines = "100m vlinderslag";
 
     <div class="row text-center mt-4 pb-3">
       <?php if ($zwemmer->foto != ""){
-        echo '<div class="col-md-3 offset-1"><img width=250 src="' . base_url($zwemmer->foto) . '"/><br /><br />';
+        echo '<div class="col-md-3 offset-1"><img width=250 height=250 src="' . base_url($zwemmer->foto) . '"/><br /><br />';
       } else {
         echo '<div class="col-md-3 offset-1"><img src="http://placehold.it/250x250"/><br /><br />';
       }
