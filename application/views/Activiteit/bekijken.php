@@ -1,60 +1,4 @@
 <script type="text/javascript">
-function haalWedstrijdenOp(week, jaar) {
-    $.ajax({type: "GET",
-        url: site_url + "/gebruiker/haalJsonOp_Wedstrijden",
-        data: {huidigeWeek: week, huidigJaar: jaar},
-        success: function (result) {
-            try {
-                var wedstrijdenWeek = jQuery.parseJSON(result);
-
-                if (wedstrijdenWeek != null) {
-                    $.each(wedstrijdenWeek, function(index) {
-                        var tijd = wedstrijdenWeek[index].reeks.tijdstip;
-                        var datum =  wedstrijdenWeek[index].reeks.datum;
-                        var td = $("tr[class=" + tijd + "]").find("." + datum);
-
-                        td.addClass("font-weight-bold text-dark");
-                        td.find(".event-rij").find(".1").addClass("event event-wed").attr('id', 'wed' + index);
-                    });
-                }
-            } catch (error) {
-                alert("-- ERROR IN JSON --\n" + result);
-            }
-        },
-        error: function (xhr, status, error) {
-            alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
-        }
-    });
-};
-
-function haalSupplementenOp(week, jaar) {
-    $.ajax({type: "GET",
-        url: site_url + "/gebruiker/haalJsonOp_Supplementen",
-        data: {huidigeWeek: week, huidigJaar: jaar},
-        success: function (result) {
-            try {
-                var supplementenWeek = jQuery.parseJSON(result);
-
-                if (supplementenWeek != null) {
-                    $.each(supplementenWeek, function(index) {
-                        var tijd = supplementenWeek[index].tijdstip;
-                        var datum =  supplementenWeek[index].datumInname;
-                        var td = $("tr[class=" + tijd + "]").find("." + datum);
-
-                        td.addClass("font-weight-bold text-dark");
-                        td.find(".event-rij").find(".2").addClass("event event-supp").attr('id', 'supp' + index);
-                    });
-                }
-            } catch (error) {
-                alert("-- ERROR IN JSON --\n" + result);
-            }
-        },
-        error: function (xhr, status, error) {
-            alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
-        }
-    });
-};
-
 function haalActiviteitenOp(week, jaar) {
     $.ajax({type: "GET",
         url: site_url + "/gebruiker/haalJsonOp_Activiteiten",
@@ -95,8 +39,6 @@ $(document).ready(function () {
     var week = $("input[name=week]").val();
     var jaar = $("input[name=jaar]").val();
 
-    haalWedstrijdenOp(week, jaar);
-    haalSupplementenOp(week, jaar);
     haalActiviteitenOp(week, jaar);
 
     $(".gebeurtenis").hide();
@@ -104,7 +46,7 @@ $(document).ready(function () {
     $("table").on('click', '.event', function () {
         $(".gebeurtenis").hide();
         var id = $(this).attr("id");
-        var klasse = $(this).closest("tr").attr("class");
+        var klasse = $(this).closest('tr').attr("class");
         $("div." + id + "." + klasse).show();
       });
 });
@@ -185,10 +127,10 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
 
   <div class="row">
     <div class="col-sm-2 offset-3">
-      <?php echo anchor('gebruiker/agenda/' . $vorigeWeek . '/' . $vorigJaar, 'Vorige week', 'class="nav-link"'); ?>
+      <?php echo anchor('activiteit/index/' . $vorigeWeek . '/' . $vorigJaar, 'Vorige week', 'class="nav-link"'); ?>
     </div>
     <div class="col-sm-2 offset-2">
-      <?php echo anchor('gebruiker/agenda/' . $volgendeWeek . '/' . $volgendJaar, 'Volgende week', 'class="nav-link"'); ?>
+      <?php echo anchor('activiteit/index/' . $volgendeWeek . '/' . $volgendJaar, 'Volgende week', 'class="nav-link"'); ?>
     </div>
   </div>
 
@@ -218,8 +160,6 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                 {
                   echo '<td class="' . $dt3->format('Y-m-d'). '">' . '&nbsp;' . $uren[$i]
                   . '<div class="event-rij">'
-                  . '<div class="1"></div>'
-                  . '<div class="2"></div>'
                   . '<div class="3"></div>'
                   . '<div class="4"></div>'
                   . '</div></td>';
@@ -229,6 +169,7 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
               }
           ;?>
         </table>
+        <?php echo anchor('activiteit/maken', 'Nieuwe activiteit', 'class="nav-link"'); ?>
       </div>
     </div>
   </div>
@@ -237,37 +178,6 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
       <div class="col-sm-12">
           <div class="text-left">
               <?php
-                $teller = 0;
-                if ($wedstrijden != null)
-                {
-                    foreach ($wedstrijden as $wedstrijd)
-                    {
-                            echo "<div class='gebeurtenis " . $wedstrijd->reeks->datum . " " . $wedstrijd->reeks->tijdstip . " wed" . $teller. "'>";
-                            echo "<span><b>" . $wedstrijd->wedstrijd->naam . " " . $wedstrijd->wedstrijd->plaats . "</b></span><br />";
-                            echo "Beginuur: " . $wedstrijd->reeks->uur . "<br />";
-                            echo "Slag: " . $wedstrijd->slag->soort . "<br />";
-                            echo "Afstand: " . $wedstrijd->afstand->afstand . "<br />";
-                            echo "Beschrijving: " . $wedstrijd->wedstrijd->beschrijving . "<br />";
-                            echo "</div>";
-                            $teller++;
-                    }
-                }
-
-                $teller = 0;
-                if ($supplementen != null)
-                {
-                    foreach ($supplementen as $supplement)
-                    {
-                            echo "<div class='gebeurtenis " . $supplement->tijdstip . " " . $supplement->datumInname . " supp" . $teller . "'>";
-                            echo "<span><b>" . $supplement->informatie->naam . "</b></span><br />";
-                            echo "Tijdstip: " . $supplement->uur . "<br />";
-                            echo "Hoeveelheid: " . $supplement->hoeveelheid . "g<br />";
-                            echo "Beschrijving: " . $supplement->informatie->beschrijving . "<br />";
-                            echo "</div>";
-                            $teller++;
-                    }
-                }
-
                 $teller = 0;
                 if ($activiteiten != null)
                 {
@@ -282,7 +192,8 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                             }
                             echo "Tijdstip: " . $activiteit->andereActiviteit->uur . "<br />";
                             echo "Locatie: " . $activiteit->andereActiviteit->plaats . "<br />";
-                            echo "Beschrijving: " . $activiteit->andereActiviteit->beschrijving . "<br />";
+                            echo "Beschrijving: " . $activiteit->andereActiviteit->beschrijving . "<br /><br />";
+                            echo anchor('activiteit/beheren/' . $activiteit->id, 'Aanpassen') . " " . anchor('activiteit/verwijderen/' . $activiteit->id, 'Verwijderen');
                             echo "</div>";
                             $teller++;
                     }

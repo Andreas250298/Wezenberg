@@ -343,14 +343,6 @@ class Gebruiker extends CI_Controller
         $this->load->model('deelname_model');
         $deelnames = $this->deelname_model->getInformatieDeelnames($gebruiker->id, $week, $jaar);
 
-        $i = 0;
-        if ($deelnames != null) {
-            foreach ($deelnames as $deelname) {
-                $deelname->id = $i;
-                $i++;
-            }
-        }
-
         echo json_encode($deelnames);
     }
 
@@ -367,14 +359,6 @@ class Gebruiker extends CI_Controller
         $this->load->model('supplementPerZwemmer_model');
         $supplementen = $this->supplementPerZwemmer_model->getInformatieSupplementen($gebruiker->id, $week, $jaar);
 
-        $i = 0;
-        if ($supplementen != null) {
-            foreach ($supplementen as $supplement) {
-                $supplement->id = $i;
-                $i++;
-            }
-        }
-
         echo json_encode($supplementen);
     }
 
@@ -390,14 +374,6 @@ class Gebruiker extends CI_Controller
 
         $this->load->model('activiteitPerGebruiker_model');
         $activiteiten = $this->activiteitPerGebruiker_model->getInformatieActiviteiten($gebruiker->id, $week, $jaar);
-
-        $i = 0;
-        if ($activiteiten != null) {
-            foreach ($activiteiten as $activiteit) {
-                $activiteit->id = $i;
-                $i++;
-            }
-        }
 
         echo json_encode($activiteiten);
     }

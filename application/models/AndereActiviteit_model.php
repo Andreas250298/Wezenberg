@@ -65,14 +65,8 @@ class AndereActiviteit_model extends CI_Model
   {
       $this->db->select('id');
       $this->db->from('andereActiviteit');
-      $this->db->group_start()
-                ->where('beginDatum >=', $maandag->format('Y-m-d') )
-                ->where('beginDatum <=', $zondag->format('Y-m-d') )
-                ->group_end()
-                ->or_group_start()
-                ->where('eindDatum >=',  $maandag->format('Y-m-d') )
-                ->where('eindDatum <=',  $zondag->format('Y-m-d') )
-                ->group_end();
+      $this->db->where('beginDatum >=', $maandag->format('Y-m-d') );
+      $this->db->where('beginDatum <=', $zondag->format('Y-m-d') );
       $query = $this->db->get();
       if ($query->num_rows() == 0)
       {
