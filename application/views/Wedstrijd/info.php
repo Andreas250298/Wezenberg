@@ -45,9 +45,5 @@ $lijstWedstrijden = "";
   </tbody>
 </table>
 <?php
-if ($gebruiker != null) {
         echo anchor('Wedstrijd/index', 'terug', 'class="btn btn-primary"');
-    } else {
-        echo anchor('home/index', 'terug', 'class="btn btn-primary"');
-    }
 ?>

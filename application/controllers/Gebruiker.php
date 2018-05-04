@@ -264,7 +264,7 @@ class Gebruiker extends CI_Controller
 
     /**
     * Account info tonen aan de hand van de id
-    * \param id De id van de gebruiker waarvan de info getoond dient te worden.
+    * @param id De id van de gebruiker waarvan de info getoond dient te worden.
     *\see Authex::getGebruikerInfo()
     *\see gebruiker_info.php
     */
@@ -285,7 +285,7 @@ class Gebruiker extends CI_Controller
 
     /**
     * Meldingen tonen aan de hand van de gebruiker ID
-    * \param id De id van de gebruiker waarvan de info getoond dient te worden.
+    * @param id De id van de gebruiker waarvan de info getoond dient te worden.
     *\see Authex::getGebruikerInfo()
     *\see main_header.php
     */

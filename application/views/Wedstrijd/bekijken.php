@@ -4,21 +4,39 @@ $lijstWedstrijden = '';
 foreach ($wedstrijden as $wedstrijd) {
     if ($wedstrijd->beginDatum > date("Y-m-d")) {
         $lijstWedstrijden .= '<tr>
-    <td>'
-    .anchor('Wedstrijd/info/' . $wedstrijd->id, $wedstrijd->naam).
-    '</td>
-    <td>'
-    .$wedstrijd->plaats.
-    '</td>
-    <td>'
-    .zetOmNaarDDMMYYYY($wedstrijd->beginDatum).
-    '</td>
-    <td>'
-    .zetOmNaarDDMMYYYY($wedstrijd->eindDatum).
-    '</td>
-    </tr>';
+      <td>'
+      .anchor('Wedstrijd/info/' . $wedstrijd->id, $wedstrijd->naam).
+      '</td>
+      <td>'
+      .$wedstrijd->plaats.
+      '</td>
+      <td>'
+      .$wedstrijd->beginDatum.
+      '</td>
+      <td>'
+      .$wedstrijd->eindDatum.
+      '</td>';
+        if (isset($gebruiker)) {
+            if ($gebruiker->soort == "trainer") {
+                $lijstWedstrijden .= '<td>'.
+   anchor('wedstrijd/updateWedstrijd/' . $wedstrijd->id, 'Wijzig').
+       '</td><td>'.
+   anchor('wedstrijd/reeksenToevoegen/' . $wedstrijd->id, 'Reeksen toevoegen').
+       '</td><td>'
+       .anchor('wedstrijd/verwijder/' . $wedstrijd->id, 'Verwijder').
+       '</td>';
+            }
+        }
+
+        $lijstWedstrijden .= '</tr>';
     }
 }
+if (isset($gebruiker)) {
+    if ($gebruiker->soort == "trainer") {
+        echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken').'</p>';
+    }
+}
+
 ?>
 
 <table class="table">
@@ -36,6 +54,12 @@ foreach ($wedstrijden as $wedstrijd) {
     <td>
       Einde
     </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
     </tr>
   </thead>
   <tbody>
@@ -47,5 +71,5 @@ foreach ($wedstrijden as $wedstrijd) {
 <?php echo anchor('Wedstrijd/toonAfgelopen', 'Toon afgelopen wedstrijden')?>
 <br/><br/>
 <p>
-    <a id="terug" href="javascript:history.go(-1);">Terug</a>
+    <?php echo anchor('home/index', 'terug'); ?>
 </p>
