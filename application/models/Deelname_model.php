@@ -46,6 +46,36 @@ class Deelname_model extends CI_Model
         }
     }
 
+    public function getInformatieDeelnamesZwemmer($id)
+    {
+      $this->db->where('gebruikerIdZwemmer', $id);
+      $this->db->Where('statusId', "2");
+      $query = $this->db->get('deelname');
+
+      if ($query->num_rows() == 0)
+      {
+        return null;
+      } else {
+        $deelnames = $query->result();
+
+        $this->load->model('wedstrijd_model');
+        $this->load->model('slag_model');
+        $this->load->model('afstand_model');
+        $this->load->model('reeks_model');
+
+        foreach ($deelnames as $deelname)
+        {
+          $deelname->reeks = $this->reeks_model->get($deelname->reeksId);
+          $deelname->afstand = $this->afstand_model->get($deelname->reeks->afstandId);
+          $deelname->slag = $this->slag_model->get($deelname->reeks->slagId);
+          $deelname->wedstrijd = $this->wedstrijd_model->get($deelname->reeks->wedstrijdId);
+        }
+
+        return $deelnames;
+      }
+
+    }
+
     /**
     * Haalt deelnames in week op van bepaalde zwemmer
     *\see reeks_model::getReeksenInWeek()

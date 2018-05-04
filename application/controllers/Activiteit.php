@@ -59,11 +59,36 @@ class Activiteit extends CI_Controller {
 
   public function aanpassen($id)
   {
-    // code...
+    $data['titel'] = 'Activiteit aanpassen';
+    $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+    $gebruiker = $this->authex->getGebruikerInfo();
+    $data['gebruiker'] = $gebruiker;
+
+    $this->model->load('andereActiviteit_model');
+    $data['activiteit'] = $this->andereActiviteit_model->get($id);
+
+    $this->model->load('gebruiker_model');
+    $data['zwemmers'] = $this->gebruiker_model->getAllZwemmers();
+
+    $partials = array('hoofding' => 'main_header',
+        'inhoud' => 'Activiteit/aanpassen',
+        'voetnoot' => 'main_footer');
+    $this->template->load('main_master', $partials, $data);
   }
 
   public function verwijderen($id)
   {
-    // code...
+    $data['titel'] = 'Activiteit verwijderen';
+    $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+    $gebruiker = $this->authex->getGebruikerInfo();
+    $data['gebruiker'] = $gebruiker;
+
+    $this->db->load('andereActiviteit_model');
+    $data['activiteit']$this->andereActiviteit_model->get($id);
+
+    $partials = array('hoofding' => 'main_header',
+        'inhoud' => 'Activiteit/verwijderen',
+        'voetnoot' => 'main_footer');
+    $this->template->load('main_master', $partials, $data);
   }
 }

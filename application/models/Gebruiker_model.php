@@ -15,6 +15,17 @@ class Gebruiker_model extends CI_Model
         $query = $this->db->get('gebruiker');
         return $query->row();
     }
+    public function getAllZwemmers()
+    {
+      $this->db->where('soort', 'zwemmer');
+      $query = $this->db->get('gebruiker');
+      if ($query->num_rows() == 0)
+      {
+        return null;
+      } else {
+        return $query->result();
+      }
+    }
 
     public function getGebruiker($email, $wachtwoord)
     {
