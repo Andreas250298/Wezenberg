@@ -234,8 +234,8 @@ class Gebruiker extends CI_Controller
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['zwemmer'] = $huidigeZwemmer;
 
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijdInformatieZwemmer($id);
+        $this->load->model('deelname_model');
+        $data['wedstrijden'] = $this->deelname_model->getInformatieDeelnamesZwemmer($id);
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmer_info',
