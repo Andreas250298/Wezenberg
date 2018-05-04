@@ -59,7 +59,7 @@ class Gebruiker extends CI_Controller
     public function maakGebruiker()
     {
         $data['titel'] = "Gebruiker aanmaken";
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model("gebruiker_model");
 
@@ -94,12 +94,12 @@ class Gebruiker extends CI_Controller
 
         $this->load->library('upload', $config);
         $this->load->model('gebruiker_model');
-        if($this->upload->do_upload('userfile')){
-          $upload_data = $this->upload->data();
-          $oudGebruiker = $this->gebruiker_model->get($gebruiker->id);
-          $this->load->helper("file");
-          unlink($oudGebruiker->foto);
-          $gebruiker->foto = 'uploads/gebruikers/' . $upload_data['file_name'];
+        if ($this->upload->do_upload('userfile')) {
+            $upload_data = $this->upload->data();
+            $oudGebruiker = $this->gebruiker_model->get($gebruiker->id);
+            $this->load->helper("file");
+            unlink($oudGebruiker->foto);
+            $gebruiker->foto = 'uploads/gebruikers/' . $upload_data['file_name'];
         }
 
 
@@ -113,12 +113,11 @@ class Gebruiker extends CI_Controller
 
 
         $gebruiker = $this->authex->getGebruikerInfo();
-        if($gebruiker->soort == "zwemmer"){
-          redirect('gebruiker/account/' . $gebruiker->id);
+        if ($gebruiker->soort == "zwemmer") {
+            redirect('gebruiker/account/' . $gebruiker->id);
         } else {
-          redirect('/gebruiker/toonZwemmers');
+            redirect('/gebruiker/toonZwemmers');
         }
-
     }
 
     /**
@@ -129,7 +128,7 @@ class Gebruiker extends CI_Controller
     */
     public function wijzig($id)
     {
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
 
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('gebruiker_model');
