@@ -62,6 +62,38 @@ class Wedstrijd_model extends CI_Model
     }
 
     /**
+     * Reeks behorende bij een deelname uit de database ophalen
+     * @param $id Het id van de deelname waar de reeks aan gekoppeld is
+     * @return De opgevraagde record
+     */
+    public function getReeksenPerWedstrijd($id)
+    {
+        $this->db->where('wedstrijdId', $id);
+        $query = $this->db->get('reeks');
+        return $query->result();
+    }
+
+    public function getSlagenPerWedstrijd($id)
+    {
+        $this->db->where('wedstrijdId', $id);
+        $query = $this->db->get('reeks');
+        $wedstrijd =  $query->row();
+        $this->load->model('slag_model');
+        $wedstrijd->slag = $this->slag_model->get($wedstrijd->slagId);
+        return $wedstrijd;
+    }
+
+    public function getAfstandenPerWedstrijd($id)
+    {
+        $this->db->where('wedstrijdId', $id);
+        $query = $this->db->get('reeks');
+        $wedstrijd =  $query->row();
+        $this->load->model('afstand_model');
+        $wedstrijd->slag = $this->afstand_model->get($wedstrijd->afstandId);
+        return $wedstrijd;
+    }
+
+    /**
      * Een wedstrijd wijzigen in de database
      * @param $wedstrijd De wedstrijd die moet gewijzigd worden
      */

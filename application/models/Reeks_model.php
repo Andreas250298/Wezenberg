@@ -29,6 +29,16 @@ class Reeks_model extends CI_Model
     }
 
     /**
+     * Een afstanden ophalen uit de database voor een keuzenlijst
+     * @return Alle bestaande afstanden uit de database
+     */
+    public function getAllReeksen()
+    {
+        $query = $this->db->get('reeks');
+        return $query->result();
+    }
+
+    /**
     * Opvragen van reeksen in een opgegeven week
     * @param maandag Datum van maandag
     * @param zondag Datum van zondag
@@ -46,6 +56,34 @@ class Reeks_model extends CI_Model
         } else {
             return $query->result();
         }
+    }
+
+    /**
+     * Een afstand van een reeks opvragen
+     * @param $id De id van de wedstrijd die reeksen heeft
+     * @return De afstand van de reeks
+     */
+    public function getAfstandenPerReeks($id)
+    {
+        $this->db->where('wedstrijdId', $id);
+        $reeks = $this->db->get('reeks')->row();
+        $this->load->model('afstand_model');
+        $reeks->afstand = $this->afstand_model->get($reeks->afstandId);
+        return $reeks;
+    }
+
+    /**
+     * Een slag van een reeks opvragen
+     * @param $id De id van de wedstrijd die reeksen heeft
+     * @return De slag van de reeks
+     */
+    public function getSlagenPerReeks($id)
+    {
+        $this->db->where('wedstrijdId', $id);
+        $reeks = $this->db->get('reeks')->row();
+        $this->load->model('slag_model');
+        $reeks->slag= $this->slag_model->get($reeks->slagId);
+        return $reeks;
     }
 
     /**

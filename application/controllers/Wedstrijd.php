@@ -241,9 +241,9 @@ class Wedstrijd extends CI_Controller
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
-        $reeks = $this->wedstrijd_model->getReeksen($id);
+        $reeks = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
         $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
-        if (isset($reeks)) {
+        foreach ($data['reeksen'] as $reeks) {
             $data['slag'] = $this->wedstrijd_model->getSlagenPerWedstrijd($reeks->slagId);
             $data['afstand'] = $this->wedstrijd_model->getAfstandenPerWedstrijd($reeks->afstandId);
         }
@@ -301,20 +301,13 @@ class Wedstrijd extends CI_Controller
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
-        $wedstrijd = $this->wedstrijd_model->get($id);
-        $reeksen = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
-        //$wedstrijdId = $reeksen->wedstrijdId;
-        $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
-        if (isset($reeksen)) {
-            foreach ($reeksen as $reeks) {
-                $slagId = $reeks->slagId;
-                $afstandId = $reeks->afstandId;
-            }
-        }
-        $data['slagen'] = $this->wedstrijd_model->getSlagenPerReeks($slagId);
+        $wedstrijd = $data['wedstrijd'];
+        $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($wedstrijd->id);
+        $this->load->model('reeks_model');
+        $data['slagenPerReeks'] = $this->reeks_model->getSlagenPerReeks($id);
+        $data['afstanden'] = $this->reeks_model->getAfstandenPerReeks($id);
 
-        $data['afstanden'] = $this->wedstrijd_model->getAfstandenPerReeks($afstandId);
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/info',
           'voetnoot' => 'main_footer');
