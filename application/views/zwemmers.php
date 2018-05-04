@@ -43,12 +43,17 @@ $zwemmersTabel = "";
     if ($teller == 4 || $teller == 0) { // nieuwe rij tabel maken bij start foreach en na elke 4de zwemmer
         echo "<tr>";
     }
-
+    if($zwemmer->foto != ""){
+      echo '<td id="' .$zwemmer->id.'" class="p-3">'
+                          . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, "<img width=200 height=200 src=" . base_url($zwemmer->foto) . ">")
+                          . "<br/>"
+                          . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, $zwemmer->naam);
+    } else {
     echo '<td id="' .$zwemmer->id.'" class="p-3">'
                         . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, "<img src=\"http://placehold.it/200x200\"")
                         . "<br/>"
                         . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, $zwemmer->naam);
-
+}
     // knoppen tonen indien ingelogd als trainer
     if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
         echo "<br/>" . anchor('gebruiker/wijzig/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ")

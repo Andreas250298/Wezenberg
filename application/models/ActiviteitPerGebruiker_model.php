@@ -17,19 +17,22 @@ class ActiviteitPerGebruiker_model extends CI_Model
     }
 
       /**
-      * Haalt deelnames in week op van bepaalde zwemmer
+      * Haalt activiteiten in week op van bepaalde zwemmer
       *\see reeks_model::getReeksenInWeek()
       * @param id ID van de zwemmer in kwestie
       * @param week Week in de agenda
       * @param jaar Jaar in de agenda
       * @return query Deelnames die week van opgegeven zwemmer.
       */
-       public function getActiviteitenInWeekPerZwemmer($id, $week, $jaar)
+       public function getActiviteitenInWeek($id, $week, $jaar)
        {
          $maandag = new DateTime;
          $maandag->setISODate(intval($jaar), intval($week));
          $zondag = clone $maandag;
          $zondag->modify('+6 day');
+
+         $this->load->model('gebruiker_model');
+         $gebruiker = $this->gebruiker_model->get($id);
 
          $this->load->model('andereActiviteit_model');
          $activiteitenInWeek = $this->andereActiviteit_model->getActiviteitenInWeek($maandag, $zondag);
@@ -40,9 +43,14 @@ class ActiviteitPerGebruiker_model extends CI_Model
              $ids[] = $activiteit->id;
            }
 
-           $this->db->where('gebruikerIdZwemmer', $id);
-           $this->db->where_in('andereActiviteitId', $ids);
-           $query = $this->db->get('activiteitPerGebruiker')->result();
+           if ($gebruiker->soort == "zwemmer") {
+             $this->db->where('gebruikerIdZwemmer', $id);
+             $this->db->where_in('andereActiviteitId', $ids);
+             $query = $this->db->get('activiteitPerGebruiker')->result();
+           } else {
+             $this->db->where_in('andereActiviteitId', $ids);
+             $query = $this->db->get('activiteitPerGebruiker')->result();
+           }
 
            return $query;
          } else {
@@ -52,16 +60,16 @@ class ActiviteitPerGebruiker_model extends CI_Model
        }
 
        /**
-       * Haalt informatie
+       * Haalt informatie op van activiteit
        *\see deelname_model::getDeelnamesInWeekPerZwemmer()
        * @param id ID van de zwemmer in kwestie
        * @param week Week in de agenda
        * @param jaar Jaar in de agenda
-       * @return deelnames Wedstrijden die week van opgegeven zwemmer.
+       * @return deelnames Activiteiten die week van opgegeven zwemmer.
        */
        public function getInformatieActiviteiten($id, $week, $jaar)
        {
-         $activiteiten = $this->activiteitPerGebruiker_model->getActiviteitenInWeekPerZwemmer($id, $week, $jaar);
+         $activiteiten = $this->activiteitPerGebruiker_model->getActiviteitenInWeek($id, $week, $jaar);
          if ($activiteiten != null)
          {
            $this->load->model('andereActiviteit_model');
@@ -80,6 +88,5 @@ class ActiviteitPerGebruiker_model extends CI_Model
          } else {
            return null;
          }
-
        }
 }

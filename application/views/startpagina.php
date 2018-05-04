@@ -117,6 +117,10 @@ function haalOpenInschrijvingenOp($wedstrijden)
 
 function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wedstrijden)
 {
+    $dt = new DateTime;
+    $week = $dt->format('W');
+    $jaar = $dt->format('Y');
+
     if ($gebruiker != null) {
         switch ($gebruiker->soort) {
             case 'zwemmer': // zwemmer
@@ -133,8 +137,8 @@ function haalPaginaInhoudOp($trainingscentrum, $nieuwsArtikels, $gebruiker, $wed
                 echo anchor('trainingscentrum/aanpassen', '<i class="fas fa-info fa-3x fa-fw"></i> Info aanpassen', 'class="beheerknop"');
                 echo '</div>';
                 echo '<div class="col-md-6">';
-                echo anchor('Activiteiten/index', '<i class="far fa-calendar-alt fa-3x fa-fw"></i> Activiteiten beheren', 'class="beheerknop"');
-                echo anchor('supplement/supplementenPerZwemmerTrainer', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen toekennen', 'class="beheerknop"');
+                echo anchor('activiteit/index/' . $week . '/' . $jaar, '<i class="far fa-calendar-alt fa-3x fa-fw"></i> Activiteiten beheren', 'class="beheerknop"');
+                echo anchor('supplement/supplementenToekennen', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen toekennen', 'class="beheerknop"');
                 echo anchor('Supplement/beheerSupplementen', '<i class="fas fa-medkit fa-3x fa-fw"></i> Supplementen beheren', 'class="beheerknop"');
                 echo '</div>';
                 echo '</div>';
