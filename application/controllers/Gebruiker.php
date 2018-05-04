@@ -93,13 +93,16 @@ class Gebruiker extends CI_Controller
         $config['max_height']           = 1080; */
 
         $this->load->library('upload', $config);
-
+        $this->load->model('gebruiker_model');
         if($this->upload->do_upload('userfile')){
           $upload_data = $this->upload->data();
+          $oudGebruiker = $this->gebruiker_model->get($gebruiker->id);
+          $this->load->helper("file");
+          unlink($oudGebruiker->foto);
           $gebruiker->foto = 'uploads/gebruikers/' . $upload_data['file_name'];
         }
 
-        $this->load->model('gebruiker_model');
+
         if ($gebruiker->id == null) {
             $gebruiker->status = 1;
             $gebruiker->soort = "zwemmer";

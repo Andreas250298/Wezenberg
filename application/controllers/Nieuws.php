@@ -78,20 +78,17 @@ class Nieuws extends CI_Controller
         $artikel->gebruikerIdTrainer = $this->authex->getGebruikerInfo()->id;
         $datestring = date("Y-m-d");
         $artikel->datumAangemaakt = $datestring;
-
         $config['upload_path']          = './uploads/nieuws';
         $config['allowed_types']        = 'gif|jpg|jpeg|png';
-        /* $config['max_size']             = 1000;
-        $config['max_width']            = 1920;
-        $config['max_height']           = 1080; */
-
         $this->load->library('upload', $config);
-
+        $this->load->model('nieuws_model');
         if($this->upload->do_upload('userfile')){
           $upload_data = $this->upload->data();
+          $oudArtikel = $this->nieuws_model->get($artikel->id);
+          $this->load->helper("file");
+          unlink($oudArtikel->foto);
           $artikel->foto = 'uploads/nieuws/' . $upload_data['file_name'];
         }
-
         $this->load->model('nieuws_model');
         if ($artikel->id == null) {
             $this->nieuws_model->insert($artikel);
@@ -99,25 +96,6 @@ class Nieuws extends CI_Controller
             $this->nieuws_model->update($artikel);
         }
         redirect('/nieuws/index');
-        /*
-        if (!$this->upload->do_upload('userfile'))
-        {
-          $error = array('error' => $this->upload->display_errors());
-
-          $this->load->view('Nieuws/error', $error);
-        } else {
-          $upload_data = $this->upload->data();
-          $artikel->foto = 'uploads/nieuws/' . $upload_data['file_name'];
-
-          $this->load->model('nieuws_model');
-          if ($artikel->id == null) {
-              $this->nieuws_model->insert($artikel);
-          } else {
-              $this->nieuws_model->update($artikel);
-          }
-          redirect('/nieuws/index');
-        } */
-
     }
 
     /**
