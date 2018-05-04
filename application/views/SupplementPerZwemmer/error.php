@@ -4,6 +4,6 @@
     <p class="card-text">
     <?php echo $message ?>
     </p>
-    <a href="javascript:history.go(-1);"" class="btn btn-primary">Terug</a>
+    <a href="javascript:history.go(-1);" class="btn btn-primary">Terug</a>
   </div>
 </div>

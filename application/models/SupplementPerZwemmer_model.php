@@ -14,6 +14,17 @@ class SupplementPerZwemmer_model extends CI_Model
     {
         parent::__construct();
     }
+
+     /**
+     * Een supplementPerZwemmer ophlane uit de database
+     * @param id Het id van supplementPerZwemmer
+     */
+    public function get($id){
+        $this->db->where('id', $id);
+        $query = $this->db->get('supplementPerZwemmer');
+        return $query->row();
+    }
+
     /**
     ** Opvragen van supplementen volgens id zwemmer
     * @param $id Het ID van de zwemmer
@@ -152,9 +163,19 @@ class SupplementPerZwemmer_model extends CI_Model
         return $this->db->insert_id();
     }
 
+     /**
+     * Een supplementPerZwemmer wijzigen in de database
+     * @param supplementPerZwemmer Het supplementPerZwemmer dat moet gewijzigd worden
+     */
+    public function update($supplementPerZwemmer)
+    {
+        $this->db->where('id', $supplementPerZwemmer->id);
+        $this->db->update('supplementPerZwemmer', $supplementPerZwemmer);
+    }
+
     /**
      * Een supplementPerZwemmer verwijderen uit de database
-     * @param $id Het id van het supplementPerZwemmer dat moet verwijderd worden
+     * @param id Het id van het supplementPerZwemmer dat moet verwijderd worden
      */
     public function delete($id)
     {
