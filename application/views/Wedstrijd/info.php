@@ -21,13 +21,9 @@ $lijstWedstrijden = "";
 
           $lijstWedstrijden .= "</td><td>" . $reeks->tijdstip ."</td></tr>";
       }
-  } else {
-      echo "<p>Er zijn voor deze wedstrijd nog geen reeksen</p>";
   }
-
-?>
-<?php if (isset($reeksen)) {
-    echo "<table class=\"table\">
+ if ($reeksen != null) {
+     echo "<table class=\"table\">
   <thead>
     <tr>
       <td>
@@ -48,8 +44,7 @@ $lijstWedstrijden = "";
      $lijstWedstrijden
   </tbody>
 </table>";
-} else {
-    echo "<p>Er zijn voor deze wedstrijd nog geen reeksen</p>";
-}
-        echo anchor('Wedstrijd/index', 'terug', 'class="btn btn-primary"');
-?>
+ } else {
+     echo "<p>Er zijn voor deze wedstrijd nog geen reeksen</p>";
+ }
+      echo anchor('Wedstrijd/index', 'terug', 'class="btn btn-primary"');
