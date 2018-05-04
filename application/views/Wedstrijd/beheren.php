@@ -71,5 +71,5 @@ if (isset($gebruiker)) {
 <?php echo anchor('Wedstrijd/toonAfgelopen', 'Toon afgelopen wedstrijden')?>
 <br/><br/>
 <p>
-    <a id="terug" href="javascript:history.go(-1);">Terug</a>
+    <?php echo anchor('home/index', 'terug'); ?>
 </p>
