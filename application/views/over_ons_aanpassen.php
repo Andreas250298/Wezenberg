@@ -1,7 +1,7 @@
 <?php
 /**
  * @file over_ons_aanpassen.php
- * 
+ *
  * View waarin de informatie over het trainingscentrum Wezenberg aangepast kan worden.
  * - Krijgt een $trainingscentrum-object binnen
  * - Wijzigingen gebeuren in de controller Trainingscentrum.php
@@ -11,7 +11,7 @@ $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaa
 ?>
 
 <div class="form-row col-12">
-    <?php echo form_open('trainingscentrum/registreer', 'class="col-12"') ?>
+    <?php echo form_open_multipart('trainingscentrum/registreer', 'class="col-12"') ?>
     <div class=" col-12 overOns form-group">
         <?php
         echo form_label("Pas welkomtekst aan", 'welkom') . "\n";
@@ -19,7 +19,7 @@ $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaa
         ?>
     </div>
     <div class="col-12 form-group">
-        <?php echo form_button('afbeelding', 'Nieuwe afbeelding', 'class="btn-primary btn"'); ?>
+        <?php echo '<input type="file" name="welkom" size="20" />'; ?>
     </div>
     <div class="col-12 overOns form-group">
         <?php
@@ -28,7 +28,7 @@ $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaa
         ?>
     </div>
     <div class="col-12 form-group">
-        <?php echo form_button('afbeelding', 'Nieuwe afbeelding', 'class="btn-primary btn"'); ?>
+        <?php echo '<input type="file" name="locatie" size="20" />'; ?>
     </div>
     <div class="col-12 overOns form-group">
         <?php
@@ -37,7 +37,7 @@ $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaa
         ?>
     </div>
     <div class="col-12 form-group">
-        <?php echo form_button('afbeelding', 'Nieuwe afbeelding', 'class="btn-primary btn"'); ?>
+        <?php echo '<input type="file" name="team" size="20" />'; ?>
     </div>
     <div class="col-12 overOns form-group">
         <?php
@@ -46,7 +46,7 @@ $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaa
         ?>
     </div>
     <div class="col-12 form-group">
-        <?php echo form_button('afbeelding', 'Nieuwe afbeelding', 'class="btn-primary btn"'); ?>
+        <?php echo '<input type="file" name="trainer" size="20" />'; ?>
     </div>
 
     <?php echo form_submit($dataSubmit) . "";
