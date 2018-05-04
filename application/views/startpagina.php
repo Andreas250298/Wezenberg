@@ -20,6 +20,7 @@ function haalArtikelsOp($nieuwsArtikels)
     echo '<h2 class="startTitel">Laatste nieuws</h2>';
     echo '<a href="#" class="scrollknop text-center"><i class="fas fa-caret-up fa-2x"></i></a>';
     echo '<ul class="list-unstyled">';
+    
     foreach ($nieuwsArtikels as $artikel) {
         echo '<p class="nieuwsartikel"><li class="media">';
         if ($artikel->foto != null) {
