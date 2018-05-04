@@ -1,10 +1,23 @@
+<script>
+var vandaag = d.getDate();
+
+$(document).ready(function(){
+    $('input').on('click','#opslaan',function(){
+        var datum = $(datum).val()
+        if (datum < vandaag){
+            alert('Datum moet in de toekomst liggen')
+        }
+    })
+})
+</script>
 <?php
     $dataHoeveelheid = array('class' => 'form-control mr-sm-2','type' => 'number', 'name' => 'hoeveelheid', 'id' => 'hoeveelheid', 'placeholder' => '', 'aria-label' => 'Titel', 'size' => '5', 'data-toggle' => 'tooltip', 'title' => 'Vul hier de hoeveelheid voor de iname in.', 'min' => '1', 'max' => '1000','required' => 'required');
-    $dataDatumInname = array('class' => 'form-control mr-sm-2','type' => 'date', 'name' => 'datum', 'id' => 'datum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de datum in dat het supplement moet worden ingenomen.','required' => 'required');
+    $dataStartDatumInname = array('class' => 'form-control mr-sm-2','type' => 'date', 'name' => 'startDatum', 'id' => 'startDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de datum in dat het supplement moet worden ingenomen.','required' => 'required');
+    $dataEindeDatumInname = array('class' => 'form-control mr-sm-2','type' => 'date', 'name' => 'eindeDatum', 'id' => 'eindeDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de datum in dat het supplement moet worden ingenomen.','required' => 'required');
     $dataTijdstipInname = array('class' => 'form-control mr-sm-2','type' => 'time', 'name' => 'tijdstip', 'id' => 'tijdstip','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier het tijdstip in dat het supplement moet worden ingenomen.','required' => 'required');
 
 
-$dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
+$dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan', 'id' => 'opslaan');
 echo form_open('Supplement/toekennen', 'class="form-group"');
 echo "<div class='form-group'>";
 echo form_label("Zwemmers: ", 'zwemmer') . "\n";
@@ -32,8 +45,13 @@ echo form_input($dataHoeveelheid) . "\n";
 echo "</div>";
 
 echo "<div class='form-group'>";
-echo form_label("Datum:", 'datum') . "\n";
-echo form_input($dataDatumInname) . "\n";
+echo form_label("Start Datum:", 'startDatum') . "\n";
+echo form_input($dataStartDatumInname) . "\n";
+echo "</div>";
+
+echo "<div class='form-group'>";
+echo form_label("Einde Datum:", 'eindeDatum') . "\n";
+echo form_input($dataEindeDatumInname) . "\n";
 echo "</div>";
 
 echo "<div class='form-group'>";
@@ -41,6 +59,7 @@ echo form_label("Tijdstip:", 'tijdstip') . "\n";
 echo form_input($dataTijdstipInname) . "\n";
 echo "</div>";
 
-echo form_submit($dataSubmit) . "";
+echo form_submit($dataSubmit) . "\n";
+echo anchor('supplement/supplementenPerZwemmerTrainer',"<button type=\"button\" class=\"btn btn-primary mx-auto\">Terug</button>");
 
 echo form_close();

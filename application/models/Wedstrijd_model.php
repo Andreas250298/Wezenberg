@@ -96,12 +96,27 @@ class Wedstrijd_model extends CI_Model
         return $query->result();
     }
 
+    public function getSlagenPerReeks($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('slag');
+        return $query->row();
+    }
+
     public function getAfstandenPerWedstrijd($id)
     {
         $this->db->where('id', $id);
         $query = $this->db->get('afstand');
         return $query->result();
     }
+
+    public function getAfstandenPerReeks($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('afstand');
+        return $query->row();
+    }
+
 
     /**
      * Een wedstrijd toevoegen aan de database
