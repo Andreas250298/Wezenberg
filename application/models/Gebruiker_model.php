@@ -16,14 +16,20 @@ class Gebruiker_model extends CI_Model
         return $query->row();
     }
 
-    public function getGebruiker($email)
+    public function getGebruiker($email, $wachtwoord)
     {
         $this->db->where('email', $email);
         $query = $this->db->get('gebruiker');
 
         if ($query->num_rows() == 1) {
             $gebruiker = $query->row();
-            return $gebruiker;
+            if (password_verify($wachtwoord, $gebruiker->wachtwoord))
+            {
+              return $gebruiker;
+            } else {
+              return null;
+            }
+
         } else {
             return null;
         }
