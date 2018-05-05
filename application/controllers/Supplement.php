@@ -186,17 +186,32 @@ class Supplement extends CI_Controller
     {
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        $this->load->model('supplementPerZwemmer_model');
+        
         $this->load->model('gebruiker_model');
-        $data['supplementenPerAlleZwemmers'] = $this->supplementPerZwemmer_model->getSupplementenPerAlleZwemmers();
         $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
-
         $data['titel'] = 'Supplementen voor alle zwemmers';
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'SupplementPerZwemmer/bekijken',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+
+    public function haalAjaxOp_supplementenPerZwemmerTrainer(){
+        $id = $this->input->get('id');
+
+        $this->load->model('gebruiker_model');
+        $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
+
+        $this->load->model('supplementPerZwemmer_model');
+        if ($id != 0){   
+            $data['supplementenPerAlleZwemmers'] = $this->supplementPerZwemmer_model->getSupplementenPerZwemmer($id);
+        } else {
+            $data['supplementenPerAlleZwemmers'] = $this->supplementPerZwemmer_model->getSupplementenPerAlleZwemmers();
+        }
+  
+        $this->load->view('supplementPerZwemmer/ajax_bekijken', $data);
+    }
+
     /**
     * Als trainer supplementen toekennen aan een zwemmer
     *\see Supplementen_model::getSupplementen()

@@ -32,13 +32,23 @@ class SupplementPerZwemmer_model extends CI_Model
     public function getSupplementenPerZwemmer($id)
     {
         $this->db->where('gebruikerIdZwemmer', $id);
-        $supplementenPerZwemmer = $this->db->get('supplementPerZwemmer')->result();
+        $query = $this->db->get('supplementPerZwemmer')->result();
+
+        $supplementenPerZwemmer = [];
+         
+        foreach($query as $q){
+            if ($q->datumInname > date('Y-m-d')){
+                array_push($supplementenPerZwemmer, $q);
+            }
+        }
+
         if ($supplementenPerZwemmer == null) {
             return null ;
         } else {
             $this->load->model('supplement_model');
             foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
                 $supplementPerZwemmer->supplement= $this->supplement_model->get($supplementPerZwemmer->supplementId);
+                $supplementPerZwemmer->zwemmer = $this->gebruiker_model->get($supplementPerZwemmer->gebruikerIdZwemmer);
             }
             return $supplementenPerZwemmer;
         }
