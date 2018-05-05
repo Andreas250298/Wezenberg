@@ -12,7 +12,7 @@ echo "<div class='form-group'>";
 echo form_label("Supplement: ", 'supplement') . "\n";
 echo "<select name='supplement' id='supplement' class='form-control' required='true'>";
 foreach ($supplementen as $supplement) {
-    if ($supplement->id = $supplementPerZwemmer->supplementId){
+    if ($supplement->id === $supplementPerZwemmer->supplementId){
         echo "<option value='" . $supplement->id . "'selected>" . $supplement->naam . "</option>\n";
     }else{
         echo "<option value='" . $supplement->id . "'>" . $supplement->naam . "</option>\n";
