@@ -25,7 +25,7 @@ class Activiteit extends CI_Controller {
    * @param week De week om te tonen in de agenda
    * @param jaar Het jaar om te tonen in de agenda
    */
-  public function index($week, $jaar)
+  public function index($week = "", $jaar = "")
   {
     $data['titel'] = 'Activiteiten';
     $data['paginaVerantwoordelijke'] = 'Bols Jordi';
@@ -44,15 +44,18 @@ class Activiteit extends CI_Controller {
     $this->template->load('main_master', $partials, $data);
   }
 
-  public function maken()
+  public function aanmaken()
   {
     $data['titel'] = 'Activiteit aanmaken';
     $data['paginaVerantwoordelijke'] = 'Bols Jordi';
     $gebruiker = $this->authex->getGebruikerInfo();
     $data['gebruiker'] = $gebruiker;
 
+    $this->load->model('gebruiker_model');
+    $data['zwemmers'] = $this->gebruiker_model->getAllZwemmers();
+
     $partials = array('hoofding' => 'main_header',
-        'inhoud' => 'Activiteit/maken',
+        'inhoud' => 'Activiteit/form',
         'voetnoot' => 'main_footer');
     $this->template->load('main_master', $partials, $data);
   }
@@ -64,31 +67,76 @@ class Activiteit extends CI_Controller {
     $gebruiker = $this->authex->getGebruikerInfo();
     $data['gebruiker'] = $gebruiker;
 
-    $this->model->load('andereActiviteit_model');
-    $data['activiteit'] = $this->andereActiviteit_model->get($id);
+    $this->load->model('andereActiviteit_model');
+    $data['activiteit'] = $this->andereActiviteit_model->getActiviteitMetSoort($id);
 
-    $this->model->load('gebruiker_model');
+    $this->load->model('gebruiker_model');
     $data['zwemmers'] = $this->gebruiker_model->getAllZwemmers();
 
+    $this->load->model('activiteitPerGebruiker_model');
+    $data['zwemmersBijActiviteit'] = $this->activiteitPerGebruiker_model->getZwemmersBijActiviteit($id);
+
     $partials = array('hoofding' => 'main_header',
-        'inhoud' => 'Activiteit/aanpassen',
+        'inhoud' => 'Activiteit/form',
         'voetnoot' => 'main_footer');
     $this->template->load('main_master', $partials, $data);
   }
 
-  public function verwijderen($id)
+  public function verwijder()
   {
-    $data['titel'] = 'Activiteit verwijderen';
+    $id = $this->input->get('id');
     $data['paginaVerantwoordelijke'] = 'Bols Jordi';
-    $gebruiker = $this->authex->getGebruikerInfo();
-    $data['gebruiker'] = $gebruiker;
+    $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
-    $this->db->load('andereActiviteit_model');
-    $data['activiteit']$this->andereActiviteit_model->get($id);
+    $this->load->model('andereActiviteit_model');
+    $this->load->model('activiteitPerGebruiker_model');
+    $this->activiteitPerGebruiker_model->deleteZwemmersBijActiviteit($id);
+    $this->andereActiviteit_model->delete($id);
 
-    $partials = array('hoofding' => 'main_header',
-        'inhoud' => 'Activiteit/verwijderen',
-        'voetnoot' => 'main_footer');
-    $this->template->load('main_master', $partials, $data);
+  }
+
+  public function nieuw()
+  {
+    $activiteit = new stdClass();
+    $activiteit->id = $this->input->post('id');
+    $activiteit->soortId = $this->input->post('soort');
+    $activiteit->naam = $this->input->post('naam');
+    $activiteit->plaats = $this->input->post('plaats');
+    $activiteit->beginDatum = $this->input->post('begindatum');
+    $activiteit->eindDatum = $this->input->post('einddatum');
+    $activiteit->tijdstip = $this->input->post('tijdstip');
+    $activiteit->beschrijving = $this->input->post('beschrijving');
+
+    $zwemmers = $this->input->post('zwemmers');
+    $activiteitPerGebruiker = new stdClass();
+
+    $this->load->model('andereActiviteit_model');
+    $this->load->model('activiteitPerGebruiker_model');
+    if ($activiteit->id == null)
+    {
+        $id = $this->andereActiviteit_model->insert($activiteit);
+
+        foreach ($zwemmers as $zwemmer)
+        {
+          $activiteitPerGebruiker->gebruikerIdZwemmer = $zwemmer;
+          $activiteitPerGebruiker->andereActiviteitId = $id;
+          $this->activiteitPerGebruiker_model->insert($activiteitPerGebruiker);
+        }
+    } else {
+        $this->andereActiviteit_model->update($activiteit);
+        $this->activiteitPerGebruiker_model->deleteZwemmersBijActiviteit($activiteit->id);
+
+        foreach ($zwemmers as $zwemmer)
+        {
+          $activiteitPerGebruiker->gebruikerIdZwemmer = $zwemmer;
+          $activiteitPerGebruiker->andereActiviteitId = $activiteit-> id;
+          $this->activiteitPerGebruiker_model->insert($activiteitPerGebruiker);
+        }
+    }
+
+    $dt = new DateTime;
+    $week = $dt->format('W');
+    $jaar = $dt->format('Y');
+    redirect('activiteit/index/' . $week . '/' . $jaar);
   }
 }

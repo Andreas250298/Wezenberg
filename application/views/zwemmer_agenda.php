@@ -156,12 +156,13 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                 }
 
                 $teller = 0;
+                print_r($activiteiten);
                 if ($activiteiten != null)
                 {
                     foreach ($activiteiten as $activiteit)
                     {
                             echo "<div class='gebeurtenis " . $activiteit->andereActiviteit->beginDatum . " " . $activiteit->andereActiviteit->tijdstip . " ander" . $teller . "'>";
-                            echo "<span><b>" . $activiteit->andereActiviteit->naam . "</b></span><br />";
+                            echo "<span><b>" . $activiteit->andereActiviteit->naam . " ID: " . $activiteit->andereActiviteit->id . "</b></span><br />";
                             if ($activiteit->andereActiviteit->soortId == 1)
                             {
                               echo "Vertrek: " . zetOmNaarDDMMYYYY($activiteit->andereActiviteit->beginDatum) . "<br />";
@@ -179,4 +180,5 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
       </div>
   </div>
 </div>
+
 <script src="<?php echo base_url(); ?>/assets/js/agendaZwemmer.js" type="text/javascript"></script>

@@ -37,6 +37,7 @@ $(document).ready(function () {
     var id = $("input[name=id]").val();
     var week = $("input[name=week]").val();
     var jaar = $("input[name=jaar]").val();
+    var activiteitId = "";
 
     haalActiviteitenOp(week, jaar);
 
@@ -48,4 +49,26 @@ $(document).ready(function () {
         var klasse = $(this).closest('tr').attr("class");
         $("div." + id + "." + klasse).show();
       });
+
+      $(".modal-trigger").click(function() {
+        activiteitId = $(this).closest('div').attr('id');
+        $('#mijnDialoogscherm').modal('show');
+      })
+
+      $("#buttonDelete").click(function(){
+        verwijderActiviteit(activiteitId);
+      })
+
+      function verwijderActiviteit(id){
+        $.ajax({type: "GET",
+        url: site_url + "/activiteit/verwijder/" + id,
+        data:{id : id},
+          success: function(){
+          window.location.reload();
+         },
+        error: function (xhr, status, error){
+          alert("--ERROR IN AJAX --\n\n" + xhr.responseText);
+        }
+      });
+      }
 });

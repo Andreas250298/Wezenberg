@@ -1,5 +1,3 @@
-<script src="<?php echo base_url(); ?>/assets/js/agendaTrainer.js" type="text/javascript"></script>
-
 <?php
 $maandag = new DateTime;
 $maandag->setTime(0, 0, 0);
@@ -116,7 +114,7 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
               }
           ;?>
         </table>
-        <?php echo anchor('activiteit/maken', 'Nieuwe activiteit', 'class="nav-link"'); ?>
+        <?php echo anchor('activiteit/aanmaken', 'Nieuwe activiteit', 'class="nav-link"'); ?>
       </div>
     </div>
   </div>
@@ -130,8 +128,8 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                 {
                     foreach ($activiteiten as $activiteit)
                     {
-                            echo "<div class='gebeurtenis " . $activiteit->andereActiviteit->beginDatum . " " . $activiteit->andereActiviteit->tijdstip . " ander" . $teller . "'>";
-                            echo "<span><b>" . $activiteit->andereActiviteit->naam . "</b></span><br />";
+                            echo "<div id='" . $activiteit->andereActiviteit->id . "' class='gebeurtenis " . $activiteit->andereActiviteit->beginDatum . " " . $activiteit->andereActiviteit->tijdstip . " ander" . $teller . "'>";
+                            echo "<span><b>" . $activiteit->andereActiviteit->naam . " ID: " . $activiteit->andereActiviteit->id . "</b></span><br />";
                             if ($activiteit->andereActiviteit->soortId == 1)
                             {
                               echo "Vertrek: " . zetOmNaarDDMMYYYY($activiteit->andereActiviteit->beginDatum) . "<br />";
@@ -140,7 +138,8 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                             echo "Tijdstip: " . $activiteit->andereActiviteit->uur . "<br />";
                             echo "Locatie: " . $activiteit->andereActiviteit->plaats . "<br />";
                             echo "Beschrijving: " . $activiteit->andereActiviteit->beschrijving . "<br /><br />";
-                            echo anchor('activiteit/beheren/' . $activiteit->id, 'Aanpassen') . " " . anchor('activiteit/verwijderen/' . $activiteit->id, 'Verwijderen');
+                            echo '<p>' . anchor('activiteit/aanpassen/' . $activiteit->andereActiviteit->id, 'Aanpassen', 'class="btn btn-primary"') . " ";
+                            echo "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button></p>";
                             echo "</div>";
                             $teller++;
                     }
@@ -148,5 +147,36 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
               ;?>
           </div>
       </div>
+      <p class="id"></p>
   </div>
 </div>
+
+
+
+
+<!-- Dialoogvenster verwijderen -->
+<div class="modal fade" id="mijnDialoogscherm" role="dialog">
+    <div class="modal-dialog">
+        <!-- Inhoud dialoogvenster-->
+        <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Pas Op</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <!-- <p id="zwemmerID"></p> -->
+            <p>
+              Bent u zeker dat u deze activiteit wilt verwijderen?
+            </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-round btn-primary" data-dismiss="modal">Sluit</button>
+                <button type="button" id="buttonDelete" class="btn btn-default btn-round btn-danger">Verwijder</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="<?php echo base_url(); ?>/assets/js/agendaTrainer.js" type="text/javascript"></script>

@@ -24,11 +24,6 @@ class AndereActiviteit_model extends CI_Model
   {
       $this->db->where('id', $id);
       $query = $this->db->get('andereActiviteit');
-
-      $this->model->load('soort_model');
-      $this->db->where('id' = $query->soortId);
-      $query->soort = $this->db->get('soort');
-
       return $query->row();
   }
   /**
@@ -58,6 +53,20 @@ class AndereActiviteit_model extends CI_Model
   {
       $this->db->where('id', $id);
       $this->db->delete('andereActiviteit');
+  }
+
+  /**
+   * Een activiteit met soort ophalen uit de database
+   * @param $id Het id van de activiteit die opgehaald moet worden
+   */
+  public function getActiviteitMetSoort($id)
+  {
+    $this->db->where('id', $id);
+    $query = $this->db->get('andereActiviteit')->row();
+
+    $this->load->model('soort_model');
+    $query->soort = $this->soort_model->get($query->soortId);
+    return $query;
   }
 
   /**
