@@ -34,7 +34,12 @@ function haalSupplementenOp(id){
 
         $("#resultaat").on('click','.modal-trigger',function() {
             supplementPerZwemmerId = $(this).parent().find('#id').val()
-            $('#mijnDialoogscherm').modal('show')
+            
+            if ($('#checkboxModal').is(':checked')){
+                verwijderSupplementPerZwemmer(supplementPerZwemmerId);
+            }else {
+                $('#mijnDialoogscherm').modal('show')
+            }
         })
 
         $("#buttonDelete").click(function(){
@@ -59,6 +64,10 @@ echo anchor(
     "<button type=\"button\" class=\"btn btn-primary mx-auto\">Supplementen beheren</button> "
 );
 
+
+
+echo '</br>';
+
 echo "<div class='form-group'>";
 echo form_label("Zwemmers: ", 'zwemmer') . "\n";
 echo "</br>";
@@ -70,6 +79,13 @@ foreach ($zwemmers as $zwemmer) {
 echo "</select>";
 echo "<div>";
 echo "</br>";
+
+echo '<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="checkboxModal">
+  <label class="form-check-label" for="checkboxModal">
+    Uitzetten waarschuwing bij het verwijderen
+  </label>
+</div>';
 
  echo ' <p>
         <div id="resultaat"></div>
