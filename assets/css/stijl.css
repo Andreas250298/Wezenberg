@@ -38,12 +38,6 @@ nav{
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.nieuwsartikel{
-    color: black;
-}
-.nieuwsartikel:hover{
-    color: black;
-}
 .inschrijving{
     color: black;
     padding-top: 10px;
@@ -79,7 +73,7 @@ nav{
     background-color: #ffffff;
 }
 .row-striped {
-    padding: 10px 0;
+    padding: 10px 10px;
 }
 .beheerknop{
     padding: 20px;
@@ -96,6 +90,45 @@ nav{
 .media{
     margin-bottom: 20px;
 }
+
+
+.latest-news > h3 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: 40px;
+}
+.latest-news-all {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+.latest-news-left {
+    display: inline-block;
+    float: left;
+    padding-right: 20px;
+}
+.latest-news-right > p {
+    color: #333;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 9px;
+}
+.news span.news-left {
+    padding-right: 18px;
+}
+ 
+.news span {
+    color: #333;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+
 
 /*EIND CSS STARTPAGINA.PHP*/
 

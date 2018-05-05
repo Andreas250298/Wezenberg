@@ -26,24 +26,31 @@ class Home extends CI_Controller
      * wedstrijden via Wedstrijd_model, deelname via deelname_model en trainingcentrum gegevens via trainingscentrum_model deze worden getoond in de view startpagina.php
      *\see Authex::getGebruikerInfo()
      *\see Wedstrijd_model::toonWedstrijden()
-     *\see Wedstrijd_model::toonWedstrijden()
-     *\see Wedstrijd_model::toonWedstrijden()
-     *\see Wedstrijd_model::toonWedstrijden()
      *
      *\see bekijken.php
      */
-    public function index()
+    public function index($nieuwsRij = 0, $agendaRij = 0)
     {
         $data['titel'] = 'Wezenberg | startpagina';
         $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $gebruiker = $data['gebruiker'];
 
-        $this->load->model('nieuws_model');
-        $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikels();
+        $data['nieuwsStartRij'] = $nieuwsRij;
+        
+        $aantal = 5;
 
+        
         $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
+        
+        $config['base_url'] = site_url('Home/index/');
+        $config['total_rows_wedstrijden'] = $this->wedstrijd_model->getCountAll();
+        $config['per_page'] = $aantal;
+        
+        $this->pagination->initialize($config);
+        
+        $data['wedstrijden'] = $this->wedstrijd_model->getAllWedstrijdPaging($aantal, $agendaRij);
+        
         if ($gebruiker != null) {
             $this->load->model('deelname_model');
             $data['status'] = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
@@ -53,6 +60,8 @@ class Home extends CI_Controller
         $this->load->model('trainingscentrum_model');
         $data['trainingscentrum'] = $this->trainingscentrum_model->get();
 
+        $data['links'] = $this->pagination->create_links();
+        
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'startpagina',
             'voetnoot' => 'main_footer');
@@ -129,5 +138,58 @@ class Home extends CI_Controller
             'voetnoot' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function haalAjaxOp_Nieuwsartikels()
+    {
+        $data['nieuwsStartRij'] = intval($this->input->get('nieuwsStartRij'));
+        $aantalArtikels = 5;
+       
+        $this->load->model('nieuws_model');
+
+        $config['total_rows_nieuws'] = $this->nieuws_model->getCountAll();
+        $config['per_page'] = $aantalArtikels;
+        
+        $this->pagination->initialize($config);
+        
+        $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikelsPaging($aantalArtikels, intval($data['nieuwsStartRij']));
+        
+        $this->load->view('ajax_nieuwsartikels', $data);
+    }
+    
+        public function haalAjaxOp_AgendaItems()
+    {
+        $data['agendaStartRij'] = intval($this->input->get('agendaStartRij'));
+        $aantalAgendaItems= 3;
+       
+        $this->load->model('wedstrijd_model');
+
+        $config['total_rows_nieuws'] = $this->wedstrijd_model->getCountAll();
+        $config['per_page'] = $aantalAgendaItems;
+        
+        $this->pagination->initialize($config);
+        
+        $data['agendaItems'] = $this->wedstrijd_model->getAllWedstrijdPaging($aantalAgendaItems, intval($data['agendaStartRij']));
+        
+        $this->load->view('ajax_agendaItems', $data);
+    }
+    
+    public function haalAjaxOp_MaakMeldingGezien()
+    {
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+
+        $meldingPerGebruiker->id = $this->input->get('id');
+        $meldingPerGebruiker->gezien = 1;
+
+        $this->load->model('meldingPerGebruiker_model');
+        $this->meldingPerGebruiker_model->update($meldingPerGebruiker);
+
+
+
+        $data['meldingGezien'] = $this->meldingPerGebruiker_model->update($id);
+
+        $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($data['gebruiker']->id);
+
+        $this->load->view('ajax_meldingTonen', $data);
     }
 }

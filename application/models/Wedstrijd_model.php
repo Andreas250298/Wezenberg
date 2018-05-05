@@ -27,6 +27,13 @@ class Wedstrijd_model extends CI_Model
         $query = $this->db->get('wedstrijd');
         return $query->row();
     }
+    
+    /**
+      * opvragen van het aantal records.
+      */
+    function getCountAll() {
+        return $this->db->count_all('wedstrijd');
+    }
 
     /**
      * Opvragen van alle wedstrijden uit de database, oplopend gesorteerd
@@ -40,7 +47,7 @@ class Wedstrijd_model extends CI_Model
     }
 
     /**
-     * Opvragen van alle nieuws artikels uit de database, aflopend gesorteerd
+     * Opvragen van alle wedstrijden uit de database, aflopend gesorteerd
      * @return De opgevraagde records
      */
     public function toonWedstrijdenDESC()
@@ -48,6 +55,16 @@ class Wedstrijd_model extends CI_Model
         $this->db->order_by('beginDatum', 'desc');
         $query = $this->db->get('wedstrijd');
         return $query->result();
+    }
+    
+    /**
+     * Opvragen van een aantal wedstrijden uit de database voor paging, aflopend gesorteerd
+     * @return De opgevraagde records
+     */
+    public function getAllWedstrijdPaging($aantal, $startrij){
+      $this->db->order_by('beginDatum', 'asc');
+      $query = $this->db->get('wedstrijd', $aantal, $startrij);
+      return $query->result();
     }
 
     /**

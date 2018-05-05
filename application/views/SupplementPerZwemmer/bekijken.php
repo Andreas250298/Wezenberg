@@ -1,89 +1,80 @@
 <script>
-var id = "";
+var supplementPerZwemmerId = "";
+var zwemmerId = 0;
+
+function verwijderSupplementPerZwemmer(id){
+    $.ajax({type: "GET",
+                url: site_url + "/supplement/verwijderSupplementPerZwemmer",
+                data:{id : id},
+                success: function(){
+                haalSupplementenOp(zwemmerId)
+                $('#mijnDialoogscherm').modal('hide')
+                },
+                error: function (xhr, status, error){
+              alert("--ERROR IN AJAX --\n\n" + xhr.responseText);
+            }
+        });
+}
+
+function haalSupplementenOp(id){
+    $.ajax({type : "GET",
+                url : site_url + "/supplement/haalAjaxOp_supplementenPerZwemmerTrainer",
+                data : { id : id },
+                success : function(result){
+                    $("#resultaat").html(result);
+                },
+                error: function (xhr, status, error) {
+                    alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+                }
+        });
+}
+
     $(document).ready(function () {
-        $(".modal-trigger").click(function() {
-            id = $(this).parent().find('#id').val()
+        haalSupplementenOp(0);
+
+        $("#resultaat").on('click','.modal-trigger',function() {
+            supplementPerZwemmerId = $(this).parent().find('#id').val()
             $('#mijnDialoogscherm').modal('show')
         })
 
         $("#buttonDelete").click(function(){
-            verwijderSupplementPerZwemmer(id);
+            verwijderSupplementPerZwemmer(supplementPerZwemmerId);
         })
 
-        function verwijderSupplementPerZwemmer(id){
-         $.ajax({type: "GET",
-            url: site_url + "/supplement/verwijderSupplementPerZwemmer",
-            data:{id : id},
-            success: function(){
-             window.location.reload();
-            },
-            error: function (xhr, status, error){
-              alert("--ERROR IN AJAX --\n\n" + xhr.responseText);
-            }
-        });
+        $('#zwemmer').on('change', function(){
+            zwemmerId = $('#zwemmer').val()
+            haalSupplementenOp(zwemmerId);
+        })
     }
-})
+)
 </script>
 <?php
-
-$namen = [];
-foreach ($supplementenPerAlleZwemmers as $supplementPerZwemmer) {
-    array_push($namen, $supplementPerZwemmer->zwemmer->id);
-}
 
 echo anchor(
     "supplement/supplementenToekennen",
     "<button type=\"button\" class=\"btn btn-primary mx-auto\">Supplement toekennen</button> "
 );
+echo anchor(
+    "supplement/beheerSupplementen",
+    "<button type=\"button\" class=\"btn btn-primary mx-auto\">Supplementen beheren</button> "
+);
 
+echo "<div class='form-group'>";
+echo form_label("Zwemmers: ", 'zwemmer') . "\n";
+echo "</br>";
+echo "<select name='zwemmer' id='zwemmer' class='form-control'>";
+echo '<option value=0>Alle Zwemmers</option>';
 foreach ($zwemmers as $zwemmer) {
-    if (in_array($zwemmer->id, $namen)) {
-        echo "<h3>$zwemmer->naam</h3>";
-        echo "</br>";
-        echo "<table class='table'>
-        <thead>
-        <tr>
-        <th>
-        Supplement
-        </th>
-        <th>
-        Hoeveelheid
-        </th>
-        <th>
-        Tijdstip
-        </th>
-        <th>
-        Datum
-        </th>
-        <th></th>
-            </tr>
-        </thead>
-        <tbody>";
-        foreach ($supplementenPerAlleZwemmers as $supplementPerZwemmer) {
-            if ($supplementPerZwemmer->zwemmer->id == $zwemmer->id) {
-                $data = array('type' => 'hidden', 'name' => 'supplementPerZwemmerId', 'id' => 'id', 'value' => $supplementPerZwemmer->id);
-                echo "<tr>
-                  <td>
-                  ".$supplementPerZwemmer->supplement->naam."
-                  </td>
-                  <td>
-                  ".$supplementPerZwemmer->hoeveelheid." g
-                  </td>
-                  <td>
-                  ".$supplementPerZwemmer->tijdstipInname."
-                  </td>
-                  <td>
-                  ".zetOmNaarDDMMYYYY($supplementPerZwemmer->datumInname)."
-                  </td>
-                  <td>".form_input($data) . anchor('supplement/aanpassenSupplementPerZwemmer/'.$supplementPerZwemmer->id, '<button type="button" class="btn btn-success btn-xs btn-round"><i class="fas fa-edit"></i></button>')."<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button></td>
-                </tr>";
-            }
-        }
-        echo "</tbody>";
-        echo "</table>";
-        echo "</br>";
-    }
+    echo "<option value='" . $zwemmer->id . "'>" . $zwemmer->naam . "</option>\n";
 }
+echo "</select>";
+echo "<div>";
+echo "</br>";
+
+ echo ' <p>
+        <div id="resultaat"></div>
+        </p>';
+
 echo anchor('home/index', "<button type=\"button\" class=\"btn btn-primary mx-auto\">Terug</button>");
 ?>
 <!-- Dialoogvenster -->
