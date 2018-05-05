@@ -7,32 +7,32 @@ $jaar = $dt->format('Y');
 
 if (isset($activiteit))
 {
-    $dataInputSoort = array('class' => 'form-control mr-sm-2',  'type' => 'text',   'name' => 'soort',  'id' => 'soort',    'placeholder' => 'Soort',   'aria-label' => 'Soort',  'size' => '30', 'value' => $activiteit->soort->naam);
-    $dataInputNaam = array('class' => 'form-control mr-sm-2',   'type' => 'text',   'name' => 'naam',   'id' => 'naam',     'placeholder' => 'Naam',    'aria-label' => 'Naam',   'size' => '30', 'value' => $activiteit->naam);
-    $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'text',   'name' => 'plaats', 'id' => 'plaats',   'placeholder' => 'Plaats',  'aria-label' => 'Plaats', 'size' => '30', 'value' => $activiteit->plaats);
-    $dataInputBeginDatum = array('class' => 'form-control mr-sm-2',   'type' => 'date',     'name' => 'begindatum',     'id' => 'begindatum',     'placeholder' => 'Begindatum',    'aria-label' => 'Begindatum',     'size' => '30', 'value' => $activiteit->beginDatum);
+    $dataInputSoort = array('class' => 'form-control mr-sm-2',  'type' => 'text',   'name' => 'soort',  'id' => 'soort',    'placeholder' => 'Soort',   'aria-label' => 'Soort',  'size' => '30', 'required' => 'true', 'value' => $activiteit->soort->naam);
+    $dataInputNaam = array('class' => 'form-control mr-sm-2',   'type' => 'text',   'name' => 'naam',   'id' => 'naam',     'placeholder' => 'Naam',    'aria-label' => 'Naam',   'size' => '30', 'required' => 'true', 'value' => $activiteit->naam);
+    $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'text',   'name' => 'plaats', 'id' => 'plaats',   'placeholder' => 'Plaats',  'aria-label' => 'Plaats', 'size' => '30', 'required' => 'true', 'value' => $activiteit->plaats);
+    $dataInputBeginDatum = array('class' => 'form-control mr-sm-2',   'type' => 'date',     'name' => 'begindatum',     'id' => 'begindatum',     'placeholder' => 'Begindatum',    'aria-label' => 'Begindatum',     'size' => '30', 'required' => 'true', 'value' => $activiteit->beginDatum);
     $dataInputEindDatum = array('class' => 'form-control mr-sm-2',    'type' => 'date',     'name' => 'einddatum',      'id' => 'einddatum',      'placeholder' => 'Einddatum',     'aria-label' => 'Einddatum',      'size' => '30', 'value' => $activiteit->eindDatum);
-    $dataInputTijdstip = array('class' => 'form-control mr-sm-2',     'type' => 'time',     'name' => 'tijdstip',       'id' => 'tijdstip',       'placeholder' => 'Tijdstip',      'aria-label' => 'Tijdstip',       'size' => '30', 'value' => $activiteit->tijdstip);
-    $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'type' => 'textarea', 'name' => 'beschrijving',   'id' => 'beschrijving',   'placeholder' => 'Beschrijving',  'aria-label' => 'Beschrijving',   'size' => '30', 'value' => $activiteit->beschrijving);
+    $dataInputTijdstip = array('class' => 'form-control mr-sm-2',     'type' => 'time',     'name' => 'tijdstip',       'id' => 'tijdstip',       'placeholder' => 'Tijdstip',      'aria-label' => 'Tijdstip',       'size' => '30', 'required' => 'true', 'value' => $activiteit->tijdstip);
+    $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'type' => 'textarea', 'name' => 'beschrijving',   'id' => 'beschrijving',   'placeholder' => 'Beschrijving',  'aria-label' => 'Beschrijving',   'size' => '30', 'required' => 'true', 'value' => $activiteit->beschrijving);
     foreach ($zwemmersBijActiviteit as $zwemmer)
     {
       $ids[] = $zwemmer->gebruikerIdZwemmer;
     }
 } else {
-  $dataInputSoort = array('class' => 'form-control mr-sm-2',  'type' => 'text',   'name' => 'soort',  'id' => 'soort',    'placeholder' => 'Soort',   'aria-label' => 'Soort',  'size' => '30');
-  $dataInputNaam = array('class' => 'form-control mr-sm-2',   'type' => 'text',   'name' => 'naam',   'id' => 'naam',     'placeholder' => 'Naam',    'aria-label' => 'Naam',   'size' => '30');
-  $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'text',   'name' => 'plaats', 'id' => 'plaats',   'placeholder' => 'Plaats',  'aria-label' => 'Plaats', 'size' => '30');
-  $dataInputBeginDatum = array('class' => 'form-control mr-sm-2',   'type' => 'date',     'name' => 'begindatum',     'id' => 'begindatum',     'placeholder' => 'Begindatum',    'aria-label' => 'Begindatum',     'size' => '30');
+  $dataInputSoort = array('class' => 'form-control mr-sm-2',  'type' => 'text',   'name' => 'soort',  'id' => 'soort',    'placeholder' => 'Soort',   'aria-label' => 'Soort', 'required' => 'true',  'size' => '30');
+  $dataInputNaam = array('class' => 'form-control mr-sm-2',   'type' => 'text',   'name' => 'naam',   'id' => 'naam',     'placeholder' => 'Naam',    'aria-label' => 'Naam', 'required' => 'true',   'size' => '30');
+  $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'text',   'name' => 'plaats', 'id' => 'plaats',   'placeholder' => 'Plaats',  'aria-label' => 'Plaats', 'required' => 'true', 'size' => '30');
+  $dataInputBeginDatum = array('class' => 'form-control mr-sm-2',   'type' => 'date',     'name' => 'begindatum',     'id' => 'begindatum',     'placeholder' => 'Begindatum',    'aria-label' => 'Begindatum', 'required' => 'true',     'size' => '30');
   $dataInputEindDatum = array('class' => 'form-control mr-sm-2',    'type' => 'date',     'name' => 'einddatum',      'id' => 'einddatum',      'placeholder' => 'Einddatum',     'aria-label' => 'Einddatum',      'size' => '30');
-  $dataInputTijdstip = array('class' => 'form-control mr-sm-2',     'type' => 'time',     'name' => 'tijdstip',       'id' => 'tijdstip',       'placeholder' => 'Tijdstip',      'aria-label' => 'Tijdstip',       'size' => '30');
-  $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'type' => 'textarea', 'name' => 'beschrijving',   'id' => 'beschrijving',   'placeholder' => 'Beschrijving',  'aria-label' => 'Beschrijving',   'size' => '30');
+  $dataInputTijdstip = array('class' => 'form-control mr-sm-2',     'type' => 'time',     'name' => 'tijdstip',       'id' => 'tijdstip',       'placeholder' => 'Tijdstip',      'aria-label' => 'Tijdstip', 'required' => 'true',       'size' => '30');
+  $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'type' => 'textarea', 'name' => 'beschrijving',   'id' => 'beschrijving',   'placeholder' => 'Beschrijving',  'aria-label' => 'Beschrijving', 'required' => 'true',   'size' => '30');
 }
   $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
 
 echo form_open_multipart('Activiteit/nieuw', 'class="form-group"');
 echo "<div>Type activiteit</div>";
 echo "<div class='form-group'>";
-echo "<select class='form-control' name='soort' size='1'>";
+echo "<select class='form-control' name='soort' size='1' required='true'>";
 echo "<option value='2'>Training</option>";
 echo "<option value='1'>Stage</option>";
 echo "</select>";
