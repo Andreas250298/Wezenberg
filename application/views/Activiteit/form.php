@@ -30,8 +30,9 @@ if (isset($activiteit))
   $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
 
 echo form_open_multipart('Activiteit/nieuw', 'class="form-group"');
+echo "<div>Type activiteit</div>";
 echo "<div class='form-group'>";
-echo "<select name='soort' size='1'>";
+echo "<select class='form-control' name='soort' size='1'>";
 echo "<option value='2'>Training</option>";
 echo "<option value='1'>Stage</option>";
 echo "</select>";
@@ -60,27 +61,27 @@ echo "<div class='form-group'>";
 echo form_labelpro("Beschrijving", 'beschrijving') . "\n";
 echo form_textarea($dataInputBeschrijving) . "\n";
 echo "</div>";
+echo "<div>Zwemmers</div>";
 echo "<div class='form-group'>";
+echo "<select name='zwemmers[]' id='zwemmers' class='form-control' multiple required='true' size='10'>";
+
 foreach ($zwemmers as $zwemmer)
 {
     if (isset($activiteit))
     {
       if (in_array($zwemmer->id, $ids))
       {
-        $dataInput = array('name' => 'zwemmers[]', 'id' => $zwemmer->id, 'aria-label' => $zwemmer->naam, 'size' => '30', 'value' => $zwemmer->id, 'checked' => TRUE);
+        echo "<option selected value='" . $zwemmer->id . "'>" . $zwemmer->naam . "</option>\n";
       } else {
-        $dataInput = array('name' => 'zwemmers[]', 'id' => $zwemmer->id, 'aria-label' => $zwemmer->naam, 'size' => '30', 'value' => $zwemmer->id);
+        echo "<option value='" . $zwemmer->id . "'>" . $zwemmer->naam . "</option>\n";
       }
-      echo form_checkbox($dataInput) . " " . $zwemmer->naam . "<br />";
     } else {
-      $dataInput = array('name' => 'zwemmers[]', 'id' => $zwemmer->id, 'aria-label' => $zwemmer->naam, 'size' => '30', 'value' => $zwemmer->id);
-      echo form_checkbox($dataInput) . " " . $zwemmer->naam . "<br />";
+      echo "<option selected value='" . $zwemmer->id . "'>" . $zwemmer->naam . "</option>\n";
     }
-
-
 }
 $dataHidden = array('name' => 'zwemmers[]', 'id' => '999', 'value' => '999', 'type' => 'hidden');
 echo form_input($dataHidden);
+echo "</select>";
 echo "</div>";
 
 if (isset($activiteit)) {
