@@ -25,7 +25,7 @@ class Activiteit extends CI_Controller {
    * @param week De week om te tonen in de agenda
    * @param jaar Het jaar om te tonen in de agenda
    */
-  public function index($week = "", $jaar = "")
+  public function index($week, $jaar)
   {
     $data['titel'] = 'Activiteiten';
     $data['paginaVerantwoordelijke'] = 'Bols Jordi';

@@ -4,10 +4,6 @@ $dt = new DateTime;
 $week = $dt->format('W');
 $jaar = $dt->format('Y');
 
-foreach ($zwemmersBijActiviteit as $zwemmer)
-{
-  $ids[] = $zwemmer->gebruikerIdZwemmer;
-}
 
 if (isset($activiteit))
 {
@@ -18,6 +14,10 @@ if (isset($activiteit))
     $dataInputEindDatum = array('class' => 'form-control mr-sm-2',    'type' => 'date',     'name' => 'einddatum',      'id' => 'einddatum',      'placeholder' => 'Einddatum',     'aria-label' => 'Einddatum',      'size' => '30', 'value' => $activiteit->eindDatum);
     $dataInputTijdstip = array('class' => 'form-control mr-sm-2',     'type' => 'time',     'name' => 'tijdstip',       'id' => 'tijdstip',       'placeholder' => 'Tijdstip',      'aria-label' => 'Tijdstip',       'size' => '30', 'value' => $activiteit->tijdstip);
     $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'type' => 'textarea', 'name' => 'beschrijving',   'id' => 'beschrijving',   'placeholder' => 'Beschrijving',  'aria-label' => 'Beschrijving',   'size' => '30', 'value' => $activiteit->beschrijving);
+    foreach ($zwemmersBijActiviteit as $zwemmer)
+    {
+      $ids[] = $zwemmer->gebruikerIdZwemmer;
+    }
 } else {
   $dataInputSoort = array('class' => 'form-control mr-sm-2',  'type' => 'text',   'name' => 'soort',  'id' => 'soort',    'placeholder' => 'Soort',   'aria-label' => 'Soort',  'size' => '30');
   $dataInputNaam = array('class' => 'form-control mr-sm-2',   'type' => 'text',   'name' => 'naam',   'id' => 'naam',     'placeholder' => 'Naam',    'aria-label' => 'Naam',   'size' => '30');
@@ -63,13 +63,20 @@ echo "</div>";
 echo "<div class='form-group'>";
 foreach ($zwemmers as $zwemmer)
 {
-    if (in_array($zwemmer->id, $ids))
+    if (isset($activiteit))
     {
-      $dataInput = array('name' => 'zwemmers[]', 'id' => $zwemmer->id, 'aria-label' => $zwemmer->naam, 'size' => '30', 'value' => $zwemmer->id, 'checked' => TRUE);
+      if (in_array($zwemmer->id, $ids))
+      {
+        $dataInput = array('name' => 'zwemmers[]', 'id' => $zwemmer->id, 'aria-label' => $zwemmer->naam, 'size' => '30', 'value' => $zwemmer->id, 'checked' => TRUE);
+      } else {
+        $dataInput = array('name' => 'zwemmers[]', 'id' => $zwemmer->id, 'aria-label' => $zwemmer->naam, 'size' => '30', 'value' => $zwemmer->id);
+      }
+      echo form_checkbox($dataInput) . " " . $zwemmer->naam . "<br />";
     } else {
       $dataInput = array('name' => 'zwemmers[]', 'id' => $zwemmer->id, 'aria-label' => $zwemmer->naam, 'size' => '30', 'value' => $zwemmer->id);
+      echo form_checkbox($dataInput) . " " . $zwemmer->naam . "<br />";
     }
-    echo form_checkbox($dataInput) . " " . $zwemmer->naam . "<br />";
+
 
 }
 $dataHidden = array('name' => 'zwemmers[]', 'id' => '999', 'value' => '999', 'type' => 'hidden');
