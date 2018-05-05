@@ -59,7 +59,7 @@ class Gebruiker extends CI_Controller
     public function maakGebruiker()
     {
         $data['titel'] = "Gebruiker aanmaken";
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model("gebruiker_model");
 
@@ -93,13 +93,16 @@ class Gebruiker extends CI_Controller
         $config['max_height']           = 1080; */
 
         $this->load->library('upload', $config);
-
-        if($this->upload->do_upload('userfile')){
-          $upload_data = $this->upload->data();
-          $gebruiker->foto = 'uploads/gebruikers/' . $upload_data['file_name'];
+        $this->load->model('gebruiker_model');
+        if ($this->upload->do_upload('userfile')) {
+            $upload_data = $this->upload->data();
+            $oudGebruiker = $this->gebruiker_model->get($gebruiker->id);
+            $this->load->helper("file");
+            unlink($oudGebruiker->foto);
+            $gebruiker->foto = 'uploads/gebruikers/' . $upload_data['file_name'];
         }
 
-        $this->load->model('gebruiker_model');
+
         if ($gebruiker->id == null) {
             $gebruiker->status = 1;
             $gebruiker->soort = "zwemmer";
@@ -110,12 +113,11 @@ class Gebruiker extends CI_Controller
 
 
         $gebruiker = $this->authex->getGebruikerInfo();
-        if($gebruiker->soort == "zwemmer"){
-          redirect('gebruiker/account/' . $gebruiker->id);
+        if ($gebruiker->soort == "zwemmer") {
+            redirect('gebruiker/account/' . $gebruiker->id);
         } else {
-          redirect('/gebruiker/toonZwemmers');
+            redirect('/gebruiker/toonZwemmers');
         }
-
     }
 
     /**
@@ -126,7 +128,7 @@ class Gebruiker extends CI_Controller
     */
     public function wijzig($id)
     {
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
 
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('gebruiker_model');
@@ -231,8 +233,8 @@ class Gebruiker extends CI_Controller
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['zwemmer'] = $huidigeZwemmer;
 
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijdInformatieZwemmer($id);
+        $this->load->model('deelname_model');
+        $data['wedstrijden'] = $this->deelname_model->getInformatieDeelnamesZwemmer($id);
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmer_info',
@@ -262,7 +264,7 @@ class Gebruiker extends CI_Controller
 
     /**
     * Account info tonen aan de hand van de id
-    * \param id De id van de gebruiker waarvan de info getoond dient te worden.
+    * @param id De id van de gebruiker waarvan de info getoond dient te worden.
     *\see Authex::getGebruikerInfo()
     *\see gebruiker_info.php
     */
@@ -283,7 +285,7 @@ class Gebruiker extends CI_Controller
 
     /**
     * Meldingen tonen aan de hand van de gebruiker ID
-    * \param id De id van de gebruiker waarvan de info getoond dient te worden.
+    * @param id De id van de gebruiker waarvan de info getoond dient te worden.
     *\see Authex::getGebruikerInfo()
     *\see main_header.php
     */

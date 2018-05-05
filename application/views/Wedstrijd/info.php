@@ -2,16 +2,28 @@
 $lijstWedstrijden = "";
   echo "<h1 class='title'>" . $wedstrijd->naam . "</h1>";
   echo "<p>" . $wedstrijd->beschrijving . "</p>";
-  foreach ($reeksen as $reeks) {
-      $lijstWedstrijden .= "<tr><td>" .
-      $reeks->id . "</td><td>" .
-      $slagen->soort . "</td><td>" .
-      $afstanden->afstand . "</td><td>" .
-      $reeks->tijdstip ."</td></tr>"
-      ;
+  if (isset($reeksen)) {
+      foreach ($reeksen as $reeks) {
+          $lijstWedstrijden .= "<tr><td>" .
+        $reeks->id . "</td><td>";
+          foreach ($slagenPerReeks as $slag) {
+              if (isset($slag->soort)) {
+                  $lijstWedstrijden .= $slag->soort;
+              }
+          }
+
+          $lijstWedstrijden .= "</td><td>";
+          foreach ($afstanden as $afstand) {
+              if (isset($afstand->afstand)) {
+                  $lijstWedstrijden .= $afstand->afstand;
+              }
+          }
+
+          $lijstWedstrijden .= "</td><td>" . $reeks->tijdstip ."</td></tr>";
+      }
   }
-?>
-<table class="table">
+ if ($reeksen != null) {
+     echo "<table class=\"table\">
   <thead>
     <tr>
       <td>
@@ -29,15 +41,10 @@ $lijstWedstrijden = "";
     </tr>
   </thead>
   <tbody>
-    <?php
-    echo $lijstWedstrijden;
-    ?>
+     $lijstWedstrijden
   </tbody>
-</table>
-<?php
-if ($gebruiker != null) {
-        echo anchor('Wedstrijd/index', 'terug', 'class="btn btn-primary"');
-    } else {
-        echo anchor('home/index', 'terug', 'class="btn btn-primary"');
-    }
-?>
+</table>";
+ } else {
+     echo "<p>Er zijn voor deze wedstrijd nog geen reeksen</p>";
+ }
+      echo anchor('Wedstrijd/index', 'terug', 'class="btn btn-primary"');

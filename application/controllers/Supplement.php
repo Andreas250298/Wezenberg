@@ -246,7 +246,7 @@ class Supplement extends CI_Controller
      * \see Supplement_model->getSupplementen
      */
     public function aanpassen()
-    {   
+    {
         $supplementPerZwemmer = new stdClass();
         $supplementPerZwemmer->id = $this->input->post('id');
         $supplementPerZwemmer->supplementId = $this->input->post('supplement');
@@ -275,26 +275,26 @@ class Supplement extends CI_Controller
         $zwemmers = $this->input->post('zwemmers');
         foreach ($zwemmers as $zwemmer) {
             $this->load->model('supplementPerZwemmer_model');
-    
+
             $supplementPerZwemmer = new stdClass();
             $supplementPerZwemmer->gebruikerIdZwemmer = $zwemmer;
             $supplementPerZwemmer->supplementId = $this->input->post('supplement');
             $supplementPerZwemmer->hoeveelheid = $this->input->post('hoeveelheid');
             $startDatum = new DateTime($this->input->post('startDatum'));
             $eindeDatum = new DateTime($this->input->post('eindeDatum'));
-        
+
             if ($startDatum > $eindeDatum){
                 $message = "Start datum ligt verder in de toekomst dan Einde datum!";
                 return $this->error($message);
             }
             else {
-                for ($i = $startDatum; $startDatum <= $eindeDatum; $i->modify('+1 day')) { 
+                for ($i = $startDatum; $startDatum <= $eindeDatum; $i->modify('+1 day')) {
                     $supplementPerZwemmer->datumInname = $i->format('Y-m-d');
                     $supplementPerZwemmer->tijdstipInname = $this->input->post('tijdstip');
                     $this->supplementPerZwemmer_model->insert($supplementPerZwemmer);
                 }
             }
-          
+
         }
         redirect("/supplement/supplementenPerZwemmerTrainer");
     }

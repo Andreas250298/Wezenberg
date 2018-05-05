@@ -35,7 +35,7 @@ class Wedstrijd extends CI_Controller
         $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
 
         $partials = array('hoofding' => 'main_header',
-          'inhoud' => 'Wedstrijd/beheren',
+          'inhoud' => 'Wedstrijd/bekijken',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
@@ -50,9 +50,10 @@ class Wedstrijd extends CI_Controller
         $data['paginaVerantwoordelijke'] = 'De Coninck Mattias';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
-        $this->load->model('wedstrijd_model');
-        $data['afstanden'] = $this->wedstrijd_model->getAfstanden();
-        $data['slagen'] = $this->wedstrijd_model->getSlagen();
+        $this->load->model('afstand_model');
+        $data['afstanden'] = $this->afstand_model->getAllAfstanden();
+        $this->load->model('slag_model');
+        $data['slagen'] = $this->slag_model->getAllSlagen();
         $this->load->model('status_model');
         $data['statussen'] = $this->status_model->getAll();
         $partials = array('hoofding' => 'main_header',
@@ -128,7 +129,7 @@ class Wedstrijd extends CI_Controller
 
     /**
      * Toont de pagina voor de wedstrijd-informatie aan te passen
-     *\param id De id van de aan te passen wedstrijd
+     *\@param id De id van de aan te passen wedstrijd
      *\see Wedstrijd_model::get()
      *\see beheren.php
      */
@@ -152,7 +153,7 @@ class Wedstrijd extends CI_Controller
      * Toont de pagina voor de wedstrijden te beheren
      *\see Authex::getGebruikerInfo()
      *\see Wedstrijd_model::toonWedstrijden()
-     *\see beheren.php
+     *\see bekijken.php
      */
     public function beheerWedstrijden()
     {
@@ -164,14 +165,14 @@ class Wedstrijd extends CI_Controller
         $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
 
         $partials = array('hoofding' => 'main_header',
-          'inhoud' => 'Wedstrijd/beheren',
+          'inhoud' => 'Wedstrijd/bekijken',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 
     /**
     * Hiermee verwijdert de trainer een wedstrijd
-    *\param id De id van de aan te verwijderen wedstrijd
+    *\@param id De id van de aan te verwijderen wedstrijd
     *\see Authex::getGebruikerInfo()
     */
     public function verwijder($id)
@@ -230,7 +231,7 @@ class Wedstrijd extends CI_Controller
 
     /**
     * Toont de pagina waarin een trainer reeksen per wedstrijd kan toevoegen
-    *\param id De id van de wedstrijd waar reeksen aan moeten toegevoegd worden
+    *\@param id De id van de wedstrijd waar reeksen aan moeten toegevoegd worden
     *\see Authex::getGebruikerInfo()
     *\see Wedstrijd_model::getReeksenPerWedstrijd()
     *\see reeksen.php
@@ -241,9 +242,9 @@ class Wedstrijd extends CI_Controller
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
-        $reeks = $this->wedstrijd_model->getReeksen($id);
+        $reeks = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
         $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
-        if (isset($reeks)) {
+        foreach ($data['reeksen'] as $reeks) {
             $data['slag'] = $this->wedstrijd_model->getSlagenPerWedstrijd($reeks->slagId);
             $data['afstand'] = $this->wedstrijd_model->getAfstandenPerWedstrijd($reeks->afstandId);
         }
@@ -270,12 +271,6 @@ class Wedstrijd extends CI_Controller
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
-        /*$reeksen = $this->wedstrijd_model->getReeksen($id);
-        $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
-        if (isset($reeks)) {
-            $data['slag'] = $this->wedstrijd_model->getSlagenPerWedstrijd($reeksen->slagId);
-            $data['afstand'] = $this->wedstrijd_model->getAfstandenPerWedstrijd($reeksen->afstandId);
-        }*/
         $this->load->model('slag_model');
         $data['slagen'] = $this->slag_model->getAllSlagen();
         $this->load->model('afstand_model');
@@ -289,7 +284,9 @@ class Wedstrijd extends CI_Controller
 
     /**
     * Toont en overzicht met meer informatie over een bepaalde wedstrijd
+    * @param id van de aangeklikte wedstrijd
     *\see Authex::getGebruikerInfo()
+    *\see Wedstrijd_model::get($id)
     *\see Wedstrijd_model::getReeksenPerWedstrijd()
     *\see Wedstrijd_model::getSlagenPerWedstrijd()
     *\see Wedstrijd_model::getAfstandenPerWedstrijd()
@@ -301,20 +298,13 @@ class Wedstrijd extends CI_Controller
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
-        $wedstrijd = $this->wedstrijd_model->get($id);
-        $reeksen = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
-        //$wedstrijdId = $reeksen->wedstrijdId;
-        $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
-        if (isset($reeksen)) {
-            foreach ($reeksen as $reeks) {
-                $slagId = $reeks->slagId;
-                $afstandId = $reeks->afstandId;
-            }
-        }
-        $data['slagen'] = $this->wedstrijd_model->getSlagenPerReeks($slagId);
+        $wedstrijd = $data['wedstrijd'];
+        $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($wedstrijd->id);
+        $this->load->model('reeks_model');
+        $data['slagenPerReeks'] = $this->reeks_model->getSlagenPerReeks($id);
+        $data['afstanden'] = $this->reeks_model->getAfstandenPerReeks($id);
 
-        $data['afstanden'] = $this->wedstrijd_model->getAfstandenPerReeks($afstandId);
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/info',
           'voetnoot' => 'main_footer');
@@ -324,8 +314,8 @@ class Wedstrijd extends CI_Controller
     /**
      * Toont de pagina met alle afgelopen wedstrijden
      *\see Authex::getGebruikerInfo()
-     *\see Wedstrijd_model::toonWedstrijden()
-     *\see beheren.php
+     *\see Wedstrijd_model::toonWedstrijdenASC()
+     *\see afgelopen.php
      */
     public function toonAfgelopen()
     {
