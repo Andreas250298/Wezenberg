@@ -54,6 +54,6 @@ foreach ($zwemmers as $zwemmer) {
     }
 }
 }else{
-    echo "<h3 class=\"mx-auto\">Deze zwemmer heeft nog geen toegekende supplementen!</h3>";
+    echo "<h4 class=\"mx-auto\">Deze zwemmer heeft nog geen toegekende supplementen!</h4>";
     echo '</br>';
 };

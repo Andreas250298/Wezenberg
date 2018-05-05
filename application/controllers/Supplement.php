@@ -159,22 +159,51 @@ class Supplement extends CI_Controller
     /**
     * Tonen van supplementen voor een zwemmer
     * @param id id van de Zwemmer
-    *\see SupplementPerZwemmer_model::getSupplementenPerZwemmer()
-    *\see Authex::getGebruikerInfo()
+    *\see SupplementPerZwemmer_model::getSupplementenPerZwemmer
+    *\see Supplement_model::getSupplementen
+    *\see Authex::getGebruikerInfo
     */
     public function supplementenPerZwemmer($id)
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+
+        $this->load->model('supplement_model');
+        $data['supplementen'] = $this->supplement_model->getSupplementen();
+
         $this->load->model('supplementPerZwemmer_model');
         $data['supplementenPerZwemmer'] = $this->supplementPerZwemmer_model->getSupplementenPerZwemmer($id);
-
 
         $data['titel'] = 'Supplementen voor zwemmer';
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Supplement/zwemmer',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
+    }
+    
+      /**
+     * Zwemmer zijn gewenste supplementen ophalen via ajax
+     * \see SupplementPerZwemmer_model::getSupplementenPerZwemmerEnSupplement
+     * \see SupplementPerZwemmer_model::getSupplementenPerZwemmer
+     * \see Supplement_model::getSupplementen
+     */
+    public function haalAjaxOp_supplementenPerZwemmer(){
+
+        $supplementId = $this->input->get('supplementId');
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $id = $data['gebruiker']->id;
+
+        $this->load->model('supplement_model');
+        $data['supplementen'] = $this->supplement_model->getSupplementen();
+
+        $this->load->model('supplementPerZwemmer_model');
+        if ($supplementId != 0){
+            $data['supplementenPerZwemmer'] = $this->supplementPerZwemmer_model->getSupplementenPerZwemmerEnSupplement($id, $supplementId);
+        }else{
+            $data['supplementenPerZwemmer'] = $this->supplementPerZwemmer_model->getSupplementenPerZwemmer($id);
+        }
+
+        $this->load->view('supplement/ajax_zwemmer', $data);
     }
 
      /**
@@ -196,6 +225,12 @@ class Supplement extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+      /**
+     * Supplementen per gewenste zwemmer tonen via ajax
+     * \see SupplementPerZwemmer_model::getSupplementenPerZwemmer
+     * \see SupplementPerZwemmer_model::getSupplementenPerAlleZwemmers
+     * \see Gebruiker_model::toonZwemmers
+     */
     public function haalAjaxOp_supplementenPerZwemmerTrainer(){
         $id = $this->input->get('id');
 

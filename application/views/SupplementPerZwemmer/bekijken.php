@@ -30,7 +30,7 @@ function haalSupplementenOp(id){
 }
 
     $(document).ready(function () {
-        haalSupplementenOp(0);
+        haalSupplementenOp(zwemmerId);
 
         $("#resultaat").on('click','.modal-trigger',function() {
             supplementPerZwemmerId = $(this).parent().find('#id').val()

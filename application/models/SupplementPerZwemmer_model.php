@@ -31,6 +31,8 @@ class SupplementPerZwemmer_model extends CI_Model
     /**
     ** Opvragen van supplementen volgens id zwemmer
     * @param $id Het ID van de zwemmer
+    *\see Supplement_model::get
+    *\see Gebruiker_model::get
     */
     public function getSupplementenPerZwemmer($id)
     {
@@ -52,6 +54,37 @@ class SupplementPerZwemmer_model extends CI_Model
             foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
                 $supplementPerZwemmer->supplement= $this->supplement_model->get($supplementPerZwemmer->supplementId);
                 $supplementPerZwemmer->zwemmer = $this->gebruiker_model->get($supplementPerZwemmer->gebruikerIdZwemmer);
+            }
+            return $supplementenPerZwemmer;
+        }
+    }
+
+     /**
+    ** Opvragen van supplementen volgens id zwemmer
+    * @param $id Het id van de zwemmer
+    * @param $supplementId het id van een gewenst supplement
+    *\see Supplement_model::get
+    *\see Gebruiker_model::get
+    */
+    public function getSupplementenPerZwemmerEnSupplement($id, $supplementId){
+        $this->db->where('gebruikerIdZwemmer', $id)->where('supplementId', $supplementId);
+        $this->db->order_by('datumInname ASC, tijdstipInname ASC');
+        $query = $this->db->get('supplementPerZwemmer')->result();
+
+        $supplementenPerZwemmer = [];
+
+        foreach($query as $q){
+            if ($q->datumInname > date('Y-m-d')){
+                array_push($supplementenPerZwemmer, $q);
+            }
+        }
+
+        if ($supplementenPerZwemmer == null) {
+            return null ;
+        } else {
+            $this->load->model('supplement_model');
+            foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
+                $supplementPerZwemmer->supplement= $this->supplement_model->get($supplementPerZwemmer->supplementId);
             }
             return $supplementenPerZwemmer;
         }

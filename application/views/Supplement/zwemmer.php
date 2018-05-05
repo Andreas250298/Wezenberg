@@ -1,53 +1,43 @@
-<?php
-$lijstSupplementenPerZwemmer = '';
-if ($supplementenPerZwemmer != null) {
-    foreach ($supplementenPerZwemmer as $supplementPerZwemmer) {
-        $lijstSupplementenPerZwemmer .= '<tr>
-    <td>'.$supplementPerZwemmer->supplement->naam.'</td>
-    <td>'.$supplementPerZwemmer->supplement->beschrijving.'</td>
-    <td>
-    '.zetOmNaarDDMMYYYY($supplementPerZwemmer->datumInname).'
-    </td><td>
-      '.$supplementPerZwemmer->tijdstipInname.'
-      </td><td>
-      '.$supplementPerZwemmer->hoeveelheid.' g
-      </td>
-    </tr>';
-    }
+<script>
+var supplementId = 0;
+
+function haalSupplementenOp(supplementId){
+    $.ajax({type : "GET",
+                url : site_url + "/supplement/haalAjaxOp_supplementenPerZwemmer",
+                data : { supplementId : supplementId },
+                success : function(result){
+                    $("#resultaat").html(result);
+                },
+                error: function (xhr, status, error) {
+                    alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+                }
+        });
 }
+
+  $(document).ready(function () {
+    haalSupplementenOp(supplementId)
+
+    $('#supplement').on('change', function(){
+        supplementId = $('#supplement').val()
+        haalSupplementenOp(supplementId)
+    })
+  })
+
+</script>
+<?php
+echo "<div class='form-group'>";
+echo form_label("Supplementen: ", 'supplement') . "\n";
+echo "</br>";
+echo "<select name='supplement' id='supplement' class='form-control'>";
+echo '<option value=0>Alle Supplementen</option>';
+foreach ($supplementen as $supplement) {
+    echo "<option value='" . $supplement->id . "'>" . $supplement->naam . "</option>\n";
+}
+echo "</select>";
+echo "<div>";
+echo "</br>";
 ?>
 
+<p><div id ="resultaat"></div></p>
 <?php
-if ($supplementenPerZwemmer == null) {
-    echo '<div>Je moet momenteel geen supplementen innemen of de trainer heeft je supplementen nog niet toegevoegd.</div>';
-} else {
-    echo "<table class=\"table\">
-    <thead>
-      <tr>
-        <td>
-          Naam
-        </td>
-      <td>
-        Beschrijving
-      </td>
-      <td>
-        Datum
-      </td>
-      <td>
-        Tijdstip
-      </td>
-      <td>
-        Hoeveelheid
-      </td>
-      </tr>
-    </thead>
-    <tbody>
-      $lijstSupplementenPerZwemmer
-    </tbody>
-  </table>";
-}
-?>
-<br/>
-<p>
-    <a id="terug" href="javascript:history.go(-1);">Terug</a>
-</p>
+echo anchor('home/index', "<button type=\"button\" class=\"btn btn-primary mx-auto\">Terug</button>");
