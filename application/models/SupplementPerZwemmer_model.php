@@ -21,8 +21,11 @@ class SupplementPerZwemmer_model extends CI_Model
      */
     public function get($id){
         $this->db->where('id', $id);
-        $query = $this->db->get('supplementPerZwemmer');
-        return $query->row();
+        $supplementPerZwemmer = $this->db->get('supplementPerZwemmer')->row();
+        $supplementPerZwemmer->supplement = $this->supplement_model->get($supplementPerZwemmer->supplementId);
+        $supplementPerZwemmer->zwemmer = $this->gebruiker_model->get($supplementPerZwemmer->gebruikerIdZwemmer);
+        
+        return $supplementPerZwemmer;
     }
 
     /**

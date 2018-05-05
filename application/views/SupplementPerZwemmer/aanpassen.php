@@ -8,6 +8,9 @@ $dataZwemmer = array('type' => 'hidden', 'name' => 'zwemmer', 'id' => 'zwemmer',
 $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan', 'id' => 'opslaan');
 echo form_open('Supplement/aanpassen', 'class="form-group"');
 
+echo '<h3>';
+echo $supplementPerZwemmer->zwemmer->naam;
+echo '</h3>';
 echo "<div class='form-group'>";
 echo form_label("Supplement: ", 'supplement') . "\n";
 echo "<select name='supplement' id='supplement' class='form-control' required='true'>";
