@@ -26,7 +26,7 @@ class AndereActiviteit_model extends CI_Model
       $query = $this->db->get('andereActiviteit');
 
       $this->model->load('soort_model');
-      $this->db->where('id' = $query->soortId);
+      $this->db->where('id' == $query->soortId);
       $query->soort = $this->db->get('soort');
 
       return $query->row();

@@ -51,7 +51,7 @@ foreach ($nieuwsArtikels as $artikel) {
         echo "<img class='img-fluid mr-3' src='" . base_url($artikel->foto) . "' width='200' height='100'/>";
     }
     else{
-        echo toonAfbeelding('neuws.png', 'class="img-fluid mr-3" width="80" maxheight="100"');
+        echo toonAfbeelding('nieuws.png', 'class="img-fluid mr-3" width="200" maxheight="100"');
     }
 
     echo '<div class="media-body">';

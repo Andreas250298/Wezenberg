@@ -35,6 +35,10 @@ echo anchor(
     "supplement/supplementenToekennen",
     "<button type=\"button\" class=\"btn btn-primary mx-auto\">Supplement toekennen</button> "
 );
+echo anchor(
+    "supplement/beheerSupplementen",
+    "<button type=\"button\" class=\"btn btn-primary mx-auto\">Supplementen beheren</button> "
+);
 
 foreach ($zwemmers as $zwemmer) {
     if (in_array($zwemmer->id, $namen)) {

@@ -84,7 +84,7 @@ class Activiteit extends CI_Controller {
     $data['gebruiker'] = $gebruiker;
 
     $this->db->load('andereActiviteit_model');
-    $data['activiteit']$this->andereActiviteit_model->get($id);
+    $data['activiteit'] = $this->andereActiviteit_model->get($id);
 
     $partials = array('hoofding' => 'main_header',
         'inhoud' => 'Activiteit/verwijderen',
