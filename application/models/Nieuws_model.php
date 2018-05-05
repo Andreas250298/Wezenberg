@@ -27,13 +27,13 @@ class Nieuws_model extends CI_Model
     * \return De opgevraagde records
     */
     public function getAllNieuwsArtikels(){
-        $this->db->order_by('datumAangemaakt', 'desc');
+        $this->db->order_by('id', 'desc');
         $query = $this->db->get('nieuwsArtikel');
         return $query->result();
     }
 
     public function getAllNieuwsArtikelsPaging($aantal, $startrij){
-      $this->db->order_by('datumAangemaakt', 'desc');
+      $this->db->order_by('id', 'desc');
       $query = $this->db->get('nieuwsArtikel', $aantal, $startrij);
       return $query->result();
     }

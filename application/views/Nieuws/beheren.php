@@ -27,22 +27,6 @@ var id = "";
     })
 
 </script>
-<style>
-    .helpBar{
-        margin: 10px 0 10px 0;
-        display: block;
-        padding: 10px;
-        background-color: lightgray;
-        border: 1px solid darkgray;
-        border-radius: 10px;
-    }
-    .tab {
-       display:inline-block;
-       margin-left: 20px;
-}
-
-
-</style>
 <h2 class="paginaTitel">Nieuws Beheren</h2>
 <div class="alert alert-dark" role="alert">
   <i class="far fa-question-circle fa-2x"></i><span class="tab">Hoe nieuws beheren? <?php echo anchor('nieuws/tutorial', "Bekijk de tutorial", "")?>
