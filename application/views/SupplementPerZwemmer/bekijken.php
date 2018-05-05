@@ -1,12 +1,14 @@
 <script>
-var id = "";
+var supplementPerZwemmerId = "";
+var zwemmerId = 0;
 
 function verwijderSupplementPerZwemmer(id){
     $.ajax({type: "GET",
                 url: site_url + "/supplement/verwijderSupplementPerZwemmer",
                 data:{id : id},
                 success: function(){
-                window.location.reload();
+                haalSupplementenOp(zwemmerId)
+                $('#mijnDialoogscherm').modal('hide')
                 },
                 error: function (xhr, status, error){
               alert("--ERROR IN AJAX --\n\n" + xhr.responseText);
@@ -30,18 +32,18 @@ function haalSupplementenOp(id){
     $(document).ready(function () {
         haalSupplementenOp(0);
 
-        $(".modal-trigger").click(function() {
-            id = $(this).parent().find('#id').val()
+        $("#resultaat").on('click','.modal-trigger',function() {
+            supplementPerZwemmerId = $(this).parent().find('#id').val()
             $('#mijnDialoogscherm').modal('show')
         })
 
         $("#buttonDelete").click(function(){
-            verwijderSupplementPerZwemmer(id);
+            verwijderSupplementPerZwemmer(supplementPerZwemmerId);
         })
 
         $('#zwemmer').on('change', function(){
-            id = $('#zwemmer').val()
-            haalSupplementenOp(id);
+            zwemmerId = $('#zwemmer').val()
+            haalSupplementenOp(zwemmerId);
         })
     }
 )
