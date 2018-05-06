@@ -10,34 +10,30 @@ foreach ($reeksen as $reeks) {
   '</td>
   <td>'
   .$reeks->tijdstip.
-  '</td>';
-    if (isset($slag)) {
-        foreach ($slag as $sl) {
-            if (isset($sl->soort)) {
-                if ($sl != null) {
-                    $lijstReeksen .= "<td>"
-      . $sl->soort . "</td>";
-                }
+  '</td><td>';
+    if (isset($slagen)) {
+        foreach ($slagen as $slag) {
+            if (isset($slag->soort)) {
+                $lijstReeksen .= $slag->soort;
             }
         }
-    }
-    if (isset($afstand)) {
-        foreach ($afstand as $afst) {
-            if (isset($afst->afstand)) {
-                if ($afst != null) {
-                    $lijstReeksen .= "<td>"
-      . $afst->afstand . "</td>";
-                }
-            }
-        }
-    }
 
-    $lijstReeksen .= '</tr>';
+        $lijstReeksen .= "</td><td>";
+        foreach ($afstanden as $afstand) {
+            if (isset($afstand->afstand)) {
+                $lijstReeksen .= $afstand->afstand;
+            }
+        }
+    }
+    if (isset($reeks->id)) {
+        $lijstReeksen .= "<td>" . anchor('wedstrijd/verwijderReeks/' . $reeks->id, 'Reeks verwijderen') . "</td></tr>";
+    }
 }
-echo '<p>'.anchor('wedstrijd/maakReeks', 'Reeks toevoegen').'
-</p>';
-?>
-<table class="table">
+    echo '<p>'.anchor('wedstrijd/maakReeks/' . $wedstrijdId, 'Reeks toevoegen').'
+  </p>';
+
+if ($reeksen != null) {
+    echo "<table class=\"table\">
   <thead>
     <tr>
       <td>
@@ -55,14 +51,14 @@ echo '<p>'.anchor('wedstrijd/maakReeks', 'Reeks toevoegen').'
     <td>
       Afstand
     </td>
+    <td>
+    </td>
     </tr>
   </thead>
   <tbody>
-    <?php
-    echo $lijstReeksen;
-    ?>
-  </tbody>
-</table>
-<p>
-    <a id="terug" href="javascript:history.go(-1);">Terug</a>
-</p>
+   $lijstReeksen
+  </tbody></table>";
+} else {
+    echo "<p>Er zijn voor deze wedstrijd nog geen reeksen</p>";
+}
+echo anchor('Wedstrijd/index', 'terug', 'class="btn btn-primary"');

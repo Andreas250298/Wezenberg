@@ -27,11 +27,12 @@ class Wedstrijd_model extends CI_Model
         $query = $this->db->get('wedstrijd');
         return $query->row();
     }
-    
+
     /**
       * opvragen van het aantal records.
       */
-    function getCountAll() {
+    public function getCountAll()
+    {
         return $this->db->count_all('wedstrijd');
     }
 
@@ -56,15 +57,16 @@ class Wedstrijd_model extends CI_Model
         $query = $this->db->get('wedstrijd');
         return $query->result();
     }
-    
+
     /**
      * Opvragen van een aantal wedstrijden uit de database voor paging, aflopend gesorteerd
      * @return De opgevraagde records
      */
-    public function getAllWedstrijdPaging($aantal, $startrij){
-      $this->db->order_by('beginDatum', 'asc');
-      $query = $this->db->get('wedstrijd', $aantal, $startrij);
-      return $query->result();
+    public function getAllWedstrijdPaging($aantal, $startrij)
+    {
+        $this->db->order_by('beginDatum', 'asc');
+        $query = $this->db->get('wedstrijd', $aantal, $startrij);
+        return $query->result();
     }
 
     /**
@@ -94,20 +96,24 @@ class Wedstrijd_model extends CI_Model
     {
         $this->db->where('wedstrijdId', $id);
         $query = $this->db->get('reeks');
-        $wedstrijd =  $query->row();
+        $reeksen =  $query->result();
         $this->load->model('slag_model');
-        $wedstrijd->slag = $this->slag_model->get($wedstrijd->slagId);
-        return $wedstrijd;
+        foreach ($reeksen as $reeks) {
+            $reeks->slag = $this->slag_model->get($reeks->slagId);
+        }
+        return $reeksen;
     }
 
     public function getAfstandenPerWedstrijd($id)
     {
         $this->db->where('wedstrijdId', $id);
         $query = $this->db->get('reeks');
-        $wedstrijd =  $query->row();
+        $reeksen =  $query->result();
         $this->load->model('afstand_model');
-        $wedstrijd->slag = $this->afstand_model->get($wedstrijd->afstandId);
-        return $wedstrijd;
+        foreach ($reeksen as $reeks) {
+            $reeks->slag = $this->afstand_model->get($reeks->afstandId);
+        }
+        return $reeksen;
     }
 
     /**

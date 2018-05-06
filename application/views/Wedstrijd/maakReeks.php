@@ -50,6 +50,7 @@ echo "</div>\n";
 if (isset($reeks)) {
     echo form_hidden('id', $reeks->id);
 }
+echo form_hidden('wedstrijdId', $wedstrijd->id);
 echo form_submit($dataSubmit) . " ";
 
 echo form_close();
