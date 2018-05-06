@@ -33,7 +33,7 @@ foreach ($reeksen as $reeks) {
   </p>';
 
 if ($reeksen != null) {
-    echo "<table class=\"table\">
+    echo "<div class=\"table-responsive\"><table class=\"table\">
   <thead>
     <tr>
       <td>
@@ -57,8 +57,8 @@ if ($reeksen != null) {
   </thead>
   <tbody>
    $lijstReeksen
-  </tbody></table>";
+  </tbody></table></div>";
 } else {
     echo "<p>Er zijn voor deze wedstrijd nog geen reeksen</p>";
 }
-echo anchor('Wedstrijd/index', 'terug', 'class="btn btn-primary"');
+echo anchor('Wedstrijd/index', 'Terug', 'class="btn btn-primary"');

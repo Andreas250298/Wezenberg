@@ -5,7 +5,7 @@ foreach ($wedstrijden as $wedstrijd) {
     if ($wedstrijd->beginDatum > date("Y-m-d")) {
         $lijstWedstrijden .= '<tr>
       <td>'
-      .anchor('Wedstrijd/info/' . $wedstrijd->id, $wedstrijd->naam).
+      .anchor('Wedstrijd/info/' . $wedstrijd->id, $wedstrijd->naam, 'class="btn btn-link"').
       '</td>
       <td>'
       .$wedstrijd->plaats.
@@ -19,11 +19,11 @@ foreach ($wedstrijden as $wedstrijd) {
         if (isset($gebruiker)) {
             if ($gebruiker->soort == "trainer") {
                 $lijstWedstrijden .= '<td>'.
-   anchor('wedstrijd/updateWedstrijd/' . $wedstrijd->id, 'Wijzig').
+   anchor('wedstrijd/updateWedstrijd/' . $wedstrijd->id, 'Wijzig', 'class="btn btn-info"').
        '</td><td>'.
-   anchor('wedstrijd/reeksenToevoegen/' . $wedstrijd->id, 'Reeksen toevoegen').
+   anchor('wedstrijd/reeksenToevoegen/' . $wedstrijd->id, 'Reeksen toevoegen', 'class="btn btn-success"').
        '</td><td>'
-       .anchor('wedstrijd/verwijder/' . $wedstrijd->id, 'Verwijder').
+       .anchor('wedstrijd/verwijder/' . $wedstrijd->id, 'Verwijder', 'class="btn btn-danger"').
        '</td>';
             }
         }
@@ -33,12 +33,12 @@ foreach ($wedstrijden as $wedstrijd) {
 }
 if (isset($gebruiker)) {
     if ($gebruiker->soort == "trainer") {
-        echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken').'</p>';
+        echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken', 'class="btn btn-success"').'</p>';
     }
 }
 
 ?>
-
+<div class="table-responsive">
 <table class="table">
   <thead>
     <tr>
@@ -68,8 +68,9 @@ if (isset($gebruiker)) {
     ?>
   </tbody>
 </table>
-<?php echo anchor('Wedstrijd/toonAfgelopen', 'Toon afgelopen wedstrijden')?>
+</div>
+<?php echo anchor('Wedstrijd/toonAfgelopen', 'Toon afgelopen wedstrijden', 'class="btn btn-primary"')?>
 <br/><br/>
 <p>
-    <?php echo anchor('home/index', 'terug'); ?>
+    <?php echo anchor('home/index', 'Terug', 'class="btn btn-primary"'); ?>
 </p>

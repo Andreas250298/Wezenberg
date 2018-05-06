@@ -29,7 +29,7 @@ class Wedstrijd extends CI_Controller
     public function index()
     {
         $data['titel'] = 'Wedstrijden bekijken';
-        $data['paginaVerantwoordelijke'] = 'De Coninck Mattias';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
