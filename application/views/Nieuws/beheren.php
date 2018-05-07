@@ -56,6 +56,7 @@ foreach ($nieuwsArtikels as $artikel) {
 
     echo '<div class="media-body">';
     echo '<h5 class="mt-0 mb-1">' . $artikel->titel . '</h5>';
+    echo '<p class="text-muted">' . $artikel->datumAangemaakt . '</p>';
     echo substr($artikel->beschrijving, 0, 144) . '...';
     echo '<p>' . anchor('Nieuws/wijzig/' . $artikel->id, 'aanpassen', 'class="btn btn-primary"') . " ";
     echo anchor('Nieuws/bekijk/' . $artikel->id, 'bekijken', 'class="btn btn-primary"') . " ";
