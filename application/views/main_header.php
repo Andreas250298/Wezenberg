@@ -115,7 +115,7 @@ $jaar = $dt->format('Y');
                                 <?php echo anchor('wedstrijd/inschrijvingen', 'Inschrijvingen', $link); ?>
                             </li>
                             <li class="nav-item">
-                                <?php echo anchor('gebruiker/account/' . $gebruiker->id, $gebruiker->naam, $link); ?>
+                                <?php echo anchor('gebruiker/toonZwemmerInfo/' . $gebruiker->id, $gebruiker->naam, $link); ?>
                             </li>
                             <li class="nav-item">
                                 <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"'); ?>
