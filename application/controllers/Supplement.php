@@ -180,7 +180,7 @@ class Supplement extends CI_Controller
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
       /**
      * Zwemmer zijn gewenste supplementen ophalen via ajax
      * \see SupplementPerZwemmer_model::getSupplementenPerZwemmerEnSupplement
@@ -215,7 +215,7 @@ class Supplement extends CI_Controller
     {
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        
+
         $this->load->model('gebruiker_model');
         $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
         $data['titel'] = 'Supplementen voor alle zwemmers';
@@ -238,13 +238,13 @@ class Supplement extends CI_Controller
         $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
 
         $this->load->model('supplementPerZwemmer_model');
-        if ($id != 0){   
+        if ($id != 0){
             $data['supplementenPerAlleZwemmers'] = $this->supplementPerZwemmer_model->getSupplementenPerZwemmer($id);
         } else {
             $data['supplementenPerAlleZwemmers'] = $this->supplementPerZwemmer_model->getSupplementenPerAlleZwemmers();
         }
-  
-        $this->load->view('supplementPerZwemmer/ajax_bekijken', $data);
+
+        $this->load->view('SupplementPerZwemmer/ajax_bekijken', $data);
     }
 
     /**
