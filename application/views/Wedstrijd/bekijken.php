@@ -62,7 +62,7 @@ if ($tijd === "na"){
     echo anchor('wedstrijd/bekijkenWedstrijden/voor',"<button type=\"button\" class=\"btn btn-primary mx-auto\">Toon afgelopen wedstrijden</button> ");
     if (isset($gebruiker)) {
         if ($gebruiker->soort == "trainer") {
-            echo anchor('wedstrijd/maakWedstrijd',"<button type=\"button\" class=\"btn btn-success mx-auto\">Nieuwe Wedstrijd aanmaken</button> ");
+            echo anchor('wedstrijd/maakWedstrijd/'.$tijd,"<button type=\"button\" class=\"btn btn-success mx-auto\">Nieuwe Wedstrijd aanmaken</button> ");
         }
     }
   } else{

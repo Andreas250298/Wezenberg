@@ -21,7 +21,7 @@ if (isset($wedstrijd)) {
     $dataInputAfstand = array('class' => 'form-control mr-sm-2', 'name' => 'afstand', 'id' => 'afstand', 'placeholder' => 'Afstand', 'aria-label' => 'afstand', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier de afstand van de wedstrijd.');
 }
 $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
-echo form_open('Wedstrijd/registreer', 'class="form-group"');
+echo form_open('Wedstrijd/registreer/'.$tijd, 'class="form-group"');
 echo "<div class='form-group'>";
 echo form_label("Naam", 'naam') . "\n";
 echo form_input($dataInputNaam) . "\n";

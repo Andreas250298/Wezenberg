@@ -15,7 +15,7 @@ if ($wedstrijden != null){
         $data = array('type' => 'hidden', 'name' => 'wedstrijdId', 'id' => 'wedstrijdId', 'value' => $wedstrijd->id);
     echo '<tr>
       <td>'
-      .anchor('Wedstrijd/info/' . $wedstrijd->id, $wedstrijd->naam, 'class="btn btn-link"').
+      .anchor('Wedstrijd/info/' . $wedstrijd->id. "/". $tijd, $wedstrijd->naam, 'class="btn btn-link"').
       '</td>
       <td>'
       .$wedstrijd->plaats.
@@ -29,9 +29,11 @@ if ($wedstrijden != null){
         if (isset($gebruiker)) {
             if ($gebruiker->soort == "trainer") {
                echo '<td>'. form_input($data) .
-   anchor('wedstrijd/updateWedstrijd/' . $wedstrijd->id, 'Wijzig', 'class="btn btn-info" style="margin-right : 10px;"').
-   anchor('wedstrijd/reeksenToevoegen/' . $wedstrijd->id, 'Reeksen toevoegen', 'class="btn btn-success" style="margin-right : 10px;"').
-   '<button type="button" class="btn btn-danger btn-xs btn-round modal-trigger"><i class="fas fa-times"></i></button></td>';
+   anchor('wedstrijd/updateWedstrijd/' . $wedstrijd->id.'/'.$tijd, 'Wijzig', 'class="btn btn-info" style="margin-right : 10px;"'); 
+   if ($tijd != 'voor'){
+       echo  anchor('wedstrijd/reeksenToevoegen/' . $wedstrijd->id ."/".$tijd, 'Reeksen toevoegen', 'class="btn btn-success" style="margin-right : 10px;"');
+   }
+    echo '<button type="button" class="btn btn-danger btn-xs btn-round modal-trigger"><i class="fas fa-times"></i></button></td>';
             }
         }
     }

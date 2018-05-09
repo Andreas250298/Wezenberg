@@ -68,4 +68,4 @@ if ($reeksen != null) {
 } else {
     echo "<p>Er zijn voor deze wedstrijd nog geen reeksen</p>";
 }
-echo anchor('Wedstrijd/index', 'Terug', 'class="btn btn-primary"');
+echo anchor('Wedstrijd/bekijkenWedstrijden/' .$tijd, 'Terug', 'class="btn btn-primary"');

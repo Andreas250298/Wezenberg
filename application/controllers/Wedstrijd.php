@@ -19,7 +19,6 @@ class Wedstrijd extends CI_Controller
         parent::__construct();
         $this->load->helper('form');
     }
-
     /**
      * Haalt alle wedstrijden op via Wedstrijd_model en toont deze in de view bekijken.php
      * @see Authex::getGebruikerInfo()
@@ -67,8 +66,9 @@ class Wedstrijd extends CI_Controller
      * @see Wedstrijd_model::insert()
      * @see Wedstrijd_model::update()
      */
-    public function registreer()
+    public function registreer($tijd)
     {
+        $data['tijd'] = $tijd;
         $wedstrijd = new stdClass();
         $wedstrijd->id = html_escape($this->input->post('id'));
         $wedstrijd->plaats = html_escape($this->input->post('plaats'));
@@ -97,7 +97,7 @@ class Wedstrijd extends CI_Controller
         $status = $this->deelname_model->get($wedstrijd->id);
         $status->statusId = '4';
 
-        redirect('/wedstrijd/bekijkenWedstrijden/na');
+        redirect('/wedstrijd/bekijkenWedstrijden/'.$tijd);
     }
 
     /**
@@ -138,8 +138,9 @@ class Wedstrijd extends CI_Controller
      * @see Wedstrijd_model::get()
      * @see beheren.php
      */
-    public function updateWedstrijd($id)
+    public function updateWedstrijd($id, $tijd)
     {
+        $data['tijd'] = $tijd;
         $data['titel'] = 'Wedstrijden wijzigen';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
@@ -184,6 +185,7 @@ class Wedstrijd extends CI_Controller
     public function haalAjaxOp_bekijkenWedstrijden(){
         $plaats = $this->input->get('plaats');
         $tijd = $this->input->get('tijd');
+        $data['tijd'] = $tijd;
 
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
@@ -297,10 +299,11 @@ class Wedstrijd extends CI_Controller
     * @see Wedstrijd_model::getReeksenPerWedstrijd()
     * @see reeksen.php
     */
-    public function reeksenToevoegen($id)
+    public function reeksenToevoegen($id, $tijd)
     {
         $data['titel'] = "Reeksen toeveogen";
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $data['tijd'] = $tijd;
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
         //$data['wedstrijd'] = $this->wedstrijd_model->get($id);
@@ -354,11 +357,12 @@ class Wedstrijd extends CI_Controller
     * @see Wedstrijd_model::getAfstandenPerWedstrijd()
     * @see info.php
     */
-    public function info($id)
+    public function info($id, $tijd)
     {
         $data['titel'] = "Meer info van wedstrijd";
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+        $data['tijd'] = $tijd;
         $this->load->model('wedstrijd_model');
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
         $wedstrijd = $data['wedstrijd'];
