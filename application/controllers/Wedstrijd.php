@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * @class Wedstrijd
- * @brief Controller-klasse voor wedstrijden
+ * @brief Controller-klasse voor Wedstrijden
  *
  * Controller-klasse met methoden die worden gebruikt bij het tonen en beren van wedstrijden.
  */

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file Nieuws/bekijken.php
+ *
+ * View waarop een nieuwsartikel kan worden bekeken.
+ */
   if($nieuwsArtikel->foto != ""){
     echo "<img class='img-fluid' src='" . base_url($nieuwsArtikel->foto) . "'/>";
   }

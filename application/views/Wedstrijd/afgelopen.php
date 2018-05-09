@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file Wedstrijd/afgelopen.php
+ *
+ * View waarin alle afgelopen wedstrijden te zien zijn.
+ */
 $lijstWedstrijden = '';
 
 foreach ($wedstrijden as $wedstrijd) {

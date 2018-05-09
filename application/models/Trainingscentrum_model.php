@@ -1,5 +1,4 @@
 <?php
-
 /**
 * @class Trainingscentrum_model
 * @brief Model-klasse voor Trainingscentrum
@@ -26,7 +25,7 @@ class Trainingscentrum_model extends CI_Model
         $query = $this->db->get('trainingscentrum');
         return $query->row();
     }
-    
+
     /**
     * Het bewerken van alle data
     */

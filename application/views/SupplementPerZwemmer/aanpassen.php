@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file SupplementPerZwemmer/aanpassen.php
+ *
+ * View supplementen per zwemmer kan aanpassen
+ */
 $dataHoeveelheid = array('class' => 'form-control mr-sm-2','type' => 'number', 'name' => 'hoeveelheid', 'id' => 'hoeveelheid', 'value' => $supplementPerZwemmer->hoeveelheid, 'aria-label' => 'Titel', 'size' => '5', 'data-toggle' => 'tooltip', 'title' => 'Vul hier de hoeveelheid voor de iname in.', 'min' => '1', 'max' => '1000','required' => 'required');
 $dataDatumInname = array('class' => 'form-control mr-sm-2','type' => 'date', 'name' => 'datum', 'id' => 'datum','value' => $supplementPerZwemmer->datumInname,'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de datum in dat het supplement moet worden ingenomen.','required' => 'required');
 $dataTijdstipInname = array('class' => 'form-control mr-sm-2','type' => 'time', 'name' => 'tijdstip', 'id' => 'tijdstip','value' => $supplementPerZwemmer->tijdstipInname,'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de datum in dat het supplement moet worden ingenomen.','required' => 'required');

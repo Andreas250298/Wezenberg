@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file Activiteit/form.php
+ *
+ * View waarop de trainer een activiteit kan toevoegen.
 
+ * - $zwemmer-object
+ * - $Activiteiten-objecten
+ */
 $dt = new DateTime;
 $week = $dt->format('W');
 $jaar = $dt->format('Y');

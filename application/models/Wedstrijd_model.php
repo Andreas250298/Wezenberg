@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @class Wedstrijd_model
  * @brief Model-klasse voor wedstrijden
@@ -29,7 +28,7 @@ class Wedstrijd_model extends CI_Model
     }
 
     /**
-      * opvragen van het aantal records.
+      * Telt alle records
       */
     public function getCountAll()
     {
@@ -103,7 +102,7 @@ class Wedstrijd_model extends CI_Model
 
     /**
      * Een wedstrijd toevoegen aan de database
-     * @param $wedstrijd De wedstrijd die moet toegevoegd worden
+     * @param wedstrijd De wedstrijd die moet toegevoegd worden
      * @return De insert functie van de wedstrijd
      */
     public function insert($wedstrijd)
@@ -114,7 +113,7 @@ class Wedstrijd_model extends CI_Model
 
     /**
      * Reeks behorende bij een deelname uit de database ophalen
-     * @param $id Het id van de deelname waar de reeks aan gekoppeld is
+     * @param id Het id van de deelname waar de reeks aan gekoppeld is
      * @return De opgevraagde record
      */
     public function getReeksenPerWedstrijd($id)
@@ -123,7 +122,11 @@ class Wedstrijd_model extends CI_Model
         $query = $this->db->get('reeks');
         return $query->result();
     }
-
+    /**
+     * Slagen behorende bij een deelname uit de database ophalen
+     * @param id Het id van de deelname waar de slagen aan gekoppeld is
+     * @return De opgevraagde record
+     */
     public function getSlagenPerWedstrijd($id)
     {
         $this->db->where('wedstrijdId', $id);
@@ -135,7 +138,11 @@ class Wedstrijd_model extends CI_Model
         }
         return $reeksen;
     }
-
+    /**
+     * Afstanden behorende bij een deelname uit de database ophalen
+     * @param id Het id van de deelname waar de afstand aan gekoppeld is
+     * @return De opgevraagde record
+     */
     public function getAfstandenPerWedstrijd($id)
     {
         $this->db->where('wedstrijdId', $id);
@@ -150,7 +157,7 @@ class Wedstrijd_model extends CI_Model
 
     /**
      * Een wedstrijd wijzigen in de database
-     * @param $wedstrijd De wedstrijd die moet gewijzigd worden
+     * @param wedstrijd De wedstrijd die moet gewijzigd worden
      */
     public function update($wedstrijd)
     {
@@ -160,7 +167,7 @@ class Wedstrijd_model extends CI_Model
 
     /**
      * Een wedstrijd verwijderen uit de database
-     * @param $id Het id van de wedstrijd die moet verwijderd worden
+     * @param id Het id van de wedstrijd die moet verwijderd worden
      */
     public function delete($id)
     {

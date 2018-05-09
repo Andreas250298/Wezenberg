@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file gebruiker_info.php
+ *
+ * View waarin men info kan zien over een gebruiker
+ */
 $leeftijd = 18;
 ?>
 

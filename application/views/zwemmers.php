@@ -1,3 +1,13 @@
+<?php
+/**
+ * @file zwemmers.php
+ *
+ * View waarin er een lijst wordt getoond met alle zwemmers
+ * -Een gewone gebruiker kan alleen informatie bekijken
+ * -Een zwemmer kan dit ook voor elke zwemmer maar kan zijn eigen informatie aanpassen via een extra knop
+ * -Een zwemmer kan elke zwemmer aanpassen, inactief maken en verwijderen
+ */
+ ?>
 <script>
 var id = "";
     $(document).ready(function () {

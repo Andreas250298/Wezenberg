@@ -1,4 +1,11 @@
 <?php
+/**
+ * @file zwemmer_info.php
+ *
+ * View waarin er informatie kan worden bekeken over een zwemmer
+ * -Een gewone gebruiker kan alleen informatie bekijken
+ * -Een zwemmer kan dit ook voor elke zwemmer maar kan zijn eigen informatie aanpassen
+ */
 $dt = new DateTime;
 $jaar = $dt->format('o');
 $geboortedatum = explode("-", $zwemmer->geboortedatum);

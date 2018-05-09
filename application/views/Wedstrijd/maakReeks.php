@@ -1,9 +1,8 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @file Wedstrijd/maakReeks.php
+ *
+ * View waarin een reeks kan gemaakt worden voor een bepaalde wedstrijd
  */
 if (isset($reeks)) {
     $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'value' => $reeks->datum,'name' => 'datum', 'id' => 'datum', 'placeholder' => 'Datum Wedstrijd', 'aria-label' => 'Datum', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul de datum van de reeks in.');

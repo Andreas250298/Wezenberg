@@ -1,3 +1,10 @@
+<?php
+/**
+ * @file SupplementPerZwemmer/error.php
+ *
+ * View waarin een error wordt getoond.
+ */
+ ?>
 <div class="card">
   <div class="card-body text-center">
     <h5 class="card-title">Error</h5>

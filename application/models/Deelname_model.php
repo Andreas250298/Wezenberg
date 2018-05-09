@@ -17,9 +17,8 @@ class Deelname_model extends CI_Model
 
     /**
      * Een reeks ophalen uit de database
-     * @param $id Het id van de reeks waar de slag aan gekoppeld is
-
-     * @return De opgevraagde record
+     * @param id Het id van de reeks waar de slag aan gekoppeld is
+     * @return Het opgevraagde record
      */
     public function get($id)
     {
@@ -30,7 +29,7 @@ class Deelname_model extends CI_Model
 
     /**
      * Deelname(s) van een zwemmer ophalen uit de database
-     * @param $id Het id van de zwemmer waar de deelnames aan gekoppeld zijn
+     * @param id Het id van de zwemmer waar de deelnames aan gekoppeld zijn
      * @return De opgevraagde record(s)
      */
     public function getDeelnamesPerZwemmer($id)
@@ -45,7 +44,15 @@ class Deelname_model extends CI_Model
             return $query->result();
         }
     }
-
+    /**
+    * haalt informatie op over een bepaalde deelname voor een zwemmer.
+    * @param id De id van een gebruiker.
+    * @see Reeks_model::get()
+    * @see Afstand_model::get()
+    * @see Wedstrijd_model::get()
+    * @see Slag_model::get()
+    * @return deelnames de opgevraagde deelnames
+    */
     public function getInformatieDeelnamesZwemmer($id)
     {
         $this->db->where('gebruikerIdZwemmer', $id);
@@ -75,7 +82,7 @@ class Deelname_model extends CI_Model
 
     /**
     * Haalt deelnames in week op van bepaalde zwemmer
-    *\see reeks_model::getReeksenInWeek()
+    * @see Reeks_model::getReeksenInWeek()
     * @param id ID van de zwemmer in kwestie
     * @param week Week in de agenda
     * @param jaar Jaar in de agenda
@@ -108,6 +115,7 @@ class Deelname_model extends CI_Model
 
     /**
      * Een status ophalen uit de database
+     * @see Status_model::get()
      * @param $id Het id van de gebruiker waarvan de status opgevraagd wordt
      * @return De opgevraagde record
      */
@@ -125,8 +133,12 @@ class Deelname_model extends CI_Model
     }
 
     /**
-    * Haalt informatie
-    *\see deelname_model::getDeelnamesInWeekPerZwemmer()
+    * Haalt informatie over bepaalde deelnames.
+    * @see Deelname_model::getDeelnamesInWeekPerZwemmer()
+    * @see Reeks_model::get()
+    * @see Afstand_model::get()
+    * @see Wedstrijd_model::get()
+    * @see Slag_model::get()
     * @param id ID van de zwemmer in kwestie
     * @param week Week in de agenda
     * @param jaar Jaar in de agenda
@@ -157,7 +169,10 @@ class Deelname_model extends CI_Model
             return null;
         }
     }
-
+    /**
+    * geeft de resultaten terug per een bepaalde deelname.
+    * @return de opgevraagde record(s)
+    */
     public function getResultatenPerDeelname($id)
     {
         $this->db->where('deelnameId', $id);

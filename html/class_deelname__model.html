@@ -110,8 +110,7 @@ Public Members</h2></td></tr>
 <tr class="separator:a50e3bfb586b2f42932a6a93f3fbb0828"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05f4fd0214d96b5cf807cb5aa8a46bba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_deelname__model.html#a05f4fd0214d96b5cf807cb5aa8a46bba">getDeelnamesPerZwemmer</a> ($id)</td></tr>
 <tr class="separator:a05f4fd0214d96b5cf807cb5aa8a46bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7bb0e614311815a2dbaaa028072d40b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7bb0e614311815a2dbaaa028072d40b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>getInformatieDeelnamesZwemmer</b> ($id)</td></tr>
+<tr class="memitem:ae7bb0e614311815a2dbaaa028072d40b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_deelname__model.html#ae7bb0e614311815a2dbaaa028072d40b">getInformatieDeelnamesZwemmer</a> ($id)</td></tr>
 <tr class="separator:ae7bb0e614311815a2dbaaa028072d40b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a543bdb17bcec2ae7a42e1ff47daf059b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_deelname__model.html#a543bdb17bcec2ae7a42e1ff47daf059b">getDeelnamesInWeekPerZwemmer</a> ($id, $week, $jaar)</td></tr>
 <tr class="separator:a543bdb17bcec2ae7a42e1ff47daf059b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,6 +118,8 @@ Public Members</h2></td></tr>
 <tr class="separator:afa04ee592ae22392085151bc9a7b1e8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab40bce39fc8ec4d583c682d1ff686c4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_deelname__model.html#ab40bce39fc8ec4d583c682d1ff686c4c">getInformatieDeelnames</a> ($id, $week, $jaar)</td></tr>
 <tr class="separator:ab40bce39fc8ec4d583c682d1ff686c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1238d33bea5851091642285d15348cc9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_deelname__model.html#a1238d33bea5851091642285d15348cc9">getResultatenPerDeelname</a> ($id)</td></tr>
+<tr class="separator:a1238d33bea5851091642285d15348cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Gedetailleerde Beschrijving</h2>
 <div class="textblock"><p>Model-klasse voor deelnames. </p>
@@ -156,11 +157,11 @@ Public Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Een reeks ophalen uit de database </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$id</td><td>Het id van de reeks waar de slag aan gekoppeld is</td></tr>
+    <tr><td class="paramname">id</td><td>Het id van de reeks waar de slag aan gekoppeld is </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Retourneert</dt><dd>De opgevraagde record </dd></dl>
+<dl class="section return"><dt>Retourneert</dt><dd>Het opgevraagde record </dd></dl>
 
 </div>
 </div>
@@ -193,7 +194,7 @@ Public Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Haalt deelnames in week op van bepaalde zwemmer </p><dl class="section see"><dt>Zie ook</dt><dd>reeks_model::getReeksenInWeek() </dd></dl>
+<p>Haalt deelnames in week op van bepaalde zwemmer </p><dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_reeks__model.html#ad38e5999163ba01f7709884edd665c33">Reeks_model::getReeksenInWeek()</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>ID van de zwemmer in kwestie </td></tr>
@@ -221,7 +222,7 @@ Public Members</h2></td></tr>
 </div><div class="memdoc">
 <p><a class="el" href="class_deelname.html" title="Controller-klasse voor Deelname. ">Deelname(s)</a> van een zwemmer ophalen uit de database </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$id</td><td>Het id van de zwemmer waar de deelnames aan gekoppeld zijn </td></tr>
+    <tr><td class="paramname">id</td><td>Het id van de zwemmer waar de deelnames aan gekoppeld zijn </td></tr>
   </table>
   </dd>
 </dl>
@@ -258,7 +259,15 @@ Public Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Haalt informatie </p><dl class="section see"><dt>Zie ook</dt><dd>deelname_model::getDeelnamesInWeekPerZwemmer() </dd></dl>
+<p>Haalt informatie over bepaalde deelnames. </p><dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_deelname__model.html#a543bdb17bcec2ae7a42e1ff47daf059b">Deelname_model::getDeelnamesInWeekPerZwemmer()</a> </dd>
+<dd>
+<a class="el" href="class_reeks__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Reeks_model::get()</a> </dd>
+<dd>
+<a class="el" href="class_afstand__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Afstand_model::get()</a> </dd>
+<dd>
+<a class="el" href="class_wedstrijd__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Wedstrijd_model::get()</a> </dd>
+<dd>
+<a class="el" href="class_slag__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Slag_model::get()</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>ID van de zwemmer in kwestie </td></tr>
@@ -268,6 +277,53 @@ Public Members</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Retourneert</dt><dd>deelnames Wedstrijden die week van opgegeven zwemmer. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae7bb0e614311815a2dbaaa028072d40b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getInformatieDeelnamesZwemmer </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>haalt informatie op over een bepaalde deelname voor een zwemmer. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>De id van een gebruiker. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_reeks__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Reeks_model::get()</a> </dd>
+<dd>
+<a class="el" href="class_afstand__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Afstand_model::get()</a> </dd>
+<dd>
+<a class="el" href="class_wedstrijd__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Wedstrijd_model::get()</a> </dd>
+<dd>
+<a class="el" href="class_slag__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Slag_model::get()</a> </dd></dl>
+<dl class="section return"><dt>Retourneert</dt><dd>deelnames de opgevraagde deelnames </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1238d33bea5851091642285d15348cc9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getResultatenPerDeelname </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>geeft de resultaten terug per een bepaalde deelname. </p><dl class="section return"><dt>Retourneert</dt><dd>de opgevraagde record(s) </dd></dl>
 
 </div>
 </div>
@@ -284,7 +340,8 @@ Public Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Een status ophalen uit de database </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Een status ophalen uit de database </p><dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_status__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Status_model::get()</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">$id</td><td>Het id van de gebruiker waarvan de status opgevraagd wordt </td></tr>
   </table>
