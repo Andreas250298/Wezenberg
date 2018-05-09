@@ -18,7 +18,7 @@ foreach ($wedstrijden as $wedstrijd) {
       '</td><td>';
         if (isset($gebruiker)) {
             if ($gebruiker->soort == "trainer") {
-                $lijstWedstrijden .= anchor('wedstrijd/maakWedstrijd', 'Resultaten toevoegen', 'class="btn btn-success"');
+                $lijstWedstrijden .= anchor('wedstrijd/voegResultatenToe', 'Resultaten toevoegen', 'class="btn btn-success"');
             }
         }
         $lijstWedstrijden .= '</td></tr>';

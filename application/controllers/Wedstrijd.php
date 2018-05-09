@@ -347,4 +347,27 @@ class Wedstrijd extends CI_Controller
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+
+    /**
+     * Toont de pagina met alle afgelopen wedstrijden
+     *\see Authex::getGebruikerInfo()
+     *\see Wedstrijd_model::toonWedstrijdenASC()
+     *\see afgelopen.php
+     */
+    public function voegResultatenToe()
+    {
+        $data['titel'] = 'Resultaten toevoegen';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+
+        $this->load->model('gebruiker_model');
+        $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
+        //$this->load->model('RondeResultaat_model');
+        //$data['wedstrijden'] = $this->RondeResultaat_model->get($id);
+
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Wedstrijd/resultaatToevoegen',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
 }
