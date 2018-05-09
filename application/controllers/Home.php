@@ -166,14 +166,11 @@ class Home extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
-<<<<<<< HEAD
-=======
     /**
     * Haalt via Ajax nieuwsartikels op om te tonen in het startscherm.
     * @see Nieuws_model::getAllNieuwsArtikelsPaging()
     * @see Authex::getGebruikerInfo()
     */
->>>>>>> c8af1408f43f10fa96043c273bd832e86805edb0
     public function haalAjaxOp_Nieuwsartikels()
     {
         $data['nieuwsStartRij'] = intval($this->input->get('nieuwsStartRij'));
@@ -191,14 +188,11 @@ class Home extends CI_Controller
         $this->load->view('ajax_nieuwsartikels', $data);
     }
 
-<<<<<<< HEAD
-=======
     /**
     * Haalt via Ajax agendaitems op om te tonen in het startscherm.
     * @see Wedstrijd_model::getAllWedstrijdPaging()
     * @see Authex::getGebruikerInfo()
     */
->>>>>>> c8af1408f43f10fa96043c273bd832e86805edb0
     public function haalAjaxOp_AgendaItems()
     {
         $data['agendaStartRij'] = intval($this->input->get('agendaStartRij'));
@@ -216,14 +210,11 @@ class Home extends CI_Controller
         $this->load->view('ajax_agendaItems', $data);
     }
 
-<<<<<<< HEAD
-=======
     /**
     * Zorgt ervoor dat een bepaalde melding wordt getoond als 'gezien'.
     * @see meldingPerGebruiker_model::getAllPerGebruiker()
     * @see Authex::getGebruikerInfo()
     */
->>>>>>> c8af1408f43f10fa96043c273bd832e86805edb0
     public function haalAjaxOp_MaakMeldingGezien()
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
