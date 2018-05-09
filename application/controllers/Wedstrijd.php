@@ -32,7 +32,7 @@ class Wedstrijd extends CI_Controller
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
+        $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenVanafVandaagASC();
 
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/bekijken',
@@ -155,14 +155,20 @@ class Wedstrijd extends CI_Controller
      * @see Wedstrijd_model::toonWedstrijden()
      * @see bekijken.php
      */
-    public function beheerWedstrijden()
+    public function bekijkenWedstrijden($tijd)
     {
         $data['titel'] = 'Wedstrijden bekijken';
-        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $data['tijd'] = $tijd;
 
         $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
+        if ($tijd === "voor"){
+            $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenVoorVandaagASC();
+        } else {
+            $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenVanafVandaagASC();
+        }
+       
 
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/bekijken',
@@ -170,27 +176,33 @@ class Wedstrijd extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function haalAjaxOp_beheerWedstrijden(){
+    public function haalAjaxOp_bekijkenWedstrijden(){
         $plaats = $this->input->get('plaats');
+        $tijd = $this->input->get('tijd');
 
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
         $this->load->model('wedstrijd_model');
-        $wedstrijdenZonderPlaats = $this->wedstrijd_model->toonWedstrijdenASC();
+        if ($tijd == 'voor'){
+            $wedstrijdenZonderPlaats = $this->wedstrijd_model->toonWedstrijdenVoorVandaagASC();
+        } else {
+            $wedstrijdenZonderPlaats = $this->wedstrijd_model->toonWedstrijdenVanafVandaagASC();
+        }
         $data['wedstrijden'] = $wedstrijdenZonderPlaats;
         $wedstrijden = [];
 
-        if ($plaats != 'Alle')
-        {
-            foreach($wedstrijdenZonderPlaats as $wedstrijd){
-             if ($wedstrijd->plaats === $plaats){
-                    array_push($wedstrijden, $wedstrijd);
+        if ($wedstrijdenZonderPlaats != null){
+            if ($plaats != 'Alle')
+            {
+                foreach($wedstrijdenZonderPlaats as $wedstrijd){
+                 if ($wedstrijd->plaats === $plaats){
+                        array_push($wedstrijden, $wedstrijd);
+                    }
                 }
-            }
-            $data['wedstrijden'] = $wedstrijden;
-        }  
-        
-        $this->load->view('Wedstrijd/ajax_bekijken', $data);
+                $data['wedstrijden'] = $wedstrijden;
+            }  
+            $this->load->view('Wedstrijd/ajax_bekijken', $data);
+        }
     }
 
     /**

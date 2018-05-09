@@ -47,6 +47,38 @@ class Wedstrijd_model extends CI_Model
         return $query->result();
     }
 
+    public function toonWedstrijdenVanafVandaagASC(){
+        $this->db->order_by('beginDatum','asc');
+        $query = $this->db->get('wedstrijd')->result();
+       
+        
+        $wedstrijden = [];
+        if ($query != null){
+            foreach($query as $q){
+                if ($q->beginDatum > date('Y-m-d')){
+                    array_push($wedstrijden, $q);
+                }
+            }
+        }
+        return $wedstrijden;  
+    }
+
+    public function toonWedstrijdenVoorVandaagASC(){
+        $this->db->order_by('beginDatum','asc');
+        $query = $this->db->get('wedstrijd')->result();
+       
+        
+        $wedstrijden = [];
+        if ($query != null){
+            foreach($query as $q){
+                if ($q->beginDatum < date('Y-m-d')){
+                    array_push($wedstrijden, $q);
+                }
+            }
+        }
+        return $wedstrijden;  
+    }
+
     /**
      * Opvragen van alle wedstrijden uit de database, aflopend gesorteerd
      * @return De opgevraagde records

@@ -1,11 +1,13 @@
 <script>
 var plaats = 'Alle';
+var tijd = "<?php echo $tijd?>";
 var wedstrijdId = 0;
 
-function haalWedstrijdenOp(plaats){
+function haalWedstrijdenOp(plaats, tijd){
     $.ajax({type : "GET",
-                url : site_url + "/wedstrijd/haalAjaxOp_beheerWedstrijden",
-                data : { plaats: plaats},
+                url : site_url + "/wedstrijd/haalAjaxOp_bekijkenWedstrijden",
+                data : { plaats: plaats,
+                tijd : tijd},
                 success : function(result){
                     $("#resultaat").html(result);
                 },
@@ -31,7 +33,7 @@ function verwijderWedstrijd(id){
 
 
 $(document).ready(function () {
-    haalWedstrijdenOp(plaats);
+    haalWedstrijdenOp(plaats, tijd);
 
          $("#resultaat").on('click','.modal-trigger',function() {
             wedstrijdId = $(this).parent().find('#wedstrijdId').val()
@@ -48,7 +50,7 @@ $(document).ready(function () {
 
         $('#plaats').on('change', function(){
             plaats = $('#plaats').val()
-            haalWedstrijdenOp(plaats);
+            haalWedstrijdenOp(plaats, tijd);
         })
 })
 
@@ -62,13 +64,21 @@ if (isset($gebruiker)) {
 
 $plaatsen = [];
 
-foreach($wedstrijden as $wedstrijd){
-  if (!in_array($wedstrijd->plaats, $plaatsen)){
-    array_push($plaatsen,$wedstrijd->plaats);
+if ($wedstrijden != null){
+  foreach($wedstrijden as $wedstrijd){
+    if (!in_array($wedstrijd->plaats, $plaatsen)){
+      array_push($plaatsen,$wedstrijd->plaats);
+    }
   }
 }
+
 sort($plaatsen);
 
+if ($tijd === "na"){
+echo "<h2 class=\"mx-auto\">Aanstaande wedstrijden</h2>";
+}else{
+  echo "<h2 class=\"mx-auto\">Afgelopen wedstrijden</h2>";
+}
 echo "<div class='form-group'>";
 echo form_label("Plaats: ", 'plaats') . "\n";
 echo "</br>";
@@ -81,21 +91,27 @@ echo "</select>";
 echo "<div>";
 echo "<br/>";
 
+if (isset($gebruiker)) {
+  if ($gebruiker->soort == "trainer") {
 echo '<div class="form-check">
   <input class="form-check-input" type="checkbox" id="checkboxModal">
   <label class="form-check-label" for="checkboxModal">
     Uitzetten waarschuwing bij het verwijderen
   </label>
 </div>';
+  }}
 
  echo ' <p>
         <div id="resultaat"></div>
         </p>';
+
+if ($tijd === "na"){
+  echo anchor('wedstrijd/bekijkenWedstrijden/voor', 'Toon afgelopen wedstrijden', 'class="btn btn-primary"');
+} else{
+  echo anchor('wedstrijd/bekijkenWedstrijden/na', 'Toon aanstaande wedstrijden', 'class="btn btn-primary"');
+}
+      
 ?>
-
-
-
-<?php echo anchor('Wedstrijd/toonAfgelopen', 'Toon afgelopen wedstrijden', 'class="btn btn-primary"')?>
 <br/><br/>
 <p>
     <?php echo anchor('home/index', 'Terug', 'class="btn btn-primary"'); ?>

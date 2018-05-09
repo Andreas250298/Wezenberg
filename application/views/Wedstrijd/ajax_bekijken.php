@@ -21,10 +21,10 @@ if ($wedstrijden != null){
       .$wedstrijd->plaats.
       '</td>
       <td>'
-      .$wedstrijd->beginDatum.
+      .zetOmNaarDDMMYYYY($wedstrijd->beginDatum).
       '</td>
       <td>'
-      .$wedstrijd->eindDatum.
+      .zetOmNaarDDMMYYYY($wedstrijd->eindDatum).
       '</td>';
         if (isset($gebruiker)) {
             if ($gebruiker->soort == "trainer") {

@@ -79,7 +79,7 @@ $jaar = $dt->format('Y');
                     <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link); ?>
                 </li>
                 <li class="nav-item">
-                    <?php echo anchor('wedstrijd/', 'Wedstrijden', $link); ?>
+                    <?php echo anchor('wedstrijd/bekijkenWedstrijden/na', 'Wedstrijden', $link); ?>
                 </li>
                 <li class="nav-item">
                     <?php echo anchor('trainingscentrum/', 'Over ons', $link); ?>
