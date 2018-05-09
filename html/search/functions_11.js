@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['toekennen',['toekennen',['../class_supplement.html#aac8beb8ac220a4d73aefd33d2909eb40',1,'Supplement']]],
-  ['toonafgelopen',['toonAfgelopen',['../class_wedstrijd.html#af552ba2afa28a203fdfce89130a0bf22',1,'Wedstrijd']]],
-  ['tooninactievezwemmers',['toonInactieveZwemmers',['../class_gebruiker.html#a34d16daedae1525887a5a0e01be81d01',1,'Gebruiker']]],
-  ['toonwedstrijden',['toonWedstrijden',['../class_gebruiker.html#aed07bbb0970247be942c61d2fe150058',1,'Gebruiker']]],
-  ['toonwedstrijdenasc',['toonWedstrijdenASC',['../class_wedstrijd__model.html#a1b9b6dff1b26567a4c3217b2a218f3b7',1,'Wedstrijd_model']]],
-  ['toonwedstrijdendesc',['toonWedstrijdenDESC',['../class_wedstrijd__model.html#aa1e93b99637b0fbc1ccf3e951aea7d7b',1,'Wedstrijd_model']]],
-  ['toonzwemmerinfo',['toonZwemmerInfo',['../class_gebruiker.html#ae7f3296e25ec314566c8a718a13b7155',1,'Gebruiker']]],
-  ['toonzwemmers',['toonZwemmers',['../class_gebruiker.html#add687a66701f7b421d0f9a8b6501faf4',1,'Gebruiker']]],
-  ['tutorial',['tutorial',['../class_nieuws.html#af47ce15799c36a0f89ef898648f96dee',1,'Nieuws']]]
+  ['scalarval',['scalarval',['../class_x_m_l___r_p_c___values.html#ac9a3751dc2d5479f409d0a4683c37d26',1,'XML_RPC_Values']]],
+  ['send',['send',['../class_x_m_l___r_p_c___client.html#a10284ca4704ff9e94185f95baa21973f',1,'XML_RPC_Client']]],
+  ['sendpayload',['sendPayload',['../class_x_m_l___r_p_c___client.html#a040f0b8dcbcaac6a33ca0541befed955',1,'XML_RPC_Client']]],
+  ['serialize_5fclass',['serialize_class',['../class_x_m_l___r_p_c___values.html#a59df3d3c8fbb47a946d6a29f0b3c8e0c',1,'XML_RPC_Values']]],
+  ['serializedata',['serializedata',['../class_x_m_l___r_p_c___values.html#a7058e00e310218c447d3c9fea0ee0a3d',1,'XML_RPC_Values']]],
+  ['serializeval',['serializeval',['../class_x_m_l___r_p_c___values.html#a1a4bfc79985c185745d96ebe3a1e5c3d',1,'XML_RPC_Values']]],
+  ['supplementenperzwemmer',['supplementenPerZwemmer',['../class_supplement.html#a24edd84cb14a0c137d0090a4a81bd801',1,'Supplement']]],
+  ['supplementenperzwemmertrainer',['supplementenPerZwemmerTrainer',['../class_supplement.html#a5a551e9fe7c7a5c516931c13f46bc2d2',1,'Supplement']]],
+  ['supplemententoekennen',['supplementenToekennen',['../class_supplement.html#aac509064f91eda58e51fa90d81e36550',1,'Supplement']]]
 ];

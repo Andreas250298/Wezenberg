@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['reeksentoevoegen',['reeksenToevoegen',['../class_wedstrijd.html#a3855b782fa062856577bbc38ce6d96b6',1,'Wedstrijd']]],
-  ['registreer',['registreer',['../class_gebruiker.html#a6db5689af94fb09c1652e5f3b1d2770a',1,'Gebruiker\registreer()'],['../class_nieuws.html#a6db5689af94fb09c1652e5f3b1d2770a',1,'Nieuws\registreer()'],['../class_supplement.html#a6db5689af94fb09c1652e5f3b1d2770a',1,'Supplement\registreer()'],['../class_trainingscentrum.html#a6db5689af94fb09c1652e5f3b1d2770a',1,'Trainingscentrum\registreer()'],['../class_wedstrijd.html#a6db5689af94fb09c1652e5f3b1d2770a',1,'Wedstrijd\registreer()']]],
-  ['registreerreeks',['registreerReeks',['../class_wedstrijd.html#aea2b2f53b11ec3d8ad5025270bf0cfff',1,'Wedstrijd']]]
+  ['parseresponse',['parseResponse',['../class_x_m_l___r_p_c___message.html#ab1b93386615fce804baf236bf660a646',1,'XML_RPC_Message']]],
+  ['prepare_5fresponse',['prepare_response',['../class_x_m_l___r_p_c___response.html#ac6925a06291928e6d4e8e53ea10fb1e2',1,'XML_RPC_Response']]]
 ];

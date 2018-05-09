@@ -6,5 +6,7 @@ var searchData=
   ['maaknieuwsartikel',['maakNieuwsArtikel',['../class_nieuws.html#a8f12b08498b1257b65045e8d1bff613d',1,'Nieuws']]],
   ['maakreeks',['maakReeks',['../class_wedstrijd.html#ada52287d3cb6fbff36dd65163376ec31',1,'Wedstrijd']]],
   ['maaksupplement',['maakSupplement',['../class_supplement.html#a16eafc503747024fc1114feec0b054b3',1,'Supplement']]],
-  ['maakwedstrijd',['maakWedstrijd',['../class_wedstrijd.html#a9f3ee9cee37d415d59d13406c3f53b38',1,'Wedstrijd']]]
+  ['maakwedstrijd',['maakWedstrijd',['../class_wedstrijd.html#a9f3ee9cee37d415d59d13406c3f53b38',1,'Wedstrijd']]],
+  ['meldaan',['meldAan',['../class_home.html#ae5d4fa8d6e6308eb8aef662645233096',1,'Home']]],
+  ['meldaf',['meldAf',['../class_home.html#aa954cce013935041d0def3a057c40676',1,'Home']]]
 ];

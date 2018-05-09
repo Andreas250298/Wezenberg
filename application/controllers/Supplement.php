@@ -22,9 +22,9 @@ class Supplement extends CI_Controller
 
     /**
     * Weergeven van Supplementen
-    *\see Authex::getGebruikerInfo()
-    *\see Supplement_model::toonSupplementen()
-    *\see Supplement/bekijken.php
+    * @see Authex::getGebruikerInfo()
+    * @see Supplement_model::toonSupplementen()
+    * @see Supplement/bekijken.php
     */
     public function index()
     {
@@ -42,8 +42,8 @@ class Supplement extends CI_Controller
 
     /**
     * Aanmaken van supplement
-    *\see Authex::getGebruikerInfo()
-    *\see Supplement/form.php
+    * @see Authex::getGebruikerInfo()
+    * @see Supplement/form.php
     */
     public function maakSupplement()
     {
@@ -61,9 +61,9 @@ class Supplement extends CI_Controller
 
     /**
     * Registreren van supplement
-    *\see Supplement_model::insert()
-    *\see Supplement_model::update()
-    *\see Supplement::beheerSupplementen()
+    * @see Supplement_model::insert()
+    * @see Supplement_model::update()
+    * @see Supplement::beheerSupplementen()
     */
     public function registreer()
     {
@@ -84,9 +84,9 @@ class Supplement extends CI_Controller
 
     /**
     * Beheren van supplementen
-    *\see Authex::getGebruikerInfo()
-    *\see Supplement_model::toonSupplementen()
-    *\see Supplementen/beheren.php
+    * @see Authex::getGebruikerInfo()
+    * @see Supplement_model::toonSupplementen()
+    * @see Supplementen/beheren.php
     */
     public function beheerSupplementen()
     {
@@ -105,9 +105,9 @@ class Supplement extends CI_Controller
 
     /**
     * Wijzigen van supplement volgens id
-    *\see Authex::getGebruikerInfo()
-    *\see Supplement_model::get()
-    *\see Supplementen/form.php
+    * @see Authex::getGebruikerInfo()
+    * @see Supplement_model::get()
+    * @see Supplementen/form.php
     */
     public function wijzig($id)
     {
@@ -125,9 +125,9 @@ class Supplement extends CI_Controller
 
     /**
     * Verwijderen van supplement volgens id
-    *\see Authex::getGebruikerInfo()
-    *\see Supplement_model::delete()
-    *\see Supplement::index()
+    * @see Authex::getGebruikerInfo()
+    * @see Supplement_model::delete()
+    * @see Supplement::index()
     */
     public function verwijder($id)
     {
@@ -141,9 +141,9 @@ class Supplement extends CI_Controller
 
      /**
     * Verwijderen van supplementPerZwemmer volgens id
-    *\see Authex::getGebruikerInfo()
-    *\see Supplement_model::delete()
-    *\see Supplement::index()
+    * @see Authex::getGebruikerInfo()
+    * @see Supplement_model::delete()
+    * @see Supplement::index()
     */
     public function verwijderSupplementPerZwemmer()
     {
@@ -159,9 +159,9 @@ class Supplement extends CI_Controller
     /**
     * Tonen van supplementen voor een zwemmer
     * @param id id van de Zwemmer
-    *\see SupplementPerZwemmer_model::getSupplementenPerZwemmer
-    *\see Supplement_model::getSupplementen
-    *\see Authex::getGebruikerInfo
+    * @see SupplementPerZwemmer_model::getSupplementenPerZwemmer
+    * @see Supplement_model::getSupplementen
+    * @see Authex::getGebruikerInfo
     */
     public function supplementenPerZwemmer($id)
     {
@@ -183,9 +183,9 @@ class Supplement extends CI_Controller
 
       /**
      * Zwemmer zijn gewenste supplementen ophalen via ajax
-     * \see SupplementPerZwemmer_model::getSupplementenPerZwemmerEnSupplement
-     * \see SupplementPerZwemmer_model::getSupplementenPerZwemmer
-     * \see Supplement_model::getSupplementen
+     * @see SupplementPerZwemmer_model::getSupplementenPerZwemmerEnSupplement
+     * @see SupplementPerZwemmer_model::getSupplementenPerZwemmer
+     * @see Supplement_model::getSupplementen
      */
     public function haalAjaxOp_supplementenPerZwemmer(){
 
@@ -208,8 +208,8 @@ class Supplement extends CI_Controller
 
      /**
      * Alle supplementPerZwemmer tonen aan de trainer
-     * \see SupplementPerZwemmer_model::getSupplementenPerAlleZwemmers
-     * \see Gebruiker_model::toonZwemmers
+     * @see SupplementPerZwemmer_model::getSupplementenPerAlleZwemmers
+     * @see Gebruiker_model::toonZwemmers
      */
     public function supplementenPerZwemmerTrainer()
     {
@@ -227,9 +227,9 @@ class Supplement extends CI_Controller
 
       /**
      * Supplementen per gewenste zwemmer tonen via ajax
-     * \see SupplementPerZwemmer_model::getSupplementenPerZwemmer
-     * \see SupplementPerZwemmer_model::getSupplementenPerAlleZwemmers
-     * \see Gebruiker_model::toonZwemmers
+     * @see SupplementPerZwemmer_model::getSupplementenPerZwemmer
+     * @see SupplementPerZwemmer_model::getSupplementenPerAlleZwemmers
+     * @see Gebruiker_model::toonZwemmers
      */
     public function haalAjaxOp_supplementenPerZwemmerTrainer(){
         $id = $this->input->get('id');
@@ -249,8 +249,8 @@ class Supplement extends CI_Controller
 
     /**
     * Als trainer supplementen toekennen aan een zwemmer
-    *\see Supplementen_model::getSupplementen()
-    *\see Gebruiker_model::toonZwemmers()
+    * @see Supplementen_model::getSupplementen()
+    * @see Gebruiker_model::toonZwemmers()
     */
     public function supplementenToekennen()
     {
@@ -271,8 +271,8 @@ class Supplement extends CI_Controller
 
      /**
      * Aanpassen supplementPerZwemmer als de trainer
-     * \see SupplementPerZwemmer_model::get
-     * \see Supplement_model->getSupplementen
+     * @see SupplementPerZwemmer_model::get
+     * @see Supplement_model->getSupplementen
      */
     public function aanpassenSupplementPerZwemmer($id){
         $this->load->model('supplementPerZwemmer_model');
@@ -292,8 +292,8 @@ class Supplement extends CI_Controller
 
      /**
      * Aanpassen supplementPerZwemmer als de trainer
-     * \see SupplementPerZwemmer_model::get
-     * \see Supplement_model->getSupplementen
+     * @see SupplementPerZwemmer_model::get
+     * @see Supplement_model->getSupplementen
      */
     public function aanpassen()
     {
@@ -317,8 +317,8 @@ class Supplement extends CI_Controller
 
      /**
      * Toekennen supplementPerZwemmer als de trainer
-     * \see SupplementPerZwemmer_model::insert
-     * \see Supplement::error
+     * @see SupplementPerZwemmer_model::insert
+     * @see Supplement::error
      */
     public function toekennen()
     {

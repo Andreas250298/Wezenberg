@@ -24,10 +24,10 @@ class Home extends CI_Controller
     /**
      * Haalt alles op dat op de startpagina van de verschillende gebruikers getoond moet worden, zoals: nieuws via nieuws_model,
      * wedstrijden via Wedstrijd_model, deelname via deelname_model en trainingcentrum gegevens via trainingscentrum_model deze worden getoond in de view startpagina.php
-     *\see Authex::getGebruikerInfo()
-     *\see Wedstrijd_model::toonWedstrijden()
+     * @see Authex::getGebruikerInfo()
+     * @see Wedstrijd_model::toonWedstrijden()
      *
-     *\see bekijken.php
+     * @see bekijken.php
      */
     public function index($nieuwsRij = 0, $agendaRij = 0)
     {
@@ -37,20 +37,20 @@ class Home extends CI_Controller
         $gebruiker = $data['gebruiker'];
 
         $data['nieuwsStartRij'] = $nieuwsRij;
-        
+
         $aantal = 5;
 
-        
+
         $this->load->model('wedstrijd_model');
-        
+
         $config['base_url'] = site_url('Home/index/');
         $config['total_rows_wedstrijden'] = $this->wedstrijd_model->getCountAll();
         $config['per_page'] = $aantal;
-        
+
         $this->pagination->initialize($config);
-        
+
         $data['wedstrijden'] = $this->wedstrijd_model->getAllWedstrijdPaging($aantal, $agendaRij);
-        
+
         if ($gebruiker != null) {
             $this->load->model('deelname_model');
             $data['status'] = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
@@ -61,7 +61,7 @@ class Home extends CI_Controller
         $data['trainingscentrum'] = $this->trainingscentrum_model->get();
 
         $data['links'] = $this->pagination->create_links();
-        
+
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'startpagina',
             'voetnoot' => 'main_footer');
@@ -69,6 +69,11 @@ class Home extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Meldt de gebruiker aan.
+    *
+    * @see Authex::getGebruikerInfo()
+    */
     public function meldAan()
     {
         $data['titel'] = 'Aanmelden';
@@ -82,6 +87,12 @@ class Home extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Toont een foutmelding aan de gebruiker wanneer er zich een fout voordoet.
+    *
+    * @see Authex::getGebruikerInfo()
+    * @param foutmelding foutcode die aan de functie meegeeft welke soort fout er zich voerdoet.
+    */
     public function toonFout($foutMelding)
     {
         $data['titel'] = 'Fout';
@@ -108,6 +119,11 @@ class Home extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Controleert of de inloggegevens wel kloppen en meldt de gebruiker aan of. Wanneer de gebruiker verkeerde inloggevens ingegeven heeft, toont het een foutmelding.
+    *
+    * @see Authex::getGebruikerInfo()
+    */
     public function controleerAanmelden()
     {
         $email = $this->input->post('email');
@@ -120,12 +136,22 @@ class Home extends CI_Controller
         }
     }
 
+    /**
+    * Meldt de gebruiker af.
+    *
+    * @see Authex::getGebruikerInfo()
+    */
     public function meldAf()
     {
         $this->authex->meldAf();
         redirect('home/index');
     }
 
+    /**
+    * Toont de gebruiker een demo over de navigatie doorheen de applicatie voor de zwemmer.
+    *
+    * @see Authex::getGebruikerInfo()
+    */
     public function demo()
     {
         $data['titel'] = 'Wezenberg | Demo';
@@ -139,41 +165,56 @@ class Home extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
-    
+
+    /**
+    * Haalt via Ajax nieuwsartikels op om te tonen in het startscherm.
+    * @see Nieuws_model::getAllNieuwsArtikelsPaging()
+    * @see Authex::getGebruikerInfo()
+    */
     public function haalAjaxOp_Nieuwsartikels()
     {
         $data['nieuwsStartRij'] = intval($this->input->get('nieuwsStartRij'));
         $aantalArtikels = 5;
-       
+
         $this->load->model('nieuws_model');
 
         $config['total_rows_nieuws'] = $this->nieuws_model->getCountAll();
         $config['per_page'] = $aantalArtikels;
-        
+
         $this->pagination->initialize($config);
-        
+
         $data['nieuwsArtikels'] = $this->nieuws_model->getAllNieuwsArtikelsPaging($aantalArtikels, intval($data['nieuwsStartRij']));
-        
+
         $this->load->view('ajax_nieuwsartikels', $data);
     }
-    
-        public function haalAjaxOp_AgendaItems()
+
+    /**
+    * Haalt via Ajax agendaitems op om te tonen in het startscherm.
+    * @see Wedstrijd_model::getAllWedstrijdPaging()
+    * @see Authex::getGebruikerInfo()
+    */
+    public function haalAjaxOp_AgendaItems()
     {
         $data['agendaStartRij'] = intval($this->input->get('agendaStartRij'));
         $aantalAgendaItems= 3;
-       
+
         $this->load->model('wedstrijd_model');
 
         $config['total_rows_nieuws'] = $this->wedstrijd_model->getCountAll();
         $config['per_page'] = $aantalAgendaItems;
-        
+
         $this->pagination->initialize($config);
-        
+
         $data['agendaItems'] = $this->wedstrijd_model->getAllWedstrijdPaging($aantalAgendaItems, intval($data['agendaStartRij']));
-        
+
         $this->load->view('ajax_agendaItems', $data);
     }
-    
+
+    /**
+    * Zorgt ervoor dat een bepaalde melding wordt getoond als 'gezien'.
+    * @see meldingPerGebruiker_model::getAllPerGebruiker()
+    * @see Authex::getGebruikerInfo()
+    */
     public function haalAjaxOp_MaakMeldingGezien()
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
