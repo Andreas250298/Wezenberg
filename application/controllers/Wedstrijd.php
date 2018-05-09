@@ -22,9 +22,9 @@ class Wedstrijd extends CI_Controller
 
     /**
      * Haalt alle wedstrijden op via Wedstrijd_model en toont deze in de view bekijken.php
-     *\see Authex::getGebruikerInfo()
-     *\see Wedstrijd_model::toonWedstrijden()
-     *\see bekijken.php
+     * @see Authex::getGebruikerInfo()
+     * @see Wedstrijd_model::toonWedstrijden()
+     * @see bekijken.php
      */
     public function index()
     {
@@ -42,7 +42,7 @@ class Wedstrijd extends CI_Controller
 
     /**
      * Toont het scherm om een nieuwe wedstrijd te maken
-     *\see maken.php
+     * @see maken.php
      */
     public function maakWedstrijd()
     {
@@ -64,8 +64,8 @@ class Wedstrijd extends CI_Controller
 
     /**
      * Maakt een nieuwe entry aan in de wedstrijd-database met de opgegeven info uit maken.php
-     *\see Wedstrijd_model::insert()
-     *\see Wedstrijd_model::update()
+     * @see Wedstrijd_model::insert()
+     * @see Wedstrijd_model::update()
      */
     public function registreer()
     {
@@ -97,8 +97,8 @@ class Wedstrijd extends CI_Controller
 
     /**
      * Maakt een nieuwe entry aan in de wedstrijd-database met de opgegeven info uit maken.php
-     *\see Wedstrijd_model::insert()
-     *\see Wedstrijd_model::update()
+     * @see Wedstrijd_model::insert()
+     * @see Wedstrijd_model::update()
      */
     public function registreerReeks()
     {
@@ -129,9 +129,9 @@ class Wedstrijd extends CI_Controller
 
     /**
      * Toont de pagina voor de wedstrijd-informatie aan te passen
-     *\@param id De id van de aan te passen wedstrijd
-     *\see Wedstrijd_model::get()
-     *\see beheren.php
+     * @param id De id van de aan te passen wedstrijd
+     * @see Wedstrijd_model::get()
+     * @see beheren.php
      */
     public function updateWedstrijd($id)
     {
@@ -151,9 +151,9 @@ class Wedstrijd extends CI_Controller
 
     /**
      * Toont de pagina voor de wedstrijden te beheren
-     *\see Authex::getGebruikerInfo()
-     *\see Wedstrijd_model::toonWedstrijden()
-     *\see bekijken.php
+     * @see Authex::getGebruikerInfo()
+     * @see Wedstrijd_model::toonWedstrijden()
+     * @see bekijken.php
      */
     public function beheerWedstrijden()
     {
@@ -172,8 +172,8 @@ class Wedstrijd extends CI_Controller
 
     /**
     * Hiermee verwijdert de trainer een wedstrijd
-    *\@param id De id van de aan te verwijderen wedstrijd
-    *\see Authex::getGebruikerInfo()
+    * @param id De id van de aan te verwijderen wedstrijd
+    * @see Authex::getGebruikerInfo()
     */
     public function verwijder($id)
     {
@@ -202,11 +202,11 @@ class Wedstrijd extends CI_Controller
 
     /**
     * Toont de pagina waarin een zwemmer zich kan inschrijven voor een wedstrijd
-    *\see Authex::getGebruikerInfo()
-    *\see Wedstrijd_model::toonWedstrijden()
-    *\see Deelname_model::getStatusPerGebruiker()
-    *\see Deelname_model::get()
-    *\see inschrijvingen.php
+    * @see Authex::getGebruikerInfo()
+    * @see Wedstrijd_model::toonWedstrijden()
+    * @see Deelname_model::getStatusPerGebruiker()
+    * @see Deelname_model::get()
+    * @see inschrijvingen.php
     */
     public function inschrijvingen()
     {
@@ -229,8 +229,8 @@ class Wedstrijd extends CI_Controller
 
     /**
     * Toont de pagina waarin een zwemmer de melding krijgt om te wachten op goedkeuring voor de inschrijving
-    *\see Authex::getGebruikerInfo()
-    *\see inschrijven.php
+    * @see Authex::getGebruikerInfo()
+    * @see inschrijven.php
     */
     public function inschrijven()
     {
@@ -246,10 +246,10 @@ class Wedstrijd extends CI_Controller
 
     /**
     * Toont de pagina waarin een trainer reeksen per wedstrijd kan toevoegen
-    *\@param id De id van de wedstrijd waar reeksen aan moeten toegevoegd worden
-    *\see Authex::getGebruikerInfo()
-    *\see Wedstrijd_model::getReeksenPerWedstrijd()
-    *\see reeksen.php
+    * @param id De id van de wedstrijd waar reeksen aan moeten toegevoegd worden
+    * @see Authex::getGebruikerInfo()
+    * @see Wedstrijd_model::getReeksenPerWedstrijd()
+    * @see reeksen.php
     */
     public function reeksenToevoegen($id)
     {
@@ -272,13 +272,13 @@ class Wedstrijd extends CI_Controller
 
     /**
     * Toont het invulformulier dat de trainer dient in te vullen om een reeks toe te voegen
-    *\see Authex::getGebruikerInfo()
-    *\see Wedstrijd_model::getReeksenPerWedstrijd()
-    *\see Wedstrijd_model::getSlagenPerWedstrijd()
-    *\see Wedstrijd_model::getAfstandenPerWedstrijd()
-    *\see Slag_model::getAllSlagen()
-    *\see Afstand_model::getAllAfstanden()
-    *\see maakReeks.php
+    * @see Authex::getGebruikerInfo()
+    * @see Wedstrijd_model::getReeksenPerWedstrijd()
+    * @see Wedstrijd_model::getSlagenPerWedstrijd()
+    * @see Wedstrijd_model::getAfstandenPerWedstrijd()
+    * @see Slag_model::getAllSlagen()
+    * @see Afstand_model::getAllAfstanden()
+    * @see maakReeks.php
     */
     public function maakReeks($id)
     {
@@ -301,12 +301,12 @@ class Wedstrijd extends CI_Controller
     /**
     * Toont en overzicht met meer informatie over een bepaalde wedstrijd
     * @param id van de aangeklikte wedstrijd
-    *\see Authex::getGebruikerInfo()
-    *\see Wedstrijd_model::get($id)
-    *\see Wedstrijd_model::getReeksenPerWedstrijd()
-    *\see Wedstrijd_model::getSlagenPerWedstrijd()
-    *\see Wedstrijd_model::getAfstandenPerWedstrijd()
-    *\see info.php
+    * @see Authex::getGebruikerInfo()
+    * @see Wedstrijd_model::get($id)
+    * @see Wedstrijd_model::getReeksenPerWedstrijd()
+    * @see Wedstrijd_model::getSlagenPerWedstrijd()
+    * @see Wedstrijd_model::getAfstandenPerWedstrijd()
+    * @see info.php
     */
     public function info($id)
     {
@@ -329,9 +329,9 @@ class Wedstrijd extends CI_Controller
 
     /**
      * Toont de pagina met alle afgelopen wedstrijden
-     *\see Authex::getGebruikerInfo()
-     *\see Wedstrijd_model::toonWedstrijdenASC()
-     *\see afgelopen.php
+     * @see Authex::getGebruikerInfo()
+     * @see Wedstrijd_model::toonWedstrijdenASC()
+     * @see afgelopen.php
      */
     public function toonAfgelopen()
     {

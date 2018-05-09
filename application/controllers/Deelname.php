@@ -19,9 +19,9 @@ class Deelname extends CI_Controller {
 
   /**
    * Haalt alle wedstrijden op via Wedstrijd_model en toont deze in de view bekijken.php
-   *\see Authex::getGebruikerInfo()
-   *\see Wedstrijd_model::toonWedstrijden()
-   *\see bekijken.php
+   * @see Authex::getGebruikerInfo()
+   * @see Wedstrijd_model::toonWedstrijden()
+   * @see bekijken.php
    */
   public function index(){
     $data['titel'] = 'Deelnames';

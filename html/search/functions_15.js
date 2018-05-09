@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xmlrpc_5fdecoder',['xmlrpc_decoder',['../class_x_m_l___r_p_c___response.html#a44f453c58a4aad3ccb76dd9926f9fa64',1,'XML_RPC_Response']]]
+  ['wijzig',['wijzig',['../class_gebruiker.html#aa10f6589c4f171a54524ed6758bed97f',1,'Gebruiker\wijzig()'],['../class_nieuws.html#aa10f6589c4f171a54524ed6758bed97f',1,'Nieuws\wijzig()'],['../class_supplement.html#aa10f6589c4f171a54524ed6758bed97f',1,'Supplement\wijzig()']]]
 ];

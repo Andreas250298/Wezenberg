@@ -1,5 +1,13 @@
 var searchData=
 [
-  ['update',['update',['../class_andere_activiteit__model.html#abeb41474b93330999361d6d74723797e',1,'AndereActiviteit_model\update()'],['../class_melding__model.html#a136f00612018561bf1b8c43a7b41837d',1,'Melding_model\update()'],['../class_melding_per_gebruiker__model.html#a643e6effd23acd07c465f372e8c43250',1,'MeldingPerGebruiker_model\update()'],['../class_nieuws__model.html#a5ddaf77b46eedf9261c45677285a756b',1,'Nieuws_model\update()'],['../class_reeks__model.html#abbf93f9b87b5236f49e0727fe109d588',1,'Reeks_model\update()'],['../class_supplement__model.html#ab8a94aa2d6d80c4fe3439b23bee8479b',1,'Supplement_model\update()'],['../class_supplement_per_zwemmer__model.html#a752f13481a412c60672302bff26ea5ad',1,'SupplementPerZwemmer_model\update()'],['../class_trainingscentrum__model.html#abbc3d99efc19464109f2d12cfeb9604b',1,'Trainingscentrum_model\update()'],['../class_wedstrijd__model.html#a3bdab634a19b3198527bd55133229cf4',1,'Wedstrijd_model\update()']]],
-  ['updatewedstrijd',['updateWedstrijd',['../class_wedstrijd.html#a8500015cafa0aa204e9a51bec0117814',1,'Wedstrijd']]]
+  ['toekennen',['toekennen',['../class_supplement.html#aac8beb8ac220a4d73aefd33d2909eb40',1,'Supplement']]],
+  ['toonafgelopen',['toonAfgelopen',['../class_wedstrijd.html#af552ba2afa28a203fdfce89130a0bf22',1,'Wedstrijd']]],
+  ['toonfout',['toonFout',['../class_home.html#a534d29f3139eb6fcfd725da57e4ba9a5',1,'Home']]],
+  ['tooninactievezwemmers',['toonInactieveZwemmers',['../class_gebruiker.html#a34d16daedae1525887a5a0e01be81d01',1,'Gebruiker']]],
+  ['toonwedstrijden',['toonWedstrijden',['../class_gebruiker.html#aed07bbb0970247be942c61d2fe150058',1,'Gebruiker']]],
+  ['toonwedstrijdenasc',['toonWedstrijdenASC',['../class_wedstrijd__model.html#a1b9b6dff1b26567a4c3217b2a218f3b7',1,'Wedstrijd_model']]],
+  ['toonwedstrijdendesc',['toonWedstrijdenDESC',['../class_wedstrijd__model.html#aa1e93b99637b0fbc1ccf3e951aea7d7b',1,'Wedstrijd_model']]],
+  ['toonzwemmerinfo',['toonZwemmerInfo',['../class_gebruiker.html#ae7f3296e25ec314566c8a718a13b7155',1,'Gebruiker']]],
+  ['toonzwemmers',['toonZwemmers',['../class_gebruiker.html#add687a66701f7b421d0f9a8b6501faf4',1,'Gebruiker']]],
+  ['tutorial',['tutorial',['../class_nieuws.html#af47ce15799c36a0f89ef898648f96dee',1,'Nieuws']]]
 ];

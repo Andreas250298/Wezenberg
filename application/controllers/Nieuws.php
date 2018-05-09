@@ -22,7 +22,9 @@ class Nieuws extends CI_Controller
 
     /**
      * Toont een lijst van nieuwsartikels startend vanaf een bepaalde rij (standaard de 0ste rij).
-     *
+     * @see Authex::getGebruikerInfo()
+     * @see nieuws_model::getCountAll()
+     * @see nieuws_model::getAllNieuwsArtikelsPaging()
      * @param startrij de rij dat moet worden getoond.
      */
     public function index($startrij = 0)
@@ -54,6 +56,7 @@ class Nieuws extends CI_Controller
 
     /**
      * Toont het formulier om een nieuw nieuwsartikel aan te maken.
+     * @see Authex::getGebruikerInfo()
      */
     public function maakNieuwsArtikel()
     {
@@ -72,6 +75,10 @@ class Nieuws extends CI_Controller
 
     /**
      * Voegt een nieuw nieuwsartikel toe aan de databank en toont dan opnieuw de lijst van nieuwsartikels.
+     * @see Authex::getGebruikerInfo()
+     * @see nieuws_model::get()
+     * @see nieuws_model::insert()
+     * @see nieuws_model::update()
      */
     public function registreer()
     {
@@ -86,14 +93,13 @@ class Nieuws extends CI_Controller
         $config['allowed_types']        = 'gif|jpg|jpeg|png';
         $this->load->library('upload', $config);
         $this->load->model('nieuws_model');
-        if($this->upload->do_upload('userfile')){
-          $upload_data = $this->upload->data();
-          $oudArtikel = $this->nieuws_model->get($artikel->id);
-          $this->load->helper("file");
-          unlink($oudArtikel->foto);
-          $artikel->foto = 'uploads/nieuws/' . $upload_data['file_name'];
+        if ($this->upload->do_upload('userfile')) {
+            $upload_data = $this->upload->data();
+            $oudArtikel = $this->nieuws_model->get($artikel->id);
+            $this->load->helper("file");
+            unlink($oudArtikel->foto);
+            $artikel->foto = 'uploads/nieuws/' . $upload_data['file_name'];
         }
-        $this->load->model('nieuws_model');
         if ($artikel->id == null) {
             $this->nieuws_model->insert($artikel);
         } else {
@@ -104,6 +110,8 @@ class Nieuws extends CI_Controller
 
     /**
      * Toont een formulier met alle gegevens ingevuld van het gekoze nieuwsartikel.
+     * @see Authex::getGebruikerInfo()
+     * @see nieuws_model::get()
      * @param id het id van het te wijzigen nieuwsartikel.
      */
     public function wijzig($id)
@@ -122,6 +130,8 @@ class Nieuws extends CI_Controller
 
     /**
      * Verwijdert het nieuwsartikel en toont opnieuw de lijst van nieuwsartikels.
+     * @see Authex::getGebruikerInfo()
+     * @see nieuws_model::get()
      * @param id het id van de te verwijderen nieuwsartikel.
      */
     public function verwijder()
@@ -140,6 +150,8 @@ class Nieuws extends CI_Controller
 
     /**
      * Toont een bepaald artikel volledig op een aparte pagina.
+     * @see Authex::getGebruikerInfo()
+     * @see nieuws_model::get()
      * @param id het id van het te bekijken nieuwsartikel.
      */
     public function bekijk($id)
@@ -161,6 +173,7 @@ class Nieuws extends CI_Controller
 
     /**
      * Toont een tutorial over hoe je het nieuws op de pagina van nieuws/beheren kan aanpassen
+     * @see Authex::getGebruikerInfo()
      */
     public function tutorial()
     {

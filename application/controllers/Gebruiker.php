@@ -31,9 +31,9 @@ class Gebruiker extends CI_Controller
 
     /**
     * Weergeven van zwemmers op zwemmers.php
-    *\see Authex::getGebruikerInfo()
-    *\see Gebruiker_model::toonZwemmers()
-    *\see zwemmers.php
+    * @see Authex::getGebruikerInfo()
+    * @see Gebruiker_model::toonZwemmers()
+    * @see zwemmers.php
     */
     public function toonZwemmers()
     {
@@ -52,9 +52,9 @@ class Gebruiker extends CI_Controller
 
     /**
     * Aanmaken van gebruiker via input uit zwemmers_form.php
-    *\see Authex::getGebruikerInfo()
-    *\see Gebruiker_model::voegToe()
-    *\see zwemmers_form.php
+    * @see Authex::getGebruikerInfo()
+    * @see Gebruiker_model::voegToe()
+    * @see zwemmers_form.php
     */
     public function maakGebruiker()
     {
@@ -71,9 +71,9 @@ class Gebruiker extends CI_Controller
 
     /**
     * registreer functie voor het aanmaken of update van een gebruiker_id
-    *\see Gebruiker_model::insert()
-    *\see Gebruiker_model::update()
-    *\see zwemmers_form.php
+    * @see Gebruiker_model::insert()
+    * @see Gebruiker_model::update()
+    * @see zwemmers_form.php
     */
     public function registreer()
     {
@@ -122,9 +122,9 @@ class Gebruiker extends CI_Controller
 
     /**
     * Wijzigen van de gebruiker volgens id
-    * \param id De id van de gebruiker die zal moeten worden aangepast
-    * \see Authex::getGebruikerInfo()
-    * \see Gebruiker_model::get()
+    *  @param id De id van de gebruiker die zal moeten worden aangepast
+    *  @see Authex::getGebruikerInfo()
+    *  @see Gebruiker_model::get()
     */
     public function wijzig($id)
     {
@@ -143,7 +143,7 @@ class Gebruiker extends CI_Controller
 
     /**
     * Verwijderen van gebruiker via id
-    *\param id De id van de gebruiker die zal worden verwijdert
+    * @param id De id van de gebruiker die zal worden verwijdert
     */
     public function verwijder()
     {
@@ -161,10 +161,10 @@ class Gebruiker extends CI_Controller
 
     /**
     * Zwemmer of inactief zetten volgens id
-    * \param id De id van de gebruiker die inactief gemaakt dient te worden.
-    *\see Gebruiker_model::get()
-    *\see Gebruiker_model::update()
-    *\see Gebruiker::toonZwemmers()
+    * @param id De id van de gebruiker die inactief gemaakt dient te worden.
+    * @see Gebruiker_model::get()
+    * @see Gebruiker_model::update()
+    * @see Gebruiker::toonZwemmers()
     */
     public function maakInactief($id)
     {
@@ -177,15 +177,15 @@ class Gebruiker extends CI_Controller
 
     /**
     * Zwemmer of actief zetten volgens id
-    *\see Gebruiker_model::get()
-    *\see Gebruiker_model::update
-    *\see Gebruiker::toonZwemmers()
+    * @see Gebruiker_model::get()
+    * @see Gebruiker_model::update
+    * @see Gebruiker::toonZwemmers()
     */
     public function maakActief($id)
     {
         /**
         * Actief maken van de gebruiker via de gewenste id.
-        * \param id De id van de gebruiker die terug actief gemaakt dient te worden.
+        * @param id De id van de gebruiker die terug actief gemaakt dient te worden.
         */
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);
@@ -197,9 +197,9 @@ class Gebruiker extends CI_Controller
 
     /**
     * Inactieve zwemmers tonen
-    *\see Authex::getGebruikerInfo()
-    *\see Gebruiker_model::toonInactieveZwemmers()
-    *\see inactieveZwemmers.php
+    * @see Authex::getGebruikerInfo()
+    * @see Gebruiker_model::toonInactieveZwemmers()
+    * @see inactieveZwemmers.php
     */
     public function toonInactieveZwemmers()
     {
@@ -218,9 +218,9 @@ class Gebruiker extends CI_Controller
 
     /**
     * Info tonen van zwemmer volgens id
-    *\see Gebruiker_model::getGebruikerInfo()
-    *\see Authex::getGebruikerInfo()
-    *\see zwemmer_info.php
+    * @see Gebruiker_model::getGebruikerInfo()
+    * @see Authex::getGebruikerInfo()
+    * @see zwemmer_info.php
     */
     public function toonZwemmerInfo($id)
     {
@@ -244,9 +244,9 @@ class Gebruiker extends CI_Controller
 
     /**
     * Wedstrijden tonen
-    *\see Authex::getGebruikerInfo()
-    *\see Wedstrijd_model::toonWedstrijden()
-    *\see wedstrijd/bekijken.php
+    * @see Authex::getGebruikerInfo()
+    * @see Wedstrijd_model::toonWedstrijden()
+    * @see wedstrijd/bekijken.php
     */
     public function toonWedstrijden()
     {
@@ -265,8 +265,8 @@ class Gebruiker extends CI_Controller
     /**
     * Account info tonen aan de hand van de id
     * @param id De id van de gebruiker waarvan de info getoond dient te worden.
-    *\see Authex::getGebruikerInfo()
-    *\see gebruiker_info.php
+    * @see Authex::getGebruikerInfo()
+    * @see gebruiker_info.php
     */
     public function account($id)
     {
@@ -286,8 +286,8 @@ class Gebruiker extends CI_Controller
     /**
     * Meldingen tonen aan de hand van de gebruiker ID
     * @param id De id van de gebruiker waarvan de info getoond dient te worden.
-    *\see Authex::getGebruikerInfo()
-    *\see main_header.php
+    * @see Authex::getGebruikerInfo()
+    * @see main_header.php
     */
     public function haalAjaxOp_Meldingen()
     {
@@ -299,6 +299,11 @@ class Gebruiker extends CI_Controller
         $this->load->view('ajax_meldingTonen', $data);
     }
 
+    /**
+    * Zorgt ervoor dat een bepaalde melding wordt getoond als 'gezien'.
+    * @see meldingPerGebruiker_model::getAllPerGebruiker()
+    * @see Authex::getGebruikerInfo()
+    */
     public function haalAjaxOp_MaakMeldingGezien()
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -319,11 +324,11 @@ class Gebruiker extends CI_Controller
     }
 
     /** Persoonlijke agenda tonen
-    *\see Authex::getGebruikerInfo()
-    *\see Deelname_model::getInformatieDeelnames()
-    *\see SupplementPerZwemmer_model::getInformatieSupplementen()
-    *\see ActiviteitPerGebruiker_model::getInformatieActiviteiten()
-    *\see zwemmer_agenda.php
+    * @see Authex::getGebruikerInfo()
+    * @see Deelname_model::getInformatieDeelnames()
+    * @see SupplementPerZwemmer_model::getInformatieSupplementen()
+    * @see ActiviteitPerGebruiker_model::getInformatieActiviteiten()
+    * @see zwemmer_agenda.php
     * @param week Te tonen week
     * @param jaar Jaar van te tonen week
     */
@@ -353,8 +358,8 @@ class Gebruiker extends CI_Controller
     }
 
     /** Wedstrijden om te tonen in agenda ophalen
-    *\see Authex::getGebruikerInfo()
-    *\see Deelname_model::getInformatieDeelnames()
+    * @see Authex::getGebruikerInfo()
+    * @see Deelname_model::getInformatieDeelnames()
     */
     public function haalJsonOp_Wedstrijden()
     {
@@ -369,8 +374,8 @@ class Gebruiker extends CI_Controller
     }
 
     /** Supplementen om te tonen in agenda ophalen
-    *\see Authex::getGebruikerInfo()
-    *\see SupplementPerZwemmer_model::getInformatieSupplementen()
+    * @see Authex::getGebruikerInfo()
+    * @see SupplementPerZwemmer_model::getInformatieSupplementen()
     */
     public function haalJsonOp_Supplementen()
     {
@@ -385,8 +390,8 @@ class Gebruiker extends CI_Controller
     }
 
     /** Activiteiten om te tonen in agenda ophalen
-    *\see Authex::getGebruikerInfo()
-    *\see ActiviteitPerGebruiker_model::getInformatieActiviteiten()
+    * @see Authex::getGebruikerInfo()
+    * @see ActiviteitPerGebruiker_model::getInformatieActiviteiten()
     */
     public function haalJsonOp_Activiteiten()
     {

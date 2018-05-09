@@ -1,7 +1,7 @@
 var searchData=
 [
   ['value',['value',['../class_x_m_l___r_p_c___response.html#aefbfa229f1c9e1fc967bff724a010f9e',1,'XML_RPC_Response']]],
-  ['verwijder',['verwijder',['../class_gebruiker.html#ad8988b8c1a354cb79946355ede7257e1',1,'Gebruiker\verwijder()'],['../class_nieuws.html#ad8988b8c1a354cb79946355ede7257e1',1,'Nieuws\verwijder()'],['../class_supplement.html#aa5997c2d1474e374ea50a87e8673d2e4',1,'Supplement\verwijder()'],['../class_wedstrijd.html#aa5997c2d1474e374ea50a87e8673d2e4',1,'Wedstrijd\verwijder()']]],
+  ['verwijder',['verwijder',['../class_activiteit.html#ad8988b8c1a354cb79946355ede7257e1',1,'Activiteit\verwijder()'],['../class_gebruiker.html#ad8988b8c1a354cb79946355ede7257e1',1,'Gebruiker\verwijder()'],['../class_nieuws.html#ad8988b8c1a354cb79946355ede7257e1',1,'Nieuws\verwijder()'],['../class_supplement.html#aa5997c2d1474e374ea50a87e8673d2e4',1,'Supplement\verwijder()'],['../class_wedstrijd.html#aa5997c2d1474e374ea50a87e8673d2e4',1,'Wedstrijd\verwijder()']]],
   ['verwijderreeks',['verwijderReeks',['../class_wedstrijd.html#a37d9e91e858488d66124b5e3c484b8d4',1,'Wedstrijd']]],
   ['verwijdersupplementperzwemmer',['verwijderSupplementPerZwemmer',['../class_supplement.html#adb01ec0527b37c7177fc41fbdb7c3ce4',1,'Supplement']]]
 ];

@@ -24,10 +24,10 @@ class Home extends CI_Controller
     /**
      * Haalt alles op dat op de startpagina van de verschillende gebruikers getoond moet worden, zoals: nieuws via nieuws_model,
      * wedstrijden via Wedstrijd_model, deelname via deelname_model en trainingcentrum gegevens via trainingscentrum_model deze worden getoond in de view startpagina.php
-     *\see Authex::getGebruikerInfo()
-     *\see Wedstrijd_model::toonWedstrijden()
+     * @see Authex::getGebruikerInfo()
+     * @see Wedstrijd_model::toonWedstrijden()
      *
-     *\see bekijken.php
+     * @see bekijken.php
      */
     public function index($nieuwsRij = 0, $agendaRij = 0)
     {
@@ -69,6 +69,11 @@ class Home extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Meldt de gebruiker aan.
+    *
+    * @see Authex::getGebruikerInfo()
+    */
     public function meldAan()
     {
         $data['titel'] = 'Aanmelden';
@@ -82,6 +87,12 @@ class Home extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Toont een foutmelding aan de gebruiker wanneer er zich een fout voordoet.
+    *
+    * @see Authex::getGebruikerInfo()
+    * @param foutmelding foutcode die aan de functie meegeeft welke soort fout er zich voerdoet.
+    */
     public function toonFout($foutMelding)
     {
         $data['titel'] = 'Fout';
@@ -108,6 +119,11 @@ class Home extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Controleert of de inloggegevens wel kloppen en meldt de gebruiker aan of. Wanneer de gebruiker verkeerde inloggevens ingegeven heeft, toont het een foutmelding.
+    *
+    * @see Authex::getGebruikerInfo()
+    */
     public function controleerAanmelden()
     {
         $email = $this->input->post('email');
@@ -120,12 +136,22 @@ class Home extends CI_Controller
         }
     }
 
+    /**
+    * Meldt de gebruiker af.
+    *
+    * @see Authex::getGebruikerInfo()
+    */
     public function meldAf()
     {
         $this->authex->meldAf();
         redirect('home/index');
     }
 
+    /**
+    * Toont de gebruiker een demo over de navigatie doorheen de applicatie voor de zwemmer.
+    *
+    * @see Authex::getGebruikerInfo()
+    */
     public function demo()
     {
         $data['titel'] = 'Wezenberg | Demo';
@@ -140,6 +166,14 @@ class Home extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+<<<<<<< HEAD
+=======
+    /**
+    * Haalt via Ajax nieuwsartikels op om te tonen in het startscherm.
+    * @see Nieuws_model::getAllNieuwsArtikelsPaging()
+    * @see Authex::getGebruikerInfo()
+    */
+>>>>>>> c8af1408f43f10fa96043c273bd832e86805edb0
     public function haalAjaxOp_Nieuwsartikels()
     {
         $data['nieuwsStartRij'] = intval($this->input->get('nieuwsStartRij'));
@@ -157,6 +191,14 @@ class Home extends CI_Controller
         $this->load->view('ajax_nieuwsartikels', $data);
     }
 
+<<<<<<< HEAD
+=======
+    /**
+    * Haalt via Ajax agendaitems op om te tonen in het startscherm.
+    * @see Wedstrijd_model::getAllWedstrijdPaging()
+    * @see Authex::getGebruikerInfo()
+    */
+>>>>>>> c8af1408f43f10fa96043c273bd832e86805edb0
     public function haalAjaxOp_AgendaItems()
     {
         $data['agendaStartRij'] = intval($this->input->get('agendaStartRij'));
@@ -174,6 +216,14 @@ class Home extends CI_Controller
         $this->load->view('ajax_agendaItems', $data);
     }
 
+<<<<<<< HEAD
+=======
+    /**
+    * Zorgt ervoor dat een bepaalde melding wordt getoond als 'gezien'.
+    * @see meldingPerGebruiker_model::getAllPerGebruiker()
+    * @see Authex::getGebruikerInfo()
+    */
+>>>>>>> c8af1408f43f10fa96043c273bd832e86805edb0
     public function haalAjaxOp_MaakMeldingGezien()
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
