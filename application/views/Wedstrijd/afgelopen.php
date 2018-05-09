@@ -15,16 +15,22 @@ foreach ($wedstrijden as $wedstrijd) {
       '</td>
       <td>'
       .$wedstrijd->eindDatum.
-      '</td></tr>';
+      '</td><td>';
+        if (isset($gebruiker)) {
+            if ($gebruiker->soort == "trainer") {
+                $lijstWedstrijden .= anchor('wedstrijd/maakWedstrijd', 'Resultaten toevoegen', 'class="btn btn-success"');
+            }
+        }
+        $lijstWedstrijden .= '</td></tr>';
     }
 }
 if (isset($gebruiker)) {
     if ($gebruiker->soort == "trainer") {
-        echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken').'</p>';
+        echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken', 'class="btn btn-success"').'</p>';
     }
 }
 ?>
-
+<div class="table-responsive">
 <table class="table">
   <thead>
     <tr>
@@ -40,6 +46,8 @@ if (isset($gebruiker)) {
     <td>
       Einde
     </td>
+    <td>
+    </td>
     </tr>
   </thead>
   <tbody>
@@ -48,6 +56,7 @@ if (isset($gebruiker)) {
     ?>
   </tbody>
 </table>
+</div>
 <p>
-    <a id="terug" href="javascript:history.go(-1);">Terug</a>
+    <a id="terug" href="javascript:history.go(-1);" class="btn btn-primary">Terug</a>
 </p>

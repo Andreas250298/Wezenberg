@@ -124,7 +124,7 @@ class Wedstrijd extends CI_Controller
         $status = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
         $status->statusId = '4';
 
-        redirect('/wedstrijd/beheerWedstrijden');
+        redirect('/wedstrijd/reeksenToevoegen/' . $reeks->wedstrijdId);
     }
 
     /**
@@ -259,8 +259,6 @@ class Wedstrijd extends CI_Controller
         $this->load->model('wedstrijd_model');
         //$data['wedstrijd'] = $this->wedstrijd_model->get($id);
         $data['wedstrijdId'] = $id;
-        //$wedstrijd = $data['wedstrijd'];
-        //$data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($wedstrijd->id);
         $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
         $this->load->model('reeks_model');
         $data['slagen'] = $this->reeks_model->getSlagenPerReeks($id);
