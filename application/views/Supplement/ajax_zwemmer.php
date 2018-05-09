@@ -18,15 +18,15 @@ if ($supplementenPerZwemmer == null) {
         echo "<table class=\"table\">
         <thead>
           <tr>
-          <td>
+          <th>
             Hoeveelheid
-          </td>
-          <td>
+          </th>
+          <th>
             Tijdstip
-          </td>
-          <td>
+          </th>
+          <th>
             Datum
-          </td>
+          </th>
           </tr>
         </thead>
         <tbody>";
