@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file Wedstrijd/resultaatToevoegen.php
+ *
+ * View waarin resultaten kunnen worden bekijken per wedstrijd
+ */
 $lijstZwemmers = '';
 $teller = 1;
 foreach ($zwemmers as $zwemmer) {

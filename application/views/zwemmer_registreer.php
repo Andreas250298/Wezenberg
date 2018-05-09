@@ -1,9 +1,10 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @file zwemmer_registreer.php
+ *
+ * View waarin zwemmers kunnen aangemaakt of worden aangepast
+ * -aanmaken kan alleen door de trainer
+ * -aanpassen kan door zowel de trainer als de zwemmer
  */
 $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam', 'aria-label' => 'Naam', 'size' => '30', 'required' => 'required');
 $dataInputEmail = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'email', 'id' => 'email', 'placeholder' => 'E-mail', 'aria-label' => 'E-mail', 'size' => '30', 'required' => 'required', 'data-error' => 'Ongeldig e-mailadres');
@@ -19,9 +20,9 @@ echo haalJavascriptOp("validator.js");
     <tr>
         <td>
             <div class="form-group">
-                <?php echo form_labelpro('Naam: ', 'naam'); 
+                <?php echo form_labelpro('Naam: ', 'naam');
                 echo '</td><td>';
-                echo form_input($dataInputNaam); 
+                echo form_input($dataInputNaam);
                 ?>
             </td>
                 <div class="help-block with-errors"></div>

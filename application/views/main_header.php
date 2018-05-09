@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file main_header.php
+ *
+ * View die een deel is van de main_master en toond de header die daar onderaan aanwezig is
+ */
 $link = array('class' => 'nav-link');
 
 $dt = new DateTime;

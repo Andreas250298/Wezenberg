@@ -19,7 +19,7 @@ class ActiviteitPerGebruiker_model extends CI_Model
     /**
      * Een activiteit per gebruiker toevoegen aan de database
      * @param activiteit Het supplement dat moet toegevoegd worden
-     * @return De insert functie van het supplement
+     * @return De insert id van het supplement
      */
     public function insert($activiteit)
     {
@@ -30,7 +30,7 @@ class ActiviteitPerGebruiker_model extends CI_Model
     /**
      * De gebruikers horende bij een activiteit ophalen uit de database
      * @param activiteitId Het id van de activiteit waar de zwemmers aan gekoppeld zijn
-     * @return De insert functie van het supplement
+     * @return De opgevraagde record(s)
      */
     public function getZwemmersBijActiviteit($activiteitId)
     {
@@ -46,7 +46,10 @@ class ActiviteitPerGebruiker_model extends CI_Model
           return null;
         }
     }
-
+    /**
+     * Een activiteit per gebruiker verwijderen uit de database
+     * @param id Het id van het record dat moet verwijderd worden.
+     */
     public function deleteZwemmersBijActiviteit($id)
     {
       $this->db->where('andereActiviteitId', $id);
@@ -55,7 +58,8 @@ class ActiviteitPerGebruiker_model extends CI_Model
 
     /**
     * Haalt activiteiten in week op van bepaalde zwemmer
-    *\see reeks_model::getReeksenInWeek()
+    * @see Gebruiker_model::get()
+    * @see AndereActiviteit_model::getActiviteitenInWeek()
     * @param id ID van de zwemmer in kwestie
     * @param week Week in de agenda
     * @param jaar Jaar in de agenda
@@ -97,7 +101,8 @@ class ActiviteitPerGebruiker_model extends CI_Model
 
     /**
     * Haalt informatie op van activiteit
-    *\see deelname_model::getDeelnamesInWeekPerZwemmer()
+    * @see AndereActiviteit_model::get()
+    * @see Soort_model::get()
     * @param id ID van de zwemmer in kwestie
     * @param week Week in de agenda
     * @param jaar Jaar in de agenda

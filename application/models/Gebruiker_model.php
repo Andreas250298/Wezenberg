@@ -1,20 +1,36 @@
 <?php
-
+/**
+* @class Gebruiker_model
+* @brief Model-klasse voor gebruikers
+*
+* Model-klasse die alle methodes bevat om te interageren met de gebruikers tabel.
+*/
 class Gebruiker_model extends CI_Model
 {
+  /**
+   * Constructor
+   */
     public function __construct()
     {
         parent::__construct();
         $this->load->helper('notation');
         $this->load->helper('date');
     }
-
+    /**
+     * Een gebruiker ophalen uit de database
+     * @param id Het id van de reeks waar de gebruiker aan gekoppeld is
+     * @return Het opgevraagde record
+     */
     public function get($id)
     {
         $this->db->where('id', $id);
         $query = $this->db->get('gebruiker');
         return $query->row();
     }
+    /**
+     * Alle reeksen ophalen uit de database
+     * @return De opgevraagde record(s)
+     */
     public function getAllZwemmers()
     {
       $this->db->where('soort', 'zwemmer');
@@ -26,7 +42,12 @@ class Gebruiker_model extends CI_Model
         return $query->result();
       }
     }
-
+    /**
+     * Een gebruiker ophalen uit de database
+     * @param email Het email van een bepaalde gebruiker
+     * @param wachtwoord Het wachtwoord van een bepaalde gebruiker
+     * @return Het opgevraagde record
+     */
     public function getGebruiker($email, $wachtwoord)
     {
         $this->db->where('email', $email);
@@ -45,7 +66,12 @@ class Gebruiker_model extends CI_Model
             return null;
         }
     }
-
+    /**
+     * Een gebruiker ophalen uit de database
+     * @param email Het email van een bepaalde gebruiker
+     * @param wachtwoord Het wachtwoord van een bepaalde gebruiker
+     * @return Het opgevraagde record
+     */
     public function getGebruikerMetWachtwoord($email, $wachtwoord)
     {
         $this->db->where('email', $email);
@@ -62,7 +88,11 @@ class Gebruiker_model extends CI_Model
             return null;
         }
     }
-
+    /**
+     * Controleert of een bepaalde email al gebruikt is
+     * @param email Het email van een bepaalde gebruiker
+     * @return true of false
+     */
     public function controleerEmailVrij($email)
     {
         // is email al dan niet aanwezig
@@ -75,19 +105,29 @@ class Gebruiker_model extends CI_Model
             return false;
         }
     }
-
+    /**
+     * voegt een gebruiker toe aan de database
+     * @param gebruiker te toe te voegen gebruiker
+     * @return id het id van de toegevoegde gebruiker
+     */
     public function insert($gebruiker)
     {
         $this->db->insert('gebruiker', $gebruiker);
         return $this->db->insert_id();
     }
-
+    /**
+     * past een gebruiker aan in de database
+     * @param gebruiker te toe te voegen gebruiker
+     */
     public function update($gebruiker)
     {
         $this->db->where('id', $gebruiker->id);
         $this->db->update('gebruiker', $gebruiker);
     }
-
+    /**
+     * haalt alle zwemmers terug uit de databank
+     * @return zwemmers Alle zwemmers uit de databank
+     */
     public function toonZwemmers()
     {
         $this->db->where('soort', 'zwemmer');
@@ -95,7 +135,10 @@ class Gebruiker_model extends CI_Model
         $query = $this->db->get('gebruiker');
         return $query->result();
     }
-
+    /**
+     * verwijdert een bepaalde zwemmer
+     * @param id Het id van de te verwijderen zwemmer
+     */
     public function delete($id)
     {
         $this->db->where('gebruikerIdZwemmer', $id);
@@ -113,7 +156,10 @@ class Gebruiker_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->delete('gebruiker');
     }
-
+    /**
+     * haalt alle inactieve zwemmers terug uit de databank
+     * @return zwemmers Alle inactieve zwemmers uit de databank
+     */
     public function toonInactieveZwemmers()
     {
         $this->db->where('soort', 'zwemmer');

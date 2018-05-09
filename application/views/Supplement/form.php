@@ -1,9 +1,8 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *\file Supplement/form.php
+ *
+ * View waarin men een supplement kan aanmaken
  */
 if(isset($supplement)) {
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam supplement', 'aria-label' => 'Naam', 'size' => '30', 'value' => $supplement->naam);

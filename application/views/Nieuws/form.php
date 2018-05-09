@@ -1,13 +1,8 @@
 <?php
 /**
- *\file form.php
+ * @file Nieuws/form.php
  *
  * View waarin men de een nieuwsitem kan toevoegen
- */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 if(isset($nieuwsArtikel)) {
     $dataInputTitel = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'titel', 'id' => 'titel', 'placeholder' => 'Titel', 'aria-label' => 'Titel', 'size' => '30', 'value' => $nieuwsArtikel->titel);

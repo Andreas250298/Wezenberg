@@ -1,9 +1,8 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @file Wedstrijd/maken.php
+ *
+ * View waarin een wedstrijd kan worden gemaakt
  */
 if (isset($wedstrijd)) {
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'value' => $wedstrijd->naam, 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam Wedstrijd', 'aria-label' => 'Titel', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul hier de naam van de wedstrijd in.');

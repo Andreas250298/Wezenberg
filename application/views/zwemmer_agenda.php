@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file zwemmer_agenda.php
+ *
+ * View waarin de zwemmer zijn agenda kan bekijken
+ */
 $maandag = new DateTime;
 $maandag->setTime(0, 0, 0);
 $maandag->setISODate(intval($jaar), intval($week));

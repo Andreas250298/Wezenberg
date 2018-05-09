@@ -1,6 +1,6 @@
 <?php
 /**
-*\file beheren.php
+* @file Supplement/beheren.php
 *
 * View waarin men de supplementen kan beheren.
 */

@@ -120,11 +120,9 @@ Public Members</h2></td></tr>
 <tr class="separator:ab7b2da03c048df955cd0cdad26c2ceaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a878f955783a464af2e319f2f328a4075"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wedstrijd__model.html#a878f955783a464af2e319f2f328a4075">getReeksenPerWedstrijd</a> ($id)</td></tr>
 <tr class="separator:a878f955783a464af2e319f2f328a4075"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0920565f09a6698831f44e1a5e7f1aea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0920565f09a6698831f44e1a5e7f1aea"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>getSlagenPerWedstrijd</b> ($id)</td></tr>
+<tr class="memitem:a0920565f09a6698831f44e1a5e7f1aea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wedstrijd__model.html#a0920565f09a6698831f44e1a5e7f1aea">getSlagenPerWedstrijd</a> ($id)</td></tr>
 <tr class="separator:a0920565f09a6698831f44e1a5e7f1aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d9d7b4037e919969506daa82456119a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d9d7b4037e919969506daa82456119a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>getAfstandenPerWedstrijd</b> ($id)</td></tr>
+<tr class="memitem:a2d9d7b4037e919969506daa82456119a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wedstrijd__model.html#a2d9d7b4037e919969506daa82456119a">getAfstandenPerWedstrijd</a> ($id)</td></tr>
 <tr class="separator:a2d9d7b4037e919969506daa82456119a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bdab634a19b3198527bd55133229cf4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wedstrijd__model.html#a3bdab634a19b3198527bd55133229cf4">update</a> ($wedstrijd)</td></tr>
 <tr class="separator:a3bdab634a19b3198527bd55133229cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,7 +165,7 @@ Public Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Een wedstrijd verwijderen uit de database </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$id</td><td>Het id van de wedstrijd die moet verwijderd worden </td></tr>
+    <tr><td class="paramname">id</td><td>Het id van de wedstrijd die moet verwijderd worden </td></tr>
   </table>
   </dd>
 </dl>
@@ -190,6 +188,29 @@ Public Members</h2></td></tr>
 <p>Een wedstrijd ophalen uit de database </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">$id</td><td>Het id van de wedstrijd die opgevraagd wordt </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retourneert</dt><dd>De opgevraagde record </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2d9d7b4037e919969506daa82456119a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getAfstandenPerWedstrijd </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Afstanden behorende bij een deelname uit de database ophalen </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Het id van de deelname waar de afstand aan gekoppeld is </td></tr>
   </table>
   </dd>
 </dl>
@@ -236,7 +257,7 @@ Public Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>opvragen van het aantal records. </p>
+<p>Telt alle records </p>
 
 </div>
 </div>
@@ -255,7 +276,30 @@ Public Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Reeks behorende bij een deelname uit de database ophalen </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$id</td><td>Het id van de deelname waar de reeks aan gekoppeld is </td></tr>
+    <tr><td class="paramname">id</td><td>Het id van de deelname waar de reeks aan gekoppeld is </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retourneert</dt><dd>De opgevraagde record </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0920565f09a6698831f44e1a5e7f1aea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getSlagenPerWedstrijd </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Slagen behorende bij een deelname uit de database ophalen </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Het id van de deelname waar de slagen aan gekoppeld is </td></tr>
   </table>
   </dd>
 </dl>
@@ -278,7 +322,7 @@ Public Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Een wedstrijd toevoegen aan de database </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$wedstrijd</td><td>De wedstrijd die moet toegevoegd worden </td></tr>
+    <tr><td class="paramname">wedstrijd</td><td>De wedstrijd die moet toegevoegd worden </td></tr>
   </table>
   </dd>
 </dl>
@@ -333,7 +377,7 @@ Public Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Een wedstrijd wijzigen in de database </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$wedstrijd</td><td>De wedstrijd die moet gewijzigd worden </td></tr>
+    <tr><td class="paramname">wedstrijd</td><td>De wedstrijd die moet gewijzigd worden </td></tr>
   </table>
   </dd>
 </dl>

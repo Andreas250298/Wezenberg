@@ -17,7 +17,7 @@ class AndereActiviteit_model extends CI_Model
   }
   /**
    * Een supplement ophalen uit de database
-   * @param $id Het id van het supplement dat opgevraagd wordt
+   * @param id Het id van het supplement dat opgevraagd wordt
    * @return De opgevraagde records
    */
   public function get($id)
@@ -28,8 +28,8 @@ class AndereActiviteit_model extends CI_Model
   }
   /**
    * Een supplement toevoegen aan de database
-   * @param $supplement Het supplement dat moet toegevoegd worden
-   * @return De insert functie van het supplement
+   * @param supplement Het supplement dat moet toegevoegd worden
+   * @return id Het insert id van het supplement
    */
   public function insert($activiteit)
   {
@@ -38,7 +38,7 @@ class AndereActiviteit_model extends CI_Model
   }
   /**
    * Een supplement wijzigen in de database
-   * @param $supplement Het supplement dat moet gewijzigd worden
+   * @param supplement Het supplement dat moet gewijzigd worden
    */
   public function update($activiteit)
   {
@@ -47,7 +47,7 @@ class AndereActiviteit_model extends CI_Model
   }
   /**
    * Een supplement verwijderen uit de database
-   * @param $id Het id van het supplement dat moet verwijderd worden
+   * @param id Het id van het supplement dat moet verwijderd worden
    */
   public function delete($id)
   {
@@ -57,7 +57,8 @@ class AndereActiviteit_model extends CI_Model
 
   /**
    * Een activiteit met soort ophalen uit de database
-   * @param $id Het id van de activiteit die opgehaald moet worden
+   * @see Soort_model::get()
+   * @param id Het id van de activiteit die opgehaald moet worden
    */
   public function getActiviteitMetSoort($id)
   {

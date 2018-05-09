@@ -110,8 +110,7 @@ Public Members</h2></td></tr>
 <tr class="separator:a957d8f7718d03b408c59817b047f594e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55c7e70aa77aaed4b7c66a6e843b30d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_activiteit_per_gebruiker__model.html#a55c7e70aa77aaed4b7c66a6e843b30d6">getZwemmersBijActiviteit</a> ($activiteitId)</td></tr>
 <tr class="separator:a55c7e70aa77aaed4b7c66a6e843b30d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada6594782bcdcf189018f9e946a72e5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada6594782bcdcf189018f9e946a72e5d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>deleteZwemmersBijActiviteit</b> ($id)</td></tr>
+<tr class="memitem:ada6594782bcdcf189018f9e946a72e5d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_activiteit_per_gebruiker__model.html#ada6594782bcdcf189018f9e946a72e5d">deleteZwemmersBijActiviteit</a> ($id)</td></tr>
 <tr class="separator:ada6594782bcdcf189018f9e946a72e5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9afb18dc4670e1e258a28f1730060e88"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_activiteit_per_gebruiker__model.html#a9afb18dc4670e1e258a28f1730060e88">getActiviteitenInWeekVoorZwemmer</a> ($id, $week, $jaar)</td></tr>
 <tr class="separator:a9afb18dc4670e1e258a28f1730060e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,6 +138,28 @@ Public Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Documentatie van functie members</h2>
+<a class="anchor" id="ada6594782bcdcf189018f9e946a72e5d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">deleteZwemmersBijActiviteit </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Een activiteit per gebruiker verwijderen uit de database </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Het id van het record dat moet verwijderd worden. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a9afb18dc4670e1e258a28f1730060e88"></a>
 <div class="memitem">
 <div class="memproto">
@@ -168,7 +189,9 @@ Public Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Haalt activiteiten in week op van bepaalde zwemmer </p><dl class="section see"><dt>Zie ook</dt><dd>reeks_model::getReeksenInWeek() </dd></dl>
+<p>Haalt activiteiten in week op van bepaalde zwemmer </p><dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_gebruiker__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Gebruiker_model::get()</a> </dd>
+<dd>
+<a class="el" href="class_andere_activiteit__model.html#aa50d8a493ca99a05fdbb2befd31380bf">AndereActiviteit_model::getActiviteitenInWeek()</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>ID van de zwemmer in kwestie </td></tr>
@@ -210,7 +233,9 @@ Public Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Haalt informatie op van activiteit </p><dl class="section see"><dt>Zie ook</dt><dd>deelname_model::getDeelnamesInWeekPerZwemmer() </dd></dl>
+<p>Haalt informatie op van activiteit </p><dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_andere_activiteit__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">AndereActiviteit_model::get()</a> </dd>
+<dd>
+<a class="el" href="class_soort__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Soort_model::get()</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>ID van de zwemmer in kwestie </td></tr>
@@ -242,7 +267,7 @@ Public Members</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Retourneert</dt><dd>De insert functie van het supplement </dd></dl>
+<dl class="section return"><dt>Retourneert</dt><dd>De opgevraagde record(s) </dd></dl>
 
 </div>
 </div>
@@ -265,7 +290,7 @@ Public Members</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Retourneert</dt><dd>De insert functie van het supplement </dd></dl>
+<dl class="section return"><dt>Retourneert</dt><dd>De insert id van het supplement </dd></dl>
 
 </div>
 </div>

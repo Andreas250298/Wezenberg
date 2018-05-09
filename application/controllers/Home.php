@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * @class Home
- * @brief Controller-klasse voor de startpagina en navigatie
+ * @brief Controller-klasse voor de Home
  *
  * Controller-klasse met methoden die worden gebruikt bij het tonen van de startpagina.
  */

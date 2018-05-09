@@ -1,4 +1,12 @@
 <?php
+/**
+ * @file Activiteit/bekijken.php
+ *
+ * View waarop de zwemmer een activiteit kan bekijken.
+
+ * - $Activiteiten-objecten die de zwemmer kan bekijken.
+ *
+ */
 $maandag = new DateTime;
 $maandag->setTime(0, 0, 0);
 $maandag->setISODate(intval($jaar), intval($week));

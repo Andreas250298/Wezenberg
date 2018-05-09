@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file Wedstrijd/info.php
+ *
+ * View waarin informatie te zien is over een bepaalde wedstrijd.
+ */
 $teller = 1;
 $lijstWedstrijden = "";
   echo "<h1 class='title'>" . $wedstrijd->naam . "</h1>";

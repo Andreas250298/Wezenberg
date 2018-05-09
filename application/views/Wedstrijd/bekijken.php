@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file Wedstrijd/bekijken.php
+ *
+ * View waarin alle wedstrijden te zien zijn.
+ */
 $lijstWedstrijden = '';
 
 foreach ($wedstrijden as $wedstrijd) {

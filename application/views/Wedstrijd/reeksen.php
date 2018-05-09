@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file Wedstrijd/reeksen.php
+ *
+ * View waarin alle reeksen voor een bepaalde wedstrijd kan worden bekeken
+ */
 $lijstReeksen = '';
 $teller = 1;
 foreach ($reeksen as $reeks) {

@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * @file ajax_agendaItems.php
+ *
+ * AJAX view waarin men agenda items kan zien op de startpagina
+ */
 foreach ($agendaItems as $agendaItem) {
     echo '<div class="row row-striped">';
     echo '<div class="col-3 text-right">';
