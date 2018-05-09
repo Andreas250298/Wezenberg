@@ -218,12 +218,17 @@ class Wedstrijd extends CI_Controller
     public function verwijder()
     {
         $id = $this->input->get('id');
+        $tijd = $this->input->get('tijd');
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
         $this->load->model('wedstrijd_model');
         $this->wedstrijd_model->delete($id);
 
-        redirect('/wedstrijd/beheerWedstrijden');
+        if ($tijd === 'na'){
+            redirect('/wedstrijd/bekijkenWedstrijden/na');
+        } else {
+            redirect('/wedstrijd/bekijkenWedstrijden/voor');
+        }
     }
 
     /**

@@ -20,7 +20,8 @@ function haalWedstrijdenOp(plaats, tijd){
 function verwijderWedstrijd(id){
   $.ajax({type : "GET",
                 url : site_url + "/wedstrijd/verwijder",
-                data : { id: id},
+                data : { id: id,
+                tijd : tijd},
                 success : function(result){
                   $('#mijnDialoogscherm').modal('hide')
                   haalWedstrijdenOp(plaats, tijd);
