@@ -105,8 +105,9 @@ class Wedstrijd extends CI_Controller
      * @see Wedstrijd_model::insert()
      * @see Wedstrijd_model::update()
      */
-    public function registreerReeks()
+    public function registreerReeks($tijd)
     {
+        $data['tijd'] = $tijd;
         $reeks = new stdClass();
         $reeks->id = html_escape($this->input->post('id'));
         $reeks->datum = html_escape($this->input->post('datum'));
@@ -129,7 +130,7 @@ class Wedstrijd extends CI_Controller
         $status = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
         $status->statusId = '4';
 
-        redirect('/wedstrijd/reeksenToevoegen/' . $reeks->wedstrijdId);
+        redirect('/wedstrijd/reeksenToevoegen/' . $reeks->wedstrijdId."/".$tijd);
     }
 
     /**
@@ -237,15 +238,16 @@ class Wedstrijd extends CI_Controller
      * Verwijdert het nieuwsartikel en toont opnieuw de lijst van nieuwsartikels.
      * @param $id van de te verwijderen nieuwsartikel
      */
-    public function verwijderReeks($id)
+    public function verwijderReeks($id, $tijd)
     {
         //$id = $this->input->get('id');
+        $data['tijd'] = $tijd;
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('reeks_model');
         $this->reeks_model->delete($id);
 
-        redirect("/wedstrijd/index");
+        redirect("/wedstrijd/bekijkenWedstrijden/".$tijd);
     }
 
     /**
@@ -329,8 +331,9 @@ class Wedstrijd extends CI_Controller
     * @see Afstand_model::getAllAfstanden()
     * @see maakReeks.php
     */
-    public function maakReeks($id)
+    public function maakReeks($id, $tijd)
     {
+        $data['tijd'] = $tijd;
         $data['titel'] = "Reeksen toevoegen";
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';

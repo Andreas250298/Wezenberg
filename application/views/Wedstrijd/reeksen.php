@@ -32,11 +32,11 @@ foreach ($reeksen as $reeks) {
         }
     }
     if (isset($reeks->id)) {
-        $lijstReeksen .= "<td>" . anchor('wedstrijd/verwijderReeks/' . $reeks->id, 'Reeks verwijderen', 'class="btn btn-danger"') . "</td></tr>";
+        $lijstReeksen .= "<td>" . anchor('wedstrijd/verwijderReeks/' . $reeks->id."/".$tijd, 'Reeks verwijderen', 'class="btn btn-danger"') . "</td></tr>";
     }
     $teller++;
 }
-    echo '<p>'.anchor('wedstrijd/maakReeks/' . $wedstrijdId, 'Reeks toevoegen', 'class="btn btn-success"').'
+    echo '<p>'.anchor('wedstrijd/maakReeks/' . $wedstrijdId."/".$tijd, 'Reeks toevoegen', 'class="btn btn-success"').'
   </p>';
 
 if ($reeksen != null) {
