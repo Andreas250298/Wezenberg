@@ -23,7 +23,7 @@ function verwijderWedstrijd(id){
                 data : { id: id},
                 success : function(result){
                   $('#mijnDialoogscherm').modal('hide')
-                  haalWedstrijdenOp(plaats);
+                  haalWedstrijdenOp(plaats, tijd);
                 },
                 error: function (xhr, status, error) {
                     alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
@@ -56,11 +56,17 @@ $(document).ready(function () {
 
 </script>
 <?php
-if (isset($gebruiker)) {
-    if ($gebruiker->soort == "trainer") {
-        echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken', 'class="btn btn-success"').'</p>';
+
+if ($tijd === "na"){
+    echo anchor('wedstrijd/bekijkenWedstrijden/voor',"<button type=\"button\" class=\"btn btn-primary mx-auto\">Toon afgelopen wedstrijden</button> ");
+    if (isset($gebruiker)) {
+        if ($gebruiker->soort == "trainer") {
+            echo anchor('wedstrijd/maakWedstrijd',"<button type=\"button\" class=\"btn btn-success mx-auto\">Nieuwe Wedstrijd aanmaken</button> ");
+        }
     }
-}
+  } else{
+    echo anchor('wedstrijd/bekijkenWedstrijden/na',"<button type=\"button\" class=\"btn btn-primary mx-auto\">Toon aanstaande wedstrijden</button> ");
+  }
 
 $plaatsen = [];
 
@@ -103,14 +109,7 @@ echo '<div class="form-check">
 
  echo ' <p>
         <div id="resultaat"></div>
-        </p>';
-
-if ($tijd === "na"){
-  echo anchor('wedstrijd/bekijkenWedstrijden/voor', 'Toon afgelopen wedstrijden', 'class="btn btn-primary"');
-} else{
-  echo anchor('wedstrijd/bekijkenWedstrijden/na', 'Toon aanstaande wedstrijden', 'class="btn btn-primary"');
-}
-      
+        </p>';      
 ?>
 <br/><br/>
 <p>

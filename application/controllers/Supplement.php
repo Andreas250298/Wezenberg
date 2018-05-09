@@ -360,7 +360,7 @@ class Supplement extends CI_Controller
 
         $data['titel'] = 'Error';
         $partials = array('hoofding' => 'main_header',
-          'inhoud' => 'SupplementPerZwemmer/error',
+          'inhoud' => 'error',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }

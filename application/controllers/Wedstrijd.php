@@ -70,13 +70,18 @@ class Wedstrijd extends CI_Controller
     public function registreer()
     {
         $wedstrijd = new stdClass();
-        $wedstrijd->id = $this->input->post('id');
-        $wedstrijd->plaats = $this->input->post('plaats');
-        $wedstrijd->naam = $this->input->post('naam');
-        $wedstrijd->beginDatum = $this->input->post('beginDatum');
-        $wedstrijd->eindDatum = $this->input->post('eindDatum');
-        $wedstrijd->laatsteInschrijvingDatum = $this->input->post('laatsteInschrijvingDatum');
-        $wedstrijd->beschrijving = $this->input->post('beschrijving');
+        $wedstrijd->id = html_escape($this->input->post('id'));
+        $wedstrijd->plaats = html_escape($this->input->post('plaats'));
+        $wedstrijd->naam = html_escape($this->input->post('naam'));
+        $wedstrijd->beginDatum = html_escape($this->input->post('beginDatum'));
+        $wedstrijd->eindDatum = html_escape($this->input->post('eindDatum'));
+        $wedstrijd->laatsteInschrijvingDatum = html_escape($this->input->post('laatsteInschrijvingDatum'));
+        $wedstrijd->beschrijving = html_escape($this->input->post('beschrijving'));
+
+        if ($wedstrijd->beginDatum > $wedstrijd->eindDatum || $wedstrijd->laatsteInschrijvingDatum >= $wedstrijd->beginDatum){
+            $message = "Zorg dat de begin datum niet verder ligt dan de eind datum, alsook moet de laatste inschrijving voor de begin datum liggen!";
+            return $this->error($message);
+        }
 
         $afstand = new stdClass();
         $afstand->naam = $this->input->post('afstand');
@@ -92,7 +97,7 @@ class Wedstrijd extends CI_Controller
         $status = $this->deelname_model->get($wedstrijd->id);
         $status->statusId = '4';
 
-        redirect('/wedstrijd/beheerWedstrijden');
+        redirect('/wedstrijd/bekijkenWedstrijden/na');
     }
 
     /**
@@ -103,12 +108,12 @@ class Wedstrijd extends CI_Controller
     public function registreerReeks()
     {
         $reeks = new stdClass();
-        $reeks->id = $this->input->post('id');
-        $reeks->datum = $this->input->post('datum');
-        $reeks->afstandId = $this->input->post('afstand');
-        $reeks->tijdstip = $this->input->post('tijdstip');
-        $reeks->slagId = $this->input->post('slag');
-        $reeks->wedstrijdId = $this->input->post('wedstrijdId');
+        $reeks->id = html_escape($this->input->post('id'));
+        $reeks->datum = html_escape($this->input->post('datum'));
+        $reeks->afstandId = html_escape($this->input->post('afstand'));
+        $reeks->tijdstip = html_escape($this->input->post('tijdstip'));
+        $reeks->slagId = html_escape($this->input->post('slag'));
+        $reeks->wedstrijdId = html_escape($this->input->post('wedstrijdId'));
         /*$afstand = new stdClass();
         $afstand->afstand = $this->input->post('afstand');*/
 
@@ -403,6 +408,22 @@ class Wedstrijd extends CI_Controller
 
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/resultaatToevoegen',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    /**
+     * Tonen van error
+     * @param message de boodschap die moet worden weergegeven
+     */
+    public function error($message){
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $data['message'] = $message;
+
+        $data['titel'] = 'Error';
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'error',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
