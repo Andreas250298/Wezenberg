@@ -1,9 +1,10 @@
 <?php
 $lijstReeksen = '';
+$teller = 1;
 foreach ($reeksen as $reeks) {
     $lijstReeksen .= '<tr>
   <td>'
-  .$reeks->id.
+  .$teller.
   '</td>
   <td>'
   .$reeks->datum.
@@ -26,10 +27,11 @@ foreach ($reeksen as $reeks) {
         }
     }
     if (isset($reeks->id)) {
-        $lijstReeksen .= "<td>" . anchor('wedstrijd/verwijderReeks/' . $reeks->id, 'Reeks verwijderen') . "</td></tr>";
+        $lijstReeksen .= "<td>" . anchor('wedstrijd/verwijderReeks/' . $reeks->id, 'Reeks verwijderen', 'class="btn btn-danger"') . "</td></tr>";
     }
+    $teller++;
 }
-    echo '<p>'.anchor('wedstrijd/maakReeks/' . $wedstrijdId, 'Reeks toevoegen').'
+    echo '<p>'.anchor('wedstrijd/maakReeks/' . $wedstrijdId, 'Reeks toevoegen', 'class="btn btn-success"').'
   </p>';
 
 if ($reeksen != null) {

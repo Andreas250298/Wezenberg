@@ -20,7 +20,7 @@ foreach ($wedstrijden as $wedstrijd) {
 }
 if (isset($gebruiker)) {
     if ($gebruiker->soort == "trainer") {
-        echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken').'</p>';
+        echo '<p>'.anchor('wedstrijd/maakWedstrijd', 'Nieuwe Wedstrijd aanmaken', 'class="btn btn-success"').'</p>';
     }
 }
 ?>
@@ -49,5 +49,5 @@ if (isset($gebruiker)) {
   </tbody>
 </table>
 <p>
-    <a id="terug" href="javascript:history.go(-1);">Terug</a>
+    <a id="terug" href="javascript:history.go(-1);" class="btn btn-primary">Terug</a>
 </p>

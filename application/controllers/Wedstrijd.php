@@ -124,7 +124,7 @@ class Wedstrijd extends CI_Controller
         $status = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
         $status->statusId = '4';
 
-        redirect('/wedstrijd/beheerWedstrijden');
+        redirect('/wedstrijd/reeksenToevoegen/' . $reeks->wedstrijdId);
     }
 
     /**

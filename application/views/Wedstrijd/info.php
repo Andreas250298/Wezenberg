@@ -1,11 +1,12 @@
 <?php
+$teller = 1;
 $lijstWedstrijden = "";
   echo "<h1 class='title'>" . $wedstrijd->naam . "</h1>";
   echo "<p>" . $wedstrijd->beschrijving . "</p>";
   if (isset($reeksen)) {
       foreach ($reeksen as $reeks) {
           $lijstWedstrijden .= "<tr><td>" .
-        $reeks->id . "</td><td>";
+        $teller . "</td><td>";
           foreach ($slagenPerReeks as $slag) {
               if (isset($slag->soort)) {
                   $lijstWedstrijden .= $slag->soort;
@@ -20,6 +21,7 @@ $lijstWedstrijden = "";
           }
 
           $lijstWedstrijden .= "</td><td>" . $reeks->tijdstip ."</td></tr>";
+          $teller++;
       }
   }
  if ($reeksen != null) {
