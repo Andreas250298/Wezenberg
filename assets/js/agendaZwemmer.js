@@ -98,12 +98,11 @@ $(document).ready(function () {
     haalSupplementenOp(week, jaar);
     haalActiviteitenOp(week, jaar);
 
-    $(".gebeurtenis").hide();
-
     $("table").on('click', '.event', function () {
         $(".gebeurtenis").hide();
         var id = $(this).attr("id");
         var klasse = $(this).closest("tr").attr("class");
+        $('#gebeurtenis-modal').modal('show');
         $("div." + id + "." + klasse).show();
       });
 });

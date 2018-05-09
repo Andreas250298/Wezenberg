@@ -119,10 +119,16 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
       </div>
     </div>
   </div>
+</div>
 
-  <div class="row">
-      <div class="col-sm-12">
-          <div class="text-left">
+  <div class="modal fade" id="gebeurtenis-modal" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Detailoverzicht</h4>
+              <button type="button" class="close" data-dismiss='modal'>&times;</button>
+            </div>
+            <div class="modal-body">
               <?php
                 $teller = 0;
                 if ($wedstrijden != null)
@@ -156,13 +162,12 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                 }
 
                 $teller = 0;
-                print_r($activiteiten);
                 if ($activiteiten != null)
                 {
                     foreach ($activiteiten as $activiteit)
                     {
                             echo "<div class='gebeurtenis " . $activiteit->andereActiviteit->beginDatum . " " . $activiteit->andereActiviteit->tijdstip . " ander" . $teller . "'>";
-                            echo "<span><b>" . $activiteit->andereActiviteit->naam . " ID: " . $activiteit->andereActiviteit->id . "</b></span><br />";
+                            echo "<span><b>" . $activiteit->andereActiviteit->naam . "</b></span><br />";
                             if ($activiteit->andereActiviteit->soortId == 1)
                             {
                               echo "Vertrek: " . zetOmNaarDDMMYYYY($activiteit->andereActiviteit->beginDatum) . "<br />";
@@ -176,9 +181,12 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                     }
                 }
               ;?>
-          </div>
-      </div>
-  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default btn-round btn-primary" data-dismiss="modal">Sluit</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="<?php echo base_url(); ?>/assets/js/agendaZwemmer.js" type="text/javascript"></script>

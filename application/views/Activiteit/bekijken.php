@@ -147,10 +147,10 @@ $uren = array('1' => "07:00", '2' => "08:00", '3' => "09:00", '4' => "10:00", '5
                           echo "Locatie: " . $activiteit->andereActiviteit->plaats . "<br />";
                           echo "Beschrijving: " . $activiteit->andereActiviteit->beschrijving . "<br /><br />";
                           echo '<p>' . anchor('activiteit/aanpassen/' . $activiteit->andereActiviteit->id, 'Aanpassen', 'class="btn btn-primary"') . " ";
-                          echo "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button></p>";
+                          echo "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round slide-trigger\"><i class=\"fas fa-times\"></i></button></p>";
                           echo "<p class='delete'>Bent u zeker dat u deze activiteit wilt verwijderen?<br />";
-                          echo "<button type='button' id='buttonSluiten' class='btn btn-default btn-round btn-primary btn-Terug'>Sluiten</button>";
-                          echo "<button type='button' id='buttonDelete' class='btn btn-default btn-round btn-danger'>Verwijder</button></p>";
+                          echo "<button type='button' class='buttonSluiten btn btn-default btn-round btn-primary btn-Terug'>Sluiten</button>";
+                          echo "<button type='button' class='buttonDelete btn btn-default btn-round btn-danger'>Verwijder</button></p>";
                           echo "</div>";
                           $teller++;
                   }

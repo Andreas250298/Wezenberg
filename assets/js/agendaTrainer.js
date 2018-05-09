@@ -46,19 +46,19 @@ $(document).ready(function () {
         $(".gebeurtenis").hide();
         var id = $(this).attr("id");
         var klasse = $(this).closest('tr').attr("class");
-	      $('#activiteit-modal').modal('show');
+	$('#activiteit-modal').modal('show');
         $("div." + id + "." + klasse).show();
       });
 
-      $(".modal-trigger").click(function() {
+      $(".slide-trigger").click(function() {
         $(".delete").slideDown();
       })
 
-      $("#buttonSluiten").click(function() {
+      $(".buttonSluiten").click(function() {
         $(".delete").slideUp();
       })
 
-      $("#buttonDelete").click(function(){
+      $(".buttonDelete").click(function(){
         activiteitId = $(this).closest('div').attr('id');
         verwijderActiviteit(activiteitId);
       })
