@@ -36,23 +36,23 @@ if ($reeksen != null) {
     echo "<div class=\"table-responsive\"><table class=\"table\">
   <thead>
     <tr>
-      <td>
+      <th>
         Reeks
-      </td>
-    <td>
+      </th>
+    <th>
       Datum
-    </td>
-    <td>
+    </th>
+    <th>
       Tijdstip
-    </td>
-    <td>
+    </th>
+    <th>
       Slag
-    </td>
-    <td>
+    </th>
+    <th>
       Afstand
-    </td>
-    <td>
-    </td>
+    </th>
+    <th>
+    </th>
     </tr>
   </thead>
   <tbody>
