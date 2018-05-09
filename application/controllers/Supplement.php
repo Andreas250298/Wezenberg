@@ -203,7 +203,7 @@ class Supplement extends CI_Controller
             $data['supplementenPerZwemmer'] = $this->supplementPerZwemmer_model->getSupplementenPerZwemmer($id);
         }
 
-        $this->load->view('supplement/ajax_zwemmer', $data);
+        $this->load->view('Supplement/ajax_zwemmer', $data);
     }
 
      /**
