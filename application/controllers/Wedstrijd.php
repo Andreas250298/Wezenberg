@@ -170,15 +170,39 @@ class Wedstrijd extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    public function haalAjaxOp_beheerWedstrijden(){
+        $plaats = $this->input->get('plaats');
+
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+
+        $this->load->model('wedstrijd_model');
+        $wedstrijdenZonderPlaats = $this->wedstrijd_model->toonWedstrijdenASC();
+        $data['wedstrijden'] = $wedstrijdenZonderPlaats;
+        $wedstrijden = [];
+
+        if ($plaats != 'Alle')
+        {
+            foreach($wedstrijdenZonderPlaats as $wedstrijd){
+             if ($wedstrijd->plaats === $plaats){
+                    array_push($wedstrijden, $wedstrijd);
+                }
+            }
+            $data['wedstrijden'] = $wedstrijden;
+        }  
+        
+        $this->load->view('Wedstrijd/ajax_bekijken', $data);
+    }
+
     /**
     * Hiermee verwijdert de trainer een wedstrijd
     * @param id De id van de aan te verwijderen wedstrijd
     * @see Authex::getGebruikerInfo()
     */
-    public function verwijder($id)
+    public function verwijder()
     {
+        $id = $this->input->get('id');
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
         $this->load->model('wedstrijd_model');
         $this->wedstrijd_model->delete($id);
 

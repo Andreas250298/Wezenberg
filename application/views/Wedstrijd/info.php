@@ -28,18 +28,18 @@ $lijstWedstrijden = "";
      echo "<div class=\"table-responsive\"><table class=\"table\">
   <thead>
     <tr>
-      <td>
+      <th>
         Reeksnummer
-      </td>
-      <td>
+      </th>
+      <th>
         Slag
-      </td>
-    <td>
+      </th>
+    <th>
       Afstand
-    </td>
-    <td>
+    </th>
+    <th>
       Tijdstip
-    </td>
+    </th>
     </tr>
   </thead>
   <tbody>

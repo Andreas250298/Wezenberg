@@ -132,6 +132,29 @@ class Wedstrijd_model extends CI_Model
      */
     public function delete($id)
     {
+        $this->db->where('wedstrijdId', $id);
+        $reeksen = $this->db->get('reeks')->result();
+
+        foreach($reeksen as $reeks){
+                $this->db->where('reeksId', $reeks->id);
+                $deelnames =  $this->db->get('deelname')->result();
+
+            foreach($deelnames as $deelname){
+                    $this->db->where('deelnameId',$deelname->id);
+                    $rondeResultaten = $this->db->get('rondeResultaat')->result();
+
+                    foreach($rondeResultaten as $rondeResultaat){
+                        $this->db->where('id', $rondeResultaat->id);
+                        $this->db->delete('rondeResultaat');
+                    }
+                    
+                    $this->db->where('id',$deelname->id);
+                    $this->db->delete('deelname');
+            }
+            $this->db->where('id', $reeks->id);
+            $this->db->delete('reeks');
+        }
+
         $this->db->where('id', $id);
         $this->db->delete('wedstrijd');
     }
