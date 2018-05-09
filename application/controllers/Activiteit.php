@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @class Activiteit
  * @brief Controller-klasse voor Activiteit
  *
- * Controller-klasse met methoden die worden gebruikt bij het tonen en beren van activiteiten.
+ * Controller-klasse met methoden die worden gebruikt bij het tonen en beheren van activiteiten.
  */
 class Activiteit extends CI_Controller {
   /**

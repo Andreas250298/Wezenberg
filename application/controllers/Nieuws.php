@@ -4,6 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @class Nieuws
  * @brief Controller-klasse voor Nieuws
+ *
+ * Controller-klasse met methoden die worden gebruikt bij het tonen en beheren van nieuwsartikels.
  */
 class Nieuws extends CI_Controller
 {
@@ -19,7 +21,9 @@ class Nieuws extends CI_Controller
     }
 
     /**
-     * Toont een lijst van alle nieuwsartikelen.
+     * Toont een lijst van nieuwsartikels startend vanaf een bepaalde rij (standaard de 0ste rij).
+     *
+     * @param startrij de rij dat moet worden getoond.
      */
     public function index($startrij = 0)
     {
@@ -100,7 +104,7 @@ class Nieuws extends CI_Controller
 
     /**
      * Toont een formulier met alle gegevens ingevuld van het gekoze nieuwsartikel.
-     * @param $id van het aangeduide nieuwsartikel
+     * @param id het id van het te wijzigen nieuwsartikel.
      */
     public function wijzig($id)
     {
@@ -118,7 +122,7 @@ class Nieuws extends CI_Controller
 
     /**
      * Verwijdert het nieuwsartikel en toont opnieuw de lijst van nieuwsartikels.
-     * @param $id van de te verwijderen nieuwsartikel
+     * @param id het id van de te verwijderen nieuwsartikel.
      */
     public function verwijder()
     {
@@ -136,7 +140,7 @@ class Nieuws extends CI_Controller
 
     /**
      * Toont een bepaald artikel volledig op een aparte pagina.
-     * @param $d van het te bekijken nieuwsartikel
+     * @param id het id van het te bekijken nieuwsartikel.
      */
     public function bekijk($id)
     {
