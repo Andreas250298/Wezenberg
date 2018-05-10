@@ -121,7 +121,7 @@ nav{
 .news span.news-left {
     padding-right: 18px;
 }
- 
+
 .news span {
     color: #333;
     font-size: 12px;
@@ -201,3 +201,9 @@ nav{
 }
 
 /*EIND CSS ACTIVITEIT BEKIJKEN.PHP*/
+
+/*CSS ZWEMMER_INFO.PHP*/
+.bio {
+  text-align: justify;
+}
+/*EIND CSS ZWEMMER_INFO.PHP*/
