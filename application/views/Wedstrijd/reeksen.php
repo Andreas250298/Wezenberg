@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file Wedstrijd/reeksen.php
+ *
+ * View waarin alle reeksen voor een bepaalde wedstrijd kan worden bekeken
+ */
 $lijstReeksen = '';
 $teller = 1;
 foreach ($reeksen as $reeks) {
@@ -27,34 +32,34 @@ foreach ($reeksen as $reeks) {
         }
     }
     if (isset($reeks->id)) {
-        $lijstReeksen .= "<td>" . anchor('wedstrijd/verwijderReeks/' . $reeks->id, 'Reeks verwijderen', 'class="btn btn-danger"') . "</td></tr>";
+        $lijstReeksen .= "<td>" . anchor('wedstrijd/verwijderReeks/' . $reeks->id."/".$tijd, 'Reeks verwijderen', 'class="btn btn-danger"') . "</td></tr>";
     }
     $teller++;
 }
-    echo '<p>'.anchor('wedstrijd/maakReeks/' . $wedstrijdId, 'Reeks toevoegen', 'class="btn btn-success"').'
+    echo '<p>'.anchor('wedstrijd/maakReeks/' . $wedstrijdId."/".$tijd, 'Reeks toevoegen', 'class="btn btn-success"').'
   </p>';
 
 if ($reeksen != null) {
     echo "<div class=\"table-responsive\"><table class=\"table\">
   <thead>
     <tr>
-      <td>
+      <th>
         Reeks
-      </td>
-    <td>
+      </th>
+    <th>
       Datum
-    </td>
-    <td>
+    </th>
+    <th>
       Tijdstip
-    </td>
-    <td>
+    </th>
+    <th>
       Slag
-    </td>
-    <td>
+    </th>
+    <th>
       Afstand
-    </td>
-    <td>
-    </td>
+    </th>
+    <th>
+    </th>
     </tr>
   </thead>
   <tbody>
@@ -63,4 +68,4 @@ if ($reeksen != null) {
 } else {
     echo "<p>Er zijn voor deze wedstrijd nog geen reeksen</p>";
 }
-echo anchor('Wedstrijd/index', 'Terug', 'class="btn btn-primary"');
+echo anchor('Wedstrijd/bekijkenWedstrijden/' .$tijd, 'Terug', 'class="btn btn-primary"');

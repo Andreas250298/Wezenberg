@@ -1,5 +1,10 @@
 <?php
-
+/**
+* @class Nieuws_model
+* @brief Model-klasse voor Nieuws
+*
+* Model-klasse die alle methodes bevat om te interageren met de Nieuws tabel
+*/
 class Nieuws_model extends CI_Model
 {
     /**
@@ -11,7 +16,7 @@ class Nieuws_model extends CI_Model
     }
 
     /**
-     * Retouneert het nieuwsartikel met het meegegeven id uit de tabel nieuwsArtikel.
+     * Retouneert het nieuwsartikel met het meegegeven id uit de tabel nieuwsArtikel
      * @param $id het id van het record dat opgevraagd wordt
      * @return het opgevraagde record
      */
@@ -23,7 +28,7 @@ class Nieuws_model extends CI_Model
     }
 
     /**
-    * Opvragen van alle nieuws artikels uit de database.
+    * Opvragen van alle nieuws artikels uit de database
     * \return De opgevraagde records
     */
     public function getAllNieuwsArtikels(){
@@ -38,9 +43,9 @@ class Nieuws_model extends CI_Model
       return $query->result();
     }
     /**
-     * Creeërt een nieuw nieuwsartikel en voegt die toe aan de databank.
+     * Creeërt een nieuw nieuwsartikel en voegt die toe aan de databank
      * @param $nieuwsArtikel een nieuwsartikel object
-     * @return het id van het juist aangemaakte nieuwsartikel.
+     * @return het id van het juist aangemaakte nieuwsartikel
      */
     public function insert($nieuwsArtikel){
         $this->db->insert('nieuwsArtikel', $nieuwsArtikel);
@@ -48,7 +53,7 @@ class Nieuws_model extends CI_Model
     }
 
     /**
-     * Voert de aanpassingen aan een bepaald artikel door aan de databank.
+     * Voert de aanpassingen aan een bepaald artikel door aan de databank
      * @param type $nieuwsArtikel een nieuwsartikel object
      */
     public function update($nieuwsArtikel){
@@ -56,7 +61,7 @@ class Nieuws_model extends CI_Model
         $this->db->update('nieuwsArtikel', $nieuwsArtikel);
     }
     /**
-     * Verwijdert een nieuwsartikel uit de databank.
+     * Verwijdert een nieuwsartikel uit de databank
      * @param $id van het artikel dat moet worden verwijderd
      */
     public function delete($id){
@@ -64,7 +69,7 @@ class Nieuws_model extends CI_Model
         $this->db->delete('nieuwsArtikel');
     }
     /**
-      * opvragen van het aantal records.
+      * opvragen van het aantal records
       */
     function getCountAll() {
         return $this->db->count_all('nieuwsArtikel');

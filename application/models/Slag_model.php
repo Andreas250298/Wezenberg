@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @class Slag_model
  * @brief Model-klasse voor slagen
@@ -18,7 +17,7 @@ class Slag_model extends CI_Model
 
     /**
      * Een slag ophalen uit de database
-     * @param $id Het id van de reeks waar de slag aan gekoppeld is
+     * @param id Het id van de reeks waar de slag aan gekoppeld is
      * @return De opgevraagde record
      */
     public function get($id)

@@ -23,7 +23,7 @@ class Authex {
 
     /**
      * Activeert een gebruiker.
-     * @see gebruiker_model::activeer()
+     * @see Gebruiker_model::activeer()
      */
     function activeer($id) {
         // nieuwe gebruiker activeren
@@ -34,7 +34,7 @@ class Authex {
 
     /**
      * Geeft een gebruiker object als gebruiker aangemeld is.
-     * @see gebruiker_model::get()
+     * @see Gebruiker_model::get()
      */
     function getGebruikerInfo() {
         $CI = & get_instance();
@@ -89,7 +89,7 @@ class Authex {
 
     /**
      * Voegt een nieuwe zwemmer toe met de ingegeven waarden.
-     * @see gebruiker_model::voegToe()
+     * @see Gebruiker_model::voegToe()
      * @param email Email van de gebruiker.
      * @param wachtwoord Wachtwoord van de gebruiker.
      * @param naam Naam van de gebruiker.
@@ -112,7 +112,7 @@ class Authex {
 
     /**
      * Wijzigt de waarden van een bestaande gebruiker.
-     * @see gebruiker_model::update()
+     * @see Gebruiker_model::update()
      * @param email Email van de gebruiker.
      * @param wachtwoord Wachtwoord van de gebruiker.
      * @param naam Naam van de gebruiker.

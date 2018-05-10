@@ -1,4 +1,9 @@
 <?php
+/**
+ *\file Supplement/ajax_zwemmer.php
+ *
+ * AJAX view die wordt opgevraagd wanneer er een ander item in de combobox wordt aangeduid.
+ */
 $supplementIds = [];
 
 if ($supplementenPerZwemmer == null) {

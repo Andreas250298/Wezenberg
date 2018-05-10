@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file SupplementPerZwemmer/ajax_bekijken.php
+ *
+ * ÂJAX view dat wordt opgeroepen om supplementen te tonen van een zwemmer.
+ */
 if ($supplementenPerAlleZwemmers != NULL){
 $namen = [];
 foreach ($supplementenPerAlleZwemmers as $supplementPerZwemmer) {

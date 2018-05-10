@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file Wedstrijd/info.php
+ *
+ * View waarin informatie te zien is over een bepaalde wedstrijd.
+ */
 $teller = 1;
 $lijstWedstrijden = "";
   echo "<h1 class='title'>" . $wedstrijd->naam . "</h1>";
@@ -28,18 +33,18 @@ $lijstWedstrijden = "";
      echo "<div class=\"table-responsive\"><table class=\"table\">
   <thead>
     <tr>
-      <td>
+      <th>
         Reeksnummer
-      </td>
-      <td>
+      </th>
+      <th>
         Slag
-      </td>
-    <td>
+      </th>
+    <th>
       Afstand
-    </td>
-    <td>
+    </th>
+    <th>
       Tijdstip
-    </td>
+    </th>
     </tr>
   </thead>
   <tbody>
@@ -49,4 +54,4 @@ $lijstWedstrijden = "";
  } else {
      echo "<p>Er zijn voor deze wedstrijd nog geen reeksen</p>";
  }
-      echo anchor('Wedstrijd/index', 'Terug', 'class="btn btn-primary"');
+      echo anchor('Wedstrijd/bekijkenWedstrijden/'. $tijd, 'Terug', 'class="btn btn-primary"');

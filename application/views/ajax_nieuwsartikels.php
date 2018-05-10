@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file ajax_nieuwsartikels.php
+ *
+ * AJAX view waarin men nieuwsartikels kan zien op de startpagina
+ */
 foreach ($nieuwsArtikels as $artikel) {
     if ($artikel->foto != null) {
         $fotoLocatie = base_url($artikel->foto);

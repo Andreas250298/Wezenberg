@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file main_footer.php
+ *
+ * View die een deel is van de main_master en toond de footer die daar onderaan aanwezig is
+ */
 $link = array('class' => 'nav-link');
 ?>
 <!--Navigatiebalk-->
@@ -12,14 +17,14 @@ $link = array('class' => 'nav-link');
             </div>
             <div class="text-center col-12">
                 <span class="navbar-text text-center">
-                    &COPY; Andreas Aerts, Bols Jordi, De Coninck Mattias, De Pauw Sacha & D'Haene Florian 
+                    &COPY; Andreas Aerts, Bols Jordi, De Coninck Mattias, De Pauw Sacha & D'Haene Florian
                 </span>
             </div>
             <div class="text-center col-12">
                 <span class="navbar-text text-center">
                     Verantwoordelijke : <?php echo $paginaVerantwoordelijke; ?>
                 </span>
-            </div>    
-        </div>   
+            </div>
+        </div>
     </div>
 </nav>

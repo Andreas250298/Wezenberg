@@ -301,7 +301,7 @@ class Gebruiker extends CI_Controller
 
     /**
     * Zorgt ervoor dat een bepaalde melding wordt getoond als 'gezien'.
-    * @see meldingPerGebruiker_model::getAllPerGebruiker()
+    * @see MeldingPerGebruiker_model::getAllPerGebruiker()
     * @see Authex::getGebruikerInfo()
     */
     public function haalAjaxOp_MaakMeldingGezien()

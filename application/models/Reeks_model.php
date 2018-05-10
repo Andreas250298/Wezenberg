@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @class Reeks_model
  * @brief Model-klasse voor reeksen
@@ -18,7 +17,7 @@ class Reeks_model extends CI_Model
 
     /**
      * Een reeks ophalen uit de database
-     * @param $id Het id van de reeks waar de slag aan gekoppeld is
+     * @param id Het id van de reeks waar de slag aan gekoppeld is
      * @return De opgevraagde record
      */
     public function get($id)
@@ -60,7 +59,7 @@ class Reeks_model extends CI_Model
 
     /**
      * Een afstand van een reeks opvragen
-     * @param $id De id van de wedstrijd die reeksen heeft
+     * @param id De id van de wedstrijd die reeksen heeft
      * @return De afstand van de reeks
      */
     public function getAfstandenPerReeks($id)
@@ -77,7 +76,7 @@ class Reeks_model extends CI_Model
 
     /**
      * Een slag van een reeks opvragen
-     * @param $id De id van de wedstrijd die reeksen heeft
+     * @param id Het id van de wedstrijd die reeksen heeft
      * @return De slag van de reeks
      */
     public function getSlagenPerReeks($id)
@@ -94,8 +93,8 @@ class Reeks_model extends CI_Model
 
     /**
      * Een reeks toevoegen aan de database
-     * @param $reeks De reeks die moet toegevoegd worden
-     * @return De insert functie van de wedstrijd
+     * @param reeks De reeks die moet toegevoegd worden
+     * @return Het insert id van de wedstrijd
      */
     public function insert($reeks)
     {
@@ -105,7 +104,7 @@ class Reeks_model extends CI_Model
 
     /**
      * Een reeks wijzigen in de database
-     * @param $reeks De reeks die moet gewijzigd worden
+     * @param reeks De reeks die moet gewijzigd worden
      */
     public function update($reeks)
     {
@@ -115,7 +114,7 @@ class Reeks_model extends CI_Model
 
     /**
      * Een reeks verwijderen uit de database
-     * @param $id Het id van de reeks die moet verwijderd worden
+     * @param id Het id van de reeks die moet verwijderd worden
      */
     public function delete($id)
     {
