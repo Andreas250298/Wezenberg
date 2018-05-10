@@ -29,14 +29,15 @@ class MeldingPerGebruiker_model extends CI_Model
     */
     public function getAllPerGebruiker($gebruikerId){
         $this->db->where('gebruikerId', $gebruikerId);
-        $query = $this->db->get('meldingPerGebruiker');
+        $this->db->where('gezien', 0);
+        $query = $this->db->get('meldingpergebruiker');
         
         $meldingenPerGebruiker = $query->result();
 
         $this->load->model('melding_model');
 
         foreach ($meldingenPerGebruiker as $meldingPerGebruiker) {
-            $meldingPerGebruiker->melding = $this->melding_model->getOrderdByVerzondenDatum($meldingPerGebruiker->id);
+            $meldingPerGebruiker->melding = $this->melding_model->get($meldingPerGebruiker->meldingId);
         }
         
         return $meldingenPerGebruiker;

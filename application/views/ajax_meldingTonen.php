@@ -16,23 +16,27 @@
 <?php
 $knopGezien = form_button("knopGezien", '<i class="fas fa-eye"></i>', array('class' => 'btn', 'title' => 'Deze melding is gezien'));
 
-
-foreach ($meldingenPerGebruiker as $meldingPerGebruiker) {
-    if ($meldingPerGebruiker->gezien != 0) {
-        $meldingGezien = 'melding-gezien';
-    } else {
-        $meldingGezien = '';
-    }
-    ?>
-    <div class="melding <?php echo $meldingGezien; ?>">
-        <?php
-        echo $meldingPerGebruiker->melding->boodschap;
-        if ($meldingPerGebruiker->gezien == 0) {
-            echo anchor('', $knopGezien, array('class' => 'meldingGezien', 'data-id' => $meldingPerGebruiker->id));
+if (count($meldingenPerGebruiker) != 0) {
+    foreach ($meldingenPerGebruiker as $meldingPerGebruiker) {
+        if ($meldingPerGebruiker->gezien != 0) {
+            $meldingGezien = 'melding-gezien';
+        } else {
+            $meldingGezien = '';
         }
         ?>
-    </div>
+        <div class="melding <?php echo $meldingGezien; ?>">
+            <?php
+            echo $meldingPerGebruiker->melding->boodschap;
+            if ($meldingPerGebruiker->gezien == 0) {
+                echo anchor('', $knopGezien, array('class' => 'meldingGezien', 'data-id' => $meldingPerGebruiker->id));
+            }
+            ?>
+        </div>
 
-    <?php
+        <?php
+    }
+}
+else{
+    echo'<div>Geen meldingen</div>';
 }
 ?>

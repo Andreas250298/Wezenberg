@@ -21,14 +21,6 @@ class Melding_model extends CI_Model
         $query = $this->db->get('melding');
         return $query->row();
     }
-
-    public function getOrderdByVerzondenDatum($id)
-    {
-        $this->db->order_by('verzondenDatum', 'asc');
-        $this->db->where('id', $id);
-        $query = $this->db->get('melding');
-        return $query->row();
-    }
     
     /**
     * Opvragen van alle meldingen van een bepaalde gebruiker uit de database.
@@ -36,7 +28,6 @@ class Melding_model extends CI_Model
     * \return De opgevraagde meldingen
     */
     public function getAll(){
-        /*$this->db->where('id', $gebruikerId);*/
         $query = $this->db->get('melding');
         return $query->result();
     }
