@@ -40,10 +40,24 @@ class Gebruiker_model extends CI_Model
             } else {
               return null;
             }
-
         } else {
             return null;
         }
+    }
+    
+    public function getActieveGebruikers()
+    {
+        $this->db->where('status', '1');
+        $query = $this->db->get('gebruiker');
+        return $query->result();
+    }
+    
+    public function getActieveTrainers()
+    {
+        $this->db->where('soort', 'trainer');
+        $this->db->where('status', '1');
+        $query = $this->db->get('gebruiker');
+        return $query->result();
     }
 
     public function getGebruikerMetWachtwoord($email, $wachtwoord)
