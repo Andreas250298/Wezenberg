@@ -13,6 +13,7 @@
 
 
 $lijstWedstrijden = '';
+$lijstAfgelopenWedstrijden = '';
 $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Inschrijven');
 $attributen = array('id' => 'mijnFormulier',
     'class' => 'form-inline my2 my-lg0',
@@ -21,7 +22,8 @@ $attributen = array('id' => 'mijnFormulier',
 $stat = "";
 
 foreach ($wedstrijden as $wedstrijd) {
-    $lijstWedstrijden .= '<tr>
+    if ($wedstrijd->beginDatum > date("Y-m-d")) {
+        $lijstWedstrijden .= '<tr>
     <td>'
     .anchor('Wedstrijd/info/' . $wedstrijd->id."/na", $wedstrijd->naam).
     '</td>
@@ -35,47 +37,74 @@ foreach ($wedstrijden as $wedstrijd) {
     .$wedstrijd->eindDatum.
     '</td>';
 
-    if (isset($status)) {
-        foreach ($status as $deel) {
-            if (isset($deel->naam)) {
-                $stat = $deel->naam;
+        if (isset($status)) {
+            foreach ($status as $deel) {
+                if (isset($deel->naam)) {
+                    $stat = $deel->naam;
+                }
             }
+        } else {
+            $stat = "open";
         }
-    } else {
-        $stat = "open";
-    }
-    $lijstWedstrijden .= "<td>" . $stat . "</td>";
+        $lijstWedstrijden .= "<td>" . $stat . "</td>";
 
-    if ($stat == "open") {
-        $lijstWedstrijden .= '<td>'.
+        if ($stat == "open") {
+            $lijstWedstrijden .= '<td>'.
   form_submit($dataSubmit);
-        '</td>';
+            '</td>';
+        }
+        $lijstWedstrijden .= "</tr>";
+    } else {
+        $lijstAfgelopenWedstrijden .= '<tr>
+  <td>'
+  .anchor('Wedstrijd/info/' . $wedstrijd->id."/na", $wedstrijd->naam).
+  '</td>
+  <td>'
+  .$wedstrijd->plaats.
+  '</td>
+  <td>'
+  .$wedstrijd->beginDatum.
+  '</td>
+  <td>'
+  .$wedstrijd->eindDatum.
+  '</td>';
+
+        if (isset($status)) {
+            foreach ($status as $deel) {
+                if (isset($deel->naam)) {
+                    $stat = "afgelopen";
+                }
+            }
+        } else {
+            $stat = "afgelopen";
+        }
+        $lijstAfgelopenWedstrijden .= "<td>" . $stat . "</td></tr>";
     }
-    $lijstWedstrijden .= "</tr>";
 }
 ?>
 <h2 class="startTitel">Open inschrijvingen</h2>
+<div class="table-responsive">
 <table class="table">
   <?php echo form_open('Wedstrijd/inschrijven', 'class="form-group"', $attributen);?>
   <thead>
     <tr>
-      <td>
+      <th>
         Naam
-      </td>
-    <td>
+      </th>
+    <th>
       Plaats
-    </td>
-    <td>
+    </th>
+    <th>
       Start
-    </td>
-    <td>
+    </th>
+    <th>
       Einde
-    </td>
-    <td>
+    </th>
+    <th>
       Status
-    </td>
-    <td>
-    </td>
+    </th>
+    <th>
+    </th>
     </tr>
   </thead>
   <tbody>
@@ -85,9 +114,36 @@ foreach ($wedstrijden as $wedstrijd) {
   </tbody>
   <?php echo form_close();?>
 </table>
-
+</div>
 <h2 class="startTitel">Voorbije inschrijvingen</h2>
-
+<div class="table-responsive">
+<table class="table">
+<thead>
+  <tr>
+    <th>
+      Naam
+    </th>
+  <th>
+    Plaats
+  </th>
+  <th>
+    Start
+  </th>
+  <th>
+    Einde
+  </th>
+  <th>
+    Status
+  </th>
+  </tr>
+</thead>
+<tbody>
+  <?php
+  echo $lijstAfgelopenWedstrijden;
+  ?>
+</tbody>
+</table>
+</div>
 <p>
     <a id="terug" href="javascript:history.go(-1);">Terug</a>
 </p>
