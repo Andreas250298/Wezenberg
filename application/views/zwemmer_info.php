@@ -9,7 +9,7 @@
 $dt = new DateTime;
 $jaar = $dt->format('o');
 $geboortedatum = explode("-", $zwemmer->geboortedatum);
-$leeftijd = date_diff(date_create($geboortedatum[0]), date_create('now'))->y;
+$leeftijd = $jaar - $geboortedatum[0];
 $disciplines = "100m vlinderslag";
 ?>
 
@@ -74,20 +74,19 @@ $disciplines = "100m vlinderslag";
             <h5>Laatste resultaten</h5>
             <?php
                 if ($afgelopenWedstrijden == null) {
-                  echo "Geen recente wedstrijden";
+                    echo "Geen recente wedstrijden";
                 } else {
-                  $teller = 0;
-                    foreach ($afgelopenWedstrijden as $afgelopen)
-                    {
-                      if ($teller < 5) {
-                        $resultaat = end($afgelopen->resultaat);
+                    $teller = 0;
+                    foreach ($afgelopenWedstrijden as $afgelopen) {
+                        if ($teller < 5) {
+                            $resultaat = end($afgelopen->resultaat);
 
-                        echo "<p><b>" . zetOmNaarDDMMYYYY($afgelopen->reeks->datum) . "</b><br />"
+                            echo "<p><b>" . zetOmNaarDDMMYYYY($afgelopen->reeks->datum) . "</b><br />"
                         . $resultaat->naam . "<br/>" . $afgelopen->wedstrijd->naam . "<br />"
                         . "Eindplaats: " . $resultaat->eindRank . "<sup>e</sup> in " . $resultaat->tijdReeks . "<br />"
                         . $afgelopen->afstand->afstand . " " . $afgelopen->slag->soort . "</p><br />";
-                      }
-                      $teller++;
+                        }
+                        $teller++;
                     }
                 }
             ;?>
