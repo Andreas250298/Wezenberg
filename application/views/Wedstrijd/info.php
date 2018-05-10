@@ -54,4 +54,4 @@ $lijstWedstrijden = "";
  } else {
      echo "<p>Er zijn voor deze wedstrijd nog geen reeksen</p>";
  }?>
- <a id="terug" href="javascript:history.go(-1);">Terug</a>
+ <a id="terug" href="javascript:history.go(-1);" class="btn btn-primary">Terug</a>
