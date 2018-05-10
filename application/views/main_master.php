@@ -1,3 +1,10 @@
+<?php
+/**
+ * @file main_master.php
+ *
+ * View waarop alles wordt getoond. het brengt de main_footer, de main_header en de te tonen view samen en maakt er een van.
+ */
+ ?>
 <!DOCTYPE html>
 <html lang="nl">
 

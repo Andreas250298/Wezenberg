@@ -40,22 +40,26 @@ $(document).ready(function () {
     var activiteitId = "";
 
     haalActiviteitenOp(week, jaar);
-
-    $(".gebeurtenis").hide();
+    $(".delete").slideUp();
 
     $("table").on('click', '.event', function () {
         $(".gebeurtenis").hide();
         var id = $(this).attr("id");
         var klasse = $(this).closest('tr').attr("class");
+	$('#activiteit-modal').modal('show');
         $("div." + id + "." + klasse).show();
       });
 
-      $(".modal-trigger").click(function() {
-        activiteitId = $(this).closest('div').attr('id');
-        $('#mijnDialoogscherm').modal('show');
+      $(".slide-trigger").click(function() {
+        $(".delete").slideDown();
       })
 
-      $("#buttonDelete").click(function(){
+      $(".buttonSluiten").click(function() {
+        $(".delete").slideUp();
+      })
+
+      $(".buttonDelete").click(function(){
+        activiteitId = $(this).closest('div').attr('id');
         verwijderActiviteit(activiteitId);
       })
 

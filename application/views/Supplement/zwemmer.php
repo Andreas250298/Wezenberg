@@ -1,3 +1,10 @@
+<?php
+/**
+ *\file Supplement/zwemmer.php
+ *
+ * View waarin men supplementen kan bekijken per zwemmer
+ */
+ ?>
 <script>
 var supplementId = 0;
 

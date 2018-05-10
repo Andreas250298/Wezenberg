@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file main_header.php
+ *
+ * View die een deel is van de main_master en toond de header die daar onderaan aanwezig is
+ */
 $link = array('class' => 'nav-link');
 
 $dt = new DateTime;
@@ -79,7 +84,7 @@ $jaar = $dt->format('Y');
                     <?php echo anchor('gebruiker/toonZwemmers', 'Zwemmers', $link); ?>
                 </li>
                 <li class="nav-item">
-                    <?php echo anchor('wedstrijd/', 'Wedstrijden', $link); ?>
+                    <?php echo anchor('wedstrijd/bekijkenWedstrijden/na', 'Wedstrijden', $link); ?>
                 </li>
                 <li class="nav-item">
                     <?php echo anchor('trainingscentrum/', 'Over ons', $link); ?>
@@ -115,7 +120,7 @@ $jaar = $dt->format('Y');
                                 <?php echo anchor('wedstrijd/inschrijvingen', 'Inschrijvingen', $link); ?>
                             </li>
                             <li class="nav-item">
-                                <?php echo anchor('gebruiker/account/' . $gebruiker->id, $gebruiker->naam, $link); ?>
+                                <?php echo anchor('gebruiker/toonZwemmerInfo/' . $gebruiker->id, $gebruiker->naam, $link); ?>
                             </li>
                             <li class="nav-item">
                                 <?php echo anchor('home/meldAf', 'Uitloggen', 'class="nav-link"'); ?>

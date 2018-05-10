@@ -1,11 +1,11 @@
 <?php
 /**
- * @file inschrijvingen.php
- * 
- * View waarop de zwemmer .
+ * @file Wedstrijd/inschrijvingen.php
+ *
+ * View waarop de zwemmer zich kan inschrijven.
 
  * - $wedstrijd-objecten waarvoor hij zich nog kan inschrijven.
- * 
+ *
  * Als je als trainer bent ingelogd krijg je ook te zien:
  * - Extra menu opties om bepaalde functionaliteiten te beheren.
  */
@@ -23,7 +23,7 @@ $stat = "";
 foreach ($wedstrijden as $wedstrijd) {
     $lijstWedstrijden .= '<tr>
     <td>'
-    .anchor('Wedstrijd/info/' . $wedstrijd->id, $wedstrijd->naam).
+    .anchor('Wedstrijd/info/' . $wedstrijd->id."/na", $wedstrijd->naam).
     '</td>
     <td>'
     .$wedstrijd->plaats.

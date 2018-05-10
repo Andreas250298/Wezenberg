@@ -1,5 +1,10 @@
 <?php
-
+/**
+* @class Melding_model
+* @brief Model-klasse voor meldingen
+*
+* Model-klasse die alle methodes bevat om te interageren met de model tabel
+*/
 class Melding_model extends CI_Model
 {
     /**
@@ -12,7 +17,7 @@ class Melding_model extends CI_Model
 
     /**
      * Retouneert een melding met het meegegeven id uit de tabel melding.
-     * @param $id het id van het record dat opgevraagd wordt
+     * @param id het id van het record dat opgevraagd wordt
      * @return het opgevraagde record
      */
     public function get($id)
@@ -21,11 +26,18 @@ class Melding_model extends CI_Model
         $query = $this->db->get('melding');
         return $query->row();
     }
-    
+
+    public function getOrderdByVerzondenDatum($id)
+    {
+        $this->db->order_by('verzondenDatum', 'asc');
+        $this->db->where('id', $id);
+        $query = $this->db->get('melding');
+        return $query->row();
+    }
+
     /**
-    * Opvragen van alle meldingen van een bepaalde gebruiker uit de database.
-    * @param $gebruikerId een gebruiker object
-    * \return De opgevraagde meldingen
+    * Opvragen van alle meldingen van een bepaalde gebruiker uit de database
+    * @return De opgevraagde meldingen
     */
     public function getAll(){
         $query = $this->db->get('melding');
@@ -33,9 +45,9 @@ class Melding_model extends CI_Model
     }
 
     /**
-     * Creeërt een nieuwe melding en voegt die toe aan de databank.
+     * Creeërt een nieuwe melding en voegt die toe aan de databank
      * @param $melding een melding object
-     * @return het id van het juist aangemaakte melding.
+     * @return het id van het juist aangemaakte melding
      */
     public function insert($melding){
         $this->db->insert('melding', $melding);
@@ -43,7 +55,7 @@ class Melding_model extends CI_Model
     }
 
     /**
-     * Voert de aanpassingen aan een bepaalde melding door aan de databank.
+     * Voert de aanpassingen aan een bepaalde melding door aan de databank
      * @param type $melding een melding object
      */
     public function update($melding){
@@ -51,7 +63,7 @@ class Melding_model extends CI_Model
         $this->db->update('melding', $melding);
     }
     /**
-     * Verwijdert een melding uit de databank.
+     * Verwijdert een melding uit de databank
      * @param $id van de melding dat moet worden verwijderd
      */
     public function delete($id){

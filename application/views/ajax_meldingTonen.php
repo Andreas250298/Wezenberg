@@ -1,3 +1,10 @@
+<?php
+/**
+ * @file ajax_meldingTonen.php
+ *
+ * AJAX view waarin men meldingen kan tonen
+ */
+ ?>
 <style>
     .melding{
         margin: 5px 0px ;

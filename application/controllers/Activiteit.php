@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @class Activiteit
  * @brief Controller-klasse voor Activiteit
  *
- * Controller-klasse met methoden die worden gebruikt bij het tonen en beren van activiteiten.
+ * Controller-klasse met methoden die worden gebruikt bij het tonen en beheren van activiteiten.
  */
 class Activiteit extends CI_Controller {
   /**
@@ -19,9 +19,9 @@ class Activiteit extends CI_Controller {
 
   /**
    * Haalt alle activiteiten op via activiteitPerGebruiker_model en toont deze in de view bekijken.php
-   *\see Authex::getGebruikerInfo()
-   *\see activiteitPerGebruiker_model::getInformatieActiviteiten()
-   *\see bekijken.php
+   * @see Authex::getGebruikerInfo()
+   * @see ActiviteitPerGebruiker_model::getInformatieActiviteiten()
+   * @see bekijken.php
    * @param week De week om te tonen in de agenda
    * @param jaar Het jaar om te tonen in de agenda
    */
@@ -44,6 +44,12 @@ class Activiteit extends CI_Controller {
     $this->template->load('main_master', $partials, $data);
   }
 
+  /**
+  * Weergeven van invulformulier voor aanmaken nieuwe activiteit
+  * @see Authex::getGebruikerInfo()
+  * @see Gebruiker_model::getAllZwemmers()
+  * @see form.php
+  */
   public function aanmaken()
   {
     $data['titel'] = 'Activiteit aanmaken';
@@ -60,6 +66,14 @@ class Activiteit extends CI_Controller {
     $this->template->load('main_master', $partials, $data);
   }
 
+  /**
+  * Weergeven van invulformulier voor aanpassen van bestaande activiteit
+  * @see Authex::getGebruikerInfo()
+  * @see AndereActiviteit_model::getActiviteitMetSoort()
+  * @see Gebruiker_model::getAllZwemmers()
+  * @see ActiviteitPerGebruiker_model::getZwemmersBijActiviteit()
+  * @see form.php
+  */
   public function aanpassen($id)
   {
     $data['titel'] = 'Activiteit aanpassen';
@@ -82,6 +96,12 @@ class Activiteit extends CI_Controller {
     $this->template->load('main_master', $partials, $data);
   }
 
+  /**
+  * Verwijderen van activiteit uit de database
+  * @see Authex::getGebruikerInfo()
+  * @see AndereActiviteit_model::delete()
+  * @see ActiviteitPerGebruiker_model::deleteZwemmersBijActiviteit()
+  */
   public function verwijder()
   {
     $id = $this->input->get('id');
@@ -95,6 +115,13 @@ class Activiteit extends CI_Controller {
 
   }
 
+  /**
+  * Weergeven van invulformulier voor aanpassen van bestaande activiteit
+  * @see AndereActiviteit_model::insert()
+  * @see ActiviteitPerGebruiker_model::insert()
+  * @see AndereActiviteit_model::update()
+  * @see ActiviteitPerGebruiker_model::deleteZwemmersBijActiviteit()
+  */
   public function nieuw()
   {
     $activiteit = new stdClass();

@@ -1,9 +1,19 @@
 <?php
-$leeftijd = 18;
+/**
+ * @file zwemmer_info.php
+ *
+ * View waarin er informatie kan worden bekeken over een zwemmer
+ * -Een gewone gebruiker kan alleen informatie bekijken
+ * -Een zwemmer kan dit ook voor elke zwemmer maar kan zijn eigen informatie aanpassen
+ */
+$dt = new DateTime;
+$jaar = $dt->format('o');
+$geboortedatum = explode("-", $zwemmer->geboortedatum);
+$leeftijd = date_diff(date_create($geboortedatum[0]), date_create('now'))->y;
 $disciplines = "100m vlinderslag";
 ?>
 
-<div class="container">
+<div class="container-fluid">
 
     <div class="row text-center">
         <div class="col-md-10 mt-2">
@@ -11,43 +21,47 @@ $disciplines = "100m vlinderslag";
         </div>
     </div>
 
-    <div class="row text-center mt-4 pb-3">
-      <?php if ($zwemmer->foto != ""){
-        echo '<div class="col-md-3 offset-1"><img width=250 height=250 src="' . base_url($zwemmer->foto) . '"/><br /><br />';
-      } else {
-        echo '<div class="col-md-3 offset-1"><img src="http://placehold.it/250x250"/><br /><br />';
-      }
+    <div class="row mt-4 pb-3">
+      <div class="col-lg-3 col-md-3 offset-lg-2 offset-md-1">
+      <?php if ($zwemmer->foto != "") {
+    echo '<img width="250px" height="250px" src="' . base_url($zwemmer->foto) . '"/><br /><br />';
+} else {
+    echo '<img src="http://placehold.it/250x250" width="250px" height="250px"/><br /><br />';
+}
 
        ?>
 
-        <p>
-            <?php if ($this->session->has_userdata('gebruiker_id') && ($this->session->userdata('gebruiker_id') == $zwemmer->id || $gebruiker->soort == 'trainer')) {
-    echo anchor('gebruiker/wijzig/' . $zwemmer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ");
-    if ($gebruiker-> soort == 'trainer') {
-        echo anchor('gebruiker/maakInactief/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button>");
-    }
-} ?>
-        </p>
-        </div>
-        <div class="col-md-6 text-left">
-            <p><b>Leeftijd: </b><?php echo $leeftijd; ?></p>
-            <p><b>Woonplaats: </b><?php echo $zwemmer->woonplaats; ?></p>
-            <p><b>Dsiciplines: </b><?php echo $disciplines; ?></p>
-            <p><b>Bio: </b><?php echo $zwemmer->beschrijving; ?></p>
-        </div>
-    </div>
+       <p class="text-center">
+           <?php if ($this->session->has_userdata('gebruiker_id') && ($this->session->userdata('gebruiker_id') == $zwemmer->id || $gebruiker->soort == 'trainer')) {
+           echo anchor('gebruiker/wijzig/' . $zwemmer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ");
+           if ($gebruiker-> soort == 'trainer') {
+               echo anchor('gebruiker/maakInactief/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button>");
+           }
+       } ?>
+       </p>
+     </div>
+     <div class="col-lg-3 col-md-3 offset-md-2 offset-lg-1 offset-xl-0">
+       <br />
+           <b>Leeftijd: </b><?php echo $leeftijd; ?><br />
+           <b>Woonplaats: </b><?php echo $zwemmer->woonplaats; ?><br />
+           <b>Dsiciplines: </b><?php echo $disciplines; ?><br />
+           <b class="bio">Bio: </b><?php echo $zwemmer->beschrijving; ?><br />
+           </div>
+           </div>
+
+
 
     <div class="row text-left mt-5">
-        <div class="col-md-3 offset-2">
+        <div class="col-md-4 offset-md-1 offset-sm-0">
             <h5>Aanstaande wedstrijden</h5>
             <?php
             if ($wedstrijden == null) {
                 echo "Geen aanstaande wedstrijden";
             } else {
                 foreach ($wedstrijden as $wedstrijd) {
-                    echo "<p><b>" . $wedstrijd->reeks->datum . "</b><br />"
+                    echo "<p><b>" . zetOmNaarDDMMYYYY($wedstrijd->reeks->datum) . "</b><br />"
                   . $wedstrijd->wedstrijd->naam . "<br />"
-                  . "te " . $wedstrijd->wedstrijd->plaats . " om " . verkortTijdstip($wedstrijd->reeks->tijdstip) . "<br />"
+                  . "te " . $wedstrijd->wedstrijd->plaats . " om " . $wedstrijd->reeks->uur . "<br />"
                   . $wedstrijd->afstand->afstand . " " . $wedstrijd->slag->soort . "</p><br />";
                 }
             }
@@ -56,9 +70,27 @@ $disciplines = "100m vlinderslag";
             ;?>
         </div>
 
-        <div class="col-md-3 offset-1">
+        <div class="col-md-3 text-left offset-md-1 offset-sm-0">
             <h5>Laatste resultaten</h5>
-            <p>To-do</p>
+            <?php
+                if ($afgelopenWedstrijden == null) {
+                  echo "Geen recente wedstrijden";
+                } else {
+                  $teller = 0;
+                    foreach ($afgelopenWedstrijden as $afgelopen)
+                    {
+                      if ($teller < 5) {
+                        $resultaat = end($afgelopen->resultaat);
+
+                        echo "<p><b>" . zetOmNaarDDMMYYYY($afgelopen->reeks->datum) . "</b><br />"
+                        . $resultaat->naam . "<br/>" . $afgelopen->wedstrijd->naam . "<br />"
+                        . "Eindplaats: " . $resultaat->eindRank . "<sup>e</sup> in " . $resultaat->tijdReeks . "<br />"
+                        . $afgelopen->afstand->afstand . " " . $afgelopen->slag->soort . "</p><br />";
+                      }
+                      $teller++;
+                    }
+                }
+            ;?>
         </div>
     </div>
 

@@ -1,3 +1,13 @@
+<?php
+/**
+ * @file zwemmers.php
+ *
+ * View waarin er een lijst wordt getoond met alle zwemmers
+ * -Een gewone gebruiker kan alleen informatie bekijken
+ * -Een zwemmer kan dit ook voor elke zwemmer maar kan zijn eigen informatie aanpassen via een extra knop
+ * -Een zwemmer kan elke zwemmer aanpassen, inactief maken en verwijderen
+ */
+ ?>
 <script>
 var id = "";
     $(document).ready(function () {
@@ -38,22 +48,23 @@ $zwemmersTabel = "";
         <div class="col-lg-10 offset-md-1">
             <h3>Zwemmers</h3>
             <p>Klik op een zwemmer voor meer info</p>
+            <div class="table-responsive">
             <table class="mt-3">
                 <?php foreach ($zwemmers as $zwemmer) {
     if ($teller == 4 || $teller == 0) { // nieuwe rij tabel maken bij start foreach en na elke 4de zwemmer
         echo "<tr>";
     }
-    if($zwemmer->foto != ""){
-      echo '<td id="' .$zwemmer->id.'" class="p-3">'
+    if ($zwemmer->foto != "") {
+        echo '<td id="' .$zwemmer->id.'" class="p-3">'
                           . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, "<img width=200 height=200 src=" . base_url($zwemmer->foto) . ">")
                           . "<br/>"
                           . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, $zwemmer->naam);
     } else {
-    echo '<td id="' .$zwemmer->id.'" class="p-3">'
+        echo '<td id="' .$zwemmer->id.'" class="p-3">'
                         . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, "<img src=\"http://placehold.it/200x200\"")
                         . "<br/>"
                         . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, $zwemmer->naam);
-}
+    }
     // knoppen tonen indien ingelogd als trainer
     if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
         echo "<br/>" . anchor('gebruiker/wijzig/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ")
@@ -71,6 +82,7 @@ $zwemmersTabel = "";
     $teller++;
 }; ?>
             </table>
+          </div>
         </div>
     </div>
 

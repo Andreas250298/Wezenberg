@@ -16,7 +16,7 @@ class Supplement_model extends CI_Model
     }
     /**
      * Een supplement ophalen uit de database
-     * @param $id Het id van het supplement dat opgevraagd wordt
+     * @param id Het id van het supplement dat opgevraagd wordt
      * @return De opgevraagde records
      */
     public function get($id)
@@ -26,7 +26,7 @@ class Supplement_model extends CI_Model
         return $query->row();
     }
     /**
-     * Opvragen van supplementen uit de database
+     * Opvragen van alle supplementen uit de database
      * @return De opgevraagde records
      */
     public function getSupplementen()
@@ -37,8 +37,8 @@ class Supplement_model extends CI_Model
     }
     /**
      * Een supplement toevoegen aan de database
-     * @param $supplement Het supplement dat moet toegevoegd worden
-     * @return De insert functie van het supplement
+     * @param supplement Het supplement dat moet toegevoegd worden
+     * @return Het insert id van het supplement
      */
     public function insert($supplement)
     {
@@ -47,7 +47,7 @@ class Supplement_model extends CI_Model
     }
     /**
      * Een supplement wijzigen in de database
-     * @param $supplement Het supplement dat moet gewijzigd worden
+     * @param supplement Het supplement dat moet gewijzigd worden
      */
     public function update($supplement)
     {
@@ -56,11 +56,15 @@ class Supplement_model extends CI_Model
     }
     /**
      * Een supplement verwijderen uit de database
-     * @param $id Het id van het supplement dat moet verwijderd worden
+     * @param id Het id van het supplement dat moet verwijderd worden
      */
     public function delete($id)
     {
+        $this->db->where('supplementId', $id);
+        $this->db->delete('supplementPerZwemmer');
         $this->db->where('id', $id);
         $this->db->delete('supplement');
+        /*$this->db->delete('supplementPerZwemmer', array('supplementId' => $id));
+        $this->db->delete('supplement', array('id' => $id));*/
     }
 }

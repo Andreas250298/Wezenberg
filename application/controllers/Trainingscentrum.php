@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @class Trainingscentrum
  * @brief Controller-klasse voor Trainingscentrum
  *
- * Model-klasse met alle methoden die worden gebruikt om pagina's te tonen over het trainingscentrum.
+ * Controller-klasse met alle methoden die worden gebruikt om pagina's te tonen over het trainingscentrum.
  */
 class Trainingscentrum extends CI_Controller {
 
@@ -21,9 +21,9 @@ class Trainingscentrum extends CI_Controller {
 
     /**
      * Weergeven van Over_ons
-     * \see Authex::getGebruikerInfo()
-     * \see Trainingscentrum_model::get()
-     * \see over_ons.php
+     * @see Authex::getGebruikerInfo()
+     * @see Trainingscentrum_model::get()
+     * @see over_ons.php
      */
     public function index() {
         $data['titel'] = 'Over ons';
@@ -42,9 +42,9 @@ class Trainingscentrum extends CI_Controller {
 
     /**
      * Weergeven van Over_ons_aanpassen
-     * \see Authex::getGebruikerInfo()
-     * \see Trainingscentrum_model::get()
-     * \see over_ons_aanpassen.php
+     * @see Authex::getGebruikerInfo()
+     * @see Trainingscentrum_model::get()
+     * @see over_ons_aanpassen.php
      */
     public function aanpassen() {
         $data['titel'] = 'Aanpassen info';
@@ -63,7 +63,8 @@ class Trainingscentrum extends CI_Controller {
 
      /**
      * Toont een formulier met alle gegevens ingevuld van het gekoze nieuwsartikel.
-     * @param $id van het aangeduide nieuwsartikel
+     * @see trainingscentrum_model::get()
+     * @see trainingscentrum_model::update()
      */
     public function registreer() {
         $trainingscentrum = new stdClass();

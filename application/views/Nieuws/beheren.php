@@ -1,3 +1,10 @@
+<?php
+/**
+ *\file Nieuws/beheren.php
+ *
+ * View waarin men de nieuwsartikels kan beheren.
+ */
+ ?>
 <script>
 var id = "";
     $(document).ready(function () {
@@ -32,16 +39,6 @@ var id = "";
   <i class="far fa-question-circle fa-2x"></i><span class="tab">Hoe nieuws beheren? <?php echo anchor('nieuws/tutorial', "Bekijk de tutorial", "")?>
 </div>
 <?php
-/**
- *\file beheren.php
- *
- * View waarin men de nieuwsartikels kan beheren.
- */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 echo "<p>" . anchor('home/index', 'Terug', "Class='btn btn-primary my-2 my-sm0'")  . " ";
 echo anchor('Nieuws/maakNieuwsArtikel', "nieuw artikel", "Class='btn btn-primary my-2 my-sm0'") . "</p>";
 
@@ -56,6 +53,7 @@ foreach ($nieuwsArtikels as $artikel) {
 
     echo '<div class="media-body">';
     echo '<h5 class="mt-0 mb-1">' . $artikel->titel . '</h5>';
+    echo '<p class="text-muted">' . $artikel->datumAangemaakt . '</p>';
     echo substr($artikel->beschrijving, 0, 144) . '...';
     echo '<p>' . anchor('Nieuws/wijzig/' . $artikel->id, 'aanpassen', 'class="btn btn-primary"') . " ";
     echo anchor('Nieuws/bekijk/' . $artikel->id, 'bekijken', 'class="btn btn-primary"') . " ";

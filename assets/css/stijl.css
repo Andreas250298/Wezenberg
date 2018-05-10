@@ -199,7 +199,7 @@ section .section-title {
 .news span.news-left {
     padding-right: 18px;
 }
- 
+
 .news span {
     color: #333;
     font-size: 12px;
@@ -251,3 +251,37 @@ section .section-title {
 }
 
 /*EIND CSS ZWEMMER_AGENDA.PHP*/
+
+/*CSS ACTIVITEIT BEKIJKEN.PHP*/
+
+.delete {
+	background: #212223;
+	color:#FFF;
+	left: 0;
+	width: 100%;
+	margin: 0;
+	padding: 20px;
+	position: absolute;
+}
+
+.modal-body {
+	padding: 0;
+}
+
+.gebeurtenis {
+	margin-left: 20px;
+	margin-top: 25px;
+	padding-right: 50px;
+}
+
+.delete button {
+	margin-left: 5px;
+}
+
+/*EIND CSS ACTIVITEIT BEKIJKEN.PHP*/
+
+/*CSS ZWEMMER_INFO.PHP*/
+.bio {
+  text-align: justify;
+}
+/*EIND CSS ZWEMMER_INFO.PHP*/

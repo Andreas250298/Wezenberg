@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file ajax_nieuwsartikels.php
+ *
+ * AJAX view waarin men nieuwsartikels kan zien op de startpagina
+ */
 foreach ($nieuwsArtikels as $artikel) {
     if ($artikel->foto != null) {
         $fotoLocatie = base_url($artikel->foto);
@@ -9,9 +14,9 @@ foreach ($nieuwsArtikels as $artikel) {
     echo '<div class="latest-news-all">';
     echo '<div class="latest-news-left"><img class="img-fluid mr-3" src="' . $fotoLocatie . '" width="150" height="100" alt="' . $artikel->titel . '"/></div>';
     echo '<div class="latest-news-right">';
-    echo '<h5 class="mt-0 mb-1">' . substr($artikel->titel, 0, 50) . '...</h5>
-        <p>' . substr($artikel->beschrijving, 0, 130) . ' ... ' . anchor('nieuws/bekijk/' . $artikel->id, 'verder lezen') . '</p>
-        <div class="news"> <span class="news-right">' . zetOmNaarDDMMYYYY($artikel->datumAangemaakt) . '</span> </div>';
+    echo '<h5 class="mt-0 mb-1">' . substr($artikel->titel, 0, 50) . '...</h5>' .
+        '<div class="news"> <span class="news-right">' . zetOmNaarDDMMYYYY($artikel->datumAangemaakt) . '</span> </div>' .
+        '<p>' . substr($artikel->beschrijving, 0, 130) . ' ... ' . anchor('nieuws/bekijk/' . $artikel->id, 'verder lezen') . '</p>';
     echo '</div>';
     echo '</div>';
 }

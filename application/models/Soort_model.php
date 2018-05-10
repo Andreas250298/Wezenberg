@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @class Soort_model
  * @brief Model-klasse voor soorten activiteiten
@@ -17,7 +16,7 @@ class Soort_model extends CI_Model
   }
   /**
    * Een soort ophalen uit de database
-   * @param $id Het id van de soort die opgevraagd wordt
+   * @param id Het id van de soort die opgevraagd wordt
    * @return De opgevraagde record
    */
   public function get($id)

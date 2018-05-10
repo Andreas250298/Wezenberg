@@ -2,7 +2,7 @@
 
 /**
  * @class Afstand_model
- * @brief Model-klasse voor afstanden
+ * @brief Model-klasse voor Afstanden
  *
  * Model-klasse die alle methodes bevat om te interageren met de afstand tabel
  */

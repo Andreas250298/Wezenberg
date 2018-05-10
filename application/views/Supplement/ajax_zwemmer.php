@@ -1,4 +1,9 @@
 <?php
+/**
+ *\file Supplement/ajax_zwemmer.php
+ *
+ * AJAX view die wordt opgevraagd wanneer er een ander item in de combobox wordt aangeduid.
+ */
 $supplementIds = [];
 
 if ($supplementenPerZwemmer == null) {
@@ -18,15 +23,15 @@ if ($supplementenPerZwemmer == null) {
         echo "<table class=\"table\">
         <thead>
           <tr>
-          <td>
+          <th>
             Hoeveelheid
-          </td>
-          <td>
+          </th>
+          <th>
             Tijdstip
-          </td>
-          <td>
+          </th>
+          <th>
             Datum
-          </td>
+          </th>
           </tr>
         </thead>
         <tbody>";

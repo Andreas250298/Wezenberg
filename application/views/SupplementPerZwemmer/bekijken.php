@@ -1,3 +1,10 @@
+<?php
+/**
+ * @file SupplementPerZwemmer/bekijken.php
+ *
+ * View waarin je kunt kijken naar supplementen per zwemmer.
+ */
+ ?>
 <script>
 var supplementPerZwemmerId = "";
 var zwemmerId = 0;
@@ -34,7 +41,7 @@ function haalSupplementenOp(id){
 
         $("#resultaat").on('click','.modal-trigger',function() {
             supplementPerZwemmerId = $(this).parent().find('#id').val()
-            
+
             if ($('#checkboxModal').is(':checked')){
                 verwijderSupplementPerZwemmer(supplementPerZwemmerId);
             }else {

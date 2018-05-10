@@ -3,27 +3,28 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+/*
+* @class Authex
+* @brief Controller-klasse voor Authenticatie
+*
+* Controller-klasse met methodes die worden gebruikt voor Authenticatie van de gebruikers.
+*/
+
 class Authex {
 
-    // +----------------------------------------------------------
-    // | TV Shop
-    // +----------------------------------------------------------
-    // | 2ITF - 201x-201x
-    // +----------------------------------------------------------
-    // | Authex library
-    // |
-    // +----------------------------------------------------------
-    // | Nelson Wells (http://nelsonwells.net/2010/05/creating-a-simple-extensible-codeigniter-authentication-library/)
-    // |
-    // | aangepast door Thomas More
-    // +----------------------------------------------------------
-
+  /**
+   * Constructor
+   */
     public function __construct() {
         $CI = & get_instance();
 
         $CI->load->model('gebruiker_model');
     }
 
+    /**
+     * Activeert een gebruiker.
+     * @see Gebruiker_model::activeer()
+     */
     function activeer($id) {
         // nieuwe gebruiker activeren
         $CI = & get_instance();
@@ -31,8 +32,11 @@ class Authex {
         $CI->gebruiker_model->activeer($id);
     }
 
+    /**
+     * Geeft een gebruiker object als gebruiker aangemeld is.
+     * @see Gebruiker_model::get()
+     */
     function getGebruikerInfo() {
-        // geef gebruiker-object als gebruiker aangemeld is
         $CI = & get_instance();
 
         if (!$this->isAangemeld()) {
@@ -42,9 +46,10 @@ class Authex {
             return $CI->gebruiker_model->get($id);
         }
     }
-
+    /**
+     * Controleert of een gebruiker aangemeld is.
+     */
     function isAangemeld() {
-        // gebruiker is aangemeld als sessievariabele gebruiker_id bestaat
         $CI = & get_instance();
 
         if ($CI->session->has_userdata('gebruiker_id')) {
@@ -54,13 +59,18 @@ class Authex {
         }
     }
 
+    /**
+     * Meldt een gebruiker aan met een opgegeven wachtwoord en email.
+     * @see Gebruiker_model::getGebruiker();
+     * @param email Email van de gebruiker.
+     * @param wachtwoord Wachtwoord van de gebruiker.
+     */
     function meldAan($email, $wachtwoord) {
-        // gebruiker aanmelden met opgegeven email en wachtwoord
         $CI = & get_instance();
 
         $gebruiker = $CI->gebruiker_model->getGebruiker($email, $wachtwoord);
 
-        if ($gebruiker == null) {
+        if ($gebruiker == null || $gebruiker->status == 0) {
             return false;
         } else {
             $CI->session->set_userdata('gebruiker_id', $gebruiker->id);
@@ -68,12 +78,26 @@ class Authex {
         }
     }
 
+    /**
+     * Meldt de gebruiker af.
+     */
     function meldAf() {
-        // afmelden, dus sessievariabele wegdoen
         $CI = & get_instance();
 
         $CI->session->unset_userdata('gebruiker_id');
     }
+
+    /**
+     * Voegt een nieuwe zwemmer toe met de ingegeven waarden.
+     * @see Gebruiker_model::voegToe()
+     * @param email Email van de gebruiker.
+     * @param wachtwoord Wachtwoord van de gebruiker.
+     * @param naam Naam van de gebruiker.
+     * @param adres Adres van de gebruiker.
+     * @param woonplaats Woonplaats van de gebruiker.
+     * @param soort Soort van de gebruiker.
+     * @param geboortedatum Geboortedatum van de gebruiker.
+     */
     function registreer($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum) {
         // nieuwe gebruiker registreren als email nog niet bestaat
         $CI = & get_instance();
@@ -86,6 +110,17 @@ class Authex {
         }
     }
 
+    /**
+     * Wijzigt de waarden van een bestaande gebruiker.
+     * @see Gebruiker_model::update()
+     * @param email Email van de gebruiker.
+     * @param wachtwoord Wachtwoord van de gebruiker.
+     * @param naam Naam van de gebruiker.
+     * @param adres Adres van de gebruiker.
+     * @param woonplaats Woonplaats van de gebruiker.
+     * @param soort Soort van de gebruiker.
+     * @param geboortedatum Geboortedatum van de gebruiker.
+     */
     function wijzig($email, $wachtwoord, $naam, $adres, $woonplaats, $soort, $geboortedatum) {
         // bestaande gebruiker updaten
         $CI = & get_instance();

@@ -1,9 +1,8 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @file Wedstrijd/maken.php
+ *
+ * View waarin een wedstrijd kan worden gemaakt
  */
 if (isset($wedstrijd)) {
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'value' => $wedstrijd->naam, 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam Wedstrijd', 'aria-label' => 'Titel', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul hier de naam van de wedstrijd in.');
@@ -22,7 +21,7 @@ if (isset($wedstrijd)) {
     $dataInputAfstand = array('class' => 'form-control mr-sm-2', 'name' => 'afstand', 'id' => 'afstand', 'placeholder' => 'Afstand', 'aria-label' => 'afstand', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier de afstand van de wedstrijd.');
 }
 $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
-echo form_open('Wedstrijd/registreer', 'class="form-group"');
+echo form_open('Wedstrijd/registreer/'.$tijd, 'class="form-group"');
 echo "<div class='form-group'>";
 echo form_label("Naam", 'naam') . "\n";
 echo form_input($dataInputNaam) . "\n";
@@ -78,5 +77,5 @@ echo "</select>";
 echo "</div>";*/
 
 echo form_submit($dataSubmit) . "";
-
+echo anchor('Wedstrijd/bekijkenWedstrijden/' .$tijd, 'Terug', 'class="btn btn-primary"');
 echo form_close();
