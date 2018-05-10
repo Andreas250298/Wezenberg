@@ -60,7 +60,7 @@ $disciplines = "100m vlinderslag";
                 foreach ($wedstrijden as $wedstrijd) {
                     echo "<p><b>" . zetOmNaarDDMMYYYY($wedstrijd->reeks->datum) . "</b><br />"
                   . $wedstrijd->wedstrijd->naam . "<br />"
-                  . "te " . $wedstrijd->wedstrijd->plaats . " om " . verkortTijdstip($wedstrijd->reeks->tijdstip) . "<br />"
+                  . "te " . $wedstrijd->wedstrijd->plaats . " om " . $wedstrijd->reeks->uur . "<br />"
                   . $wedstrijd->afstand->afstand . " " . $wedstrijd->slag->soort . "</p><br />";
                 }
             }
@@ -71,7 +71,25 @@ $disciplines = "100m vlinderslag";
 
         <div class="col-md-3 text-left offset-md-1 offset-sm-0">
             <h5>Laatste resultaten</h5>
-            <p>To-do</p>
+            <?php
+                if ($afgelopenWedstrijden == null) {
+                  echo "Geen recente wedstrijden";
+                } else {
+                  $teller = 0;
+                    foreach ($afgelopenWedstrijden as $afgelopen)
+                    {
+                      if ($teller < 5) {
+                        $resultaat = end($afgelopen->resultaat);
+
+                        echo "<p><b>" . zetOmNaarDDMMYYYY($afgelopen->reeks->datum) . "</b><br />"
+                        . $resultaat->naam . "<br/>" . $afgelopen->wedstrijd->naam . "<br />"
+                        . "Eindplaats: " . $resultaat->eindRank . "<sup>e</sup> in " . $resultaat->tijdReeks . "<br />"
+                        . $afgelopen->afstand->afstand . " " . $afgelopen->slag->soort . "</p><br />";
+                      }
+                      $teller++;
+                    }
+                }
+            ;?>
         </div>
     </div>
 

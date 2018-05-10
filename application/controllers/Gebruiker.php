@@ -234,7 +234,8 @@ class Gebruiker extends CI_Controller
         $data['zwemmer'] = $huidigeZwemmer;
 
         $this->load->model('deelname_model');
-        $data['wedstrijden'] = $this->deelname_model->getInformatieDeelnamesZwemmer($id);
+        $data['wedstrijden'] = $this->deelname_model->getInformatieDeelnames($id, false);
+        $data['afgelopenWedstrijden'] = $this->deelname_model->getInformatieDeelnames($id, true);
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'zwemmer_info',
@@ -343,7 +344,7 @@ class Gebruiker extends CI_Controller
         $data['jaar'] = $jaar;
 
         $this->load->model('deelname_model');
-        $data['wedstrijden'] = $this->deelname_model->getInformatieDeelnames($gebruiker->id, $week, $jaar);
+        $data['wedstrijden'] = $this->deelname_model->getInformatieDeelnames($gebruiker->id, false, $week, $jaar);
 
         $this->load->model('supplementPerZwemmer_model');
         $data['supplementen'] = $this->supplementPerZwemmer_model->getInformatieSupplementen($gebruiker->id, $week, $jaar);

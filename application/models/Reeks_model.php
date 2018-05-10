@@ -56,7 +56,30 @@ class Reeks_model extends CI_Model
             return $query->result();
         }
     }
-
+    /**
+    * Opvragen van reeksen vanaf vandaag
+    * @param maandag Datum van maandag
+    * @param zondag Datum van zondag
+    * @return De opgevraagde reeksen.
+    */
+    public function getReeksenVoorOfNaVandaag($voor)
+    {
+        $this->db->select('id');
+        $this->db->from('reeks');
+        if ($voor) {
+          $this->db->order_by('datum', 'ASC');
+          $this->db->where('datum <', date('Y-m-d'));
+        } else {
+          $this->db->order_by('datum', 'DESC');
+          $this->db->where('datum >=', date('Y-m-d'));
+        }
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+            return null;
+        } else {
+            return $query->result();
+        }
+    }
     /**
      * Een afstand van een reeks opvragen
      * @param id De id van de wedstrijd die reeksen heeft

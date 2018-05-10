@@ -44,41 +44,6 @@ class Deelname_model extends CI_Model
             return $query->result();
         }
     }
-    /**
-    * haalt informatie op over een bepaalde deelname voor een zwemmer.
-    * @param id De id van een gebruiker.
-    * @see Reeks_model::get()
-    * @see Afstand_model::get()
-    * @see Wedstrijd_model::get()
-    * @see Slag_model::get()
-    * @return deelnames de opgevraagde deelnames
-    */
-    public function getInformatieDeelnamesZwemmer($id)
-    {
-        $this->db->where('gebruikerIdZwemmer', $id);
-        $this->db->Where('statusId', "2");
-        $query = $this->db->get('deelname');
-
-        if ($query->num_rows() == 0) {
-            return null;
-        } else {
-            $deelnames = $query->result();
-
-            $this->load->model('wedstrijd_model');
-            $this->load->model('slag_model');
-            $this->load->model('afstand_model');
-            $this->load->model('reeks_model');
-
-            foreach ($deelnames as $deelname) {
-                $deelname->reeks = $this->reeks_model->get($deelname->reeksId);
-                $deelname->afstand = $this->afstand_model->get($deelname->reeks->afstandId);
-                $deelname->slag = $this->slag_model->get($deelname->reeks->slagId);
-                $deelname->wedstrijd = $this->wedstrijd_model->get($deelname->reeks->wedstrijdId);
-            }
-
-            return $deelnames;
-        }
-    }
 
     /**
     * Haalt deelnames in week op van bepaalde zwemmer
@@ -114,10 +79,63 @@ class Deelname_model extends CI_Model
     }
 
     /**
+    * Haalt deelnames in toekomst of verleden op van bepaalde zwemmer
+    * @see Reeks_model::getReeksenVoorOfNaVandaag()
+    * @param id ID van de zwemmer in kwestie
+    * @return query Deelnames die week van opgegeven zwemmer.
+    */
+    public function getDeelnamesVoorOfNaVandaagPerZwemmer($id, $voor = False)
+    {
+        $this->load->model('reeks_model');
+        $reeksen = $this->reeks_model->getReeksenVoorOfNaVandaag($voor);
+
+        if ($reeksen != null) {
+            foreach ($reeksen as $reeks) {
+                $ids[] = $reeks->id;
+            }
+
+            $this->db->where('statusId', '2');
+            $this->db->where('gebruikerIdZwemmer', $id);
+            $this->db->where_in('reeksId', $ids);
+            $query = $this->db->get('deelname')->result();
+
+            return $query;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Haalt deelnames in verleden op van bepaalde zwemmer
+    * @see Reeks_model::getReeksenVanafVandaag()
+    * @param id ID van de zwemmer in kwestie
+    * @return query Deelnames die week van opgegeven zwemmer.
+    */
+    public function getDeelnamesVoorVandaagPerZwemmer($id)
+    {
+        $this->load->model('reeks_model');
+        $reeksen = $this->reeks_model->getReeksenVoorVandaag();
+        if ($reeksen != null) {
+            foreach ($reeksen as $reeks) {
+                $ids[] = $reeks->id;
+            }
+
+            $this->db->where('statusId', '2');
+            $this->db->where('gebruikerIdZwemmer', $id);
+            $this->db->where_in('reeksId', $ids);
+            $query = $this->db->get('deelname')->result();
+
+            return $query;
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Een status ophalen uit de database
      * @see Status_model::get()
-     * @param $id Het id van de gebruiker waarvan de status opgevraagd wordt
-     * @return De opgevraagde record
+     * @param id Het id van de gebruiker waarvan de status opgevraagd wordt
+     * @return deelname De opgevraagde record
      */
     public function getStatusPerGebruiker($id)
     {
@@ -135,18 +153,25 @@ class Deelname_model extends CI_Model
     /**
     * Haalt informatie over bepaalde deelnames.
     * @see Deelname_model::getDeelnamesInWeekPerZwemmer()
+    * @see Deelname_model::getDeelnamesVanafVandaagPerZwemmer()
     * @see Reeks_model::get()
     * @see Afstand_model::get()
     * @see Wedstrijd_model::get()
     * @see Slag_model::get()
     * @param id ID van de zwemmer in kwestie
+    * @param voor Of er moet gekeken worden naar de deelnames voor of na vandaag
     * @param week Week in de agenda
     * @param jaar Jaar in de agenda
     * @return deelnames Wedstrijden die week van opgegeven zwemmer.
     */
-    public function getInformatieDeelnames($id, $week, $jaar)
+    public function getInformatieDeelnames($id, $voor = false, $week = null, $jaar = null)
     {
-        $deelnames = $this->deelname_model->getDeelnamesInWeekPerZwemmer($id, $week, $jaar);
+      if (isset($week) && isset($jaar))
+      {
+        $deelnames = $this->deelname_model->getDeelnamesInWeekPerZwemmer($id, $voor, $week, $jaar);
+      } else {
+        $deelnames = $this->deelname_model->getDeelnamesVoorOfNaVandaagPerZwemmer($id, $voor);
+      }
         if ($deelnames != null) {
             $this->load->model('wedstrijd_model');
             $this->load->model('slag_model');
@@ -162,6 +187,11 @@ class Deelname_model extends CI_Model
                 $deelname->slag = $this->slag_model->get($deelname->reeks->slagId);
                 $deelname->wedstrijd = $this->wedstrijd_model->get($deelname->reeks->wedstrijdId);
                 $deelname->reeks->tijdstip = (string) $deelname->reeks->tijdstip;
+                if ($voor)
+                {
+                  $this->load->model('rondeResultaat_model');
+                  $deelname->resultaat = $this->rondeResultaat_model->getResultatenPerDeelname($deelname->id);
+                }
             }
 
             return $deelnames;
@@ -171,7 +201,7 @@ class Deelname_model extends CI_Model
     }
     /**
     * geeft de resultaten terug per een bepaalde deelname.
-    * @return de opgevraagde record(s)
+    * @return query De opgevraagde record(s)
     */
     public function getResultatenPerDeelname($id)
     {

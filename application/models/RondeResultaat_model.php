@@ -26,4 +26,19 @@ class RondeResultaat_model extends CI_Model
         $query = $this->db->get('rondeResultaat');
         return $query->row();
     }
+
+    /**
+    * geeft de resultaten terug per een bepaalde deelname.
+    * @return query De opgevraagde record(s)
+    */
+    public function getResultatenPerDeelname($id)
+    {
+        $this->db->where('deelnameId', $id);
+        $query = $this->db->get('rondeResultaat');
+        if ($query->num_rows() == 0) {
+            return null;
+        } else {
+            return $query->result();
+        }
+    }
 }
