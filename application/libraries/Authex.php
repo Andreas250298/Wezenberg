@@ -70,7 +70,7 @@ class Authex {
 
         $gebruiker = $CI->gebruiker_model->getGebruiker($email, $wachtwoord);
 
-        if ($gebruiker == null) {
+        if ($gebruiker == null || $gebruiker->status == 0) {
             return false;
         } else {
             $CI->session->set_userdata('gebruiker_id', $gebruiker->id);

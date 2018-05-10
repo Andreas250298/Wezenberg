@@ -59,7 +59,7 @@ $disciplines = "100m vlinderslag";
                 echo "Geen aanstaande wedstrijden";
             } else {
                 foreach ($wedstrijden as $wedstrijd) {
-                    echo "<p><b>" . $wedstrijd->reeks->datum . "</b><br />"
+                    echo "<p><b>" . zetOmNaarDDMMYYYY($wedstrijd->reeks->datum) . "</b><br />"
                   . $wedstrijd->wedstrijd->naam . "<br />"
                   . "te " . $wedstrijd->wedstrijd->plaats . " om " . verkortTijdstip($wedstrijd->reeks->tijdstip) . "<br />"
                   . $wedstrijd->afstand->afstand . " " . $wedstrijd->slag->soort . "</p><br />";

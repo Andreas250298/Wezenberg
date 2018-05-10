@@ -85,6 +85,7 @@ class Gebruiker extends CI_Controller
         $gebruiker->email = $this->input->post('email');
         $gebruiker->geboortedatum = $this->input->post('geboortedatum');
         $gebruiker->beschrijving = $this->input->post('beschrijving');
+        $gebruiker->wachtwoord = password_hash($this->input->post('wachtwoord'), PASSWORD_DEFAULT);
 
         $config['upload_path']          = './uploads/gebruikers';
         $config['allowed_types']        = 'gif|jpg|jpeg|png';
@@ -102,21 +103,20 @@ class Gebruiker extends CI_Controller
             $gebruiker->foto = 'uploads/gebruikers/' . $upload_data['file_name'];
         }
 
-
-        if ($gebruiker->id == null) {
-            $gebruiker->status = 1;
-            $gebruiker->soort = "zwemmer";
-            $this->gebruiker_model->insert($gebruiker);
+        if ($gebruiker->id == null)
+        {
+          $gebruiker->status = 1;
+          $gebruiker->soort = "zwemmer";
+          $this->gebruiker_model->insert($gebruiker);
         } else {
-            $this->gebruiker_model->update($gebruiker);
+          $this->gebruiker_model->update($gebruiker);
         }
-
 
         $gebruiker = $this->authex->getGebruikerInfo();
         if ($gebruiker->soort == "zwemmer") {
-            redirect('gebruiker/toonZwemmerInfo/' . $gebruiker->id);
+          redirect('gebruiker/toonZwemmerInfo/' . $gebruiker->id);
         } else {
-            redirect('/gebruiker/toonZwemmers');
+          redirect('/gebruiker/toonZwemmers');
         }
     }
 
