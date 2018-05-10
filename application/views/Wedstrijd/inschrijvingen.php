@@ -23,7 +23,7 @@ $stat = "";
 foreach ($wedstrijden as $wedstrijd) {
     $lijstWedstrijden .= '<tr>
     <td>'
-    .anchor('Wedstrijd/info/' . $wedstrijd->id, $wedstrijd->naam).
+    .anchor('Wedstrijd/info/' . $wedstrijd->id."/na", $wedstrijd->naam).
     '</td>
     <td>'
     .$wedstrijd->plaats.
