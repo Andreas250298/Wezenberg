@@ -35,7 +35,7 @@ class MeldingPerGebruiker_model extends CI_Model
     public function getAllPerGebruiker($gebruikerId){
         $this->db->where('gebruikerId', $gebruikerId);
         $this->db->where('gezien', 0);
-        $query = $this->db->get('meldingpergebruiker');
+        $query = $this->db->get('meldingPerGebruiker');
 
         $meldingenPerGebruiker = $query->result();
 
