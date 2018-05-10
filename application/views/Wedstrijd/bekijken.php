@@ -58,33 +58,33 @@ $(document).ready(function () {
 </script>
 <?php
 
-if ($tijd === "na"){
-    echo anchor('wedstrijd/bekijkenWedstrijden/voor',"<button type=\"button\" class=\"btn btn-primary mx-auto\">Toon afgelopen wedstrijden</button> ");
+if ($tijd === "na") {
+    echo anchor('wedstrijd/bekijkenWedstrijden/voor', "<button type=\"button\" class=\"btn btn-primary mx-auto\">Toon afgelopen wedstrijden</button> ");
     if (isset($gebruiker)) {
         if ($gebruiker->soort == "trainer") {
-            echo anchor('wedstrijd/maakWedstrijd/'.$tijd,"<button type=\"button\" class=\"btn btn-success mx-auto\">Nieuwe Wedstrijd aanmaken</button> ");
+            echo anchor('wedstrijd/maakWedstrijd/'.$tijd, "<button type=\"button\" class=\"btn btn-success mx-auto\">Nieuwe Wedstrijd aanmaken</button> ");
         }
     }
-  } else{
-    echo anchor('wedstrijd/bekijkenWedstrijden/na',"<button type=\"button\" class=\"btn btn-primary mx-auto\">Toon aanstaande wedstrijden</button> ");
-  }
+} else {
+    echo anchor('wedstrijd/bekijkenWedstrijden/na', "<button type=\"button\" class=\"btn btn-primary mx-auto\">Toon aanstaande wedstrijden</button> ");
+}
 
 $plaatsen = [];
 
-if ($wedstrijden != null){
-  foreach($wedstrijden as $wedstrijd){
-    if (!in_array($wedstrijd->plaats, $plaatsen)){
-      array_push($plaatsen,$wedstrijd->plaats);
+if ($wedstrijden != null) {
+    foreach ($wedstrijden as $wedstrijd) {
+        if (!in_array($wedstrijd->plaats, $plaatsen)) {
+            array_push($plaatsen, $wedstrijd->plaats);
+        }
     }
-  }
 }
 
 sort($plaatsen);
 
-if ($tijd === "na"){
-echo "<h2 class=\"mx-auto\">Aanstaande wedstrijden</h2>";
-}else{
-  echo "<h2 class=\"mx-auto\">Afgelopen wedstrijden</h2>";
+if ($tijd === "na") {
+    echo "<h2 class=\"mx-auto\">Aanstaande wedstrijden</h2>";
+} else {
+    echo "<h2 class=\"mx-auto\">Afgelopen wedstrijden</h2>";
 }
 echo "<div class='form-group'>";
 echo form_label("Plaats: ", 'plaats') . "\n";
@@ -99,18 +99,19 @@ echo "<div>";
 echo "<br/>";
 
 if (isset($gebruiker)) {
-  if ($gebruiker->soort == "trainer") {
-echo '<div class="form-check">
+    if ($gebruiker->soort == "trainer") {
+        echo '<div class="form-check">
   <input class="form-check-input" type="checkbox" id="checkboxModal">
   <label class="form-check-label" for="checkboxModal">
     Uitzetten waarschuwing bij het verwijderen
   </label>
 </div>';
-  }}
+    }
+}
 
  echo ' <p>
         <div id="resultaat"></div>
-        </p>';      
+        </p>';
 ?>
 <br/><br/>
 <p>

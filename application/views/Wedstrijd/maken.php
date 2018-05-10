@@ -77,5 +77,5 @@ echo "</select>";
 echo "</div>";*/
 
 echo form_submit($dataSubmit) . "";
-
+echo anchor('Wedstrijd/bekijkenWedstrijden/' .$tijd, 'Terug', 'class="btn btn-primary"');
 echo form_close();
