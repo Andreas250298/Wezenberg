@@ -5,6 +5,7 @@
  * View waarin een wedstrijd kan worden gemaakt
  */
 if (isset($wedstrijd)) {
+    echo "<h2 class=\"paginaTitel\">wedstrijd aanpassen</h2>";
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'value' => $wedstrijd->naam, 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam Wedstrijd', 'aria-label' => 'Titel', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul hier de naam van de wedstrijd in.');
     $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'value' => $wedstrijd->plaats,'name' => 'plaats', 'id' => 'plaats', 'placeholder' => 'Plaats Wedstrijd', 'aria-label' => 'Plaats', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul de gemeente in waar de wedstrijd plaatsvindt.');
     $dataInputBeginDatum = array('class' => 'form-control mr-sm-2', 'value' => $wedstrijd->beginDatum,'type' => 'date', 'name' => 'beginDatum', 'id' => 'beginDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de startdatum in van de wedstrijd(Deze kan verschillen van de einddatum).');
@@ -12,6 +13,7 @@ if (isset($wedstrijd)) {
     $dataInputLaatseInschrijvingDatum = array('class' => 'form-control mr-sm-2', 'value' => $wedstrijd->laatsteInschrijvingDatum,'type' => 'date', 'name' => 'laatsteInschrijvingDatum', 'id' => 'laatsteInschrijvingDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier de uiterste datum waarop zwemmers zich kunnen inschrijven voor deze wedstrijd.');
     $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'value' => $wedstrijd->beschrijving,'name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Schrijf hier de beschrijving van de wedstrijd', 'aria-label' => 'beschrijving', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier een beschrijving voor deze wedstrijd.');
 } else {
+  echo "<h2 class=\"paginaTitel\">Wedstrijd maken</h2>";
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam Wedstrijd', 'aria-label' => 'Titel', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul hier de naam van de wedstrijd in.');
     $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'plaats', 'id' => 'plaats', 'placeholder' => 'Plaats Wedstrijd', 'aria-label' => 'Plaats', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul de gemeente in waar de wedstrijd plaatsvindt.');
     $dataInputBeginDatum = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'name' => 'beginDatum', 'id' => 'beginDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de startdatum in van de wedstrijd(Deze kan verschillen van de einddatum).');
