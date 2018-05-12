@@ -4,6 +4,7 @@
  *
  * View waarin alle reeksen voor een bepaalde wedstrijd kan worden bekeken
  */
+ echo "<h2 class=\"paginaTitel\">Reeksen beheren</h2>";
 $lijstReeksen = '';
 $teller = 1;
 foreach ($reeksen as $reeks) {

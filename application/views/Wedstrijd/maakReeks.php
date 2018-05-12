@@ -5,12 +5,14 @@
  * View waarin een reeks kan gemaakt worden voor een bepaalde wedstrijd
  */
 if (isset($reeks)) {
+  echo "<h2 class=\"paginaTitel\">Reeks aanpassen</h2>";
     $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'value' => $reeks->datum,'name' => 'datum', 'id' => 'datum', 'placeholder' => 'Datum Wedstrijd', 'aria-label' => 'Datum', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul de datum van de reeks in.');
     $dataInputBeginDatum = array('class' => 'form-control mr-sm-2', 'value' => $reeks->tijdstip,'type' => 'time', 'name' => 'tijdstip', 'id' => 'tijdstip','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul hier het tijdstip in van de reeks.');
     $dataInputEindDatum = array('class' => 'form-control mr-sm-2', 'value' => $reeks->datum,'type' => 'date', 'name' => 'eindDatum', 'id' => 'eindDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de einddatum in van de wedstrijd(deze kan verschillen van de begindatum).');
     $dataInputLaatseInschrijvingDatum = array('class' => 'form-control mr-sm-2', 'value' => $wedstrijd->laatsteInschrijvingDatum,'type' => 'date', 'name' => 'laatsteInschrijvingDatum', 'id' => 'laatsteInschrijvingDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier de uiterste datum waarop zwemmers zich kunnen inschrijven voor deze wedstrijd.');
     $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'value' => $wedstrijd->beschrijving,'name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Schrijf hier de beschrijving van de wedstrijd', 'aria-label' => 'beschrijving', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Geef hier een beschrijving voor deze wedstrijd.');
 } else {
+  echo "<h2 class=\"paginaTitel\">Reeks maken</h2>";
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'reeks', 'id' => 'reeks', 'placeholder' => 'Reeks', 'aria-label' => 'Reeks', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul hier de reeks van de wedstrijd in.');
     $dataInputPlaats = array('class' => 'form-control mr-sm-2', 'type' => 'date', 'name' => 'datum', 'id' => 'datum', 'placeholder' => 'Datum Wedstrijd', 'aria-label' => 'Datum', 'size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul de datum van de reeks in.');
     $dataInputBeginDatum = array('class' => 'form-control mr-sm-2', 'type' => 'time', 'name' => 'tijdstip', 'id' => 'tijdstip','placeholder' => 'Tijdstip reeks','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'Vul hier het tijdstip in van de reeks.');
@@ -51,5 +53,6 @@ if (isset($reeks)) {
 }
 echo form_hidden('wedstrijdId', $wedstrijd->id);
 echo form_submit($dataSubmit) . " ";
+echo  anchor('wedstrijd/reeksenToevoegen/' . $wedstrijd->id ."/".$tijd, 'Terug', 'class="btn btn-primary" style="margin-right : 10px;"');
 
 echo form_close();
