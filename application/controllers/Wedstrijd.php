@@ -76,8 +76,8 @@ class Wedstrijd extends CI_Controller {
         $wedstrijd->laatsteInschrijvingDatum = html_escape($this->input->post('laatsteInschrijvingDatum'));
         $wedstrijd->beschrijving = html_escape($this->input->post('beschrijving'));
 
-        if ($wedstrijd->beginDatum > $wedstrijd->eindDatum || $wedstrijd->laatsteInschrijvingDatum >= $wedstrijd->beginDatum){
-            $message = "Zorg dat de begin datum niet verder ligt dan de eind datum, alsook moet de laatste inschrijving voor de begin datum liggen!";
+        if ($wedstrijd->beginDatum > $wedstrijd->eindDatum || $wedstrijd->laatsteInschrijvingDatum >= $wedstrijd->beginDatum || $wedstrijd->beginDatum <= date('Y-m-d')){
+            $message = "Zorg dat de datums kloppen, een wedstrijd kan niet in het verleden liggen. Een einddatum kan niet vroeger liggen als een startdatum, ook kan een inschrijfdatum niet na een startdatum liggen.";
             return $this->error($message);
         }
 
