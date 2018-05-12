@@ -12,7 +12,6 @@ $dataZwemmer = array('type' => 'hidden', 'name' => 'zwemmer', 'id' => 'zwemmer',
 
 $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan', 'id' => 'opslaan');
 echo form_open('Supplement/aanpassen', 'class="form-group"');
-
 echo '<h3>';
 echo $supplementPerZwemmer->zwemmer->naam;
 echo '</h3>';

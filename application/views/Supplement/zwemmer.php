@@ -45,6 +45,6 @@ echo "<div>";
 echo "</br>";
 ?>
 
-<p><div id ="resultaat"></div></p>
+<div id ="resultaat"></div>
 <?php
 echo anchor('home/index', "<button type=\"button\" class=\"btn btn-primary mx-auto\">Terug</button>");

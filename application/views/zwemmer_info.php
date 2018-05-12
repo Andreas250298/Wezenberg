@@ -9,7 +9,10 @@
 $dt = new DateTime;
 $jaar = $dt->format('o');
 $geboortedatum = explode("-", $zwemmer->geboortedatum);
-$leeftijd = $jaar - $geboortedatum[0];
+if($geboortedatum[0] != null) {
+  $leeftijd = $jaar - $geboortedatum[0];
+}
+
 $disciplines = "100m vlinderslag";
 ?>
 
@@ -42,7 +45,7 @@ $disciplines = "100m vlinderslag";
      </div>
      <div class="col-lg-3 col-md-3 offset-md-2 offset-lg-1 offset-xl-0">
        <br />
-           <b>Leeftijd: </b><?php echo $leeftijd; ?><br />
+           <b>Leeftijd: </b><?php if(isset($leeftijd)){ echo $leeftijd;}?><br />
            <b>Woonplaats: </b><?php echo $zwemmer->woonplaats; ?><br />
            <b>Dsiciplines: </b><?php echo $disciplines; ?><br />
            <b class="bio">Bio: </b><?php echo $zwemmer->beschrijving; ?><br />
