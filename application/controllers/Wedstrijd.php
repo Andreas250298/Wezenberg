@@ -38,6 +38,7 @@ class Wedstrijd extends CI_Controller {
 
     /**
      * Toont het scherm om een nieuwe wedstrijd te maken
+     * @param tijd of de datum voor of na vandaag ligt 
      * @see maken.php
      */
     public function maakWedstrijd($tijd) {
@@ -60,6 +61,7 @@ class Wedstrijd extends CI_Controller {
 
     /**
      * Maakt een nieuwe entry aan in de wedstrijd-database met de opgegeven info uit maken.php
+     * @param tijd of de datum voor of na vandaag ligt 
      * @see Wedstrijd_model::insert()
      * @see Wedstrijd_model::update()
      */
@@ -147,6 +149,7 @@ class Wedstrijd extends CI_Controller {
 
     /**
      * Maakt een nieuwe entry aan in de wedstrijd-database met de opgegeven info uit maken.php
+     * @param tijd of de datum voor of na vandaag ligt 
      * @see Wedstrijd_model::insert()
      * @see Wedstrijd_model::update()
      */
@@ -181,6 +184,7 @@ class Wedstrijd extends CI_Controller {
     /**
      * Toont de pagina voor de wedstrijd-informatie aan te passen
      * @param id De id van de aan te passen wedstrijd
+     * @param tijd of de datum voor of na vandaag ligt 
      * @see Wedstrijd_model::get()
      * @see beheren.php
      */
@@ -202,6 +206,7 @@ class Wedstrijd extends CI_Controller {
 
     /**
      * Toont de pagina voor de wedstrijden te beheren
+     * @param tijd of de datum voor of na vandaag ligt 
      * @see Authex::getGebruikerInfo()
      * @see Wedstrijd_model::toonWedstrijden()
      * @see bekijken.php
@@ -227,6 +232,11 @@ class Wedstrijd extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+     * Ajax functie die wedstrijden zal ophalen via juiste GET input
+     * @see Wedstrijd_model::toonWedstrijdenVoorVandaagASC()
+     * @see Wedstrijd_model::toonWedstrijdenVanafVandaagASC()
+     */
     public function haalAjaxOp_bekijkenWedstrijden(){
         $plaats = $this->input->get('plaats');
         $tijd = $this->input->get('tijd');
@@ -280,7 +290,8 @@ class Wedstrijd extends CI_Controller {
 
     /**
      * Verwijdert het nieuwsartikel en toont opnieuw de lijst van nieuwsartikels.
-     * @param $id van de te verwijderen nieuwsartikel
+     * @param id van de te verwijderen nieuwsartikel
+     * @param tijd of de datum voor of na vandaag ligt
      */
 
     public function verwijderReeks($id, $tijd)
@@ -342,6 +353,7 @@ class Wedstrijd extends CI_Controller {
     /**
     * Toont de pagina waarin een trainer reeksen per wedstrijd kan toevoegen
     * @param id De id van de wedstrijd waar reeksen aan moeten toegevoegd worden
+    * @param $tijd of de datum voor of na vandaag ligt
     * @see Authex::getGebruikerInfo()
     * @see Wedstrijd_model::getReeksenPerWedstrijd()
     * @see reeksen.php
@@ -369,6 +381,7 @@ class Wedstrijd extends CI_Controller {
 
     /**
     * Toont het invulformulier dat de trainer dient in te vullen om een reeks toe te voegen
+    * @param tijd of de datum voor of na vandaag ligt
     * @see Authex::getGebruikerInfo()
     * @see Wedstrijd_model::getReeksenPerWedstrijd()
     * @see Wedstrijd_model::getSlagenPerWedstrijd()
@@ -399,6 +412,7 @@ class Wedstrijd extends CI_Controller {
     /**
     * Toont en overzicht met meer informatie over een bepaalde wedstrijd
     * @param id van de aangeklikte wedstrijd
+    * @param tijd of de datum voor of na vandaag ligt 
     * @see Authex::getGebruikerInfo()
     * @see Wedstrijd_model::get($id)
     * @see Wedstrijd_model::getReeksenPerWedstrijd()
@@ -472,6 +486,7 @@ class Wedstrijd extends CI_Controller {
     /**
      * Tonen van error
      * @param message de boodschap die moet worden weergegeven
+     * @see Authex::GetGebruikerInfo()
      */
     public function error($message){
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
