@@ -4,7 +4,7 @@
  * View waarop de trainer een tutorial kan bekijken.
  */
  ?>
-<h2 class="paginaTitel"><i class="fas fa-angle-left"></i> Tutorial : Nieuws beheren</h2>
+<h2 class="paginaTitel">Tutorial : Nieuws beheren</h2>
 <div class="row">
     <div class="col-sm-12">
         <h3 class="paginaTitel">Inleiding</h3>

@@ -6,7 +6,8 @@
  * - Krijgt een $trainingscentrum-object binnen
  * - Wijzigingen gebeuren in de controller Trainingscentrum.php
  */
-
+echo  "<h2 class=\"paginaTitel\">Over ons pagina aanpassen</h2>";
+echo anchor('nieuws/index', 'Terug', "Class='btn btn-primary my-2 my-sm0'");
 $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan');
 ?>
 

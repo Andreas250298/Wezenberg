@@ -2,7 +2,7 @@
 /**
  * @file SupplementPerZwemmer/toekennen.php
  *
- * View een supplement kan worden toegevoegd aan een zwemmer.
+ * View waarin een supplement kan worden toegevoegd aan een zwemmer.
  */
     $dataHoeveelheid = array('class' => 'form-control mr-sm-2','type' => 'number', 'name' => 'hoeveelheid', 'id' => 'hoeveelheid', 'placeholder' => '', 'aria-label' => 'Titel', 'size' => '5', 'data-toggle' => 'tooltip', 'title' => 'Vul hier de hoeveelheid voor de iname in.', 'min' => '1', 'max' => '1000','required' => 'required');
     $dataStartDatumInname = array('class' => 'form-control mr-sm-2','type' => 'date', 'name' => 'startDatum', 'id' => 'startDatum','size' => '30', 'data-toggle' => 'tooltip', 'title' => 'vul hier de datum in dat het supplement moet worden ingenomen.','required' => 'required');
@@ -11,6 +11,7 @@
 
 
 $dataSubmit = array('class' => 'btn btn-primary my-2 my-sm0', 'value' => 'Opslaan', 'id' => 'opslaan');
+echo "<h2 class=\"paginaTitel\">Supplementen toekennen</h2>";
 echo form_open('Supplement/toekennen', 'class="form-group"');
 echo "<div class='form-group'>";
 echo form_label("Zwemmers: ", 'zwemmer') . "\n";

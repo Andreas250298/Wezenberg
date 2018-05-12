@@ -4,9 +4,9 @@
 *
 * View waarin men de supplementen kan beheren.
 */
-echo '<p>'.anchor('supplement/maakSupplement', 'Nieuw supplement aanmaken', 'class="btn btn-success"').'
-
-</p>';
+echo "<h2 class=\"paginaTitel\">Supplementen beheren</h2>";
+echo '<p>'.anchor('supplement/supplementenPerZwemmerTrainer', 'Terug', "Class='btn btn-primary my-2 my-sm0'"). " "
+ . anchor('supplement/maakSupplement', 'Nieuw supplement aanmaken', 'class="btn btn-success"') . '</p>';
 
 foreach ($supplementen as $supplement) {
     echo "<div class='card'>";
@@ -17,5 +17,3 @@ foreach ($supplementen as $supplement) {
     echo anchor('Supplement/verwijder/' . $supplement->id, 'Verwijderen', 'class="btn btn-danger"');
     echo '</div></div>';
 }
-
-echo anchor('supplement/supplementenPerZwemmerTrainer', 'Terug', "Class='btn btn-primary my-2 my-sm0'");

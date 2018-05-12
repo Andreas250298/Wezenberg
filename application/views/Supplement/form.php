@@ -4,11 +4,14 @@
  *
  * View waarin men een supplement kan aanmaken
  */
+
 if(isset($supplement)) {
+    echo "<h2 class=\"paginaTitel\">Supplement aanpassen</h2>";
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam supplement', 'aria-label' => 'Naam', 'size' => '30', 'value' => $supplement->naam);
     $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Beschrijving supplement', 'aria-label' => 'beschrijving', 'size' => '30', 'value' => $supplement->beschrijving);
 }
 else {
+  echo "<h2 class=\"paginaTitel\">Supplement toevoegen</h2>";
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam', 'aria-label' => 'Naam', 'size' => '30');
 $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Beschrijving supplement', 'aria-label' => 'beschrijving', 'size' => '30');
 

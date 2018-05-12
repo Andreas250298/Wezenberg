@@ -61,6 +61,8 @@ function haalSupplementenOp(id){
 )
 </script>
 <?php
+echo "<h2 class=\"paginaTitel\">Supplementen beheren</h2>";
+echo anchor('home/index', "<button type=\"button\" class=\"btn btn-primary mx-auto\">Terug</button>") . " ";
 
 echo anchor(
     "supplement/supplementenToekennen",
@@ -98,7 +100,6 @@ echo '<div class="form-check">
         <div id="resultaat"></div>
         </p>';
 
-echo anchor('home/index', "<button type=\"button\" class=\"btn btn-primary mx-auto\">Terug</button>");
 ?>
 <!-- Dialoogvenster -->
 <div class="modal fade" id="mijnDialoogscherm" role="dialog">

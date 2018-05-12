@@ -4,11 +4,14 @@
  *
  * View waarin men de een nieuwsitem kan toevoegen
  */
+
 if(isset($nieuwsArtikel)) {
+   echo "<h2 class=\"paginaTitel\">Nieuwsartikel aanpassen</h2>";
     $dataInputTitel = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'titel', 'id' => 'titel', 'placeholder' => 'Titel', 'aria-label' => 'Titel', 'size' => '30', 'value' => $nieuwsArtikel->titel);
     $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Schrijf hier je artikel', 'aria-label' => 'beschrijving', 'size' => '30', 'value' => $nieuwsArtikel->beschrijving);
 }
 else {
+   echo "<h2 class=\"paginaTitel\">Nieuwsartikel toevoegen</h2>";
     $dataInputTitel = array('class' => 'form-control mr-sm-2', 'type' => 'text', 'name' => 'titel', 'id' => 'titel', 'placeholder' => 'Titel', 'aria-label' => 'Titel', 'size' => '30');
 $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Schrijf hier je artikel', 'aria-label' => 'beschrijving', 'size' => '30');
 
