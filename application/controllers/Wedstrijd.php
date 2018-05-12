@@ -40,7 +40,8 @@ class Wedstrijd extends CI_Controller {
      * Toont het scherm om een nieuwe wedstrijd te maken
      * @see maken.php
      */
-    public function maakWedstrijd() {
+    public function maakWedstrijd($tijd) {
+        $data['tijd'] = $tijd;
         $data['titel'] = 'Wedstrijden aanmaken';
         $data['paginaVerantwoordelijke'] = 'De Coninck Mattias';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
