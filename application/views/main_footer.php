@@ -38,7 +38,7 @@ $link = array('class' => 'nav-link');
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
                 <p>Dit is een testproject van Team-12 voor Mangelschots Kristine</p>
-                <p class="h6">&copy Alle rechten voorbehouden.<a class="text-green ml-2" href="https://www.sunlimetech.com" target="_blank">Team 12</a></p>
+                <p class="h6">&copy Alle rechten voorbehouden. Team 12</p>
             </div>
             </hr>
         </div>	
