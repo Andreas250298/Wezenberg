@@ -117,6 +117,8 @@ if (isset($gebruiker)) {
 <p>
     <?php echo anchor('home/index', 'Terug', 'class="btn btn-primary"'); ?>
 </p>
+</div>
+
 <!-- Dialoogvenster -->
 <div class="modal fade" id="mijnDialoogscherm" role="dialog">
     <div class="modal-dialog">
@@ -139,5 +141,4 @@ if (isset($gebruiker)) {
         </div>
 
     </div>
-</div>
 </div>
