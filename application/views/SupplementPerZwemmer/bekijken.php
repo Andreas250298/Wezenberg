@@ -101,6 +101,7 @@ echo '<div class="form-check">
         </p>';
 
 ?>
+</div>
 <!-- Dialoogvenster -->
 <div class="modal fade" id="mijnDialoogscherm" role="dialog">
     <div class="modal-dialog">
