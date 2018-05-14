@@ -46,8 +46,7 @@ foreach ($nieuwsArtikels as $artikel) {
     echo '<p class="nieuwsartikel"><li class="media">';
     if ($artikel->foto != null) {
         echo "<img class='img-fluid mr-3' src='" . base_url($artikel->foto) . "' width='200' height='100'/>";
-    }
-    else{
+    } else {
         echo toonAfbeelding('nieuws.png', 'class="img-fluid mr-3" width="200" maxheight="100"');
     }
 

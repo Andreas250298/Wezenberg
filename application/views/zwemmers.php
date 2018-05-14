@@ -7,7 +7,7 @@
  * -Een zwemmer kan dit ook voor elke zwemmer maar kan zijn eigen informatie aanpassen via een extra knop
  * -Een zwemmer kan elke zwemmer aanpassen, inactief maken en verwijderen
  */
- 
+
  ?>
 <script>
 var id = "";
@@ -38,69 +38,91 @@ var id = "";
     })
 
 </script>
+<style>
+.zwem {
+  float: left;
+}
+</style>
 <?php
 $teller = 0;
 $zwemmersTabel = "";
+$dt = new DateTime;
+$jaar = $dt->format('o');
+
 ?>
-
-
-<div class="container text-center">
-    <div class="row">
-        <div class="col-lg-10 offset-md-1">
             <h3>Zwemmers</h3>
             <p>Klik op een zwemmer voor meer info</p>
-            <div class="table-responsive">
-            <table class="mt-3">
-                <?php foreach ($zwemmers as $zwemmer) {
-    if ($teller == 4 || $teller == 0) { // nieuwe rij tabel maken bij start foreach en na elke 4de zwemmer
-        echo "<tr>";
-    }
-    if ($zwemmer->foto != "") {
-        echo '<td id="' .$zwemmer->id.'" class="p-3">'
-                          . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, "<img width=200 height=200 src=" . base_url($zwemmer->foto) . ">")
-                          . "<br/>"
-                          . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, $zwemmer->naam);
-    } else {
-        echo '<td id="' .$zwemmer->id.'" class="p-3">'
-                        . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, "<img src=\"http://placehold.it/200x200\"")
-                        . "<br/>"
-                        . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, $zwemmer->naam);
-    }
-    // knoppen tonen indien ingelogd als trainer
-    if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
-        echo "<br/>" . anchor('gebruiker/wijzig/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ")
-                            . anchor('gebruiker/maakInactief/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button> ")
-                            . "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>";
-    }
-    //
 
-    echo "</td>";
+  <?php
+  foreach ($zwemmers as $zwemmer) {
+      $geboortedatum = explode("-", $zwemmer->geboortedatum);
+      if ($geboortedatum[0] != null) {
+          $leeftijd = $jaar - $geboortedatum[0];
+      }
+      echo "\n<p class=nieuwsartikel>\n\t<li class=\"media\">\n";
+      echo "<div class=\"media-body\">\n";
+      if ($zwemmer->foto != "") {
+          echo anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, "<img class='img-fluid mr-3 zwem' width=200 height=200 src=" . base_url($zwemmer->foto) . ">") . "\n";
+      } else {
+          echo anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, "<img class='img-fluid mr-3 zwem' width=200 maxheight=200 src=\"http://placehold.it/200x200\">") . "\n";
+      }
+      echo "<h5 class=\"mt-0 mb-1\">\n\t". anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, $zwemmer->naam) . "\n</h5>\n";
+      echo "<p class=\"text-muted\">" . $leeftijd . "</p>\n";
+      // knoppen tonen indien ingelogd als trainer
+      if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
+          echo '<p id="' . $zwemmer->id .'">';
+          echo anchor('gebruiker/wijzig/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ");
+          echo anchor('gebruiker/maakInactief/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button> ");
+          echo "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>\n";
+          echo "\t</p>\n";
+      }
+      //
 
-    if ($teller == 4) { // teller resetten
-        echo "</tr>";
-        $teller = 0;
-    }
-    $teller++;
-}; ?>
-            </table>
-          </div>
-        </div>
-    </div>
+      echo "\n\t\t</div>\n\t</li>\n</p>";
+  } ?>
+  <hr/>
+  <h3>Trainers</h3>
+  <p>Klik op een trainer voor meer info</p>
 
-    <div class="row">
+<?php
+foreach ($trainers as $trainer) {
+      $geboortedatum = explode("-", $trainer->geboortedatum);
+      if ($geboortedatum[0] != null) {
+          $leeftijd = $jaar - $geboortedatum[0];
+      }
+      echo "\n<p class=nieuwsartikel>\n\t<li class=\"media\">\n";
+      echo "<div class=\"media-body\">\n";
+      if ($trainer->foto != "") {
+          echo anchor('gebruiker/toonZwemmerInfo/' . $trainer->id, "<img class='img-fluid mr-3 zwem' width=200 height=200 src=" . base_url($trainer->foto) . ">") . "\n";
+      } else {
+          echo anchor('gebruiker/toonZwemmerInfo/' . $trainer->id, "<img class='img-fluid mr-3 zwem' width=200 maxheight=200 src=\"http://placehold.it/200x200\">") . "\n";
+      }
+      echo "<h5 class=\"mt-0 mb-1\">\n\t". anchor('gebruiker/toonZwemmerInfo/' . $trainer->id, $trainer->naam) . "\n</h5>\n";
+      echo "<p class=\"text-muted\">" . $leeftijd . "</p>\n";
+      // knoppen tonen indien ingelogd als trainer
+      if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
+          echo '<p id="' . $trainer->id .'">';
+          echo anchor('gebruiker/wijzig/'. $trainer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ");
+          echo anchor('gebruiker/maakInactief/'. $trainer->id, "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button> ");
+          echo "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>\n";
+          echo "\t</p>\n";
+      }
+//
+
+      echo "\n\t\t</div>\n\t</li>\n</p>";
+  } ?>
         <div class="col-lg-12 mt-2 mb-2">
             <?php
             // link gebruiker maken tonen enkel indien als trainer ingelogd
             if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
                 echo "<p id='test'>" . anchor('gebruiker/maakGebruiker', "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-user-plus\"></i></button>") .
-                "&nbsp;&nbsp;&nbsp;" . anchor('gebruiker/toonInactieveZwemmers', 'Toon inactieve zwemmers') ."</p>";
+                "&nbsp;&nbsp;&nbsp;" . anchor('gebruiker/toonInactieveZwemmers', 'Toon inactieve zwemmers', "Class='btn btn-primary my-2 my-sm0'") ."</p>";
             }
             ?>
 
             <?php echo '<p>' . anchor('home', 'Terug', "Class='btn btn-primary my-2 my-sm0'") . '</p>';?>
-        </div>
+        <!--</div>-->
     </div>
-</div>
 
 <!-- Dialoogvenster -->
 <div class="modal fade" id="mijnDialoogscherm" role="dialog">

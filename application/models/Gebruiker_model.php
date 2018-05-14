@@ -7,9 +7,9 @@
 */
 class Gebruiker_model extends CI_Model
 {
-  /**
-   * Constructor
-   */
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct();
@@ -28,19 +28,33 @@ class Gebruiker_model extends CI_Model
         return $query->row();
     }
     /**
-     * Alle reeksen ophalen uit de database
+     * Alle zwemmers ophalen uit de database
      * @return De opgevraagde record(s)
      */
     public function getAllZwemmers()
     {
-      $this->db->where('soort', 'zwemmer');
-      $query = $this->db->get('gebruiker');
-      if ($query->num_rows() == 0)
-      {
-        return null;
-      } else {
-        return $query->result();
-      }
+        $this->db->where('soort', 'zwemmer');
+        $query = $this->db->get('gebruiker');
+        if ($query->num_rows() == 0) {
+            return null;
+        } else {
+            return $query->result();
+        }
+    }
+
+    /**
+     * Alle trainers ophalen uit de database
+     * @return De opgevraagde record(s)
+     */
+    public function getAllTrainers()
+    {
+        $this->db->where('soort', 'trainer');
+        $query = $this->db->get('gebruiker');
+        if ($query->num_rows() == 0) {
+            return null;
+        } else {
+            return $query->result();
+        }
     }
     /**
      * Een gebruiker ophalen uit de database
@@ -55,11 +69,10 @@ class Gebruiker_model extends CI_Model
 
         if ($query->num_rows() == 1) {
             $gebruiker = $query->row();
-            if (password_verify($wachtwoord, $gebruiker->wachtwoord))
-            {
-              return $gebruiker;
+            if (password_verify($wachtwoord, $gebruiker->wachtwoord)) {
+                return $gebruiker;
             } else {
-              return null;
+                return null;
             }
         } else {
             return null;
@@ -76,7 +89,7 @@ class Gebruiker_model extends CI_Model
         $query = $this->db->get('gebruiker');
         return $query->result();
     }
-    
+
     /**
      * haalt alle actieve trainers terug uit de databank
      * @return trainers Alle actieve trainers uit de databank
@@ -192,5 +205,4 @@ class Gebruiker_model extends CI_Model
         $query = $this->db->get('gebruiker');
         return $query->result();
     }
-
 }
