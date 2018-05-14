@@ -76,9 +76,9 @@ if (isset($zwemmer)) {
 
 echo form_submit($dataSubmit) . " ";
 if ($gebruiker->soort == 'trainer') {
-  echo '<p>' . anchor('gebruiker/toonZwemmers', 'Terug', "Class='btn btn-primary my-2 my-sm0'") . '</p>';
+  echo anchor('gebruiker/toonZwemmers', 'Terug', "Class='btn btn-primary my-2 my-sm0 buttonMargin'");
 } else {
-echo '<p>' . anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, 'Terug', "Class='btn btn-primary my-2 my-sm0'") . '</p>';
+echo anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, 'Terug', "Class='btn btn-primary my-2 my-sm0 buttonMargin'");
 }
 echo form_close();
 echo "</table>";

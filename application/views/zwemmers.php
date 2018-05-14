@@ -7,6 +7,7 @@
  * -Een zwemmer kan dit ook voor elke zwemmer maar kan zijn eigen informatie aanpassen via een extra knop
  * -Een zwemmer kan elke zwemmer aanpassen, inactief maken en verwijderen
  */
+ 
  ?>
 <script>
 var id = "";

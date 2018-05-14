@@ -41,10 +41,11 @@ foreach ($supplementen as $supplement) {
     echo "<option value='" . $supplement->id . "'>" . $supplement->naam . "</option>\n";
 }
 echo "</select>";
-echo "<div>";
+echo "</div>";
 echo "</br>";
 ?>
 
 <div id ="resultaat"></div>
 <?php
 echo anchor('home/index', "<button type=\"button\" class=\"btn btn-primary mx-auto\">Terug</button>");
+echo "</br></br>";

@@ -5,7 +5,7 @@
  * View waarin de zwemmer een demo kan bekijken doorheen de applicatie
  */
  ?>
-<h2 class="paginaTitel"><i class="fas fa-angle-left"></i> Demo : zwemmer</h2>
+<h2 class="paginaTitel">Demo : zwemmer</h2>
 <div class="row">
     <div class="col-sm-12">
         <h3 class="paginaTitel">Inleiding</h3>

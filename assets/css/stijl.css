@@ -285,3 +285,9 @@ section .section-title {
   text-align: justify;
 }
 /*EIND CSS ZWEMMER_INFO.PHP*/
+
+/*CSS ZWEMMER_OFRM.PHP*/
+
+.buttonMargin {
+  margin-left: 5px;
+}
