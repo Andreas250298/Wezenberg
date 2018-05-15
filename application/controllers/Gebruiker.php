@@ -38,7 +38,7 @@ class Gebruiker extends CI_Controller
     public function toonZwemmers()
     {
         $data['titel'] = 'Zwemmers';
-        $data['paginaVerantwoordelijke'] = 'De Coninck Mattias';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
         //gebruiker_model inladen
@@ -204,7 +204,7 @@ class Gebruiker extends CI_Controller
     public function toonInactieveZwemmers()
     {
         $data['titel'] = 'Zwemmers';
-        $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
         //gebruiker_model inladen
@@ -224,7 +224,7 @@ class Gebruiker extends CI_Controller
     */
     public function toonZwemmerInfo($id)
     {
-        $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
 
         $this->load->model('gebruiker_model');
         $huidigeZwemmer = $this->gebruiker_model->get($id);

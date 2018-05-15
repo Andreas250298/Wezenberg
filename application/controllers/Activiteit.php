@@ -28,7 +28,7 @@ class Activiteit extends CI_Controller {
   public function index($week, $jaar)
   {
     $data['titel'] = 'Activiteiten';
-    $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+    $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
     $gebruiker = $this->authex->getGebruikerInfo();
     $data['gebruiker'] = $gebruiker;
 
@@ -53,7 +53,7 @@ class Activiteit extends CI_Controller {
   public function aanmaken()
   {
     $data['titel'] = 'Activiteit aanmaken';
-    $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+    $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
     $gebruiker = $this->authex->getGebruikerInfo();
     $data['gebruiker'] = $gebruiker;
 
@@ -77,7 +77,7 @@ class Activiteit extends CI_Controller {
   public function aanpassen($id)
   {
     $data['titel'] = 'Activiteit aanpassen';
-    $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+    $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
     $gebruiker = $this->authex->getGebruikerInfo();
     $data['gebruiker'] = $gebruiker;
 
@@ -105,7 +105,7 @@ class Activiteit extends CI_Controller {
   public function verwijder()
   {
     $id = $this->input->get('id');
-    $data['paginaVerantwoordelijke'] = 'Bols Jordi';
+    $data['paginaVerantwoordelijke'] = 'Florian D\'Haene';
     $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
     $this->load->model('andereActiviteit_model');

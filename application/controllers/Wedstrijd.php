@@ -193,7 +193,7 @@ class Wedstrijd extends CI_Controller {
         $data['tijd'] = $tijd;
         $data['titel'] = 'Wedstrijden wijzigen';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
         $this->load->model('wedstrijd_model');
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
 
@@ -214,7 +214,7 @@ class Wedstrijd extends CI_Controller {
     public function bekijkenWedstrijden($tijd)
     {
         $data['titel'] = 'Wedstrijden bekijken';
-        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['tijd'] = $tijd;
 

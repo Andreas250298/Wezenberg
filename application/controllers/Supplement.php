@@ -149,7 +149,7 @@ class Supplement extends CI_Controller
     {
         $id = $this->input->get('id');
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $this->load->model('supplementPerZwemmer_model');
         $this->supplementPerZwemmer_model->delete($id);
 
@@ -166,7 +166,7 @@ class Supplement extends CI_Controller
     public function supplementenPerZwemmer($id)
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
 
         $this->load->model('supplement_model');
         $data['supplementen'] = $this->supplement_model->getSupplementen();
@@ -213,7 +213,7 @@ class Supplement extends CI_Controller
      */
     public function supplementenPerZwemmerTrainer()
     {
-        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
         $this->load->model('gebruiker_model');
@@ -254,7 +254,7 @@ class Supplement extends CI_Controller
     */
     public function supplementenToekennen()
     {
-        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $this->load->model('supplement_model');
         $this->load->model('gebruiker_model');
@@ -278,7 +278,7 @@ class Supplement extends CI_Controller
         $this->load->model('supplementPerZwemmer_model');
         $this->load->model('supplement_model');
 
-        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['paginaVerantwoordelijke'] = 'Sacha De Pauw';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['supplementPerZwemmer'] = $this->supplementPerZwemmer_model->get($id);
         $data['supplementen'] = $this->supplement_model->getSupplementen();

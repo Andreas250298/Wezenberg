@@ -77,7 +77,7 @@ class Home extends CI_Controller
     public function meldAan()
     {
         $data['titel'] = 'Aanmelden';
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Jorid Bols';
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
 
         $partials = array('hoofding' => 'main_header',
@@ -96,7 +96,7 @@ class Home extends CI_Controller
     public function toonFout($foutMelding)
     {
         $data['titel'] = 'Fout';
-        $data['paginaVerantwoordelijke'] = '';
+        $data['paginaVerantwoordelijke'] = 'Jordi Bols';
 
         switch ($foutMelding) {
             case 'aanmelden':
