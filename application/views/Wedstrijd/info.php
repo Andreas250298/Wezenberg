@@ -13,7 +13,7 @@ echo "<p>" . $wedstrijd->beschrijving . "</p>";
 
 if (isset($reeksen)) {
     foreach ($reeksen as $reeks) {
-        if (isset($deeknames)) {
+        if (isset($deelnames)) {
             foreach ($deelnames as $deelname) {
                 if ($deelname->reeksId == $reeks->id) {
                     $deelnameIds[] = $reeks->id;
