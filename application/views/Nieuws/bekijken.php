@@ -4,6 +4,7 @@
  *
  * View waarop een nieuwsartikel kan worden bekeken.
  */
+ echo "<p>";
  if(isset($gebruiker->soort)) {
    if ($gebruiker->soort == 'trainer') {
        echo anchor('Nieuws/index', 'terug', 'class="btn btn-primary"');
@@ -11,6 +12,7 @@
  } else {
      echo anchor('home/index', 'terug', 'class="btn btn-primary"');
    }
+   echo "</p>";
   if($nieuwsArtikel->foto != ""){
     echo "<img class='img-fluid' src='" . base_url($nieuwsArtikel->foto) . "'/>";
   }
