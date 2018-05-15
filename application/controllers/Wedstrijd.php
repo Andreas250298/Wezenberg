@@ -38,7 +38,7 @@ class Wedstrijd extends CI_Controller {
 
     /**
      * Toont het scherm om een nieuwe wedstrijd te maken
-     * @param tijd of de datum voor of na vandaag ligt 
+     * @param tijd of de datum voor of na vandaag ligt
      * @see maken.php
      */
     public function maakWedstrijd($tijd) {
@@ -61,7 +61,7 @@ class Wedstrijd extends CI_Controller {
 
     /**
      * Maakt een nieuwe entry aan in de wedstrijd-database met de opgegeven info uit maken.php
-     * @param tijd of de datum voor of na vandaag ligt 
+     * @param tijd of de datum voor of na vandaag ligt
      * @see Wedstrijd_model::insert()
      * @see Wedstrijd_model::update()
      */
@@ -149,7 +149,7 @@ class Wedstrijd extends CI_Controller {
 
     /**
      * Maakt een nieuwe entry aan in de wedstrijd-database met de opgegeven info uit maken.php
-     * @param tijd of de datum voor of na vandaag ligt 
+     * @param tijd of de datum voor of na vandaag ligt
      * @see Wedstrijd_model::insert()
      * @see Wedstrijd_model::update()
      */
@@ -184,7 +184,7 @@ class Wedstrijd extends CI_Controller {
     /**
      * Toont de pagina voor de wedstrijd-informatie aan te passen
      * @param id De id van de aan te passen wedstrijd
-     * @param tijd of de datum voor of na vandaag ligt 
+     * @param tijd of de datum voor of na vandaag ligt
      * @see Wedstrijd_model::get()
      * @see beheren.php
      */
@@ -206,7 +206,7 @@ class Wedstrijd extends CI_Controller {
 
     /**
      * Toont de pagina voor de wedstrijden te beheren
-     * @param tijd of de datum voor of na vandaag ligt 
+     * @param tijd of de datum voor of na vandaag ligt
      * @see Authex::getGebruikerInfo()
      * @see Wedstrijd_model::toonWedstrijden()
      * @see bekijken.php
@@ -217,14 +217,14 @@ class Wedstrijd extends CI_Controller {
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['tijd'] = $tijd;
-        
+
         $this->load->model('wedstrijd_model');
         if ($tijd === "voor"){
             $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenVoorVandaagASC();
         } else {
             $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenVanafVandaagASC();
         }
-       
+
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'Wedstrijd/bekijken',
@@ -262,7 +262,7 @@ class Wedstrijd extends CI_Controller {
                     }
                 }
                 $data['wedstrijden'] = $wedstrijden;
-            }  
+            }
             $this->load->view('Wedstrijd/ajax_bekijken', $data);
         }
     }
@@ -324,9 +324,8 @@ class Wedstrijd extends CI_Controller {
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->toonWedstrijdenASC();
         $this->load->model('deelname_model');
-        $data['status'] = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
-        $data['deelname'] = $this->deelname_model->get($gebruiker->id);
-        
+        $data['deelnames'] = $this->deelname_model->getStatusPerGebruiker($gebruiker->id);
+
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'Wedstrijd/inschrijvingen',
             'voetnoot' => 'main_footer');
@@ -338,16 +337,31 @@ class Wedstrijd extends CI_Controller {
     * @see Authex::getGebruikerInfo()
     * @see inschrijven.php
     */
-    public function inschrijven()
+    public function inschrijven($reeksId, $tijd)
     {
-        $data['titel'] = "Inschrijven webstrijden";
+        $data['titel'] = "Inschrijving ontvangen";
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
 
-        $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'Wedstrijd/inschrijven',
-            'voetnoot' => 'main_footer');
-        $this->template->load('main_master', $partials, $data);
+        if ($reeksId != null && $tijd == 1) {
+            $deelname = new stdClass();
+            $deelname->gebruikerIdZwemmer = $data['gebruiker']->id;
+            $deelname->statusId = 1;
+            $deelname->reeksId = $reeksId;
+
+            $this->load->model('deelname_model');
+            $this->deelname_model->insert($deelname);
+            
+            $partials = array('hoofding' => 'main_header',
+                'inhoud' => 'Wedstrijd/inschrijven',
+                'voetnoot' => 'main_footer');
+            $this->template->load('main_master', $partials, $data);
+        } else {
+            redirect('/Wedstrijd/info/' . $reeksId . '/' . $tijd);
+        }
+
+
+
     }
 
     /**
@@ -363,7 +377,7 @@ class Wedstrijd extends CI_Controller {
         $data['titel'] = "Reeksen toeveogen";
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
         $data['tijd'] = $tijd;
-        
+
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $this->load->model('wedstrijd_model');
         //$data['wedstrijd'] = $this->wedstrijd_model->get($id);
@@ -412,7 +426,7 @@ class Wedstrijd extends CI_Controller {
     /**
     * Toont en overzicht met meer informatie over een bepaalde wedstrijd
     * @param id van de aangeklikte wedstrijd
-    * @param tijd of de datum voor of na vandaag ligt 
+    * @param tijd of de datum voor of na vandaag ligt
     * @see Authex::getGebruikerInfo()
     * @see Wedstrijd_model::get($id)
     * @see Wedstrijd_model::getReeksenPerWedstrijd()
@@ -425,19 +439,23 @@ class Wedstrijd extends CI_Controller {
         $data['titel'] = "Meer info van wedstrijd";
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
-        $data['tijd'] = $tijd;
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijd'] = $this->wedstrijd_model->get($id);
-        $wedstrijd = $data['wedstrijd'];
-        $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($wedstrijd->id);
-        $this->load->model('reeks_model');
-        $data['slagenPerReeks'] = $this->reeks_model->getSlagenPerReeks($id);
-        $data['afstanden'] = $this->reeks_model->getAfstandenPerReeks($id);
 
-        $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'Wedstrijd/info',
-            'voetnoot' => 'main_footer');
-        $this->template->load('main_master', $partials, $data);
+        if ($tijd == 1)
+        {
+            $this->load->model('wedstrijd_model');
+            $this->load->model('deelname_model');
+            $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
+            $data['wedstrijd'] = $this->wedstrijd_model->get($id);
+            $data['deelnames'] = $this->deelname_model->getDeelnamesBijWedstrijd($id, $data['gebruiker']->id);
+
+            $partials = array('hoofding' => 'main_header',
+                'inhoud' => 'Wedstrijd/info',
+                'voetnoot' => 'main_footer');
+            $this->template->load('main_master', $partials, $data);
+        } else {
+            // Naar foutpagina?
+            redirect('/home/index/');
+        }
     }
 
     /**

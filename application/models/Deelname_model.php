@@ -28,6 +28,17 @@ class Deelname_model extends CI_Model
     }
 
     /**
+     * Een deelname toevoegen aan de database
+     * @param deelname De deelname die moet toegevoegd worden
+     * @return Het insert id van de deelname
+     */
+    public function insert($deelname)
+    {
+        $this->db->insert('deelname', $deelname);
+        return $this->db->insert_id();
+    }
+
+    /**
      * Deelname(s) van een zwemmer ophalen uit de database
      * @param id Het id van de zwemmer waar de deelnames aan gekoppeld zijn
      * @return De opgevraagde record(s)
@@ -44,6 +55,35 @@ class Deelname_model extends CI_Model
             return $query->result();
         }
     }
+
+    /**
+     * Deelname(s) van een zwemmer aan een wedstrijd ophalen uit de database
+     * @param wedstrijdId Het id van de wedstrijd waar de deelnames van opgehaald moeten worden
+     * @param zwemmerId Het id van de zwemmer waar de deelnames aan gekoppeld zijn
+     * @return De opgevraagde record(s)
+     */
+     public function getDeelnamesBijWedstrijd($wedstrijdId, $zwemmerId)
+     {
+         $this->load->model('wedstrijd_model');
+         $reeksen = $this->wedstrijd_model->getReeksenPerWedstrijd($wedstrijdId);
+
+         if ($reeksen != null) {
+            foreach ($reeksen as $reeks) {
+                 $ids[] = $reeks->id;
+             }
+             $this->db->where('gebruikerIdZwemmer', $zwemmerId);
+             $this->db->where_in('reeksId', $ids);
+             $deelnames = $this->db->get('deelname')->result();
+
+             $this->load->model('reeks_model');
+             foreach ($deelnames as $deelname) {
+                 $deelname->reeks = $this->reeks_model->getReeksMetInfo($deelname->reeksId);
+             }
+             return $deelnames;
+        } else {
+            return null;
+        }
+     }
 
     /**
     * Haalt deelnames in week op van bepaalde zwemmer

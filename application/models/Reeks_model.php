@@ -115,6 +115,23 @@ class Reeks_model extends CI_Model
     }
 
     /**
+    * Haalt reeks met afstand en slag op
+    *
+    */
+    public function getReeksMetInfo($id)
+    {
+        $this->load->model('afstand_model');
+        $this->load->model('slag_model');
+
+        $this->db->where('id', $id);
+        $reeks = $this->db->get('reeks')->row();
+        $reeks->slag = $this->slag_model->get($reeks->slagId);
+        $reeks->afstand = $this->afstand_model->get($reeks->afstandId);
+
+        return $reeks;
+    }
+
+    /**
      * Een reeks toevoegen aan de database
      * @param reeks De reeks die moet toegevoegd worden
      * @return Het insert id van de wedstrijd

@@ -49,8 +49,8 @@ class Wedstrijd_model extends CI_Model
     public function toonWedstrijdenVanafVandaagASC(){
         $this->db->order_by('beginDatum','asc');
         $query = $this->db->get('wedstrijd')->result();
-       
-        
+
+
         $wedstrijden = [];
         if ($query != null){
             foreach($query as $q){
@@ -59,14 +59,14 @@ class Wedstrijd_model extends CI_Model
                 }
             }
         }
-        return $wedstrijden;  
+        return $wedstrijden;
     }
 
     public function toonWedstrijdenVoorVandaagASC(){
         $this->db->order_by('beginDatum','asc');
         $query = $this->db->get('wedstrijd')->result();
-       
-        
+
+
         $wedstrijden = [];
         if ($query != null){
             foreach($query as $q){
@@ -75,7 +75,7 @@ class Wedstrijd_model extends CI_Model
                 }
             }
         }
-        return $wedstrijden;  
+        return $wedstrijden;
     }
 
     /**
@@ -120,7 +120,19 @@ class Wedstrijd_model extends CI_Model
     {
         $this->db->where('wedstrijdId', $id);
         $query = $this->db->get('reeks');
-        return $query->result();
+        if ($query->num_rows() > 0) {
+            $this->load->model('afstand_model');
+            $this->load->model('slag_model');
+
+            $reeksen = $query->result();
+            foreach ($reeksen as $reeks) {
+                $reeks->slag = $this->slag_model->get($reeks->slagId);
+                $reeks->afstand = $this->afstand_model->get($reeks->afstandId);
+            }
+            return $reeksen;
+        } else {
+            return null;
+        }
     }
     /**
      * Slagen behorende bij een deelname uit de database ophalen
@@ -186,7 +198,7 @@ class Wedstrijd_model extends CI_Model
                         $this->db->where('id', $rondeResultaat->id);
                         $this->db->delete('rondeResultaat');
                     }
-                    
+
                     $this->db->where('id',$deelname->id);
                     $this->db->delete('deelname');
             }
