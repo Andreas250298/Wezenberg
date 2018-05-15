@@ -13,10 +13,11 @@ echo "<p>" . $wedstrijd->beschrijving . "</p>";
 
 if (isset($reeksen)) {
     foreach ($reeksen as $reeks) {
-
-        foreach ($deelnames as $deelname) {
-            if ($deelname->reeksId == $reeks->id) {
-                $deelnameIds[] = $reeks->id;
+        if (isset($deelnames)) {
+            foreach ($deelnames as $deelname) {
+                if ($deelname->reeksId == $reeks->id) {
+                    $deelnameIds[] = $reeks->id;
+                }
             }
         }
 
@@ -29,6 +30,7 @@ if (isset($reeksen)) {
                                             <td>' . $deelname->reeks->slag->soort . '</td>
                                             <td>' . $deelname->reeks->afstand->afstand . '</td>
                                             <td>' . verkortTijdstip($deelname->reeks->tijdstip) . '</td>';
+
                     if ($tijd = "na") {
                         switch ($deelname->statusId) {
                             case 1:
@@ -61,12 +63,17 @@ if (isset($reeksen)) {
                                     <td>' . $teller . '</td>
                                     <td>' . $reeks->slag->soort . '</td>
                                     <td>' . $reeks->afstand->afstand . '</td>
-                                    <td>' . verkortTijdstip($reeks->tijdstip) . '</td>
-                                    <td>Open</td>';
-            if ($tijd == "na") {
+                                    <td>' . verkortTijdstip($reeks->tijdstip) . '</td>'
+                                    ;
+            if ($tijd == "na" && $gebruiker != null) {
+                $lijstWedstrijden .= '<td>Open</td>';
                 $lijstWedstrijden .=  '<td>' . anchor('Wedstrijd/inschrijven/' . $reeks->id . '/na', 'Inschrijven') . '</td>';
             } else {
-                $lijstWedstrijden .=  '<td>Deze wedstrijd is afgelopen</td>';
+                if ($gebruiker == null) {
+                    $lijstWedstrijden .= "<td>Niet van toepassing</td><td>Niet van toepassing</td>";
+                } else {
+                    $lijstWedstrijden .=  '<td>Deze wedstrijd is afgelopen</td>';
+                }
             }
 
             $lijstWedstrijden .= '</tr>';
@@ -75,8 +82,7 @@ if (isset($reeksen)) {
     }
 }
 
-if ($reeksen != null)
-{
+if ($reeksen != null) {
     echo "<div class=\"table-responsive\">
             <table class=\"table\">
                 <thead>
