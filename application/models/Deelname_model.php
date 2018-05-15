@@ -28,6 +28,32 @@ class Deelname_model extends CI_Model
     }
 
     /**
+     * past een deelname aan in de database
+     * @param deelname de toe te voegen deelname
+     */
+    public function update($deelname)
+    {
+        $this->db->where('id', $deelname->id);
+        $this->db->update('deelname', $deelname);
+    }
+
+    /**
+     * Keurt een deelname aan in de database
+     * @param deelname de toe te voegen deelname
+     */
+    public function behandelInschrijving($id, $goed)
+    {
+        $deelname = $this->deelname_model->get($id);
+        if ($goed) {
+            $deelname->statusId = 2;
+        } else {
+            $deelname->statusId = 3;
+        }
+
+        $this->deelname_model->update($deelname);
+    }
+
+    /**
      * Alle deelnames ophalen uit de database gesorteerd op soort
      * @param id Het id van de deelname
      * @return deelnames Alle deelnames met hun informatie

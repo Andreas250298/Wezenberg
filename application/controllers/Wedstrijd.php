@@ -527,6 +527,11 @@ class Wedstrijd extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+    * Tonen van een overzicht van alle inschrijvingen
+    * @see deelname_model::getDeelnamesMetStatus()
+    * @see inschrijvingen_trainer.php
+    */
     public function toonInschrijvingen()
     {
         $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
@@ -541,4 +546,13 @@ class Wedstrijd extends CI_Controller
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+
+    public function behandelInschrijving($id, $goed) {
+        $this->load->model('deelname_model');
+        $deelname = $this->deelname_model->behandelInschrijving($id, $goed);
+
+        redirect('Wedstrijd/toonInschrijvingen/');
+    }
+
+
 }

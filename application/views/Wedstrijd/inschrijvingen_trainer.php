@@ -11,8 +11,8 @@
                      <td>' . $deelname->reeks->afstand->afstand . '</td>
                      <td>' . $deelname->status->naam . '</td>
                      <td>' .
-                        anchor('Wedstrijd/keurGoed/' . $deelname->id, '<i class="fas fa-check"></i>', $attributesGoed) . ' ' .
-                        anchor('Wedstrijd/keurAf/' . $deelname->id, '<i class="fas fa-times"></i>', $attributesWeiger) . '
+                        anchor('Wedstrijd/behandelInschrijving/' . $deelname->id . '/' . true, '<i class="fas fa-check"></i>', $attributesGoed) . ' ' .
+                        anchor('Wedstrijd/behandelInschrijving/' . $deelname->id . '/' . false, '<i class="fas fa-times"></i>', $attributesWeiger) . '
                     </td>
                 </tr>';
     }
