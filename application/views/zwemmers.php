@@ -67,7 +67,7 @@ $jaar = $dt->format('o');
           echo anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, "<img class='img-fluid mr-3 zwem' width=200 maxheight=200 src=\"http://placehold.it/200x200\">") . "\n";
       }
       echo "<h5 class=\"mt-0 mb-1\">\n\t". anchor('gebruiker/toonZwemmerInfo/' . $zwemmer->id, $zwemmer->naam) . "\n</h5>\n";
-      echo "<p class=\"text-muted\">" . $leeftijd . "</p>\n";
+      echo "<p class=\"text-muted\">Leeftijd: " . $leeftijd . "</p>\n";
       // knoppen tonen indien ingelogd als trainer
       if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
           echo '<p id="' . $zwemmer->id .'">';
@@ -98,13 +98,11 @@ foreach ($trainers as $trainer) {
           echo anchor('gebruiker/toonZwemmerInfo/' . $trainer->id, "<img class='img-fluid mr-3 zwem' width=200 maxheight=200 src=\"http://placehold.it/200x200\">") . "\n";
       }
       echo "<h5 class=\"mt-0 mb-1\">\n\t". anchor('gebruiker/toonZwemmerInfo/' . $trainer->id, $trainer->naam) . "\n</h5>\n";
-      echo "<p class=\"text-muted\">" . $leeftijd . "</p>\n";
+      echo "<p class=\"text-muted\">Leeftijd: " . $leeftijd . "</p>\n";
       // knoppen tonen indien ingelogd als trainer
       if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
           echo '<p id="' . $trainer->id .'">';
           echo anchor('gebruiker/wijzig/'. $trainer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ");
-          echo anchor('gebruiker/maakInactief/'. $trainer->id, "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button> ");
-          echo "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>\n";
           echo "\t</p>\n";
       }
 //
@@ -116,11 +114,12 @@ foreach ($trainers as $trainer) {
             // link gebruiker maken tonen enkel indien als trainer ingelogd
             if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
                 echo "<p id='test'>" . anchor('gebruiker/maakGebruiker', "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-user-plus\"></i></button>") .
-                "&nbsp;&nbsp;&nbsp;" . anchor('gebruiker/toonInactieveZwemmers', 'Toon inactieve zwemmers', "Class='btn btn-primary my-2 my-sm0'") ."</p>";
+                "&nbsp;&nbsp;&nbsp;" . anchor('gebruiker/toonInactieveZwemmers', 'Toon inactieve zwemmers', "Class='btn btn-primary my-2 my-sm0'");
+                echo " " . anchor('home', 'Terug', "Class='btn btn-primary my-2 my-sm0'")  ."</p>";
+            } else {
+              echo anchor('home', 'Terug', "Class='btn btn-primary my-2 my-sm0'");
             }
             ?>
-
-            <?php echo '<p>' . anchor('home', 'Terug', "Class='btn btn-primary my-2 my-sm0'") . '</p>';?>
         <!--</div>-->
     </div>
 
