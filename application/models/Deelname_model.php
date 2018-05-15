@@ -16,8 +16,8 @@ class Deelname_model extends CI_Model
     }
 
     /**
-     * Een reeks ophalen uit de database
-     * @param id Het id van de reeks waar de slag aan gekoppeld is
+     * Een deelname ophalen uit de database
+     * @param id Het id van de deelname
      * @return Het opgevraagde record
      */
     public function get($id)
@@ -25,6 +25,43 @@ class Deelname_model extends CI_Model
         $this->db->where('id', $id);
         $query = $this->db->get('deelname');
         return $query->row();
+    }
+
+    /**
+     * Alle deelnames ophalen uit de database gesorteerd op soort
+     * @param id Het id van de deelname
+     * @return deelnames Alle deelnames met hun informatie
+     */
+    public function getDeelnamesMetStatus()
+    {
+        $ids = array(1, 2, 3);
+
+        $this->db->where_in('statusId', $ids);
+        $this->db->order_by("statusId", "asc");
+        $deelnames = $this->db->get('deelname')->result();
+
+        $this->load->model('gebruiker_model');
+        $this->load->model('status_model');
+        $this->load->model('reeks_model');
+        $this->load->model('wedstrijd_model');
+        $this->load->model('slag_model');
+        $this->load->model('afstand_model');
+
+        foreach ($deelnames as $deelname) {
+            $deelname->zwemmer = $this->gebruiker_model->get($deelname->gebruikerIdZwemmer);
+            $deelname->status = $this->status_model->get($deelname->statusId);
+            $deelname->reeks = $this->reeks_model->get($deelname->reeksId);
+            $deelname->reeks->wedstrijd = $this->wedstrijd_model->get($deelname->reeks->wedstrijdId);
+            $deelname->reeks->slag = $this->slag_model->get($deelname->reeks->slagId);
+            $deelname->reeks->afstand = $this->afstand_model->get($deelname->reeks->afstandId);
+            if ($deelname->reeks->wedstrijd->beginDatum > date('Y-m-d')) {
+                $deelname->tijd = "na";
+            } else {
+                $deelname->tijd = "voor";
+            }
+        }
+
+        return $deelnames;
     }
 
     /**
@@ -58,6 +95,8 @@ class Deelname_model extends CI_Model
 
     /**
      * Deelname(s) van een zwemmer aan een wedstrijd ophalen uit de database
+     * @see wedstrijd_model::getReeksenPerWedstrijd();
+     * @see reeks_model::getReeksMetInfo();
      * @param wedstrijdId Het id van de wedstrijd waar de deelnames van opgehaald moeten worden
      * @param zwemmerId Het id van de zwemmer waar de deelnames aan gekoppeld zijn
      * @return De opgevraagde record(s)

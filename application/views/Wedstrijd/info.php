@@ -29,23 +29,27 @@ if (isset($reeksen)) {
                                             <td>' . $deelname->reeks->slag->soort . '</td>
                                             <td>' . $deelname->reeks->afstand->afstand . '</td>
                                             <td>' . verkortTijdstip($deelname->reeks->tijdstip) . '</td>';
-                    switch ($deelname->statusId) {
-                        case 1:
-                            $lijstWedstrijden .= '<td>In behandeling</td>
-                                                  <td>Inschrijven is op dit moment niet mogelijk</td>';
-                            break;
-                        case 2:
-                            $lijstWedstrijden .= '<td>Geaccepteerd</td>
-                                                  <td>Inschrijven is op dit moment niet mogelijk</td>';
-                            break;
-                        case 3:
-                            $lijstWedstrijden .= '<td>Geweigerd</td>
-                                                  <td>Inschrijven is op dit moment niet mogelijk</td>';
-                            break;
-                        case 4:
-                            $lijstWedstrijden .= '<td>Open</td>
-                                                  <td>' . anchor('Wedstrijd/inschrijven/' . $deelname->reeks->id . '/1', 'Inschrijven') . '</td>';
-                            break;
+                    if ($tijd = "na") {
+                        switch ($deelname->statusId) {
+                            case 1:
+                                $lijstWedstrijden .= '<td>In behandeling</td>
+                                                      <td>Inschrijven is op dit moment niet mogelijk</td>';
+                                break;
+                            case 2:
+                                $lijstWedstrijden .= '<td>Geaccepteerd</td>
+                                                      <td>Inschrijven is op dit moment niet mogelijk</td>';
+                                break;
+                            case 3:
+                                $lijstWedstrijden .= '<td>Geweigerd</td>
+                                                      <td>Inschrijven is op dit moment niet mogelijk</td>';
+                                break;
+                            case 4:
+                                $lijstWedstrijden .= '<td>Open</td>
+                                                      <td>' . anchor('Wedstrijd/inschrijven/' . $deelname->reeks->id . '/na', 'Inschrijven') . '</td>';
+                                break;
+                        }
+                    } else {
+                        $lijstWedstrijden .=  '<td>Deze wedstrijd is afgelopen</td>';
                     }
                     $lijstWedstrijden .= '</tr>';
                     $teller++;
@@ -58,9 +62,14 @@ if (isset($reeksen)) {
                                     <td>' . $reeks->slag->soort . '</td>
                                     <td>' . $reeks->afstand->afstand . '</td>
                                     <td>' . verkortTijdstip($reeks->tijdstip) . '</td>
-                                    <td>Open</td>
-                                    <td>' . anchor('Wedstrijd/inschrijven/' . $reeks->id . '/1', 'Inschrijven') . '</td>
-                                </tr>';
+                                    <td>Open</td>';
+            if ($tijd == "na") {
+                $lijstWedstrijden .=  '<td>' . anchor('Wedstrijd/inschrijven/' . $reeks->id . '/na', 'Inschrijven') . '</td>';
+            } else {
+                $lijstWedstrijden .=  '<td>Deze wedstrijd is afgelopen</td>';
+            }
+
+            $lijstWedstrijden .= '</tr>';
             $teller++;
         }
     }

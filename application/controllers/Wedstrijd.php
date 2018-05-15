@@ -343,7 +343,7 @@ class Wedstrijd extends CI_Controller {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
 
-        if ($reeksId != null && $tijd == 1) {
+        if ($reeksId != null && $tijd == "na") {
             $deelname = new stdClass();
             $deelname->gebruikerIdZwemmer = $data['gebruiker']->id;
             $deelname->statusId = 1;
@@ -351,7 +351,7 @@ class Wedstrijd extends CI_Controller {
 
             $this->load->model('deelname_model');
             $this->deelname_model->insert($deelname);
-            
+
             $partials = array('hoofding' => 'main_header',
                 'inhoud' => 'Wedstrijd/inschrijven',
                 'voetnoot' => 'main_footer');
@@ -439,23 +439,18 @@ class Wedstrijd extends CI_Controller {
         $data['titel'] = "Meer info van wedstrijd";
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
+        $data['tijd'] = $tijd;
 
-        if ($tijd == 1)
-        {
-            $this->load->model('wedstrijd_model');
-            $this->load->model('deelname_model');
-            $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
-            $data['wedstrijd'] = $this->wedstrijd_model->get($id);
-            $data['deelnames'] = $this->deelname_model->getDeelnamesBijWedstrijd($id, $data['gebruiker']->id);
+        $this->load->model('wedstrijd_model');
+        $this->load->model('deelname_model');
+        $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
+        $data['wedstrijd'] = $this->wedstrijd_model->get($id);
+        $data['deelnames'] = $this->deelname_model->getDeelnamesBijWedstrijd($id, $data['gebruiker']->id);
 
-            $partials = array('hoofding' => 'main_header',
-                'inhoud' => 'Wedstrijd/info',
-                'voetnoot' => 'main_footer');
-            $this->template->load('main_master', $partials, $data);
-        } else {
-            // Naar foutpagina?
-            redirect('/home/index/');
-        }
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'Wedstrijd/info',
+            'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
     }
 
     /**
@@ -514,6 +509,21 @@ class Wedstrijd extends CI_Controller {
         $data['titel'] = 'Error';
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'error',
+          'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    public function toonInschrijvingen()
+    {
+        $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $data['titel'] = 'Inschrijvingen bekijken';
+
+        $this->load->model('deelname_model');
+        $data['deelnames'] = $this->deelname_model->getDeelnamesMetStatus();
+
+        $partials = array('hoofding' => 'main_header',
+          'inhoud' => 'Wedstrijd/inschrijvingen_trainer',
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }

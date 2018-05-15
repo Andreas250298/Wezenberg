@@ -25,17 +25,17 @@ foreach ($wedstrijden as $wedstrijd)
     if ($wedstrijd->beginDatum > date("Y-m-d"))
     {
         $lijstWedstrijden .= '<tr>
-                                <td>' . anchor('Wedstrijd/info/' . $wedstrijd->id."/1", $wedstrijd->naam).'</td>
+                                <td>' . anchor('Wedstrijd/info/' . $wedstrijd->id."/na", $wedstrijd->naam).'</td>
                                 <td>' . $wedstrijd->plaats . '</td>
                                 <td>' . zetOmNaarDDMMYYYY($wedstrijd->beginDatum) . '</td>
                                 <td>' . zetOmNaarDDMMYYYY($wedstrijd->eindDatum) . '</td>
                             </tr>';
     } else {
         $lijstAfgelopenWedstrijden .= '<tr>
-                                          <td>' . anchor('Wedstrijd/info/' . $wedstrijd->id."/0", $wedstrijd->naam) . '</td>
+                                          <td>' . anchor('Wedstrijd/info/' . $wedstrijd->id."/voor", $wedstrijd->naam) . '</td>
                                           <td>' . $wedstrijd->plaats . '</td>
-                                          <td>' . $wedstrijd->beginDatum . '</td>
-                                          <td>' . $wedstrijd->eindDatum . '</td>
+                                          <td>' . zetOmNaarDDMMYYYY($wedstrijd->beginDatum) . '</td>
+                                          <td>' . zetOmNaarDDMMYYYY($wedstrijd->eindDatum) . '</td>
                                         </tr>';
     }
 }
