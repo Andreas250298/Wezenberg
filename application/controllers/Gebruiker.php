@@ -86,7 +86,7 @@ class Gebruiker extends CI_Controller
         $gebruiker->email = $this->input->post('email');
         $gebruiker->geboortedatum = $this->input->post('geboortedatum');
         $gebruiker->beschrijving = $this->input->post('beschrijving');
-        $gebruiker->wachtwoord = password_hash($this->input->post('wachtwoord'), PASSWORD_DEFAULT);
+        //$gebruiker->wachtwoord = password_hash($this->input->post('wachtwoord'), PASSWORD_DEFAULT);
 
         $config['upload_path']          = './uploads/gebruikers';
         $config['allowed_types']        = 'gif|jpg|jpeg|png';
@@ -140,7 +140,44 @@ class Gebruiker extends CI_Controller
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+    /**
+    * Wijzigen van het wachwoord van de gebruiker volgens id
+    *  @param id De id van de gebruiker die zal moeten worden aangepast
+    *  @see Authex::getGebruikerInfo()
+    *  @see Gebruiker_model::get()
+    */
+    public function wijzigWachtwoord($id)
+    {
+        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
 
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $this->load->model('gebruiker_model');
+        $data['zwemmer'] = $this->gebruiker_model->get($id);
+        $data['titel'] = 'Zwemmer wachtwoord wijzigen';
+
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'zwemmer_wachtwoord',
+            'voetnoot' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    public function registreerWachtwoord(){
+      $id = $this->input->post('id');
+      $wachtwoord = $this->input->post('wachtwoord');
+      $data['gebruiker'] = $this->authex->getGebruikerInfo();
+      $this->load->model('gebruiker_model');
+      $gebruiker = $this->gebruiker_model->get($id);
+      $gebruiker->wachtwoord = password_hash($this->input->post('wachtwoord'), PASSWORD_DEFAULT);
+
+      $this->gebruiker_model->update($gebruiker);
+
+      $gebruiker = $this->authex->getGebruikerInfo();
+      if ($gebruiker->soort == "zwemmer") {
+          redirect('gebruiker/toonZwemmerInfo/' . $gebruiker->id);
+      } else {
+          redirect('/gebruiker/toonZwemmers');
+      }
+    }
     /**
     * Verwijderen van gebruiker via id
     * @param id De id van de gebruiker die zal worden verwijdert

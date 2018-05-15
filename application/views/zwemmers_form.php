@@ -2,7 +2,7 @@
 /**
  * @file zwemmers_form.php
  *
- * DUBBEL????
+ * View waarin zwemmers kunnen aangemaakt of worden aangepast
  */
 echo haalJavascriptOp("validator.js");
 echo "<table>";
@@ -15,8 +15,6 @@ if (isset($zwemmer)) {
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'required' => 'required', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam', 'aria-label' => 'Naam', 'size' => '30', 'value' => $zwemmer->naam);
     $dataInputEmail = array('class' => 'form-control mr-sm-2', 'required' => 'required', 'name' => 'email', 'id' => 'email', 'placeholder' => 'E-mail', 'aria-label' => 'Email', 'size' => '30', 'value' => $zwemmer->email);
     $dataInputWoonplaats = array('class' => 'form-control mr-sm-2', 'name' => 'woonplaats', 'id' => 'woonplaats', 'placeholder' => 'Woonplaats', 'aria-label' => 'Woonplaats', 'size' => '30', 'value' => $zwemmer->woonplaats);
-    $dataInputWachtwoord = array('class' => 'form-control mr-sm-2', 'type' => 'password', 'name' => 'wachtwoord', 'id' => 'wachtwoord', 'placeholder' => 'Wachtwoord', 'aria-label' => 'Wachtwoord', 'size' => '30', 'required' => 'required');
-    $dataInputWachtwoordBevestig = array('class' => 'form-control mr-sm-2', 'type' => 'password', 'name' => 'wachtwoordBevestig', 'id' => 'wachtwoordBevestig', 'placeholder' => 'Wachtwoord', 'aria-label' => 'WachtwoordBevestig', 'size' => '30', 'required' => 'required');
     $dataInputAdres = array('class' => 'form-control mr-sm-2', 'name' => 'adres', 'id' => 'adres', 'placeholder' => 'Adres', 'aria-label' => 'Adres', 'size' => '30', 'value' => $zwemmer->adres);
     $dataInputGeboortedatum = array('class' => 'form-control mr-sm-2', 'type' => 'date','name' => 'geboortedatum', 'id' => 'geboortedatum', 'placeholder' => 'Geboortedatum', 'aria-label' => 'Geboortedatum', 'size' => '30', 'value' => $zwemmer->geboortedatum);
     $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'type' => 'textarea','name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Beschrijving', 'aria-label' => 'Beschrijving', 'size' => '30', 'value' => $zwemmer->beschrijving);
@@ -24,8 +22,6 @@ if (isset($zwemmer)) {
     $dataInputNaam = array('class' => 'form-control mr-sm-2', 'required' => 'required', 'type' => 'text', 'name' => 'naam', 'id' => 'naam', 'placeholder' => 'Naam', 'aria-label' => 'Naam', 'size' => '30');
     $dataInputEmail = array('class' => 'form-control mr-sm-2', 'required' => 'required', 'name' => 'email', 'id' => 'email', 'placeholder' => 'E-mail', 'aria-label' => 'Email', 'size' => '30');
     $dataInputWoonplaats = array('class' => 'form-control mr-sm-2', 'name' => 'woonplaats', 'id' => 'woonplaats', 'placeholder' => 'Woonplaats', 'aria-label' => 'Woonplaats', 'size' => '30');
-    $dataInputWachtwoord = array('class' => 'form-control mr-sm-2', 'type' => 'password', 'name' => 'wachtwoord', 'id' => 'wachtwoord', 'placeholder' => 'Wachtwoord', 'aria-label' => 'Wachtwoord', 'size' => '30', 'required' => 'required');
-    $dataInputWachtwoordBevestig = array('class' => 'form-control mr-sm-2', 'type' => 'password', 'name' => 'wachtwoordBevestig', 'id' => 'wachtwoordBevestig', 'placeholder' => 'Wachtwoord', 'aria-label' => 'WachtwoordBevestig', 'size' => '30', 'required' => 'required');
     $dataInputAdres = array('class' => 'form-control mr-sm-2', 'name' => 'adres', 'id' => 'adres', 'placeholder' => 'Adres', 'aria-label' => 'Adres', 'size' => '30');
     $dataInputGeboortedatum = array('class' => 'form-control mr-sm-2', 'type' => 'date','name' => 'geboortedatum', 'id' => 'geboortedatum', 'placeholder' => 'Geboortedatum', 'aria-label' => 'Geboortedatum', 'size' => '30');
     $dataInputBeschrijving = array('class' => 'form-control mr-sm-2', 'type' => 'textarea','name' => 'beschrijving', 'id' => 'beschrijving', 'placeholder' => 'Beschrijving', 'aria-label' => 'Beschrijving', 'size' => '30');
@@ -41,15 +37,6 @@ echo "</div>";
 echo "<div class='form-group'>";
 echo form_label("E-mail", 'email') . "\n";
 echo form_input($dataInputEmail) . "\n";
-echo "</div>";
-echo "<div class='form-group'>";
-echo form_labelpro('Wachtwoord: ', 'wachtwoord');
-echo form_input($dataInputWachtwoord);
-echo "</div>";
-echo "<div class='form-group'>";
-echo form_labelpro('Wachtwoord bevestigen: ', 'wachtwoordBevestig');
-echo form_input($dataInputWachtwoordBevestig);
-echo "<div id='waarschuwingWachtwoorden' class='alert alert-danger'>Wachtwoorden komen niet overeen!</div>";
 echo "</div>";
 echo "<div class='form-group'>";
 echo form_labelpro("Woonplaats", 'woonplaats') . "\n";

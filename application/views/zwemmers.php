@@ -72,6 +72,7 @@ $jaar = $dt->format('o');
       if ($this->session->has_userdata('gebruiker_id') && $gebruiker->soort == 'trainer') {
           echo '<p id="' . $zwemmer->id .'">';
           echo anchor('gebruiker/wijzig/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ");
+          echo anchor('gebruiker/wijzigWachtwoord/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\">Wachtwoord wijzigen</button> ");
           echo anchor('gebruiker/maakInactief/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button> ");
           echo "<button type=\"button\" class=\"btn btn-danger btn-xs btn-round modal-trigger\"><i class=\"fas fa-times\"></i></button>\n";
           echo "\t</p>\n";

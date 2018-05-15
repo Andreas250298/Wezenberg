@@ -36,6 +36,7 @@ $disciplines = "100m vlinderslag";
        <p class="text-center">
            <?php if ($this->session->has_userdata('gebruiker_id') && ($this->session->userdata('gebruiker_id') == $zwemmer->id || $gebruiker->soort == 'trainer')) {
            echo anchor('gebruiker/wijzig/' . $zwemmer->id, "<button type=\"button\" class=\"btn btn-success btn-xs btn-round\"><i class=\"fas fa-edit\"></i></button> ");
+           echo anchor('gebruiker/wijzigWachtwoord/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\">Wachtwoord wijzigen</button> ");
            if ($gebruiker-> soort == 'trainer') {
                echo anchor('gebruiker/maakInactief/'. $zwemmer->id, "<button type=\"button\" class=\"btn btn-warning btn-xs btn-round\"><i class=\"fas fa-lock\"></i></button>");
            }
