@@ -105,7 +105,15 @@ class Wedstrijd extends CI_Controller
 
         redirect('/wedstrijd/bekijkenWedstrijden/'.$tijd);
     }
-
+    /**
+    * creeert een nieuwe melding en voegt die toe aan de databank
+    * @param boodschap het te toenen melding
+    * @param ontvangerId de gebruiker(s) die het moeten kunnen gezien
+    * @see melding_model::insert()
+    * @see meldingPerGebruiker_model::insert()
+    * @see gebruiker_model::getActieveGebruikers()
+    * @see gebruiker_model::getActieveTrainers()
+    */
     public function wedstrijdMelding($boodschap, $ontvangerId = 0)
     {
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
@@ -224,7 +232,7 @@ class Wedstrijd extends CI_Controller
         if ($data['gebruiker'] != null && $data['gebruiker']->soort === 'trainer'){
             $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
         } else {
-            $data['paginaVerantwoordelijke'] = 'Andreas Aerts';  
+            $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         }
 
 
@@ -305,7 +313,6 @@ class Wedstrijd extends CI_Controller
      * @param id van de te verwijderen nieuwsartikel
      * @param tijd of de datum voor of na vandaag ligt
      */
-
     public function verwijderReeks($id, $tijd)
     {
         //$id = $this->input->get('id');
@@ -388,13 +395,6 @@ class Wedstrijd extends CI_Controller
         $data['tijd'] = $tijd;
 
         $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
-        /*$this->load->model('wedstrijd_model');
-        //$data['wedstrijd'] = $this->wedstrijd_model->get($id);
-        $data['wedstrijdId'] = $id;
-        $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
-        $this->load->model('reeks_model');
-        $data['slagen'] = $this->reeks_model->getSlagenPerReeks($id);
-        $data['afstanden'] = $this->reeks_model->getAfstandenPerReeks($id);*/
         $this->load->model('wedstrijd_model');
         $this->load->model('deelname_model');
         $data['reeksen'] = $this->wedstrijd_model->getReeksenPerWedstrijd($id);
@@ -507,9 +507,6 @@ class Wedstrijd extends CI_Controller
 
         $this->load->model('gebruiker_model');
         $data['zwemmers'] = $this->gebruiker_model->toonZwemmers();
-        //$this->load->model('RondeResultaat_model');
-        //$data['wedstrijden'] = $this->RondeResultaat_model->get($id);
-
         $partials = array('hoofding' => 'main_header',
           'inhoud' => 'Wedstrijd/resultaatToevoegen',
           'voetnoot' => 'main_footer');
@@ -553,7 +550,12 @@ class Wedstrijd extends CI_Controller
           'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-
+    /**
+    * De trainer kan hiermee aanduiden of een zwemmer mag meedoen aan een wedstrijd
+    * @param id het id van deelname
+    * @param goed of de zwemmer goedkeuring heeft gekregen
+    * @see deelname_model::behandelInschrijving()
+    */
     public function behandelInschrijving($id, $goed) {
         $this->load->model('deelname_model');
         $deelname = $this->deelname_model->behandelInschrijving($id, $goed);

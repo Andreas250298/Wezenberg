@@ -29,7 +29,7 @@ class Nieuws_model extends CI_Model
 
     /**
     * Opvragen van alle nieuws artikels uit de database
-    * \return De opgevraagde records
+    * @return De opgevraagde records
     */
     public function getAllNieuwsArtikels(){
         $this->db->order_by('id', 'desc');

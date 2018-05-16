@@ -2,7 +2,7 @@
 /**
  * @file SupplementPerZwemmer/ajax_bekijken.php
  *
- * ÂJAX view dat wordt opgeroepen om supplementen te tonen van een zwemmer.
+ * AJAX view dat wordt opgeroepen om supplementen te tonen van een zwemmer.
  */
 if ($supplementenPerAlleZwemmers != null) {
     $namen = [];

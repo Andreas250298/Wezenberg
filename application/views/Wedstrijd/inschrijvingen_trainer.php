@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file Wedstrijd/inschrijvingen_trainer.php
+ *
+ * view die inschrijvingen toont aan de trainer
+ */
     $inschrijvingen = "";
     $attributesGoed = array('role' => 'button', 'class' => 'btn btn-success btn-xs btn-round btn-goedkeuren');
     $attributesWeiger = array('role' => 'button', 'class' => 'btn btn-danger btn-xs btn-round btn-afkeuren');

@@ -160,7 +160,12 @@ class Gebruiker extends CI_Controller
             'voetnoot' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-
+    /**
+    * Registreert het nieuwe wachtwoord in de databank
+    * @see Authex::getGebruikerInfo()
+    * @see Gebruiker_model::get()
+    * @see Gebruiker_model::update()
+    */
     public function registreerWachtwoord(){
       $id = $this->input->post('id');
       $wachtwoord = $this->input->post('wachtwoord');
