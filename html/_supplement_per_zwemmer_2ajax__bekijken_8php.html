@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Wezenberg: application/views/Wedstrijd/inschrijvingen.php Bestand Referentie</title>
+<title>Wezenberg: application/views/SupplementPerZwemmer/ajax_bekijken.php Bestand Referentie</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -81,56 +81,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Zoeken');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d75c23162a2652451dce46d2e7e8aead.html">application</a></li><li class="navelem"><a class="el" href="dir_47696c67d24d00a376c580718bcb3d63.html">views</a></li><li class="navelem"><a class="el" href="dir_918b8718ed9c5a95faceb7bf7a08dd4f.html">Wedstrijd</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d75c23162a2652451dce46d2e7e8aead.html">application</a></li><li class="navelem"><a class="el" href="dir_47696c67d24d00a376c580718bcb3d63.html">views</a></li><li class="navelem"><a class="el" href="dir_b5ba22caebf158e3aa06fbb6110a59ea.html">SupplementPerZwemmer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#var-members">Variabelen</a>  </div>
   <div class="headertitle">
-<div class="title">inschrijvingen.php Bestand Referentie</div>  </div>
+<div class="title">ajax_bekijken.php Bestand Referentie</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variabelen</h2></td></tr>
-<tr class="memitem:a5d973e88398f5faa4509a179501a4a50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d973e88398f5faa4509a179501a4a50"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$lijstWedstrijden</b> = ''</td></tr>
-<tr class="separator:a5d973e88398f5faa4509a179501a4a50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fd051eba51a127608133e60464fd568"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4fd051eba51a127608133e60464fd568"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$lijstAfgelopenWedstrijden</b> = ''</td></tr>
-<tr class="separator:a4fd051eba51a127608133e60464fd568"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84b10859df3e10972f247ba9c34d0fc7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a84b10859df3e10972f247ba9c34d0fc7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$dataSubmit</b> = array('class' =&gt; 'btn btn-primary my-2 my-sm0', 'value' =&gt; 'Inschrijven')</td></tr>
-<tr class="separator:a84b10859df3e10972f247ba9c34d0fc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd7d618dedece1ba58065179c980d4a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$attributen</b></td></tr>
-<tr class="separator:abd7d618dedece1ba58065179c980d4a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af30efc7bba1c5f2377b960d4532c04d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af30efc7bba1c5f2377b960d4532c04d9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$stat</b> = &quot;&quot;</td></tr>
-<tr class="separator:af30efc7bba1c5f2377b960d4532c04d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8d0fc9137ddd0fafb213ac81397f189"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8d0fc9137ddd0fafb213ac81397f189"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>foreach</b> ($wedstrijden as $wedstrijd)</td></tr>
-<tr class="separator:af8d0fc9137ddd0fafb213ac81397f189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c16f4c01540520637e7b7eedde29573"><td class="memItemLeft" align="right" valign="top">if($supplementenPerAlleZwemmers!=NULL)&#160;</td><td class="memItemRight" valign="bottom"><b>else</b></td></tr>
+<tr class="separator:a6c16f4c01540520637e7b7eedde29573"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Gedetailleerde Beschrijving</h2>
-<div class="textblock"><p>View waarop de zwemmer zich kan inschrijven.</p>
-<ul>
-<li>$wedstrijd-objecten waarvoor hij zich nog kan inschrijven.</li>
-</ul>
-<p>Als je als trainer bent ingelogd krijg je ook te zien:</p><ul>
-<li>Extra menu opties om bepaalde functionaliteiten te beheren. </li>
-</ul>
+<div class="textblock"><p>AJAX view dat wordt opgeroepen om supplementen te tonen van een zwemmer. </p>
 </div><h2 class="groupheader">Documentatie van variabelen</h2>
-<a class="anchor" id="abd7d618dedece1ba58065179c980d4a7"></a>
+<a class="anchor" id="a6c16f4c01540520637e7b7eedde29573"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">$attributen</td>
+          <td class="memname">if ($supplementenPerAlleZwemmers!=NULL) else</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initi&euml;le waarde:</b><div class="fragment"><div class="line">= array(<span class="stringliteral">&#39;id&#39;</span> =&gt; <span class="stringliteral">&#39;mijnFormulier&#39;</span>,</div><div class="line">    <span class="stringliteral">&#39;class&#39;</span> =&gt; <span class="stringliteral">&#39;form-inline my2 my-lg0&#39;</span>,</div><div class="line">    <span class="stringliteral">&#39;data-toggle&#39;</span> =&gt; <span class="stringliteral">&#39;validator&#39;</span>,</div><div class="line">    <span class="stringliteral">&#39;role&#39;</span> =&gt; <span class="stringliteral">&#39;form&#39;</span>)</div></div><!-- fragment -->
+<b>Initi&euml;le waarde:</b><div class="fragment"><div class="line">{</div><div class="line">    echo <span class="stringliteral">&quot;&lt;p class=\&quot;mx-auto\&quot;&gt;Deze zwemmer heeft nog geen toegekende supplementen!&lt;/p&gt;&quot;</span></div></div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

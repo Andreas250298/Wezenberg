@@ -1,6 +1,7 @@
 var searchData=
 [
   ['haalajaxop_5fagendaitems',['haalAjaxOp_AgendaItems',['../class_home.html#a2e37f1ec204d6c0dd7ff99f41d2e97a4',1,'Home']]],
+  ['haalajaxop_5fbekijkenwedstrijden',['haalAjaxOp_bekijkenWedstrijden',['../class_wedstrijd.html#a2986c62e5097afb90d123e1553218c92',1,'Wedstrijd']]],
   ['haalajaxop_5fmaakmeldinggezien',['haalAjaxOp_MaakMeldingGezien',['../class_gebruiker.html#a6fe96945e897311b00a5af4a6e360a54',1,'Gebruiker\haalAjaxOp_MaakMeldingGezien()'],['../class_home.html#a6fe96945e897311b00a5af4a6e360a54',1,'Home\haalAjaxOp_MaakMeldingGezien()']]],
   ['haalajaxop_5fmeldingen',['haalAjaxOp_Meldingen',['../class_gebruiker.html#a55d2f98cc642e2881e31bb73bc07eeda',1,'Gebruiker']]],
   ['haalajaxop_5fnieuwsartikels',['haalAjaxOp_Nieuwsartikels',['../class_home.html#a4049e57a5ea4563db574697d1aae9a7f',1,'Home']]],

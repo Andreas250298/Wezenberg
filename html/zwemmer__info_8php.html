@@ -103,31 +103,31 @@ Variabelen</h2></td></tr>
 <tr class="memitem:a406f81a4aa12afa567beea787d15fa56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a406f81a4aa12afa567beea787d15fa56"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$geboortedatum</b> = explode(&quot;-&quot;, $zwemmer-&gt;geboortedatum)</td></tr>
 <tr class="separator:a406f81a4aa12afa567beea787d15fa56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d39ed058683e4eaa690e6d43737d6e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d39ed058683e4eaa690e6d43737d6e4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$leeftijd</b> = $jaar - $geboortedatum[0]</td></tr>
-<tr class="separator:a6d39ed058683e4eaa690e6d43737d6e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad712376ca965f9efafee3759ee73642a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad712376ca965f9efafee3759ee73642a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$disciplines</b> = &quot;100m vlinderslag&quot;</td></tr>
-<tr class="separator:ad712376ca965f9efafee3759ee73642a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef01410a01661e251d6f24f4d997fc69"><td class="memItemLeft" align="right" valign="top">if($zwemmer-&gt;foto!=&quot;&quot;)&#160;</td><td class="memItemRight" valign="bottom"><b>else</b></td></tr>
-<tr class="separator:aef01410a01661e251d6f24f4d997fc69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52297389cf95caa84f9308e09907f465"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a52297389cf95caa84f9308e09907f465"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> ($this-&gt;session-&gt;has_userdata('gebruiker_id')&amp;&amp;($this-&gt;session-&gt;userdata('gebruiker_id')==$zwemmer-&gt;id||$gebruiker-&gt;soort== 'trainer'))</td></tr>
-<tr class="separator:a52297389cf95caa84f9308e09907f465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51d13e0582e1eb20bd132a369c92b224"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51d13e0582e1eb20bd132a369c92b224"></a>
+if($geboortedatum[0]!=null)&#160;</td><td class="memItemRight" valign="bottom"><b>$disciplines</b> = &quot;100m vlinderslag&quot;</td></tr>
+<tr class="separator:a51d13e0582e1eb20bd132a369c92b224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d890baf93437373de0c37ddbb8527f1"><td class="memItemLeft" align="right" valign="top">if($zwemmer-&gt;foto!=&quot;&quot;)&#160;</td><td class="memItemRight" valign="bottom"><b>else</b></td></tr>
+<tr class="separator:a7d890baf93437373de0c37ddbb8527f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab057aa7ca8043edcbcf75d26ed0ce891"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab057aa7ca8043edcbcf75d26ed0ce891"></a>
+if($this-&gt;session-&gt;has_userdata('gebruiker_id')&amp;&amp;($this-&gt;session-&gt;userdata('gebruiker_id')==$zwemmer-&gt;id||$gebruiker-&gt;soort== 'trainer'))&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (isset($leeftijd))</td></tr>
+<tr class="separator:ab057aa7ca8043edcbcf75d26ed0ce891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c34d6c9ffdfa2fc004497f7c907b163"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5c34d6c9ffdfa2fc004497f7c907b163"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>foreach</b> ($afgelopenWedstrijden as $afgelopen)</td></tr>
+<tr class="separator:a5c34d6c9ffdfa2fc004497f7c907b163"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Gedetailleerde Beschrijving</h2>
 <div class="textblock"><p>View waarin er informatie kan worden bekeken over een zwemmer -Een gewone gebruiker kan alleen informatie bekijken -Een zwemmer kan dit ook voor elke zwemmer maar kan zijn eigen informatie aanpassen </p>
 </div><h2 class="groupheader">Documentatie van variabelen</h2>
-<a class="anchor" id="aef01410a01661e251d6f24f4d997fc69"></a>
+<a class="anchor" id="a7d890baf93437373de0c37ddbb8527f1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">if ($wedstrijden==null) else</td>
+          <td class="memname">if ($afgelopenWedstrijden==null) else</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initi&euml;le waarde:</b><div class="fragment"><div class="line">{</div><div class="line">        echo <span class="stringliteral">&#39;&lt;img src=&quot;http://placehold.it/250x250&quot; width=&quot;250px&quot; height=&quot;250px&quot;/&gt;&lt;br /&gt;&lt;br /&gt;&#39;</span></div></div><!-- fragment -->
+<b>Initi&euml;le waarde:</b><div class="fragment"><div class="line">{</div><div class="line">    echo <span class="stringliteral">&#39;&lt;img src=&quot;http://placehold.it/250x250&quot; width=&quot;250px&quot; height=&quot;250px&quot;/&gt;&lt;br /&gt;&lt;br /&gt;&#39;</span></div></div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

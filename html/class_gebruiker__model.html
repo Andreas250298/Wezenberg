@@ -110,8 +110,14 @@ Public Members</h2></td></tr>
 <tr class="separator:a50e3bfb586b2f42932a6a93f3fbb0828"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac16dda03f5b1b05c49561f4b8b2a0c47"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker__model.html#ac16dda03f5b1b05c49561f4b8b2a0c47">getAllZwemmers</a> ()</td></tr>
 <tr class="separator:ac16dda03f5b1b05c49561f4b8b2a0c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9951d7a2be118246dfeec771a339d664"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker__model.html#a9951d7a2be118246dfeec771a339d664">getAllTrainers</a> ()</td></tr>
+<tr class="separator:a9951d7a2be118246dfeec771a339d664"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6661a5a3ae919cdb408edf054559553e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker__model.html#a6661a5a3ae919cdb408edf054559553e">getGebruiker</a> ($email, $wachtwoord)</td></tr>
 <tr class="separator:a6661a5a3ae919cdb408edf054559553e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2b0d018e107c4891ab1aa72477bf1c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker__model.html#af2b0d018e107c4891ab1aa72477bf1c0">getActieveGebruikers</a> ()</td></tr>
+<tr class="separator:af2b0d018e107c4891ab1aa72477bf1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a375f7979c76672060b66aa34d795202a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker__model.html#a375f7979c76672060b66aa34d795202a">getActieveTrainers</a> ()</td></tr>
+<tr class="separator:a375f7979c76672060b66aa34d795202a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb5e13bd44dd2d3a7d187c3e4ec3c2a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker__model.html#afb5e13bd44dd2d3a7d187c3e4ec3c2a4">getGebruikerMetWachtwoord</a> ($email, $wachtwoord)</td></tr>
 <tr class="separator:afb5e13bd44dd2d3a7d187c3e4ec3c2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc25ef722dddd2b2ba15da4cf337c410"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker__model.html#adc25ef722dddd2b2ba15da4cf337c410">controleerEmailVrij</a> ($email)</td></tr>
@@ -216,6 +222,54 @@ Public Members</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="af2b0d018e107c4891ab1aa72477bf1c0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getActieveGebruikers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>haalt alle actieve gebruikers terug uit de databank </p><dl class="section return"><dt>Retourneert</dt><dd>gebruikers Alle actieve gebruikers uit de databank </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a375f7979c76672060b66aa34d795202a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getActieveTrainers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>haalt alle actieve trainers terug uit de databank </p><dl class="section return"><dt>Retourneert</dt><dd>trainers Alle actieve trainers uit de databank </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9951d7a2be118246dfeec771a339d664"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getAllTrainers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Alle trainers ophalen uit de database </p><dl class="section return"><dt>Retourneert</dt><dd>De opgevraagde record(s) </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ac16dda03f5b1b05c49561f4b8b2a0c47"></a>
 <div class="memitem">
 <div class="memproto">
@@ -228,7 +282,7 @@ Public Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Alle reeksen ophalen uit de database </p><dl class="section return"><dt>Retourneert</dt><dd>De opgevraagde record(s) </dd></dl>
+<p>Alle zwemmers ophalen uit de database </p><dl class="section return"><dt>Retourneert</dt><dd>De opgevraagde record(s) </dd></dl>
 
 </div>
 </div>
