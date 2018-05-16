@@ -329,10 +329,10 @@ class Gebruiker extends CI_Controller
     */
     public function haalAjaxOp_Meldingen()
     {
-        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $gebruiker = $this->authex->getGebruikerInfo();
 
         $this->load->model('meldingPerGebruiker_model');
-        $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($data['gebruiker']->id);
+        $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($gebruiker->id);
 
         $this->load->view('ajax_meldingTonen', $data);
     }
@@ -344,19 +344,16 @@ class Gebruiker extends CI_Controller
     */
     public function haalAjaxOp_MaakMeldingGezien()
     {
-        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+        $gebruiker = $this->authex->getGebruikerInfo();
 
+        $meldingPerGebruiker = new stdClass();
         $meldingPerGebruiker->id = $this->input->get('id');
         $meldingPerGebruiker->gezien = 1;
 
         $this->load->model('meldingPerGebruiker_model');
         $this->meldingPerGebruiker_model->update($meldingPerGebruiker);
-
-
-
-        $data['meldingGezien'] = $this->meldingPerGebruiker_model->update($id);
-
-        $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($data['gebruiker']->id);
+        
+        $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($gebruiker->id);
 
         $this->load->view('ajax_meldingTonen', $data);
     }

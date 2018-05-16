@@ -20,34 +20,14 @@ $jaar = $dt->format('Y');
         });
         $.ajax({type: "GET",
             url: site_url + "/gebruiker/haalAjaxOp_Meldingen",
-//            data: {id: id},
             success: function (result) {
                 $("#meldingen_content_wrapper").html(result);
             },
             error: function (xhr, status, error) {
                 alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
             }
-        });
-        $(".meldingGezien").click(function (e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            maakMeldingGezien(id);
         });
     });
-
-    function maakMeldingGezien(id)
-    {
-        $.ajax({type: "GET",
-            url: site_url + "/gebruiker/haalAjaxOp_MeldingGezien",
-            data: {id: id},
-            success: function (result) {
-                $("#meldingen_content_wrapper").html(result);
-            },
-            error: function (xhr, status, error) {
-                alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
-            }
-        });
-    }
 </script>
 
 

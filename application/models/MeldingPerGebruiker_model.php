@@ -60,11 +60,11 @@ class MeldingPerGebruiker_model extends CI_Model
 
     /**
      * Voert de aanpassingen aan een bepaalde melding door aan de databank.
-     * @param type $melding een melding object
+     * @param type $meldingPerGebruiker een melding object
      */
     public function update($meldingPerGebruiker){
         $this->db->where('id', $meldingPerGebruiker->id);
-        $this->db->update('meldingPerGebruiker', $melding);
+        $this->db->update('meldingPerGebruiker', $meldingPerGebruiker);
     }
     /**
      * Verwijdert een melding uit de databank.
