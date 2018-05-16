@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file Wedstrijd/ajax_bekijken.php
+ *
+ * AJAX view dat wordt opgeroepen om wedstrijden te tonen
+ */
 if ($wedstrijden != null){
     echo '<table class="table">
     <thead>
@@ -29,7 +34,7 @@ if ($wedstrijden != null){
         if (isset($gebruiker)) {
             if ($gebruiker->soort == "trainer") {
                echo '<td>'. form_input($data) .
-   anchor('wedstrijd/updateWedstrijd/' . $wedstrijd->id.'/'.$tijd, 'Wijzig', 'class="btn btn-info" style="margin-right : 10px;"'); 
+   anchor('wedstrijd/updateWedstrijd/' . $wedstrijd->id.'/'.$tijd, 'Wijzig', 'class="btn btn-info" style="margin-right : 10px;"');
    if ($tijd != 'voor'){
        echo  anchor('wedstrijd/reeksenToevoegen/' . $wedstrijd->id ."/".$tijd, 'Reeksen toevoegen', 'class="btn btn-success" style="margin-right : 10px;"');
    }

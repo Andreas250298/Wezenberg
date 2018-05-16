@@ -116,7 +116,9 @@ class Reeks_model extends CI_Model
 
     /**
     * Haalt reeks met afstand en slag op
-    *
+    * @param id het id van de reeks-
+    * @see afstand_model::get()
+    * @see slag_model::get()
     */
     public function getReeksMetInfo($id)
     {

@@ -45,7 +45,10 @@ class Wedstrijd_model extends CI_Model
         $query = $this->db->get('wedstrijd');
         return $query->result();
     }
-
+    /**
+     * Opvragen van alle wedstrijden vanaf vandaag uit de database, oplopend gesorteerd
+     * @return De opgevraagde records
+     */
     public function toonWedstrijdenVanafVandaagASC(){
         $this->db->order_by('beginDatum','asc');
         $query = $this->db->get('wedstrijd')->result();
@@ -61,7 +64,10 @@ class Wedstrijd_model extends CI_Model
         }
         return $wedstrijden;
     }
-
+    /**
+     * Opvragen van alle wedstrijden uit het verleden uit de database, oplopend gesorteerd
+     * @return De opgevraagde records
+     */
     public function toonWedstrijdenVoorVandaagASC(){
         $this->db->order_by('beginDatum','asc');
         $query = $this->db->get('wedstrijd')->result();

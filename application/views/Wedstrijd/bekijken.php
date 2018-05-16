@@ -1,3 +1,10 @@
+<?php
+/**
+ * @file Wedstrijd/bekijken.php
+ *
+ * view waarin wedstrijden worden getoond.
+ */
+ ?>
 <script>
 var plaats = 'Alle';
 var tijd = "<?php echo $tijd?>";
