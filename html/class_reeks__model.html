@@ -112,10 +112,14 @@ Public Members</h2></td></tr>
 <tr class="separator:a097d8ec7ace8fe69db8fa9b39cfa0a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad38e5999163ba01f7709884edd665c33"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reeks__model.html#ad38e5999163ba01f7709884edd665c33">getReeksenInWeek</a> ($maandag, $zondag)</td></tr>
 <tr class="separator:ad38e5999163ba01f7709884edd665c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55173561beb5367f5ef1dd5c3c1dd957"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reeks__model.html#a55173561beb5367f5ef1dd5c3c1dd957">getReeksenVoorOfNaVandaag</a> ($voor)</td></tr>
+<tr class="separator:a55173561beb5367f5ef1dd5c3c1dd957"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a365218f2da9528d2e7cb0c91f5b5a8bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reeks__model.html#a365218f2da9528d2e7cb0c91f5b5a8bd">getAfstandenPerReeks</a> ($id)</td></tr>
 <tr class="separator:a365218f2da9528d2e7cb0c91f5b5a8bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a383f34c2b672abb48487740366835ac0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reeks__model.html#a383f34c2b672abb48487740366835ac0">getSlagenPerReeks</a> ($id)</td></tr>
 <tr class="separator:a383f34c2b672abb48487740366835ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7b6e288c1ac035c11e5f46cb2a76d14"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reeks__model.html#ac7b6e288c1ac035c11e5f46cb2a76d14">getReeksMetInfo</a> ($id)</td></tr>
+<tr class="separator:ac7b6e288c1ac035c11e5f46cb2a76d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8272f9fd0ff62e5cbf7116ae416280e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reeks__model.html#a8272f9fd0ff62e5cbf7116ae416280e8">insert</a> ($reeks)</td></tr>
 <tr class="separator:a8272f9fd0ff62e5cbf7116ae416280e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbf93f9b87b5236f49e0727fe109d588"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reeks__model.html#abbf93f9b87b5236f49e0727fe109d588">update</a> ($reeks)</td></tr>
@@ -259,6 +263,55 @@ Public Members</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Retourneert</dt><dd>De opgevraagde reeksen. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a55173561beb5367f5ef1dd5c3c1dd957"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getReeksenVoorOfNaVandaag </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$voor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Opvragen van reeksen vanaf vandaag </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maandag</td><td>Datum van maandag </td></tr>
+    <tr><td class="paramname">zondag</td><td>Datum van zondag </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retourneert</dt><dd>De opgevraagde reeksen. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac7b6e288c1ac035c11e5f46cb2a76d14"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getReeksMetInfo </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Haalt reeks met afstand en slag op </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>het id van de reeks- </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Zie ook</dt><dd>afstand_model::get() </dd>
+<dd>
+slag_model::get() </dd></dl>
 
 </div>
 </div>

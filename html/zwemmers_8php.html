@@ -100,16 +100,31 @@ Variabelen</h2></td></tr>
 <tr class="memitem:a86659290a750c0b184ca9ca43aa4e566"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86659290a750c0b184ca9ca43aa4e566"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$zwemmersTabel</b> = &quot;&quot;</td></tr>
 <tr class="separator:a86659290a750c0b184ca9ca43aa4e566"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c2a6887a8c651050560f27d979e9c4d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c2a6887a8c651050560f27d979e9c4d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>foreach</b> ($zwemmers as $zwemmer)</td></tr>
-<tr class="separator:a4c2a6887a8c651050560f27d979e9c4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67ac19ea155a6e92bce2adfbf77a680c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67ac19ea155a6e92bce2adfbf77a680c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> ($this-&gt;session-&gt;has_userdata('gebruiker_id')&amp;&amp;$gebruiker-&gt;soort== 'trainer')</td></tr>
-<tr class="separator:a67ac19ea155a6e92bce2adfbf77a680c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13d975491fa02b0bccb4166e76c8621f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13d975491fa02b0bccb4166e76c8621f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>$dt</b> = new DateTime</td></tr>
+<tr class="separator:a13d975491fa02b0bccb4166e76c8621f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a6c040a0aac1b6184bb6819dca4897a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a6c040a0aac1b6184bb6819dca4897a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>$jaar</b> = $dt-&gt;format('o')</td></tr>
+<tr class="separator:a5a6c040a0aac1b6184bb6819dca4897a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e5dcdc269a63bd74bcc906182c79f16"><td class="memItemLeft" align="right" valign="top">foreach($zwemmers as $zwemmer) foreach($trainers as $trainer) if($this-&gt;session-&gt;has_userdata('gebruiker_id')&amp;&amp;$gebruiker-&gt;soort== 'trainer')&#160;</td><td class="memItemRight" valign="bottom"><b>else</b></td></tr>
+<tr class="separator:a3e5dcdc269a63bd74bcc906182c79f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Gedetailleerde Beschrijving</h2>
 <div class="textblock"><p>View waarin er een lijst wordt getoond met alle zwemmers -Een gewone gebruiker kan alleen informatie bekijken -Een zwemmer kan dit ook voor elke zwemmer maar kan zijn eigen informatie aanpassen via een extra knop -Een zwemmer kan elke zwemmer aanpassen, inactief maken en verwijderen </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Documentatie van variabelen</h2>
+<a class="anchor" id="a3e5dcdc269a63bd74bcc906182c79f16"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">foreach ($zwemmers as $zwemmer) foreach ($trainers as $trainer) if ($this-&gt;session-&gt;has_userdata('gebruiker_id')&amp;&amp;$gebruiker-&gt;soort== 'trainer') else</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initi&euml;le waarde:</b><div class="fragment"><div class="line">{</div><div class="line">                echo anchor(<span class="stringliteral">&#39;home&#39;</span>, <span class="stringliteral">&#39;Terug&#39;</span>, <span class="stringliteral">&quot;Class=&#39;btn btn-primary my-2 my-sm0&#39;&quot;</span>)</div></div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Gegenereerd door &#160;<a href="http://www.doxygen.org/index.html">

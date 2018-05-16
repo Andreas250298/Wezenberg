@@ -116,6 +116,10 @@ Public Members</h2></td></tr>
 <tr class="separator:a6db5689af94fb09c1652e5f3b1d2770a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa10f6589c4f171a54524ed6758bed97f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker.html#aa10f6589c4f171a54524ed6758bed97f">wijzig</a> ($id)</td></tr>
 <tr class="separator:aa10f6589c4f171a54524ed6758bed97f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5ac432af7b32f9924dc6f6319a8eba6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker.html#ae5ac432af7b32f9924dc6f6319a8eba6">wijzigWachtwoord</a> ($id)</td></tr>
+<tr class="separator:ae5ac432af7b32f9924dc6f6319a8eba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6232dc1807fbe2d5784938a1cfc08f39"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker.html#a6232dc1807fbe2d5784938a1cfc08f39">registreerWachtwoord</a> ()</td></tr>
+<tr class="separator:a6232dc1807fbe2d5784938a1cfc08f39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8988b8c1a354cb79946355ede7257e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker.html#ad8988b8c1a354cb79946355ede7257e1">verwijder</a> ()</td></tr>
 <tr class="separator:ad8988b8c1a354cb79946355ede7257e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42960b4133cc395c93dff00c25505c80"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gebruiker.html#a42960b4133cc395c93dff00c25505c80">maakInactief</a> ($id)</td></tr>
@@ -214,7 +218,7 @@ Public Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Persoonlijke agenda tonen </p><dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_authex.html#abb2a936495eadd748dd4bec115c4fe70">Authex::getGebruikerInfo()</a> </dd>
 <dd>
-<a class="el" href="class_deelname__model.html#ab40bce39fc8ec4d583c682d1ff686c4c">Deelname_model::getInformatieDeelnames()</a> </dd>
+<a class="el" href="class_deelname__model.html#a017186948f6bd9f4089dc7460ec64959">Deelname_model::getInformatieDeelnames()</a> </dd>
 <dd>
 <a class="el" href="class_supplement_per_zwemmer__model.html#ab9a662ac51b68ac6138dc890362b65e2">SupplementPerZwemmer_model::getInformatieSupplementen()</a> </dd>
 <dd>
@@ -339,7 +343,7 @@ Public Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Wedstrijden om te tonen in agenda ophalen </p><dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_authex.html#abb2a936495eadd748dd4bec115c4fe70">Authex::getGebruikerInfo()</a> </dd>
 <dd>
-<a class="el" href="class_deelname__model.html#ab40bce39fc8ec4d583c682d1ff686c4c">Deelname_model::getInformatieDeelnames()</a> </dd></dl>
+<a class="el" href="class_deelname__model.html#a017186948f6bd9f4089dc7460ec64959">Deelname_model::getInformatieDeelnames()</a> </dd></dl>
 
 </div>
 </div>
@@ -434,6 +438,26 @@ Gebruiker_model::voegToe() </dd>
 <a class="el" href="class_gebruiker__model.html#ae3e552ba8d345132349739b6be738e4e">Gebruiker_model::update()</a> </dd>
 <dd>
 <a class="el" href="zwemmers__form_8php.html">zwemmers_form.php</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6232dc1807fbe2d5784938a1cfc08f39"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">registreerWachtwoord </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Registreert het nieuwe wachtwoord in de databank </p><dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_authex.html#abb2a936495eadd748dd4bec115c4fe70">Authex::getGebruikerInfo()</a> </dd>
+<dd>
+<a class="el" href="class_gebruiker__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Gebruiker_model::get()</a> </dd>
+<dd>
+<a class="el" href="class_gebruiker__model.html#ae3e552ba8d345132349739b6be738e4e">Gebruiker_model::update()</a> </dd></dl>
 
 </div>
 </div>
@@ -553,6 +577,31 @@ wedstrijd/bekijken.php </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>Wijzigen van de gebruiker volgens id </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>De id van de gebruiker die zal moeten worden aangepast </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_authex.html#abb2a936495eadd748dd4bec115c4fe70">Authex::getGebruikerInfo()</a> </dd>
+<dd>
+<a class="el" href="class_gebruiker__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Gebruiker_model::get()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae5ac432af7b32f9924dc6f6319a8eba6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">wijzigWachtwoord </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Wijzigen van het wachwoord van de gebruiker volgens id </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>De id van de gebruiker die zal moeten worden aangepast </td></tr>
   </table>

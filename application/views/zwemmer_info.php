@@ -26,9 +26,9 @@ $disciplines = "100m vlinderslag";
     <div class="row mt-4 pb-3">
       <div class="col-lg-3 col-md-3 offset-lg-2 offset-md-1">
       <?php if ($zwemmer->foto != "") {
-    echo '<img width="250px" height="250px" src="' . base_url($zwemmer->foto) . '"/><br /><br />';
+    echo '<img class="img-fluid" width="250px" height="250px" src="' . base_url($zwemmer->foto) . '"/><br /><br />';
 } else {
-    echo '<img src="http://placehold.it/250x250" width="250px" height="250px"/><br /><br />';
+    echo '<img class="img-fluid" src="http://placehold.it/250x250" width="250px" height="250px"/><br /><br />';
 }
 
        ?>
@@ -43,7 +43,7 @@ $disciplines = "100m vlinderslag";
        } ?>
        </p>
      </div>
-     <div class="col-lg-3 col-md-3 offset-md-2 offset-lg-1 offset-xl-0">
+     <div class="col-lg-5 col-md-5 offset-md-2 offset-lg-1 offset-xl-0">
        <br />
            <b>Leeftijd: </b><?php if (isset($leeftijd)) {
            echo $leeftijd;

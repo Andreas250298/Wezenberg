@@ -64,7 +64,5 @@ class Supplement_model extends CI_Model
         $this->db->delete('supplementPerZwemmer');
         $this->db->where('id', $id);
         $this->db->delete('supplement');
-        /*$this->db->delete('supplementPerZwemmer', array('supplementId' => $id));
-        $this->db->delete('supplement', array('id' => $id));*/
     }
 }

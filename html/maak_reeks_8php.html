@@ -96,11 +96,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Zoeken');
 Variabelen</h2></td></tr>
 <tr class="memitem:a4bba65b28b786425a2656654078aae5c"><td class="memItemLeft" align="right" valign="top">if(isset($reeks))&#160;</td><td class="memItemRight" valign="bottom"><b>else</b></td></tr>
 <tr class="separator:a4bba65b28b786425a2656654078aae5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a496991062cda2bd6c249476abbeea691"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a496991062cda2bd6c249476abbeea691"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>$dataInputNaam</b> = array('class' =&gt; 'form-control mr-sm-2', 'type' =&gt; 'text', 'name' =&gt; 'reeks', 'id' =&gt; 'reeks', 'placeholder' =&gt; 'Reeks', 'aria-label' =&gt; 'Reeks', 'size' =&gt; '30', 'data-toggle' =&gt; 'tooltip', 'title' =&gt; 'Vul hier de reeks van de wedstrijd in.')</td></tr>
+<tr class="separator:a496991062cda2bd6c249476abbeea691"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a166cce5dc24004b5cfa270f41a463caf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a166cce5dc24004b5cfa270f41a463caf"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$dataInputPlaats</b> = array('class' =&gt; 'form-control mr-sm-2', 'type' =&gt; 'date', 'name' =&gt; 'datum', 'id' =&gt; 'datum', 'placeholder' =&gt; 'Datum <a class="el" href="class_wedstrijd.html">Wedstrijd</a>', 'aria-label' =&gt; 'Datum', 'size' =&gt; '30', 'data-toggle' =&gt; 'tooltip', 'title' =&gt; 'Vul de datum van de reeks in.')</td></tr>
 <tr class="separator:a166cce5dc24004b5cfa270f41a463caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7923673cd80a4053e15e307453093add"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7923673cd80a4053e15e307453093add"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$dataInputBeginDatum</b> = array('class' =&gt; 'form-control mr-sm-2', 'type' =&gt; 'text', 'name' =&gt; 'tijdstip', 'id' =&gt; 'tijdstip','placeholder' =&gt; 'Tijdstip reeks','size' =&gt; '30', 'data-toggle' =&gt; 'tooltip', 'title' =&gt; 'Vul hier het tijdstip in van de reeks.')</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>$dataInputBeginDatum</b> = array('class' =&gt; 'form-control mr-sm-2', 'type' =&gt; 'time', 'name' =&gt; 'tijdstip', 'id' =&gt; 'tijdstip','placeholder' =&gt; 'Tijdstip reeks','size' =&gt; '30', 'data-toggle' =&gt; 'tooltip', 'title' =&gt; 'Vul hier het tijdstip in van de reeks.')</td></tr>
 <tr class="separator:a7923673cd80a4053e15e307453093add"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada1a09ecdcef646d8aadb8415007fb48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada1a09ecdcef646d8aadb8415007fb48"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$dataInputEindDatum</b> = array('class' =&gt; 'form-control mr-sm-2', 'type' =&gt; 'date', 'name' =&gt; 'eindDatum', 'id' =&gt; 'eindDatum','size' =&gt; '30', 'data-toggle' =&gt; 'tooltip', 'title' =&gt; 'vul hier de einddatum in van de wedstrijd(deze kan verschillen van de begindatum).')</td></tr>
@@ -139,7 +142,7 @@ Variabelen</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initi&euml;le waarde:</b><div class="fragment"><div class="line">{</div><div class="line">    $dataInputNaam = array(<span class="stringliteral">&#39;class&#39;</span> =&gt; <span class="stringliteral">&#39;form-control mr-sm-2&#39;</span>, <span class="stringliteral">&#39;type&#39;</span> =&gt; <span class="stringliteral">&#39;text&#39;</span>, <span class="stringliteral">&#39;name&#39;</span> =&gt; <span class="stringliteral">&#39;reeks&#39;</span>, <span class="stringliteral">&#39;id&#39;</span> =&gt; <span class="stringliteral">&#39;reeks&#39;</span>, <span class="stringliteral">&#39;placeholder&#39;</span> =&gt; <span class="stringliteral">&#39;Reeks&#39;</span>, <span class="stringliteral">&#39;aria-label&#39;</span> =&gt; <span class="stringliteral">&#39;Reeks&#39;</span>, <span class="stringliteral">&#39;size&#39;</span> =&gt; <span class="stringliteral">&#39;30&#39;</span>, <span class="stringliteral">&#39;data-toggle&#39;</span> =&gt; <span class="stringliteral">&#39;tooltip&#39;</span>, <span class="stringliteral">&#39;title&#39;</span> =&gt; <span class="stringliteral">&#39;Vul hier de reeks van de wedstrijd in.&#39;</span>)</div></div><!-- fragment -->
+<b>Initi&euml;le waarde:</b><div class="fragment"><div class="line">{</div><div class="line">  echo <span class="stringliteral">&quot;&lt;h2 class=\&quot;paginaTitel\&quot;&gt;Reeks maken&lt;/h2&gt;&quot;</span></div></div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

@@ -107,15 +107,10 @@ class Home extends CI_Controller
                 $data['foutMelding'] = '';
                 break;
         }
-
-
-
         $data['gebruiker'] = $this->authex->getGebruikerInfo();
-
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'login_fout',
             'voetnoot' => 'main_footer');
-
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -208,5 +203,26 @@ class Home extends CI_Controller
         $data['agendaItems'] = $this->wedstrijd_model->getAllWedstrijdPaging($aantalAgendaItems, intval($data['agendaStartRij']));
 
         $this->load->view('ajax_agendaItems', $data);
+    }
+
+    /**
+    * Zorgt ervoor dat een bepaalde melding wordt getoond als 'gezien'.
+    * @see meldingPerGebruiker_model::getAllPerGebruiker()
+    * @see Authex::getGebruikerInfo()
+    */
+    public function haalAjaxOp_MaakMeldingGezien()
+    {
+        $data['gebruiker'] = $this->authex->getGebruikerInfo();
+
+        $meldingPerGebruiker->id = $this->input->get('id');
+        $meldingPerGebruiker->gezien = 1;
+
+        $this->load->model('meldingPerGebruiker_model');
+        $this->meldingPerGebruiker_model->update($meldingPerGebruiker);
+        $data['meldingGezien'] = $this->meldingPerGebruiker_model->update($id);
+
+        $data['meldingenPerGebruiker'] = $this->meldingPerGebruiker_model->getAllPerGebruiker($data['gebruiker']->id);
+
+        $this->load->view('ajax_meldingTonen', $data);
     }
 }
