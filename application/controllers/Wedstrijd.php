@@ -219,8 +219,15 @@ class Wedstrijd extends CI_Controller
     public function bekijkenWedstrijden($tijd)
     {
         $data['titel'] = 'Wedstrijden bekijken';
-        $data['paginaVerantwoordelijke'] = 'Andreas Aerts';
         $data['gebruiker']  = $this->authex->getGebruikerInfo();
+
+        if ($data['gebruiker'] != null && $data['gebruiker']->soort === 'trainer'){
+            $data['paginaVerantwoordelijke'] = 'Mattias De Coninck';
+        } else {
+            $data['paginaVerantwoordelijke'] = 'Andreas Aerts';  
+        }
+
+
         $data['tijd'] = $tijd;
 
         $this->load->model('wedstrijd_model');
